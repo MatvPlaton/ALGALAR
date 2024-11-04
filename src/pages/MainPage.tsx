@@ -1,3 +1,4 @@
+import React from "react";
 import Header from "../components/MainPage/Header.tsx";
 import Truck from "../components/MainPage/Truck.tsx";
 import Info from "../components/MainPage/Info.tsx";

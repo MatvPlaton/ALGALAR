@@ -1,3 +1,4 @@
+import React from "react";
 import styled from 'styled-components';
 import Logotype from '../../assets/image7.svg'
 import ProfileIcon from '../../assets/profile.svg'

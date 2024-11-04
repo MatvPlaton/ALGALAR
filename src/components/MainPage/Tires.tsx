@@ -1,3 +1,4 @@
+import React from "react";
 import styled from 'styled-components'
 import Background from '../../assets/Background.svg';
 const TiresWrapper = styled.img`

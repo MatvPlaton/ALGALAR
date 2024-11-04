@@ -1,3 +1,4 @@
+import React from "react";
 import styled from 'styled-components';
 import VKlogo from '../../assets/Link → SVG.svg';
 import YTlogo from '../../assets/Link → SVG (1).svg';

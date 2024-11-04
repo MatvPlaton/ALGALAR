@@ -1,3 +1,4 @@
+import React from "react";
 import styled from 'styled-components';
 import Logotype from '../../assets/image7.svg';
 import BadTyre1 from '../../assets/bad_tyre1.webp.svg';
