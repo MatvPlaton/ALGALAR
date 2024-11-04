@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import Logotype from '../../assets/image7.svg';
 import VKlogo from '../../assets/Link → SVG.svg';
 import YTlogo from '../../assets/Link → SVG (1).svg';
 import TGlogo from '../../assets/telegram-social.svg';
