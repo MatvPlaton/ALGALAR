@@ -2,7 +2,6 @@
 import React from "react";
 import styled from "styled-components";
 import Background from "../../assets/background.svg"
-import Logotype from "../../assets/image7.svg";
 import Image from "next/image";
 
 const TruckWrapper = styled.div`
