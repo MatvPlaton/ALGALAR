@@ -1,12 +1,13 @@
 "use client"
 import React from "react";
+import { useRouter } from 'next/navigation';
 import styled from 'styled-components';
 import Logotype from '../../assets/image7.svg'
 import ProfileIcon from '../../assets/profile.svg'
 import Image from "next/image";
 const HeaderWrapper = styled.div`
     width: 100%;
-    height: 15%;
+    height: 21vh;
     background-color: black;
     color: white;
     position: absolute;
@@ -40,11 +41,11 @@ const LogoRest  = styled.div`
 `
 const ProfileIc = styled.div`
     transform: scale(150%);
-    left: 10%;
-    top: 25%;
+    left: -5%;
+    top: 22%;
     width: 1vw;
-    height: 1vw;
-    position: absolute;
+    height: 1vh;
+    position: relative;
     
 `
 const Profile = styled.button`
@@ -55,19 +56,31 @@ const Profile = styled.button`
     height: 25%;
     background-color: #43C5E2;
     border-radius: 0.5vw;
-    border: none;
     font-size: 1vw;
     color: white;
+    border: none;
     padding-left: 2vw;
+    padding-bottom: 0.5vw;
+    &:hover {
+        background-color: #40b9d6;
+    }
+    &:active {
+        transform: scale(95%);
+        background-color: #43C5E2;
+    }
 `
 const Header = () => {
+    const router = useRouter();
 
+    const navigateToAnotherPage = () => {
+        router.push('../../pages/Login'); // Specify the path to the page you want to navigate to
+    };
     return <HeaderWrapper>
 
         <LogoImg> <Image style={{width: '3vw', height: '3vw'}} src={Logotype} alt='' /> </LogoImg>
         <LogoAng> ALGALAR </LogoAng>
         <LogoRest> технология безопасного вождения </LogoRest>
-        <Profile>
+        <Profile onClick={() => navigateToAnotherPage()}>
             <ProfileIc> <Image style={{width: '1vw', height: '1vw'}} src={ProfileIcon} alt='' /> </ProfileIc>
                 Личный Кабинет </Profile>
     </HeaderWrapper>;

@@ -11,8 +11,8 @@ const InfoWrapper = styled.div`
     position: absolute;
     left: 0;
     width: 100%;
-    height: 160%;
-    top:69%;
+    height: 160vh;
+    top:70vh;
 `
 const MainDescription = styled.div`
     color: white;
@@ -38,7 +38,7 @@ const FirstSentence = styled.div`
     font-weight: bold;
     font-size: 1.5vw;
     left: 10%;
-    top: 25%;
+    top: 22%;
     position: absolute;
     font-family: MontserratBold, sans-serif;
 
@@ -48,7 +48,7 @@ const SecondSentence = styled.div`
     font-weight: bold;
     font-size: 1.5vw;
     left: 40%;
-    top: 25%;
+    top: 22%;
     position: absolute;
     font-family: MontserratBold, sans-serif;
 
@@ -59,7 +59,7 @@ const ThirdSentence = styled.div`
     font-weight: bold;
     font-size: 1.5vw;
     left: 10%;
-    top: 55%;
+    top: 45%;
     position: absolute;
     font-family: MontserratBold, sans-serif;
 
@@ -70,7 +70,7 @@ const FourthSentence = styled.div`
     font-weight: bold;
     font-size: 1.5vw;
     left: 40%;
-    top: 55%;
+    top: 45%;
     position: absolute;
     font-family: MontserratBold, sans-serif;
 
@@ -100,7 +100,7 @@ const ThirdDescription = styled.div`
     color: white;
     font-size: 1vw;
     left: 12.85%;
-    top: 60%;
+    top: 52%;
     position: absolute;
     text-align: left;
     line-height: 1.5vw;
@@ -111,7 +111,7 @@ const FourthDescription = styled.div`
     color: white;
     font-size: 1vw;
     left: 42.85%;
-    top: 60%;
+    top: 52%;
     position: absolute;
     text-align: left;
     line-height: 1.5vw;
@@ -123,7 +123,7 @@ const AlgalarBlock = styled.div`
     color: white;
     font-size: 0.8vw;
     left: 65.85%;
-    top: 25%;
+    top: 22%;
     position: absolute;
     text-align: left;
     line-height: 1.5vw;
@@ -136,47 +136,39 @@ const AlgalarBlock = styled.div`
 const AlgalarDescription = styled.div`
     position: absolute;
     left: 12%;
+    line-height: 2vw;
+
     text-align: left;
     font-size: 1.5vw;
     font-weight: bold;
     top: 5%;
     
 `
-const Algalar01 = styled.div`
+const Algalar01Descripion = styled.li`
     position: absolute;
-    left: 10%;
+    left: 20%;
     text-align: left;
     font-size: 1.2vw;
     font-weight: bold;
     top: 20%;
-
-`
-
-const Algalar02 = styled.div`
-    position: absolute;
-    left: 10%;
-    text-align: left;
-    font-size: 1.2vw;
-    font-weight: bold;
-    top: 55%;
-
-`
-const Algalar01Descripion = styled.div`
-    position: absolute;
-    left: 20%;
-    text-align: left;
-    font-size: 1.2vw;
-    font-weight: bold;
-    top: 25%;
     line-height: 2vw;
 `
-const Algalar02Description = styled.div`
+const Algalar02Descripion = styled.li`
     position: absolute;
     left: 20%;
     text-align: left;
     font-size: 1.2vw;
     font-weight: bold;
-    top: 60%;
+    top: 50%;
+    line-height: 2vw;
+`
+const Algalar03Description = styled.li`
+    position: absolute;
+    left: 20%;
+    text-align: left;
+    font-size: 1.2vw;
+    font-weight: bold;
+    top: 70%;
     line-height: 2vw;
 `
 const PressureReminder = styled.div`
@@ -221,24 +213,35 @@ const Info = () => {
             автотранспорта и доп. затратам <br />
             на ремонт</FirstDescription>
 
-        <SecondSentence> <span style={{color: '#43C5E2',marginRight: '0.6vw'}}> 02    </span> Износ и перегрев шин </SecondSentence>
+        <SecondSentence> <span style={{color: '#43C5E2',marginRight: '0.6vw'}}> 02    </span> Быстрый износ <br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; и перегрев шин </SecondSentence>
         <SecondDescription> Отсутствие своевременного контроля за <br />
             состоянием автошин и преждевременный <br /> выход из строя </SecondDescription>
 
-        <ThirdSentence> <span style={{color: '#43C5E2',marginRight: '0.6vw'}}> 03    </span> Актуальность данных </ThirdSentence>
+        <ThirdSentence> <span style={{color: '#43C5E2',marginRight: '0.6vw'}}> 03    </span> Нет актуальных
+            данных <br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;для
+            принятия решения </ThirdSentence>
         <ThirdDescription> Выбор бренда автошин основывается на <br /> обещаниях продавца, а не на реальной <br /> статистике использования </ThirdDescription>
 
-        <FourthSentence> <span style={{color: '#43C5E2',marginRight: '0.6vw'}}> 04    </span> Удалённый контроль </FourthSentence>
+        <FourthSentence> <span style={{color: '#43C5E2',marginRight: '0.6vw'}}> 04    </span> Отсутствие
+            удаленной <br /> &ensp;&ensp;&ensp;&nbsp;
+            системы контроля </FourthSentence>
         <FourthDescription> Владелец не знает о текущем состоянии <br /> своего автопарка, поэтому сложно <br /> спрогнозировать расходы на техническое <br />
             обслуживание и ремонт</FourthDescription>
         <AlgalarBlock>
+
             <AlgalarDescription> Платформа мониторинга <br/> <span style={{color: '#43C5E2'}}> ALGALAR </span>
             </AlgalarDescription>
-            <Algalar01> 01 </Algalar01>
-            <Algalar02> 02 </Algalar02>
-            <Algalar01Descripion> <span style={{color: '#43C5E2'}}> дистанционное <br/> управление </span> вашим <br/> автопарком и водителем в <br /> любое время и в единой <br /> системе </Algalar01Descripion>
-            <Algalar02Description> значительное <span style={{color: '#43C5E2'}}> сокращение  <br/> расходов </span> за счет  <br/> безопасной эксплуатации  <br /> автотехники
-            </Algalar02Description>
+            <ul>
+                <Algalar01Descripion> <span
+                    style={{color: '#43C5E2'}}>  дистанционное <br/> управление </span> вашим <br/> автопарком и
+                    водителем в <br/> любое время и в единой <br/> системе </Algalar01Descripion>
+                <Algalar02Descripion> отслеживание реакции <br/> водителя на изменение <br/> показателей
+                </Algalar02Descripion>
+                <Algalar03Description> значительное <span style={{color: '#43C5E2'}}> сокращение  <br/> расходов </span> за
+                    счет <br/> безопасной эксплуатации <br/> автотехники
+                </Algalar03Description>
+            </ul>
         </AlgalarBlock>
         <PressureReminder> Отсутствие постоянного контроля <br />
             давления в шинах - это прямая <br />
@@ -247,7 +250,7 @@ const Info = () => {
 
         <Tyre1> <Image style={{width: '20vw', height: '20vw'}} src={BadTyre1} alt='' /> </Tyre1>
         <Tyre2> <Image style={{width: '20vw', height: '20vw'}} src={BadTyre2} alt='' /> </Tyre2>
-        <Logo> <Image style={{width: '35vw', height: '35vw'}} src={Logotype} alt='' /> </Logo>
+        <Logo> <Image style={{width: '35vw', height: '70vh'}} src={Logotype} alt='' /> </Logo>
     </InfoWrapper>
 }
 

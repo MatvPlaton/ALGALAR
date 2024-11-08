@@ -6,18 +6,18 @@ import Image from "next/image";
 
 const TruckWrapper = styled.div`
     width: 100%;
-    top: 15%;
+    top: 20vh;
+    height: 51vh;
     position: absolute;
     left: 0;
     z-index: 10;
-
 `
 const TextWrapper = styled.div`
     position: absolute;
     background-color: rgba(0, 0, 0, 0.9);
-    top: 15%;
+    top: 0;
     width: 50%;
-    height: 54.03%;
+    height: inherit;
     z-index: 100;
     left: 0;
 `
@@ -43,15 +43,14 @@ const RegularText = styled.div`
 `
 
 const Truck = () => {
-    return <div>
-
-        <TruckWrapper>
-            <Image style={{width: '100%', height: '15%'}} src={Background} alt='' />
+    return <TruckWrapper>
+            <Image style={{width: '101%', height: 'inherit'}} src={Background} alt='' />
+            <TextWrapper>
+                <BoldText> УНИКАЛЬНАЯ <br /> ПЛАТФОРМА ALGALAR </BoldText>
+                <RegularText> высокая эффективность работы и своевременное <br /> реагирование на все изменения технических показателей </RegularText>
+            </TextWrapper>
         </TruckWrapper>
-        <TextWrapper>
-            <BoldText> УНИКАЛЬНАЯ <br /> ПЛАТФОРМА ALGALAR </BoldText>
-            <RegularText> высокая эффективность работы и своевременное <br /> реагирование на все изменения технических показателей </RegularText>
-        </TextWrapper>
-    </div>
+
+
 }
 export default Truck;

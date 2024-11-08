@@ -1,8 +1,8 @@
-import MainPage from "../../pages/MainPage";
+import Page from "@/app/pages/MainPage/page";
 export default function Home() {
   return (
     <div>
-      <MainPage />
+      <Page />
     </div>
   );
 }
