@@ -1,7 +1,7 @@
 "use client"
 import React from "react";
 import styled from "styled-components";
-import Background from "../../assets/background.svg"
+import Background from "../../assets/MainPage/background.svg"
 import Image from "next/image";
 
 const TruckWrapper = styled.div`

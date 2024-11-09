@@ -1,29 +1,15 @@
 import React from 'react';
-import styled from 'styled-components';
+import {EnterWrapper} from "./styles/Enter";
+import {useRouter} from "next/navigation";
 
-const EnterWrapper = styled.button`
-    font-family: RobotoMedium,sans-serif;
-    position: absolute;
-    top: 43%;
-    color: white;
-    background-color: #5A5CA8;
-    left: 53%;
-    letter-spacing: 0.1vw;
-    font-size: 1.2vw;
-    border: none;
-    border-radius: 0.4vw;
-    width: 7vw;
-    height: 6vh;
-    &:hover {
-        background-color: #46478b;
-    }
-    &:active {
-        transform: translateY(-5%);
-    }
-`
 const Enter = () => {
 
-    return <EnterWrapper> ВХОД </EnterWrapper>
+    const router = useRouter();
+
+    const navigateToAnotherPage = () => {
+        router.push('../../Profile'); // Specify the path to the page you want to navigate to
+    };
+    return <EnterWrapper onClick={() => navigateToAnotherPage()}> ВХОД </EnterWrapper>
 }
 
 export default Enter;

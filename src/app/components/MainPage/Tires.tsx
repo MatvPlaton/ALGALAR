@@ -1,13 +1,9 @@
 "use client"
 import React from "react";
-import styled from 'styled-components'
-import Background from '../../assets/Background.svg';
+import Background from '../../assets/MainPage/Background.svg';
 import Image from "next/image";
-const TiresWrapper = styled.div`
-    position: absolute;
-    left: 0;
-    top: 230vh
-`
+import {TiresWrapper} from "@/app/components/MainPage/styles/Tires";
+
 
 const Tires = () => {
     return <TiresWrapper>  <Image style={{width: '100%', height: '80vh'}} src={Background} alt='' /> </TiresWrapper>
