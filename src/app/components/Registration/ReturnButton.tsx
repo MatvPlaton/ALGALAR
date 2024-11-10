@@ -7,7 +7,7 @@ const Enter = (props: {message: string}) => {
     const router = useRouter();
 
     const navigateToAnotherPage = () => {
-        router.push('../../Login'); // Specify the path to the page you want to navigate to
+        router.push('../../login'); // Specify the path to the page you want to navigate to
     };
     return <ReturnWrapper onClick={() => navigateToAnotherPage()}> {props.message} </ReturnWrapper>
 }

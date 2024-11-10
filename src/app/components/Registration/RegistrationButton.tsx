@@ -6,7 +6,7 @@ const RegistrationButton = () => {
     const router = useRouter();
 
     const navigateToAnotherPage = () => {
-        router.push('../../Login'); // Specify the path to the page you want to navigate to
+        router.push('../../login'); // Specify the path to the page you want to navigate to
     };
     return <RegistrationWrapper onClick={() => navigateToAnotherPage()}> ЗАРЕГИСТРИРОВАТЬСЯ </RegistrationWrapper>
 }

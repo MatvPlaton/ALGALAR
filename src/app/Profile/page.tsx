@@ -1,35 +1,32 @@
-'use client';
+"use client"
+import React, {useEffect, useState} from "react";
+import ProfileMenu from '@/app/components/Profile/ProfileMenu'
+import ProfileTitle from '@/app/components/Profile/ProfileTitle'
+import {FieldsWrapper} from "@/app/components/Profile/styles/FieldsWrapper";
+import AnyField from "@/app/components/Login/AnyField";
+const Page = () => {
+    const [parentData, setParentData] = useState<string>('');
+    const handleDataFromChild = (data: string) => {
+        setParentData(data);
 
-import { useState } from "react";
-import styles from "./styles.module.css"; // CSS module for styling
-
-export default function Sidebar() {
-    const [isExpanded, setIsExpanded] = useState(false);
-
-    const toggleSidebar = () => {
-        setIsExpanded((prev) => !prev);
     };
+    useEffect(() => {
+        console.log(parentData);
+    }, [parentData]);
+    return <>
+        <ProfileMenu />
+        <ProfileTitle />
+        <FieldsWrapper>
+            <AnyField text='Имя*'  onDataChange={handleDataFromChild}/>
+            <AnyField text='Фамилия*'  onDataChange={handleDataFromChild}/>
+            <AnyField text='Отчество'  onDataChange={handleDataFromChild}/>
+            <AnyField text='Телефон*'  onDataChange={handleDataFromChild}/>
+            <AnyField text='E-mail*'  onDataChange={handleDataFromChild}/>
 
-    return (
-        <div className={`${styles.sidebar} ${isExpanded ? styles.expanded : ""}`}>
-            <div className={styles.menuItems}>
-                {/* Add menu items here */}
-                <div className={styles.menuItem}>
-                    <span className={styles.icon}> 1</span>
-                    {isExpanded && <span className={styles.label}>Home</span>}
-                </div>
-                <div className={styles.menuItem}>
-                    <span className={styles.icon}></span>
-                    {isExpanded && <span className={styles.label}>Search</span>}
-                </div>
-                <div className={styles.menuItem}>
-                    <span className={styles.icon}>️</span>
-                    {isExpanded && <span className={styles.label}>Settings</span>}
-                </div>
-            </div>
-            <button className={styles.toggleButton} onClick={toggleSidebar}>
-                {isExpanded ? "⟨" : "⟩"}
-            </button>
-        </div>
-    );
+            <AnyField text='ИНН Компании'  onDataChange={handleDataFromChild}/>
+
+        </FieldsWrapper>
+        </>
 }
+
+export default Page;

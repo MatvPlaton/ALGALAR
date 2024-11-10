@@ -7,18 +7,28 @@ import ForgotPassword from "@/app/components/Login/ForgotPassword";
 import RegistrationButton from "@/app/components/Login/RegistrationButton";
 import Enter from "@/app/components/Login/Enter";
 import {FieldsWrapper} from "@/app/components/Login/styles/FieldsWrapper";
+import {useState, useEffect} from "react";
 const Login = () => {
+    const [parentData, setParentData] = useState<string>('');
+    const handleDataFromChild = (data: string) => {
+        setParentData(data);
+
+    };
+    useEffect(() => {
+        console.log(parentData);
+    }, [parentData]);
     return <>
-        <Header />
+        <Header/>
         <UnderHeaderText message='Введите данные для входа'/>
         <FieldsWrapper>
-        <AnyField text={'E-mail'}/>
-        <PasswordField text={'Пароль'}/>
+            <AnyField onDataChange={handleDataFromChild} text={'E-mail'}/>
+            <PasswordField text={'Пароль'}/>
         </FieldsWrapper>
-        <ForgotPassword />
-        <RegistrationButton />
-        <Enter />
+        <ForgotPassword/>
+        <RegistrationButton/>
+        <Enter/>
     </>
 }
+
 
 export default Login;
