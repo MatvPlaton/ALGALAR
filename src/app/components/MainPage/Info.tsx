@@ -39,8 +39,8 @@ const Info = () => {
                 <SentenceNumber> 01 </SentenceNumber>
                 <SentenceTextWrapper>
                     <Sentence>  Простой техники </Sentence>
-                    <Description> Дорожные происшествия, <br /> приводящие к простоям <br /> автотранспорта и доп.
-                        затратам <br /> на ремонт </Description>
+                    <Description> Дорожные происшествия, <br /> приводящие к простоям <br /> автотранспорта и дополнительным
+                        затратам на ремонт </Description>
                 </SentenceTextWrapper>
             </FirstSentenceWrapper>
             <SecondSentenceWrapper>
