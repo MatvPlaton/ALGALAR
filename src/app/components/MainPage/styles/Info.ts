@@ -116,10 +116,15 @@ export const AlgalarBlock = styled.div`
     position: absolute;
     text-align: left;
     width: 23%;
-    height: clamp(16vw, calc(15% + 35rem), 50rem);
+    height: clamp(16vw, calc(1vh + 41rem), 50rem);
     border-radius: 2vw;
     font-family: RobotoBold, sans-serif;
-    
+    @media (max-width: 1700px) {
+        height: 49rem;
+    }
+    @media (max-width: 900px) {
+        height: 39rem;
+    }
 `
 export const AlgalarDescription = styled.div`
     position: relative;
@@ -128,7 +133,7 @@ export const AlgalarDescription = styled.div`
     text-align: left;
     font-size: 1.8rem;
     font-weight: bold;
-    top: 5%;
+    top: 2%;
     @media (max-width: 800px) {
         font-size: 3vw;
     }
@@ -137,10 +142,10 @@ export const Algalar01Descripion = styled.li`
     position: relative;
     left: 20%;
     text-align: left;
-    font-size: clamp(0.02vw, 0.8vw + 0.5rem, 2.5rem);
+    font-size: clamp(0.02vw, 0.8vw + 0.4rem, 2.5rem);
     font-weight: bold;
-    margin-bottom: 2rem;
-    top: 10%;
+    margin-bottom: 1rem;
+    top: 8%;
     width: 70%;
     overflow-wrap: break-word;
     line-height: clamp(1vw, calc(2vw + 0.5rem), 2.5rem) ;
@@ -150,8 +155,8 @@ export const Algalar02Descripion = styled.li`
     left: 20%;
     width: 70%;
     text-align: left;
-    font-size: clamp(0.02vw, 0.8vw + 0.5rem, 2.5rem);
-    margin-bottom: 2rem;
+    font-size: clamp(0.02vw, 0.8vw + 0.4rem, 2.5rem);
+    margin-bottom: 1rem;
     top: 50%;
     overflow-wrap: break-word;
     line-height: clamp(1vw, calc(2vw + 0.5rem), 2.5rem) ;
@@ -161,9 +166,9 @@ export const Algalar03Description = styled.li`
     position: relative;
     left: 20%;
     text-align: left;
-    font-size: clamp(0.02vw, 0.8vw + 0.5rem, 2.5rem);
+    font-size: clamp(0.02vw, 0.8vw + 0.4rem, 2.5rem);
     font-weight: bold;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     width: 70%;
     overflow-wrap: break-word;
     top: 70%;

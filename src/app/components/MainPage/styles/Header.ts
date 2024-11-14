@@ -63,6 +63,7 @@ export const ProfileIc = styled.div`
 export const Profile = styled.button`
     position: relative;
     left: 75%;
+    color: white;
     top: 30%;
     width: 19rem;
     height: 35%;

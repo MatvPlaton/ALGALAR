@@ -74,7 +74,7 @@ const Info = () => {
 
             <AlgalarDescription> Платформа мониторинга <br/> <span style={{color: '#43C5E2'}}> ALGALAR </span>
             </AlgalarDescription>
-            <ul style={{position:'relative',top: '7%'}}>
+            <ul style={{position:'relative',top: '4%'}}>
                 <Algalar01Descripion> <span
                     style={{color: '#43C5E2'}}>  дистанционное <br/> управление </span> вашим <br/> автопарком и
                     водителем в <br/> любое время и в единой <br/> системе </Algalar01Descripion>
