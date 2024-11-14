@@ -3,7 +3,14 @@ import * as React from 'react';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import {MenuItem, Select, SelectChangeEvent} from "@mui/material";
-
+import styled from "styled-components";
+const Wrap = styled(FormControl)`
+    width: 90%;
+    margin-bottom: 2rem;
+    @media (max-width: 1000px) {
+        width: 15rem;
+    }   
+`
 const SetTimezone = () =>  {
 
     const [timezone, setTimezone] = React.useState('');
@@ -15,7 +22,7 @@ const SetTimezone = () =>  {
     const range = Array.from({ length: 25 }, (_, i) => i - 12);
 
     return (
-        <FormControl variant="standard" sx={{ m: 2, width: '124ch' }}>
+        <Wrap variant="standard">
             <InputLabel id="demo-simple-select-standard-label">Часовой пояс</InputLabel>
             <Select
                 labelId="demo-simple-select-standard-label"
@@ -31,7 +38,7 @@ const SetTimezone = () =>  {
                 ))}
 
             </Select>
-        </FormControl>
+        </Wrap>
     );
 }
 

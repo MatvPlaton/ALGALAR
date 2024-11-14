@@ -1,5 +1,5 @@
 import React from 'react';
-import {AdditionalWrapper} from "@/app/components/Registration/styles/Additional";
+import {AdditionalWrapper} from "./styles/Additional";
 
 
 const Additional = () => {

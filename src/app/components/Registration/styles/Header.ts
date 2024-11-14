@@ -4,12 +4,11 @@ export const HeaderWrapper = styled.div`
     background-color: black;
     color: white;
     width: 100%;
-    height: 25%;
-    overflow-x: hidden;
+    height: 8.7%;
 `
 export const LogoWrapper = styled.div`
     position: relative;
-    left: 38%;
+    left: 38.2%;
     top: 4%;
     width: 27%;
     height: 96%;

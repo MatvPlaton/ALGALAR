@@ -1,20 +1,34 @@
 import React from "react";
-import Link from 'next/link'
 import Logotype from '../../assets/MainPage/image7.svg'
 import ProfileIcon from '../../assets/MainPage/profile.svg'
+import {useRouter} from "next/navigation";
 import Image from "next/image";
-import {HeaderWrapper, LogoAng, LogoImg, LogoRest, Profile, ProfileIc} from "./styles/Header";
+import {
+    HeaderWrapper,
+    LogoAng,
+    LogoImg,
+    LogoRest,
+    Profile,
+    ProfileIc,
+    LogoWrapper,
+    LogoWrapperText, ButtonTextWrapper
+} from "./styles/Header";
 
 const Header = () => {
 
-    return <HeaderWrapper>
+    const router = useRouter();
 
-        <LogoImg> <Image style={{width: '3vw', height: '3vw'}} src={Logotype} alt='' /> </LogoImg>
-        <LogoAng> ALGALAR </LogoAng>
-        <LogoRest> технология безопасного вождения </LogoRest>
-        <Profile>
-            <ProfileIc> <Image style={{width: '1vw', height: '1vw'}} src={ProfileIcon} alt='' /> </ProfileIc>
-            <Link href='/login'> Личный Кабинет </Link> </Profile>
+    return <HeaderWrapper>
+        <LogoWrapper>
+        <LogoImg> <Image style={{width: 'inherit', height: 'inherit'}} src={Logotype} alt='' /> </LogoImg>
+        <LogoWrapperText>
+            <LogoAng> ALGALAR </LogoAng>
+            <LogoRest> технология безопасного вождения </LogoRest>
+        </LogoWrapperText>
+        </LogoWrapper>
+        <Profile onClick={() => router.push('/login')}>
+            <ProfileIc> <Image style={{width: 'inherit', height: 'inherit'}} src={ProfileIcon} alt='' /> </ProfileIc>
+            <ButtonTextWrapper> Личный Кабинет </ButtonTextWrapper> </Profile>
     </HeaderWrapper>;
 }
 

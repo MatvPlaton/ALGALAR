@@ -1,9 +1,14 @@
 import styled from 'styled-components';
 
 export const AdditionalWrapper = styled.div`
-    position: absolute;
+    position: relative;
     color: #858585;
     font-family: RobotoRegular, sans-serif;
-    top: 22%;
-    left: 21.5%
+    top: 12%;
+    left: 3.2%;
+    @media (max-width: 1000px) {
+    left: 28%;
+    position: relative;
+    top: 8%;
+}
 `

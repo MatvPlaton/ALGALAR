@@ -4,37 +4,39 @@ export const FooterWrapper = styled.div`
     position: absolute;
     width: 100%;
     left: 0;
-    top:306%;
-    height: 55vh;
+    top:189rem;
+    height: 40rem;
 `
 export const Algalar = styled.div`
     color: white;
     font-weight: bolder;
-    font-size: 2.5vw;
+    font-size: calc(2vw + 1rem);
     position: absolute;
-    left: 15%;
+    left: 18%;
+    transform: translateX(-25%);
     top: 10%;
     font-family: MontserratBold, sans-serif;
 `
 export const MadeInRussia = styled.div`
     color: white;
-    font-size: 1vw;
+    font-size: calc(0.7vw + 1rem);
     position: absolute;
-    left: 15%;
+    left: 14.2%;
     top: 23%;
     font-family: MontserratMedium, sans-serif;
 `
 export const Address = styled.div`
     color: #B3B6BA;
-    font-size: 1vw;
+    font-size: calc(0.3vw + 1rem);
     position: absolute;
-    left: 15%;
+    width: 25vw;
+    left: 14%;
     top: 38%;
     font-family: InterRegular;
 `
 export const Number = styled.div`
     color: white;
-    font-size: 1.5vw;
+    font-size: clamp(0vw, calc(0.8vw + 1rem), 3vw);
     font-weight: bolder;
     position: absolute;
     left: 65.5%;
@@ -44,7 +46,7 @@ export const Number = styled.div`
 export const Email = styled.div`
 
     color: white;
-    font-size: 1.5vw;
+    font-size: clamp(0vw, calc(0.8vw + 1rem), 3vw);
     font-weight: bolder;
     position: absolute;
     left: 66%;
@@ -54,30 +56,39 @@ export const Email = styled.div`
 `
 export const Social = styled.div`
     color: white;
-    font-size: 1vw;
+    font-size: clamp(0vw,  calc(0.3vw + 1rem), 2vw);
     position: absolute;
-    left: 68.5%;
+    left: 68%;
     top: 55%;
     font-family: MontserratMedium, sans-serif;
+`
+export const IconsWrapper = styled.div`
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    top: 60%;
+    left: 71.5%;
+    width: 4vw;
+    height: 2vh;
 `
 export const VK = styled.button`
     left: 73.1%;
     top: 63%;
-    position: absolute;
+    position: relative;
     background-color: #141415;
     border: none;
 `
 export const YouTUbe = styled.button`
     left: 76.1%;
     top: 63%;
-    position: absolute;
+    position: relative;
     background-color: #141415;
     border: none;
 `
 export const Telegram = styled.button`
     left: 79.1%;
     top: 63%;
-    position: absolute;
+    position: relative;
     background-color: #141415;
     border: none;
 `
@@ -86,7 +97,7 @@ export const PersonalData = styled.a`
     color: white;
     font-size: 1vw;
     position: absolute;
-    left: 28.5%;
+    left: 29%;
     top: 75%;
     
 `
@@ -95,7 +106,7 @@ export const Agreement = styled.a`
     color: white;
     font-size: 1vw;
     position: absolute;
-    left: 56.5%;
+    left: 58%;
     top: 75%;
 `
 export const Cookie = styled.div`

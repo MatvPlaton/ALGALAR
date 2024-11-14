@@ -13,81 +13,86 @@ export const SidebarWrapper = styled.div<SideBarProps>`
     transition: width 0.3s ease; /* animation for expanding/collapsing */
     overflow: hidden;
     z-index: 100;
-    width: ${({ $active }) => ($active ? '23vw' : '4.8vw')};
+    width: ${({ $active }) => ($active ? '25.5vw' : '4.8vw')};
+`
+export const HeaderWrapper = styled.div`
+    position: absolute;
+    height: 10vh;
+    left: 0;
     
+    transition: width 0.3s ease;
+    width: 17vw;
+    display: flex;
 `
 export const LogoWrapper = styled.div<SideBarProps>`
     margin-top: 1vw;
-    position: absolute;
+    position: relative;
     left: -0.5vw;
 `
 export const ALGALAR = styled.div`
     font-family: InterExtraBold,sans-serif;
-    left: -18%;
-    top: 2.5%;
     position: relative;
+    top: 20%;
     font-size: 1.3vw;
     width: 4vw;
     color: white;
-
 `
 export const Description = styled.div`
     font-family: InterExtraBold,sans-serif;
-    left: -8%;
-    top: 3%;
+    top: 55%;
+    left: -24%;
     position: relative;
-    font-size: 0.4vw;
-    width: 8vw;
-
-`
-
-export const LogosWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 16.5%;
-    left: 0.5%;
-    height: 30vh;
-    gap: 2vw;
-`
-export const DescriptionsWrapper = styled.div<SideBarProps>`
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    color: white;
-    font-family: RobotoRegular,sans-serif;
-    gap: 2.7vw;
-    top: 14.5%;
-    left: 16%;
-    height: 80vh;
-    font-size: 1.3vw;
-    overflow: hidden;
-`
-export const DescriptionWrapper = styled.div<SideBarProps>`
-    
-    position: relative;
-    color: white;
+    font-size: 0.6vw;
     white-space: nowrap;
+`
+export const ComponentsList = styled.div`
+    flex-direction: column;
+    display: flex;
+    position: absolute;
+    left: 6%;
+    top: 15%;
+`
+export const Component = styled.div`
+    position: relative;
+    background-color: black;
+    font-size: 1vw;
+    white-space: nowrap;
+    display: flex;
+    height: 6vh;
+    flex-direction: row;
+    margin-bottom: 1vw;
+        
+`
+export const ComponentImage = styled.div`
+    width: 5vw;
+    height: 5vh;
+    position: relative;
+    
+    left: -2%;
+    place-items: center;
+    display: grid;
+`
+export const ComponentText = styled.div`
+    position: relative;
+    left: 3.8%;
+    top: -5%;
+    height: 100%;
+    font-size: 1.4vw;
+    place-items: center;
+    display: grid;
     font-family: RobotoRegular,sans-serif;
-    left: 5%;
-    top: 14%;
-    font-size: 1.3vw;
-    overflow: hidden;
-    transition: width 0.3s ease; /* 0.5s duration for smooth animation */
-    width: ${({ $active }) => ($active ? '17vw' : '0')};
-    `
-export const ProfileActiveWrapper = styled.div<SideBarProps>`
-    font-family: RobotoRegular,sans-serif;
+    
+`
+export const ComponentTextOn = styled.div`
     position: relative;
     color: black;
-    left: 5%;
-    top: -0.2%;
-    font-size: 1.3vw;
-    overflow: hidden;
-    transition: width 0.3s ease; /* 0.5s duration for smooth animation */
-
-    width: ${({ $active }) => ($active ? '15vw' : '0')}; /* Width animation */
-
+    left: -63%;
+    top: 10%;
+    height: 100%;
+    font-size: 1.5vw;
+    font-family: RobotoRegular,sans-serif;
+    place-items: center;
+    display: grid;
 `
 export const ToggleButton = styled.div<SideBarProps>`
     background-color: black;
@@ -97,7 +102,6 @@ export const ToggleButton = styled.div<SideBarProps>`
     color: white;
     cursor: pointer;
     transition: left 0.3s ease;
-    /* animation for expanding/collapsing */
     &:hover {
         background-color: black;
     }

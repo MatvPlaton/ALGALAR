@@ -7,6 +7,7 @@ import ForgotPassword from "@/app/components/Login/ForgotPassword";
 import RegistrationButton from "@/app/components/Login/RegistrationButton";
 import Enter from "@/app/components/Login/Enter";
 import {FieldsWrapper} from "@/app/components/Login/styles/FieldsWrapper";
+import {LoginWrapper} from "@/app/components/Login/styles/LoginWrapper";
 import {useState, useEffect} from "react";
 const Login = () => {
     const [parentData, setParentData] = useState<string>('');
@@ -17,7 +18,7 @@ const Login = () => {
     useEffect(() => {
         console.log(parentData);
     }, [parentData]);
-    return <>
+    return <LoginWrapper>
         <Header/>
         <UnderHeaderText message='Введите данные для входа'/>
         <FieldsWrapper>
@@ -27,7 +28,7 @@ const Login = () => {
         <ForgotPassword/>
         <RegistrationButton/>
         <Enter/>
-    </>
+    </LoginWrapper>
 }
 
 

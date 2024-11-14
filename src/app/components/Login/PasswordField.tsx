@@ -7,7 +7,15 @@ import InputAdornment from '@mui/material/InputAdornment';
 import FormControl from '@mui/material/FormControl';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import styled from "styled-components";
+const Wrap = styled(FormControl)`
+    width: 90%;
+    margin-bottom: 2rem;
 
+    @media (max-width: 1000px) {
+        width: 15rem;
+    }   
+`
 const PasswordField = (props: {text: string}) =>  {
     const [showPassword, setShowPassword] = React.useState(false);
 
@@ -22,7 +30,7 @@ const PasswordField = (props: {text: string}) =>  {
     };
     return (
 
-            <FormControl sx={{ m: 2, width: '124ch' }} variant="standard">
+            <Wrap variant="standard">
                 <InputLabel htmlFor="standard-adornment-password">{props.text}</InputLabel>
                 <Input
                     id="standard-adornment-password"
@@ -42,7 +50,7 @@ const PasswordField = (props: {text: string}) =>  {
                         </InputAdornment>
                     }
                 />
-            </FormControl>
+            </Wrap>
     );
 }
 

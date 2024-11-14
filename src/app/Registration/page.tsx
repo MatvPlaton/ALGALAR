@@ -1,6 +1,6 @@
 "use client"
 import React, {useEffect, useState} from "react";
-import Header from '@/app/components/Login/Header';
+import Header from '@/app/components/Registration/Header';
 import UnderHeaderText from "@/app/components/Login/UnderHeaderText";
 import AnyField from "@/app/components/Login/AnyField";
 import {FieldsWrapper} from "@/app/components/Login/styles/FieldsWrapper";
@@ -9,6 +9,7 @@ import PasswordField from "@/app/components/Login/PasswordField";
 import SetTimezone from "@/app/components/Login/SetTimezone";
 import RegistrationButton from "@/app/components/Registration/RegistrationButton";
 import ReturnButton from "@/app/components/Registration/ReturnButton";
+import {LoginWrapper} from "@/app/components/Registration/styles/LoginWrapper";
 const Page = () => {
     const [parentData, setParentData] = useState<string>('');
     const handleDataFromChild = (data: string) => {
@@ -18,7 +19,7 @@ const Page = () => {
     useEffect(() => {
         console.log(parentData);
     }, [parentData]);
-    return <div style={{height: '120vh'}}>
+    return <LoginWrapper>
         <Header />
         <UnderHeaderText message='Регистрация в системе'/>
         <FieldsWrapper>
@@ -35,7 +36,7 @@ const Page = () => {
             <RegistrationButton />
         </FieldsWrapper>
 
-    </div>
+    </LoginWrapper>
 
 }
 

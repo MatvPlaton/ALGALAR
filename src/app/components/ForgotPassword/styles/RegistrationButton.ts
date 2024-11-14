@@ -1,28 +1,28 @@
 import styled from 'styled-components';
 
-export const ForgotPasswordWrapper = styled.button`
+export const RegistrationWrapper = styled.button`
     font-family: RobotoMedium,sans-serif;
-    position: absolute;
-    bottom: 0;
-    color: #34373b;
-    background-color: white;
-    left: 0;
-    letter-spacing: 0.07vw;
+    position: relative;
+    top: 12%;
+    color: white;
+    background-color: #5A5CA8;
+    left: 90%;
+    letter-spacing: 0.1vw;
     border: none;
-    border-radius: 0.4rem;
+    border-radius: 0.4vw;
     font-size: 0.9rem;
-    width: 10rem;
+    width: 7rem;
     height: 2.5rem;
     box-shadow: 0 0.5vw 0.5vw 0 rgba(0,0,0,0.2), 0 0.01vw 0.5vw 0 rgba(0,0,0,0.19);
     &:hover {
-        background-color: #c4c2c3;
+        background-color: #46478b;
     }
     &:active {
         transform: translateY(-5%);
     }
     @media (max-width: 1000px) {
-        left: 45%;
+        left: 48%;
         position: relative;
-        top: 30%;
+        top: 18%;
     }
 `

@@ -1,15 +1,15 @@
 import styled from 'styled-components';
 
-export const ForgotPasswordWrapper = styled.button`
+export const ReturnWrapper = styled.button`
     font-family: RobotoMedium,sans-serif;
-    position: absolute;
-    bottom: 0;
+    position: relative;
     color: #34373b;
     background-color: white;
-    left: 0;
-    letter-spacing: 0.07vw;
+    top: 22.5%;
+    left: 67%;
+    letter-spacing: 0.1vw;
     border: none;
-    border-radius: 0.4rem;
+    border-radius: 0.4vw;
     font-size: 0.9rem;
     width: 10rem;
     height: 2.5rem;
@@ -21,8 +21,8 @@ export const ForgotPasswordWrapper = styled.button`
         transform: translateY(-5%);
     }
     @media (max-width: 1000px) {
-        left: 45%;
+        left: 46%;
         position: relative;
-        top: 30%;
+        top: 10%;
     }
 `

@@ -5,189 +5,202 @@ export const InfoWrapper = styled.div`
     position: absolute;
     left: 0;
     width: 100%;
-    height: 160vh;
-    top:70vh;
+    height: 100rem;
+    top:43rem;
+`
+export const MainWrapper = styled.div`
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+    left: 10%;
+    top: 5%;
+    height: 10vh;
 `
 export const MainDescription = styled.div`
     color: white;
     font-weight: bolder;
-    font-size: 2vw;
-    position: absolute;
-    left: 10%;
-    top: 10%;
+    font-size: 2.5rem;
+    position: relative;
     font-family: MontserratBold, sans-serif;
 `
 export const MainAdditional = styled.div`
     color: white;
     font-weight: bold;
-    font-size: 1vw;
+    font-size: 1.5rem;
+    position: relative;
+    font-family: MontserratBold, sans-serif;
+    top: 50%;
+`
+export const EnumWrapper = styled.div`
     position: absolute;
+    top: 20%;
     left: 10%;
-    top: 16%;
-    font-family: MontserratBold, sans-serif;
+    width: 55vw;
+    height: 50rem;
+    display: flex;
+    flex-direction: column;
+`
+export const EnumWrapper1 = styled.div`
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 50%;
 
 `
-export const FirstSentence = styled.div`
-    color: white;
+export const EnumWrapper2 = styled.div`
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 50%;
+    position: relative;
+
+`
+export const FirstSentenceWrapper = styled.div`
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    width: 24vw;
+    height: 50%;
+`
+export const SentenceNumber = styled.div`
+    color: #43C5E2;
+    font-family: MontserratBold, sans-serif;
     font-weight: bold;
-    font-size: 1.5vw;
+    font-size: 2rem;
+    @media (max-width: 1000px) {
+        font-size: 2.85vw;
+    }
+`
+export const SentenceTextWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    position: relative;
     left: 10%;
-    top: 22%;
-    position: absolute;
-    font-family: MontserratBold, sans-serif;
-
+    
 `
-export const SecondSentence = styled.div`
+export const Sentence = styled.div`
     color: white;
     font-weight: bold;
-    font-size: 1.5vw;
-    left: 40%;
-    top: 22%;
-    position: absolute;
+    font-size: 2rem;
     font-family: MontserratBold, sans-serif;
-
-
+    @media (max-width: 1000px) {
+        font-size: 2.85vw;
+    }
 `
-export const ThirdSentence = styled.div`
+export const Description = styled.div`
     color: white;
-    font-weight: bold;
-    font-size: 1.5vw;
+    font-size: 1.3rem;
+    position: relative;
+    top: 20%;
+    text-align: left;
+    line-height: 2rem;
+    font-family: RobotoRegular, sans-serif;
+    @media (max-width: 1000px) {
+        font-size: 1.85vw;
+    }
+`
+export const SecondSentenceWrapper = styled.div`
+    position: relative;
     left: 10%;
-    top: 45%;
-    position: absolute;
-    font-family: MontserratBold, sans-serif;
-
-
+    display: flex;
+    flex-direction: row;
+    width: 24vw;
+    height: 50%;
 `
-export const FourthSentence = styled.div`
-    color: white;
-    font-weight: bold;
-    font-size: 1.5vw;
-    left: 40%;
-    top: 45%;
-    position: absolute;
-    font-family: MontserratBold, sans-serif;
 
-`
-export const FirstDescription = styled.div`
-    color: white;
-    font-size: 1vw;
-    left: 12.85%;
-    top: 30%;
-    position: absolute;
-    text-align: left;
-    line-height: 1.5vw;
-    font-family: RobotoRegular, sans-serif;
-`
-export const SecondDescription = styled.div`
-    color: white;
-    font-size: 1vw;
-    left: 43.15%;
-    top: 30%;
-    position: absolute;
-    text-align: left;
-    line-height: 1.5vw;
-    font-family: RobotoRegular, sans-serif;
-
-`
-export const ThirdDescription = styled.div`
-    color: white;
-    font-size: 1vw;
-    left: 12.85%;
-    top: 52%;
-    position: absolute;
-    text-align: left;
-    line-height: 1.5vw;
-    font-family: RobotoRegular, sans-serif;
-
-`
-export const FourthDescription = styled.div`
-    color: white;
-    font-size: 1vw;
-    left: 42.85%;
-    top: 52%;
-    position: absolute;
-    text-align: left;
-    line-height: 1.5vw;
-    font-family: RobotoRegular, sans-serif;
-
-`
 export const AlgalarBlock = styled.div`
     background-color: #5A5CA8;
     color: white;
-    font-size: 0.8vw;
-    left: 65.85%;
-    top: 22%;
+    left: 74%;
+    top: 19%;
     position: absolute;
     text-align: left;
-    line-height: 1.5vw;
     width: 23%;
-    height: 45%;
+    height: clamp(16vw, calc(15% + 35rem), 50rem);
     border-radius: 2vw;
     font-family: RobotoBold, sans-serif;
-
-`
-export const AlgalarDescription = styled.div`
-    position: absolute;
-    left: 12%;
-    line-height: 2vw;
-
-    text-align: left;
-    font-size: 1.5vw;
-    font-weight: bold;
-    top: 5%;
     
 `
+export const AlgalarDescription = styled.div`
+    position: relative;
+    left: 12%;
+    line-height: 3rem;
+    text-align: left;
+    font-size: 1.8rem;
+    font-weight: bold;
+    top: 5%;
+    @media (max-width: 800px) {
+        font-size: 3vw;
+    }
+`
 export const Algalar01Descripion = styled.li`
-    position: absolute;
+    position: relative;
     left: 20%;
     text-align: left;
-    font-size: 1.2vw;
+    font-size: clamp(0.02vw, 0.8vw + 0.5rem, 2.5rem);
     font-weight: bold;
-    top: 20%;
-    line-height: 2vw;
+    margin-bottom: 2rem;
+    top: 10%;
+    width: 70%;
+    overflow-wrap: break-word;
+    line-height: clamp(1vw, calc(2vw + 0.5rem), 2.5rem) ;
 `
 export const Algalar02Descripion = styled.li`
-    position: absolute;
+    position: relative;
     left: 20%;
+    width: 70%;
     text-align: left;
-    font-size: 1.2vw;
-    font-weight: bold;
+    font-size: clamp(0.02vw, 0.8vw + 0.5rem, 2.5rem);
+    margin-bottom: 2rem;
     top: 50%;
-    line-height: 2vw;
+    overflow-wrap: break-word;
+    line-height: clamp(1vw, calc(2vw + 0.5rem), 2.5rem) ;
+
 `
 export const Algalar03Description = styled.li`
-    position: absolute;
+    position: relative;
     left: 20%;
     text-align: left;
-    font-size: 1.2vw;
+    font-size: clamp(0.02vw, 0.8vw + 0.5rem, 2.5rem);
     font-weight: bold;
+    margin-bottom: 2rem;
+    width: 70%;
+    overflow-wrap: break-word;
     top: 70%;
-    line-height: 2vw;
+    line-height: clamp(1vw, calc(2vw + 0.5rem), 2.5rem) ;
+`
+export const TiresWrapper = styled.div`
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    position: relative;
+    top: 75%;
+    height: 20rem;
+    left: 10%;
 `
 export const PressureReminder = styled.div`
     color: white;
-    font-size: 1.5vw;
-    left: 12.85%;
-    top: 80%;
-    position: absolute;
+    font-size: clamp(0.02vw, 2rem, 5vw);
+    left: 2.85%;
+    top: 25%;
+    transform: translateX(-20%);
+    position: relative;
     text-align: right;
-    line-height: 2vw;
+    line-height: clamp(0.02vw, 2rem, 5vw);
     font-family: MontserratSemiBold, sans-serif;
 `
 export const Tyre1 = styled.div`
-    left: 42.85%;
-    top: 73%;
-    position: absolute;
-    width: 20vw;
-    height: 20vw;
+    left: 1%;
+    position: relative;
+    width: clamp(0.02vw, 20rem, 20vw);
+    height: 20rem;
 `
 export const Tyre2 = styled.div`
-    left: 65.85%;
-    top: 73%;
-    position: absolute;
-    width: 20vw;
-    height: 20vw;
+    position: relative;
+    left: 5%;
+
+    width: clamp(0.02vw, 20rem, 20vw);
+    height: 20rem;
     
 `
 export const Logo = styled.div`
