@@ -13,7 +13,6 @@ const Login = () => {
     const [parentData, setParentData] = useState<string>('');
     const handleDataFromChild = (data: string) => {
         setParentData(data);
-
     };
     useEffect(() => {
         console.log(parentData);

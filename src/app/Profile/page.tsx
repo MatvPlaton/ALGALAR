@@ -16,7 +16,7 @@ const Page = () => {
         console.log(parentData);
     }, [parentData]);
     return <>
-        <ProfileMenu />
+        <ProfileMenu height={'100vh'} activeField={'Профиль'}/>
         <ProfileTitle />
         <FieldsWrapper>
             <AnyField text='Имя*'  onDataChange={handleDataFromChild}/>

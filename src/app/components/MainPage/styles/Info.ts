@@ -133,6 +133,7 @@ export const AlgalarDescription = styled.div`
     text-align: left;
     font-size: 1.8rem;
     font-weight: bold;
+    width: 80%;
     top: 2%;
     @media (max-width: 800px) {
         font-size: 3vw;

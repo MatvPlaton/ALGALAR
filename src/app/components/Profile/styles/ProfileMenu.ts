@@ -1,9 +1,10 @@
 import styled from "styled-components";
 interface SideBarProps {
     $active?: boolean;
+    height?: string;
 }
 export const SidebarWrapper = styled.div<SideBarProps>`
-    height: 100vh;
+    height: ${props => props.height};
     position: absolute;
     background-color: black;
     color: white;
@@ -13,7 +14,7 @@ export const SidebarWrapper = styled.div<SideBarProps>`
     transition: width 0.3s ease; /* animation for expanding/collapsing */
     overflow: hidden;
     z-index: 100;
-    width: ${({ $active }) => ($active ? '25.5vw' : '4.8vw')};
+    width: ${({ $active }) => ($active ? '26.5vw' : '4.8vw')};
 `
 export const HeaderWrapper = styled.div`
     position: absolute;
@@ -50,7 +51,7 @@ export const ComponentsList = styled.div`
     display: flex;
     position: absolute;
     left: 6%;
-    top: 15%;
+    top: 15vh;
 `
 export const Component = styled.div`
     position: relative;
@@ -84,10 +85,10 @@ export const ComponentText = styled.div`
     
 `
 export const ComponentTextOn = styled.div`
-    position: relative;
+    position: absolute;
     color: black;
-    left: -63%;
-    top: 10%;
+    left: 22%;
+    top: -3%;
     height: 100%;
     font-size: 1.5vw;
     font-family: RobotoRegular,sans-serif;
