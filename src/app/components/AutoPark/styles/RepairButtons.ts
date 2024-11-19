@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 export const ButtonsWrapper = styled.div`
     position: absolute;
-    left: 65.5%;
-    top: 85%;
+    left: 54%;
+    top: 62%;
     width: auto;
     height: auto;
 `
@@ -15,10 +15,10 @@ export const AddButton = styled.button`
     letter-spacing: 0.1vw;
     border: none;
     border-radius: 0.4vw;
-    margin-left: 2vw;
-    font-size: 0.9vw;
-    width: 7vw;
-    height: 2.5vw;
+    font-size: 0.6vw;
+    margin-right: 1vw;
+    width: 4vw;
+    height: 1.5vw;
     box-shadow: 0 0.5vw 0.5vw 0 rgba(0,0,0,0.2), 0 0.01vw 0.5vw 0 rgba(0,0,0,0.19);
     &:hover {
         background-color: #46478b;
@@ -35,9 +35,11 @@ export const CopyButton = styled.button`
     letter-spacing: 0.07vw;
     border: none;
     border-radius: 0.4vw;
-    font-size: 0.9vw;
-    width: 20vw;
-    height: 2.5vw;
+    font-size: 0.5vw;
+    margin-right: 1vw;
+
+    width: 4vw;
+    height: 1.5vw;
     box-shadow: 0 0.5vw 0.5vw 0 rgba(0,0,0,0.2), 0 0.01vw 0.5vw 0 rgba(0,0,0,0.19);
     &:hover {
         background-color: #c4c2c3;

@@ -7,19 +7,13 @@ export const WheelConfigWrapper = styled.div`
     width: 30%;
     left: 20%;
 `
-export const AxisWrapper = styled.div`
-    position: absolute;
-    top: 58%;
-    left: 10%;
-    height: 20%;
-`
+
 export const AxisNumber = styled.div`
     display: flex;
     flex-direction: row;
     font-family: RobotoRegular,sans-serif;
     color: black;
     font-size: 1vw;
-
 `
 export const AxisBlockWrapper = styled.div`
     display: flex;
@@ -27,7 +21,9 @@ export const AxisBlockWrapper = styled.div`
     position: absolute;
     left: 10%;
     top: 30%;
-    width: 80%;
+    width: 85%;
+    max-height: 130%;
+    overflow-y: auto;
 `
 export const SingleAxis = styled.div`
     display: flex;
@@ -35,9 +31,9 @@ export const SingleAxis = styled.div`
     flex-direction: row;
     position: relative;
     width: 50%;
-    left: 23%;
+    left: 20%;
     top: 25%;
-    height: 40%;
+    height: 100%;
 `
 export const DoubleAxisWrapper = styled.div`
     display: flex;
@@ -48,19 +44,11 @@ export const DoubleAxisWrapper = styled.div`
     left: 4.2%;
     gap: 6.1vw;
 `
-export const DoubleAxis = styled.div`
-    display: flex;
-    flex-direction: row;
-    gap: 1vw;
-    position: relative;
-    width: 40%;
-`
-export const TireWrapper = styled.div`
-    
-`
+
+
 export const CheckBoxWrapper1 = styled.input`
     position: relative;
-    left: 90%;
+    left: 150%;
 `
 export const CheckBoxWrapper2 = styled.input`
     position: relative;

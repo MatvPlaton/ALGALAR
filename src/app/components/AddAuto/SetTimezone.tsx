@@ -9,6 +9,7 @@ const Wrap = styled(FormControl)`
     height: 15%;
     margin-bottom: 1vw;
     font-size: 1vw;
+    padding: 0.5vw;
 
 `
 interface ChildComponentProps {
@@ -25,7 +26,7 @@ const SetTimezone: React.FC<ChildComponentProps> = (({text }) => {
 
     return (
         <Wrap variant="standard">
-            <InputLabel style={{fontSize: '0.8vw'}} id="demo-simple-select-standard-label">{text}</InputLabel>
+            <InputLabel style={{padding: '0.5vw',fontSize: '1vw'}} id="demo-simple-select-standard-label">{text}</InputLabel>
             <Select
                 labelId="demo-simple-select-standard-label"
                 id="demo-simple-select-standard"

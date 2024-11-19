@@ -5,67 +5,87 @@ import {
     AxisNumber,
     SingleAxis,
     AxisBlockWrapper,
-    CheckBoxWrapper1,CheckBoxWrapper2
+    CheckBoxWrapper1
 } from "@/app/components/AddAuto/styles/WheelConfig";
 import minus from '../../assets/AddAuto/minus-circle.svg'
 import plus from '../../assets/AddAuto/plus.svg'
-import emptyTire from '../../assets/AddAuto/Rectangle 41.svg'
 import redactTire from '../../assets/AddAuto/Frame 3.svg'
 
-import {useState} from "react";
-const WheelConfig = () => {
+interface Props {
+    redacting: boolean;
+    setRedacting: React.Dispatch<React.SetStateAction<boolean>>;
+    axis : number;
+    setAxis:  React.Dispatch<React.SetStateAction<number>>;
+    isChecked : boolean;
+    setIsChecked: React.Dispatch<React.SetStateAction<boolean>>;
+    currTire : number;
+    setCurrTire : React.Dispatch<React.SetStateAction<number>>;
+    isDoubled : boolean[];
+    setIsDoubled : React.Dispatch<React.SetStateAction<boolean[]>>;
+    images : string[];
+    setImages : React.Dispatch<React.SetStateAction<string[]>>;
+}
+const WheelConfig: React.FC<Props> = ({redacting,setRedacting,axis,
+                                          setAxis,isChecked,setIsChecked,
+                                      images,setImages,setCurrTire, isDoubled, setIsDoubled}) => {
 
 
-    const [axis,SetAxis] = useState(2);
-    const [isChecked, setIsChecked] = useState(false);
-    const [currTire, SetCurrTire] = useState(-1);
 
-    const toggleCheckbox = () => {
+    const switchAxis = (index : number) => {
         setIsChecked(!isChecked);
-    };
+        setIsDoubled((prevStates) =>
+            prevStates.map((item, i) => i === index ? !item : item))
 
-    const [images, SetImages] =
-        useState([emptyTire,emptyTire,emptyTire,emptyTire,emptyTire])
-
+    }
+    // class wheelSetting {
+    //     private SensorNumber: number;
+    //     private TireBrand: string;
+    //     private TireSize: number;
+    //     private TireCost: number;
+    //     private TireModel: string;
+    //     constructor(SensorNumber : number,TireBrand: string, TireSize: number,TireCost: number, TireModel: string) {
+    //
+    //         this.SensorNumber = SensorNumber;
+    //         this.TireBrand = TireBrand;
+    //         this.TireSize = TireSize;
+    //         this.TireCost = TireCost;
+    //         this.TireModel = TireModel;
+    //     }
+    // }
     const switchImage = (index : number) => {
-        SetCurrTire(index)
-        SetImages((prevImage) =>
-            prevImage.map((item, i) => i === index && currTire != index ? redactTire : item)
+        if (redacting) return;
+
+        setCurrTire(index)
+        setRedacting(true)
+        setImages((prevImage) =>
+            prevImage.map((item, i) => i === index ? redactTire : item)
         );
     }
 
     return <WheelConfigWrapper>
         <AxisNumber> Осей : &emsp; {axis}
-        <Image onClick={() => SetAxis(axis === 2 ? axis : axis - 1)}
+        <Image onClick={() => setAxis(axis === 2 ? axis : axis - 1)}
                style={{width: '1.3vw', height: '2.6vh', position: 'relative', left: '5%',top: '0.3%'}} src={minus} alt={''} />
-        <Image onClick={() => SetAxis(axis === 6 ? axis : axis + 1)}
+        <Image onClick={() => setAxis(axis === 6 ? axis : axis + 1)}
                style={{width: '1.3vw', height: '2.6vh', position: 'relative', left: '10%',top: '0.3%'}} src={plus} alt={''} />
-            <div style={{position: 'relative', left: '55%'}}> Спаренная ошиновка </div>
+            <div style={{position: 'relative', left: '45%'}}> Спаренная ошиновка </div>
         </AxisNumber>
         <AxisBlockWrapper>
-            <SingleAxis>
-                <Image onClick={() => switchImage(0)} key={1} style={{width: '3.4vw', height: '14.5vh'}} src={images[0]} alt={''}/>
-                <Image onClick={() => switchImage(1)} key= {2} style={{width: '3.4vw', height: '14.5vh', position: 'relative', left: '41%'}} src={images[1]}
-                       alt={''}/>
 
-                <CheckBoxWrapper1 type={"checkbox"} checked={isChecked} onChange={toggleCheckbox} />
-
-            </SingleAxis>
-            <SingleAxis>
-                <Image onClick={() => switchImage(2)} key={3} style={{width: '3.4vw', height: '14.5vh'}} src={images[2]} alt={''}/>
-                <Image onClick={() => switchImage(3)} key={4} style={{width: '3.4vw',height: '14.5vh', position: 'relative', left: '41%'}} src={images[3]} alt={''} />
-                <CheckBoxWrapper1 type={"checkbox"} checked={isChecked} onChange={toggleCheckbox} />
-
-            </SingleAxis>
-            {Array.from({ length: axis-2 }, (_, index) => (
+            {Array.from({ length: axis}, (_, index) => (
                 <SingleAxis key={index}>
-                    <Image style={{width: '3.4vw',height: '14.5vh'}} src={emptyTire} alt={''} />
-                    <Image style={{width: '3.4vw',height: '14.5vh', position: 'relative', left: '41.8%'}} src={emptyTire} alt={''} />
+                    <CheckBoxWrapper1 type={"checkbox"} onChange={() => switchAxis(index)} />
 
-                    <Image style={{width: '3.4vw',height: '14.5vh', position: 'relative', left: '51%'}} src={emptyTire} alt={''} />
-                    <Image style={{width: '3.4vw',height: '14.5vh', position: 'relative', left: '-121%'}} src={emptyTire} alt={''} />
-                    <CheckBoxWrapper2 type={"checkbox"} checked={isChecked} onChange={toggleCheckbox} />
+                    {!isDoubled[index] ? <>
+                        <Image onClick={() => switchImage(4*index + 1)} key={4*index + 1} style={{width: '3.4vw', height: '14.5vh'}} src={images[4*index + 1]} alt={''}/>
+                        <Image onClick={() => switchImage(4*index + 3)} key= {4*index + 3} style={{width: '3.4vw', height: '14.5vh', position: 'relative', left: '41%'}} src={images[4*index + 3]}
+                               alt={''}/> </> : <>
+                        <Image onClick={() => switchImage(4*index)} style={{width: '3.4vw',height: '14.5vh'}} src={images[4*index]} alt={''} />
+                        <Image onClick={() => switchImage(4*index + 1)} style={{width: '3.4vw',height: '14.5vh', position: 'relative', left: '41.8%'}} src={images[4*index + 1]} alt={''} />
 
+                        <Image onClick={() => switchImage(4*index + 2)} style={{width: '3.4vw',height: '14.5vh', position: 'relative', left: '51%'}} src={images[4*index + 2]} alt={''} />
+                        <Image onClick={() => switchImage(4*index + 3)} style={{width: '3.4vw',height: '14.5vh', position: 'relative', left: '-121%'}} src={images[4*index + 3]} alt={''} />
+                    </>}
                 </SingleAxis>
             ))}
 

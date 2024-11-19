@@ -6,7 +6,7 @@ export const EnterWrapper = styled.button`
     color: white;
     background-color: #5A5CA8;
     left: 93%;
-    bottom: 0;
+    bottom: 1%;
     letter-spacing: 0.1vw;
     border: none;
     border-radius: 0.4rem;

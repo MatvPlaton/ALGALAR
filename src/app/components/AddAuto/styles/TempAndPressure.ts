@@ -4,14 +4,17 @@ export const TempAndPressureWrapper = styled.div`
     width: 38%;
     height: 30%;
     position: absolute;
-    left: 57%;
-    top: 40%;
+    left: 59%;
+    top: 52%;
     display: flex;
     flex-direction: row;
+    background-color: white;
+
 `
 export const Headers = styled.div`
     width: 20%;
     height: 100%;
+    position: relative;
     flex-direction: column;
 `
 
@@ -44,19 +47,14 @@ export const FieldWrapper = styled.div`
     grid-auto-flow: column;
     place-items: center;
 `
-export const TextWrapper = styled.div`
-    width: 100%;
-    position: absolute;
-    right: 10%;
-    top: -50%;
-    text-align: center;
-`
+
 export  const MinMaxWrapper = styled.div`
     font-family: RobotoRegular,sans-serif;
     font-size: 1.2vw;
     position: absolute;
-    left: 66.4%;
-    top: 38%;
+    left: 68.4%;
+    top: 52.2%;
     display: flex;
     flex-direction: row;
+    background-color: white;
 `

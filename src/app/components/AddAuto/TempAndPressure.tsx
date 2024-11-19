@@ -10,12 +10,14 @@ import {FieldWrapper} from "@/app/components/AddAuto/styles/TempAndPressure";
 import Image from "next/image";
 import temp from '../../assets/AddAuto/tempIcon.svg';
 import bar from '../../assets/AddAuto/barIcon.svg';
-
-const TempAndPressure = () => {
-    return <>
+interface Prop {
+    redacting: boolean;
+}
+const TempAndPressure: React.FC<Prop> = ({redacting}) => {
+    return <> {redacting ? <>
         <MinMaxWrapper>
-            <div style={{marginRight: '6.6vw'}}> Минимальное </div>
-            <div style={{marginRight: '1vw'}}> Максимальное </div>
+            <div style={{zIndex: 100, marginRight: '6.6vw'}}> Минимальное </div>
+            <div style={{zIndex: 100, marginRight: '1vw'}}> Максимальное </div>
             </MinMaxWrapper>
         <TempAndPressureWrapper>
         <Headers>
@@ -44,7 +46,7 @@ const TempAndPressure = () => {
 
                     </FieldWrapper>
                 </MinFields>
-        </TempAndPressureWrapper> </>
+        </TempAndPressureWrapper> </> : <div />} </>
 }
 
 export default TempAndPressure;

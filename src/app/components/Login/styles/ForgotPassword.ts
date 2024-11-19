@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const ForgotPasswordWrapper = styled.button`
     font-family: RobotoMedium,sans-serif;
     position: absolute;
-    bottom: 0;
+    bottom: 1%;
     color: #34373b;
     background-color: white;
     left: 0;

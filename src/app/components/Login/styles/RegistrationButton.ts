@@ -6,7 +6,7 @@ export const RegistrationWrapper = styled.button`
     color: #34373b;
     background-color: white;
     left: 70%;
-    bottom: 0;
+    bottom: 1%;
     letter-spacing: 0.1vw;
     border: none;
     border-radius: 0.4rem;

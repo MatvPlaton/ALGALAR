@@ -8,4 +8,6 @@ export const ConfigFieldsWrapper = styled.div`
     height: 40%;
     margin-bottom: 10vw;
     flex-direction: column;
+    background-color: white;
+    
 `

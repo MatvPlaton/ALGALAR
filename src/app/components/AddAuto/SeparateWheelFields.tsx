@@ -1,9 +1,12 @@
 import React from "react";
 import {FieldsWrapper, Header, SeparateWheelFieldsWrapper} from './styles/SeparateWheelFields';
 import AnyField from "@/app/components/AddAuto/AnyField";
-const SeparateWheelFields = () => {
-    return <>
-        <Header> Настройка колеса </Header>
+interface Prop {
+    redacting: boolean;
+}
+const SeparateWheelFields: React.FC<Prop> = ({redacting}) => {
+    return <> {redacting ? <>
+        <Header> <span style={{position: 'absolute', left: '2%', bottom: '5%'}}> Настройка колеса </span> </Header>
         <FieldsWrapper>
         <SeparateWheelFieldsWrapper>
         <AnyField text={'Номер датчика*'} />
@@ -16,7 +19,7 @@ const SeparateWheelFields = () => {
             <AnyField text={'Стоимость шины(тыс. руб.)*'} />
         </SeparateWheelFieldsWrapper>
         </FieldsWrapper>
-        </>
+        </> : <div />} </>
 }
 
 export default SeparateWheelFields;

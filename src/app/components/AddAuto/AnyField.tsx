@@ -8,21 +8,21 @@ const Wrap = styled(FormControl)`
     height: 15%;
     margin-bottom: 1vw;
     font-size: 1vw;
-    
+    padding: 0.5vw;
 `
 interface ChildComponentProps {
     text: string;
 }
-const AnyField: React.FC<ChildComponentProps> = (({text }) =>  {
+const AnyField: React.FC<ChildComponentProps> = ({text }) =>  {
 
     return (
             <Wrap variant="standard">
-                <InputLabel style={{fontSize: '1vw'}} htmlFor="standard-adornment-password">{text} </InputLabel>
+                <InputLabel style={{padding: '0.5vw', fontSize: '1vw'}} htmlFor="standard-adornment-password">{text} </InputLabel>
                 <Input
                     id="standard-adornment-password"
                 />
             </Wrap>
     )
-})
+}
 
 export default AnyField;
