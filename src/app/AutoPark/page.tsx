@@ -1,7 +1,6 @@
 "use client"
 import React, {useState} from "react";
 import ProfileMenu from "@/app/components/Profile/ProfileMenu";
-import Graphic from "@/app/components/AutoPark/Graphic";
 import DataTable from "@/app/components/AutoPark/Table";
 import Header from "@/app/components/AutoPark/Header";
 import Scheme from "../components/AutoPark/Scheme";
@@ -12,14 +11,13 @@ import RepairTable from "@/app/components/AutoPark/RepairTable";
 
 const AutoPark = () => {
 
-    const [dataIndex,setDataIndex] = useState(0);
+    const [,setDataIndex] = useState(0);
     return <> <ProfileMenu height={'100vh'} activeField={'Автопарк'} />
                 <Header />
                 <DataTable setDataIndex={setDataIndex}/>
 
                 <Scheme />
                 <GraphicButtons />
-                <Graphic dataIndex={dataIndex} max={12}/>
                 <RepairButtons />
                 <RepairTable />
     </>
