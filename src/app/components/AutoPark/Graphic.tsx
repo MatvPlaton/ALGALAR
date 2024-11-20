@@ -93,8 +93,10 @@ interface Prop {
     dataIndex: number
 }
 const Graphic: React.FC<Prop> = (({max = 0, dataIndex}) => {
-    // Пример данных для графика
-    const dataPoints: DataPoint[] = [
+
+    const dataPoints = [];
+    dataPoints.push([]);
+    dataPoints.push([
         { label: 'ПН', value: 7.5 },
         { label: 'ВТ', value: 8 },
         { label: 'СР', value: 7.7 },
@@ -102,8 +104,9 @@ const Graphic: React.FC<Prop> = (({max = 0, dataIndex}) => {
         { label: 'ПТ', value: 7.5 },
         { label: 'СБ', value: 8.1 },
         { label: 'ВС', value: 7.5 }
-    ];
-    const dataPoints1: DataPoint[] = [
+    ]);
+    // Пример данных для графика
+    dataPoints.push([
         { label: 'ПН', value: 8.5 },
         { label: 'ВТ', value: 6 },
         { label: 'СР', value: 7.7 },
@@ -111,11 +114,10 @@ const Graphic: React.FC<Prop> = (({max = 0, dataIndex}) => {
         { label: 'ПТ', value: 7.9 },
         { label: 'СБ', value: 6.1 },
         { label: 'ВС', value: 7 }
-    ];
-
+    ]);
     return (
         <div style={{position: "absolute", left: '70%', top: '24%', height: '30%', width: '27%'}}>
-            <LineChart max={max} dataPoints={dataIndex === 0 ? dataPoints : dataPoints1} />
+            <LineChart max={max} dataPoints={dataPoints[dataIndex + 1]} />
         </div>
     );
 });

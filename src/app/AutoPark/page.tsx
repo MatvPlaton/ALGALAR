@@ -17,7 +17,7 @@ const AutoPark = () => {
                 <Header />
                 <DataTable dataIndex={dataIndex} setDataIndex={setDataIndex}/>
 
-                <Scheme />
+                <Scheme dataIndex={dataIndex}/>
                 <GraphicButtons />
                 <Graphic dataIndex={dataIndex} max={12}/>
                 <RepairButtons />
