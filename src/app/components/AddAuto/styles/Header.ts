@@ -15,14 +15,3 @@ export const HeaderText1 = styled.div`
     font-size: 2vw;
     padding: 0.5vw;
 `
-export const HeaderText2 = styled.div`
-    color: black;
-    position: relative;
-    height: 50%;
-    font-family: RobotoRegular, sans-serif;
-    font-size: 1.4vw;
-    display: flex;
-    align-items: flex-end;
-    padding: 0.5vw;
-
-`

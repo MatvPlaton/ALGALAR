@@ -1,9 +1,28 @@
 import styled from 'styled-components';
 
-export const ButtonsWrapper = styled.div`
+export const Wrapper = styled. div`
     position: absolute;
     left: 72%;
-    top: 22%;
+    top: 16%;
+    flex-direction: column;
+`
+export const TempAndPressureWrapper = styled.div`
+    flex-direction: row;
+    display: flex;
+    font-family: RobotoMedium,sans-serif;
+    letter-spacing: 0.1vw;
+    font-size: 0.7vw;
+    margin-bottom: 0.5vw;
+    cursor: pointer;
+    
+`
+export const TAndP = styled.div`
+    &:hover {
+        color : #5A5CA8;
+    }
+`
+export const ButtonsWrapper = styled.div`
+    
     width: auto;
     height: auto;
 `
@@ -27,6 +46,15 @@ export const AddButton = styled.button`
         transform: translateY(-5%);
     }
     
+`
+export const Report = styled(AddButton)`
+    position: absolute;
+    top: 650%;
+    border-radius: 0.2vw;
+    width: 12vw;
+    height: 2vw;
+    left: 54%;
+    font-size: 0.8vw;
 `
 export const CopyButton = styled.button`
     font-family: RobotoMedium,sans-serif;

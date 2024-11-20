@@ -3,9 +3,7 @@ import React, {useState} from "react";
 import ProfileMenu from "@/app/components/Profile/ProfileMenu";
 import Header from "@/app/components/AddAuto/Header"
 import ConfigFields from "@/app/components/AddAuto/ConfigFields"
-import WheelConfig from "@/app/components/AddAuto/WheelConfig";
 import SeparateWheelFields from "@/app/components/AddAuto/SeparateWheelFields";
-import TempAndPressure from "@/app/components/AddAuto/TempAndPressure";
 import Buttons from "@/app/components/AddAuto/Buttons";
 import emptyTire from "@/app/assets/AddAuto/Rectangle 41.svg";
 
@@ -23,15 +21,16 @@ const AutoPark = () => {
 
 
 
-    return <div style={{backgroundColor: '#D9D9D9', height: '120vh'}}>
-        <ProfileMenu height={'120vh'} activeField={'Добавить авто'} />
+    return <div style={{backgroundColor: '#D9D9D9', height: '100vh'}}>
+        <ProfileMenu height={'100vh'} activeField={'Добавить авто'} />
         <Header />
-        <ConfigFields />
-        <WheelConfig images={images} setImages={setImages} isDoubled={isDoubled} setIsDoubled={setIsDoubled}
-                     currTire={currTire} setCurrTire={setCurrTire} isChecked={isChecked} setIsChecked={setIsChecked}
-                     redacting={redacting} setRedacting={setRedacting} axis={axis} setAxis={setAxis}/>
+
+        <ConfigFields images={images} setImages={setImages} isDoubled={isDoubled} setIsDoubled={setIsDoubled}
+                      setCurrTire={setCurrTire} isChecked={isChecked} setIsChecked={setIsChecked}
+                      setRedacting={setRedacting} axis={axis} setAxis={setAxis} currTire={currTire}/>
+
+
         <SeparateWheelFields redacting={redacting}/>
-        <TempAndPressure redacting={redacting}/>
         <Buttons redacting={redacting} setRedacting={setRedacting} setImages={setImages} currTire={currTire}/>
     </div>
 }

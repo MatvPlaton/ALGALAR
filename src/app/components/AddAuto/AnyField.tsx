@@ -5,8 +5,7 @@ import FormControl from '@mui/material/FormControl';
 import styled from 'styled-components';
 const Wrap = styled(FormControl)`
     width: 90%;
-    height: 15%;
-    margin-bottom: 1vw;
+    margin-bottom: 0.5vw;
     font-size: 1vw;
     padding: 0.5vw;
 `

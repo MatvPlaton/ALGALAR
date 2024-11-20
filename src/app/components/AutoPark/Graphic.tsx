@@ -114,7 +114,7 @@ const Graphic: React.FC<Prop> = (({max = 0, dataIndex}) => {
     ];
 
     return (
-        <div style={{position: "absolute", left: '70%', top: '30%', height: '30%', width: '27%'}}>
+        <div style={{position: "absolute", left: '70%', top: '24%', height: '30%', width: '27%'}}>
             <LineChart max={max} dataPoints={dataIndex === 0 ? dataPoints : dataPoints1} />
         </div>
     );

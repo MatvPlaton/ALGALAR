@@ -10,9 +10,11 @@ import {
 import minus from '../../assets/AddAuto/minus-circle.svg'
 import plus from '../../assets/AddAuto/plus.svg'
 import redactTire from '../../assets/AddAuto/Frame 3.svg'
+import emptyTire from "@/app/assets/AddAuto/Rectangle 41.svg";
+
+import {CopyButton} from "@/app/components/AddAuto/styles/ConfigFields";
 
 interface Props {
-    redacting: boolean;
     setRedacting: React.Dispatch<React.SetStateAction<boolean>>;
     axis : number;
     setAxis:  React.Dispatch<React.SetStateAction<number>>;
@@ -25,7 +27,7 @@ interface Props {
     images : string[];
     setImages : React.Dispatch<React.SetStateAction<string[]>>;
 }
-const WheelConfig: React.FC<Props> = ({redacting,setRedacting,axis,
+const WheelConfig: React.FC<Props> = ({setRedacting,axis,
                                           setAxis,isChecked,setIsChecked,
                                       images,setImages,setCurrTire, isDoubled, setIsDoubled}) => {
 
@@ -53,12 +55,11 @@ const WheelConfig: React.FC<Props> = ({redacting,setRedacting,axis,
     //     }
     // }
     const switchImage = (index : number) => {
-        if (redacting) return;
 
         setCurrTire(index)
         setRedacting(true)
         setImages((prevImage) =>
-            prevImage.map((item, i) => i === index ? redactTire : item)
+            prevImage.map((item, i) => i === index ? redactTire : emptyTire)
         );
     }
 
@@ -68,7 +69,7 @@ const WheelConfig: React.FC<Props> = ({redacting,setRedacting,axis,
                style={{width: '1.3vw', height: '2.6vh', position: 'relative', left: '5%',top: '0.3%'}} src={minus} alt={''} />
         <Image onClick={() => setAxis(axis === 6 ? axis : axis + 1)}
                style={{width: '1.3vw', height: '2.6vh', position: 'relative', left: '10%',top: '0.3%'}} src={plus} alt={''} />
-            <div style={{position: 'relative', left: '45%'}}> Спаренная ошиновка </div>
+            <div style={{position: 'relative', left: '43%'}}> Спаренная ошиновка </div>
         </AxisNumber>
         <AxisBlockWrapper>
 
@@ -77,19 +78,22 @@ const WheelConfig: React.FC<Props> = ({redacting,setRedacting,axis,
                     <CheckBoxWrapper1 type={"checkbox"} onChange={() => switchAxis(index)} />
 
                     {!isDoubled[index] ? <>
-                        <Image onClick={() => switchImage(4*index + 1)} key={4*index + 1} style={{width: '3.4vw', height: '14.5vh'}} src={images[4*index + 1]} alt={''}/>
-                        <Image onClick={() => switchImage(4*index + 3)} key= {4*index + 3} style={{width: '3.4vw', height: '14.5vh', position: 'relative', left: '41%'}} src={images[4*index + 3]}
+                        <Image onClick={() => switchImage(4*index)} style={{width: '3.4vw', height: '14.5vh'}} src={images[4*index]} alt={''}/>
+                        <Image onClick={() => switchImage(4*index + 1)} style={{width: '3.4vw', height: '14.5vh', position: 'relative', left: '41%'}} src={images[4*index + 1]}
                                alt={''}/> </> : <>
                         <Image onClick={() => switchImage(4*index)} style={{width: '3.4vw',height: '14.5vh'}} src={images[4*index]} alt={''} />
-                        <Image onClick={() => switchImage(4*index + 1)} style={{width: '3.4vw',height: '14.5vh', position: 'relative', left: '41.8%'}} src={images[4*index + 1]} alt={''} />
+                        <Image onClick={() => switchImage(4*index + 1)} style={{width: '3.45vw',height: '14.5vh', position: 'relative', left: '40.8%'}} src={images[4*index + 1]} alt={''} />
 
-                        <Image onClick={() => switchImage(4*index + 2)} style={{width: '3.4vw',height: '14.5vh', position: 'relative', left: '51%'}} src={images[4*index + 2]} alt={''} />
-                        <Image onClick={() => switchImage(4*index + 3)} style={{width: '3.4vw',height: '14.5vh', position: 'relative', left: '-121%'}} src={images[4*index + 3]} alt={''} />
+                        <Image onClick={() => switchImage(4*index + 3)} style={{width: '3.4vw',height: '14.5vh', position: 'relative', left: '51%'}} src={images[4*index + 3]} alt={''} />
+                        <Image onClick={() => switchImage(4*index + 2)} style={{width: '3.4vw',height: '14.5vh', position: 'relative', left: '-75%'}} src={images[4*index + 2]} alt={''} />
                     </>}
                 </SingleAxis>
             ))}
 
+            <CopyButton> СОХРАНИТЬ </CopyButton>
+
         </AxisBlockWrapper>
+
     </WheelConfigWrapper>
 }
 

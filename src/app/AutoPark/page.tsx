@@ -12,10 +12,10 @@ import RepairTable from "@/app/components/AutoPark/RepairTable";
 
 const AutoPark = () => {
 
-    const [dataIndex,setDataIndex] = useState(0);
+    const [dataIndex,setDataIndex] = useState(-1);
     return <> <ProfileMenu height={'100vh'} activeField={'Автопарк'} />
                 <Header />
-                <DataTable setDataIndex={setDataIndex}/>
+                <DataTable dataIndex={dataIndex} setDataIndex={setDataIndex}/>
 
                 <Scheme />
                 <GraphicButtons />

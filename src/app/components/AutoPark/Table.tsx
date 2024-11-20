@@ -59,9 +59,9 @@ const Wrap3 = styled.td`
 `
 interface Prop {
     setDataIndex: React.Dispatch<React.SetStateAction<number>>;
-
+    dataIndex: number;
 }
-const DataTable: React.FC<Prop> = ({setDataIndex}) => {
+const DataTable: React.FC<Prop> = ({dataIndex, setDataIndex}) => {
     return (
         <table style={{ position: 'absolute', left: '6.5%', top: '15%', width: '40%', borderCollapse: 'collapse' }}>
             <thead>
@@ -76,11 +76,11 @@ const DataTable: React.FC<Prop> = ({setDataIndex}) => {
             <tbody>
             {data.map((item, index) => (
                 <tr style={{cursor: 'pointer'}} onClick={() => setDataIndex(index)} key={index}>
-                    <Wrap2  >{index + 1}</Wrap2>
-                    <Wrap3>{item.field1}</Wrap3>
-                    <Wrap3>{item.field2}</Wrap3>
-                    <Wrap3>{item.field3}</Wrap3>
-                    <Wrap3>{item.field4}</Wrap3>
+                    <Wrap2 style={{backgroundColor: dataIndex === index ? "#43C5E24A" : ""}}>{index + 1}</Wrap2>
+                    <Wrap3 style={{backgroundColor: dataIndex === index ? "#43C5E24A" : ""}}>{item.field1}</Wrap3>
+                    <Wrap3 style={{backgroundColor: dataIndex === index ? "#43C5E24A" : ""}}>{item.field2}</Wrap3>
+                    <Wrap3 style={{backgroundColor: dataIndex === index ? "#43C5E24A" : ""}}>{item.field3}</Wrap3>
+                    <Wrap3 style={{backgroundColor: dataIndex === index ? "#43C5E24A" : ""}}>{item.field4}</Wrap3>
                 </tr>
             ))}
             </tbody>

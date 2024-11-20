@@ -16,8 +16,8 @@ interface Prop {
 const TempAndPressure: React.FC<Prop> = ({redacting}) => {
     return <> {redacting ? <>
         <MinMaxWrapper>
-            <div style={{zIndex: 100, marginRight: '6.6vw'}}> Минимальное </div>
-            <div style={{zIndex: 100, marginRight: '1vw'}}> Максимальное </div>
+            <div style={{zIndex: 100, marginRight: '7.5vw'}}> Минимальное </div>
+            <div> Максимальное </div>
             </MinMaxWrapper>
         <TempAndPressureWrapper>
         <Headers>

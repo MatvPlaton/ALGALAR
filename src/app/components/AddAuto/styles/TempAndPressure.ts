@@ -1,15 +1,12 @@
 import styled from 'styled-components';
 
 export const TempAndPressureWrapper = styled.div`
-    width: 38%;
-    height: 30%;
-    position: absolute;
-    left: 59%;
-    top: 52%;
+    position: relative;
     display: flex;
     flex-direction: row;
     background-color: white;
-
+    top: 20%;
+    height: 20%;
 `
 export const Headers = styled.div`
     width: 20%;
@@ -26,11 +23,7 @@ export const MinFields = styled.div`
     font-size: 1.2vw;
     text-align: center;
 `
-export const MaxFields = styled.div`
-    width: 40%;
-    height: 100%;
-    flex-direction: column;
-`
+
 export const Temp = styled.div`
     display: grid;
     height: 50%;
@@ -51,10 +44,11 @@ export const FieldWrapper = styled.div`
 export  const MinMaxWrapper = styled.div`
     font-family: RobotoRegular,sans-serif;
     font-size: 1.2vw;
-    position: absolute;
-    left: 68.4%;
-    top: 52.2%;
     display: flex;
+    position: relative;
+    top: 18%;
+    left: 25%;
+    width: 10%;
     flex-direction: row;
     background-color: white;
 `
