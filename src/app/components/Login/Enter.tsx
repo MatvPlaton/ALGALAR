@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {EnterWrapper} from "./styles/Enter";
 import {useRouter} from "next/navigation";
 import {clearToken, setToken} from "@/app/redux/authSlice";

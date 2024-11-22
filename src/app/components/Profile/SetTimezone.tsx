@@ -25,7 +25,7 @@ const SetTimezone = () =>  {
     return (
         <Wrap variant="standard">
             <InputLabel id="demo-simple-select-standard-label">Часовой пояс</InputLabel>
-            <Select
+            <Select style={{marginBottom: '1rem'}}
                 labelId="demo-simple-select-standard-label"
                 id="demo-simple-select-standard"
                 value={timezone}

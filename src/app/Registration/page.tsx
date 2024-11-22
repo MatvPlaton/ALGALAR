@@ -7,7 +7,6 @@ import {FieldsWrapper} from "@/app/components/Login/styles/FieldsWrapper";
 import SetGender from "@/app/components/Login/SetGender";
 import PasswordField from "@/app/components/Registration/PasswordField";
 import SetTimezone from "@/app/components/Login/SetTimezone";
-import RegistrationButton from "@/app/components/Registration/RegistrationButton";
 import ReturnButton from "@/app/components/Registration/ReturnButton";
 import {LoginWrapper} from "@/app/components/Registration/styles/LoginWrapper";
 import {RegistrationWrapper} from "@/app/components/Registration/styles/RegistrationButton";

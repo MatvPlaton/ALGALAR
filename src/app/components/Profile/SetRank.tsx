@@ -20,23 +20,19 @@ const SetTimezone = () =>  {
         setTimezone(event.target.value as string);
     };
 
-    const range = Array.from({ length: 25 }, (_, i) => i - 12);
 
     return (
         <Wrap variant="standard">
-            <InputLabel id="demo-simple-select-standard-label">Часовой пояс</InputLabel>
-            <Select
+            <InputLabel id="demo-simple-select-standard-label">Должность</InputLabel>
+            <Select style={{marginBottom: '1rem'}}
                 labelId="demo-simple-select-standard-label"
                 id="demo-simple-select-standard"
                 value={timezone}
                 onChange={handleChange}
                 label="timezone"
             >
-                {range.map((number) => (
-                    number >= 0 ?
-                        (<MenuItem key={number} value={number}> (UTC+{number}:00) </MenuItem>) :
-                        (<MenuItem key={number} value={number}> (UTC{number}:00) </MenuItem>)
-                ))}
+                (<MenuItem key={0} value={0}> Менеджер </MenuItem>) :
+                (<MenuItem key={1} value={1}> Водитель </MenuItem>)
 
             </Select>
         </Wrap>
