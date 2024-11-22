@@ -11,12 +11,16 @@ const Wrap = styled(FormControl)`
         width: 15rem;
     }   
 `
-const SetTimezone = () =>  {
+interface ChildComponentProps {
+    onDataChange: (data: string) => void;
+}
+const SetTimezone: React.FC<ChildComponentProps> = ({onDataChange}) =>  {
 
     const [timezone, setTimezone] = React.useState('');
 
     const handleChange = (event: SelectChangeEvent) => {
         setTimezone(event.target.value as string);
+        onDataChange(event.target.value as string)
     };
 
     const range = Array.from({ length: 25 }, (_, i) => i - 12);

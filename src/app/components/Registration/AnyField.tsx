@@ -4,8 +4,6 @@ import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import {useState} from "react";
 import styled from 'styled-components';
-import {setEmail} from "@/app/redux/emailSlice";
-import {useDispatch} from "react-redux";
 const Wrap = styled(FormControl)`
     width: 90%;
     margin-bottom: 2rem;
@@ -14,15 +12,15 @@ const Wrap = styled(FormControl)`
     }   
 `
 interface ChildComponentProps {
+    onDataChange: (data: string) => void;
     text: string;
 }
-const AnyField: React.FC<ChildComponentProps> = (({ text }) =>  {
+const AnyField: React.FC<ChildComponentProps> = (({ onDataChange, text }) =>  {
 
-    const dispatch = useDispatch();
     const [inputValue, setInputValue] = useState('');
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setInputValue(event.target.value);
-        dispatch(setEmail(event.target.value))
+        onDataChange(event.target.value);
     };
 
     return (

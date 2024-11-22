@@ -7,6 +7,8 @@ import Tires from "@/app/components/MainPage/Tires";
 import Footer from "@/app/components/MainPage/Footer";
 
 const Page = () => {
+
+
     return (<div>
         <Header />
         <Truck />

@@ -30,7 +30,6 @@ import addCarActive from "../../assets/Profile/ActiveAddAuto.svg"
 
 import arrow1 from "../../assets/Profile/Arrow1.svg"
 import arrow2 from "../../assets/Profile/Arrow2.svg"
-import {useRouter} from "next/navigation";
 import Image from "next/image";
 import {ALGALAR, Description} from "@/app/components/Profile/styles/ProfileMenu";
 
@@ -41,7 +40,6 @@ interface Prop {
 const Sidebar: React.FC<Prop> = ({activeField,height}) => {
     const [isExpanded, setIsExpanded] = useState(false);
 
-    const router = useRouter();
     const toggleSidebar = () => {
         setIsExpanded((prev) => !prev);
     };
@@ -65,7 +63,7 @@ const Sidebar: React.FC<Prop> = ({activeField,height}) => {
             </HeaderWrapper>
             <ComponentsList>
                 {Object.keys(Pictures).map((key : string) =>
-                    <Component onClick={() => router.push(`/${Pictures[key][2]}`)} key={key}>
+                    <Component onClick={() => window.location.href = (`/${Pictures[key][2]}`)} key={key}>
                         {activeField === key ? <>
                                 <Image style={{position: 'relative', left: '-1%', top: '-24%',display: 'grid', width: '27vw',height: '8vh'}}
                                                       src={Pictures[key][1]} alt={''} />

@@ -7,43 +7,43 @@ import styled from "styled-components";
 const Wrap = styled(FormControl)`
     width: 90%;
     margin-bottom: 2rem;
-    left: -1.5%;
     @media (max-width: 1000px) {
         width: 15rem;
-        left: -3.5%;
-
     }   
 `
-interface ChildComponentProps {
-    onDataChange: (data: string) => void;
-}
-const SetGender: React.FC<ChildComponentProps> = ({onDataChange}) =>  {
 
-    const [gender, setGender] = React.useState('');
+const SetTimezone = () =>  {
+
+    const [timezone, setTimezone] = React.useState('');
 
     const handleChange = (event: SelectChangeEvent) => {
-        setGender(event.target.value as string);
-        onDataChange(event.target.value as string)
+        setTimezone(event.target.value as string);
     };
 
+    const range = Array.from({ length: 25 }, (_, i) => i - 12);
+
     return (
-        <Wrap variant="standard" sx={{ m: 2, width: '124ch' }}>
-            <InputLabel id="demo-simple-select-standard-label">Выберите пол</InputLabel>
+        <Wrap variant="standard">
+            <InputLabel id="demo-simple-select-standard-label">Часовой пояс</InputLabel>
             <Select
                 labelId="demo-simple-select-standard-label"
                 id="demo-simple-select-standard"
-                value={gender}
+                value={timezone}
                 onChange={handleChange}
-                label="gender"
+                label="timezone"
             >
-                <MenuItem value={1}>Мужской</MenuItem>
-                <MenuItem value={2}>Женский</MenuItem>
+                {range.map((number) => (
+                    number >= 0 ?
+                        (<MenuItem key={number} value={number}> (UTC+{number}:00) </MenuItem>) :
+                        (<MenuItem key={number} value={number}> (UTC{number}:00) </MenuItem>)
+                ))}
+
             </Select>
         </Wrap>
     );
 }
 
-export default SetGender;
+export default SetTimezone;
 
 
 
