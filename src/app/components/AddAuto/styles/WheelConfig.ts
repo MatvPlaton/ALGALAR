@@ -12,6 +12,7 @@ export const AxisNumber = styled.div`
     font-family: RobotoRegular,sans-serif;
     color: black;
     font-size: 1vw;
+    margin-top: 1vw;
     margin-left: 5.6vw;
 `
 export const AxisBlockWrapper = styled.div`
@@ -39,5 +40,5 @@ export const SingleAxis = styled.div`
 export const CheckBoxWrapper1 = styled.input`
     position: relative;
     left: 110%;
-
+    top: -17%;
 `

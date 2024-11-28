@@ -11,8 +11,9 @@ import minus from '../../assets/AddAuto/minus-circle.svg'
 import plus from '../../assets/AddAuto/plus.svg'
 import redactTire from '../../assets/AddAuto/Frame 3.svg'
 import emptyTire from "@/app/assets/AddAuto/Rectangle 41.svg";
-
-import {CopyButton} from "@/app/components/AddAuto/styles/ConfigFields";
+import axis1 from '../../assets/AddAuto/Axis.svg';
+import beginAxis from '../../assets/AddAuto/Axis3.svg'
+import endAxis from '../../assets/AddAuto/Axis3End.svg'
 
 interface Props {
     setRedacting: React.Dispatch<React.SetStateAction<boolean>>;
@@ -59,10 +60,20 @@ const WheelConfig: React.FC<Props> = ({setRedacting,axis,
         setCurrTire(index)
         setRedacting(true)
         setImages((prevImage) =>
-            prevImage.map((item, i) => i === index ? redactTire : emptyTire)
+            prevImage.map((item, i) => i === index  ? redactTire : item === redactTire ? emptyTire : item)
         );
     }
 
+
+    const ImageComponent = (props: { index: number, length: number }) => {
+        if (props.index === 0) {
+            return <Image style={{width: '8vw',height: '8vw',position: 'relative', top: '25%',left: '0.45%'}} src={beginAxis} alt='' />;
+        } else if (props.index === props.length - 1) {
+            return <Image style={{width: '8vw',height: '8vw',position: 'relative', top: '-25%',left: '-0.01%'}} src={endAxis} alt='' />;
+        } else {
+            return <Image style={{width: '8vw',height: '14vw',position: 'relative', top: '-25%',left: '0.3%'}} src={axis1} alt='' />;
+        }
+    };
     return <WheelConfigWrapper>
         <AxisNumber> Осей : &emsp; {axis}
         <Image onClick={() => setAxis(axis === 2 ? axis : axis - 1)}
@@ -79,18 +90,25 @@ const WheelConfig: React.FC<Props> = ({setRedacting,axis,
 
                     {!isDoubled[index] ? <>
                         <Image onClick={() => switchImage(4*index)} style={{width: '3.4vw', height: '14.5vh'}} src={images[4*index]} alt={''}/>
-                        <Image onClick={() => switchImage(4*index + 1)} style={{width: '3.4vw', height: '14.5vh', position: 'relative', left: '41%'}} src={images[4*index + 1]}
-                               alt={''}/> </> : <>
-                        <Image onClick={() => switchImage(4*index)} style={{width: '3.4vw',height: '14.5vh'}} src={images[4*index]} alt={''} />
-                        <Image onClick={() => switchImage(4*index + 1)} style={{width: '3.45vw',height: '14.5vh', position: 'relative', left: '40.8%'}} src={images[4*index + 1]} alt={''} />
+                        <ImageComponent length={axis} index={index} />
 
-                        <Image onClick={() => switchImage(4*index + 3)} style={{width: '3.4vw',height: '14.5vh', position: 'relative', left: '51%'}} src={images[4*index + 3]} alt={''} />
-                        <Image onClick={() => switchImage(4*index + 2)} style={{width: '3.4vw',height: '14.5vh', position: 'relative', left: '-75%'}} src={images[4*index + 2]} alt={''} />
+                        <Image onClick={() => switchImage(4*index + 1)} style={{width: '3.4vw', height: '14.5vh', position: 'relative', left: '1%'}} src={images[4*index + 1]}
+                               alt={''}/> </> : <>
+
+                        <Image onClick={() => switchImage(4*index)} style={{width: '3.4vw', height: '14.5vh'}} src={images[4*index]} alt={''}/>
+                        <Image onClick={() => switchImage(4*index + 2)} style={{width: '3.4vw', height: '14.5vh', position: 'relative', left: '-41%'}} src={images[4*index + 2]}
+                               alt={''}/>
+                        <div style={{position: 'relative', left: '-15%'}}> <ImageComponent length={axis} index={index} /> </div>
+
+                        <Image onClick={() => switchImage(4*index + 1)} style={{width: '3.4vw', height: '14.5vh', position: 'relative', left: '-14%'}} src={images[4*index + 1]}
+                               alt={''}/>
+
+                        <Image onClick={() => switchImage(4*index + 3)} style={{width: '3.4vw', height: '14.5vh', position: 'relative', left: '-8%'}} src={images[4*index + 3]}
+                               alt={''}/>
                     </>}
                 </SingleAxis>
             ))}
 
-            <CopyButton> СОХРАНИТЬ </CopyButton>
 
         </AxisBlockWrapper>
 

@@ -1,38 +1,46 @@
 "use client"
-import * as React from 'react';
+import React from 'react';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
-import {Select, SelectChangeEvent} from "@mui/material";
+import {MenuItem, Select, SelectChangeEvent} from "@mui/material";
 import styled from "styled-components";
+import {useState} from "react";
 const Wrap = styled(FormControl)`
     width: 90%;
-    margin-bottom: 1vw;
     font-size: 1vw;
     padding: 0.5vw;
-
 `
 interface ChildComponentProps {
     text: string;
+    userField : string;
+    setField : React.Dispatch<React.SetStateAction<string>>;
+    turn: boolean;
+    setTurn : React.Dispatch<React.SetStateAction<boolean>>
 }
-const SetTimezone: React.FC<ChildComponentProps> = (({text }) => {
+const SetTimezone: React.FC<ChildComponentProps> = (({setTurn, turn, text,userField,setField }) => {
 
-    const [timezone, setTimezone] = React.useState('');
+    const [inputValue, setInputValue] = useState(userField || '');
 
-    const handleChange = (event: SelectChangeEvent) => {
-        setTimezone(event.target.value as string);
+    const handleChange = (event: SelectChangeEvent<string>) => {
+        const newValue = event.target.value;
+        setInputValue(newValue); // Update local state
+        setField(newValue); // Propagate to parent state
     };
 
 
     return (
-        <Wrap variant="standard">
-            <InputLabel style={{padding: '0.5vw',fontSize: '1vw'}} id="demo-simple-select-standard-label">{text}</InputLabel>
+        <Wrap onClick={() => setTurn(false)} variant="standard" error={turn}>
+            <InputLabel style={{marginLeft: '1vw',fontSize: '1vw'}} id="demo-simple-select-standard-label">{text}</InputLabel>
             <Select
+                style={{marginLeft: '1vw',fontSize: '1vw'}}
                 labelId="demo-simple-select-standard-label"
                 id="demo-simple-select-standard"
-                value={timezone}
+                value={inputValue}
                 onChange={handleChange}
                 label="timezone"
             >
+                <MenuItem value="Грузовик">Грузовик</MenuItem>
+                <MenuItem value="Самосвал">Самосвал</MenuItem>
             </Select>
         </Wrap>
     );

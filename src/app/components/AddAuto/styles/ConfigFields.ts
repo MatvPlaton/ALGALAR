@@ -20,7 +20,10 @@ export const HeaderText2 = styled.div`
     align-items: flex-end;
     padding: 0.5vw;
 `
-export const CopyButton = styled.button`
+interface props {
+    top?: string; // Define the prop type for top
+}
+export const CopyButton = styled.button<props>`
     font-family: RobotoMedium,sans-serif;
     color: white;
     background-color: #a9a9a9;
@@ -28,11 +31,11 @@ export const CopyButton = styled.button`
     border: none;
     border-radius: 0.4vw;
     font-size: 0.9vw;
-    position: relative;
-    top: 65%;
-    left: 85%;
+    position: absolute;
+    top: calc(92% + ${(props) => props.top || '0'});    
+    left: 82%;
     width: 8vw;
-    height: 1vw;
+    height: 5%;
     box-shadow: 0 0.5vw 0.5vw 0 rgba(0,0,0,0.2), 0 0.01vw 0.5vw 0 rgba(0,0,0,0.19);
     &:hover {
         background-color: #c4c2c3;

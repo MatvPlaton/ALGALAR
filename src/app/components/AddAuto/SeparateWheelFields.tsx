@@ -1,6 +1,6 @@
 import React from "react";
 import {FieldsWrapper, Header, SeparateWheelFieldsWrapper, Wrapper} from './styles/SeparateWheelFields';
-import AnyField from "@/app/components/AddAuto/AnyField";
+import AnyField from "@/app/components/AddAuto/AnyField1";
 import TempAndPressure from "@/app/components/AddAuto/TempAndPressure";
 interface Prop {
     redacting: boolean;
