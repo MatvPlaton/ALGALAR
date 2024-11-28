@@ -32,6 +32,7 @@ import arrow1 from "../../assets/Profile/Arrow1.svg"
 import arrow2 from "../../assets/Profile/Arrow2.svg"
 import Image from "next/image";
 import {ALGALAR, Description} from "@/app/components/Profile/styles/ProfileMenu";
+import {useRouter} from "next/navigation";
 
 interface Prop {
     activeField : string;
@@ -43,6 +44,8 @@ const Sidebar: React.FC<Prop> = ({activeField,height}) => {
     const toggleSidebar = () => {
         setIsExpanded((prev) => !prev);
     };
+
+    const router = useRouter();
     const Pictures : {[key : string] : [string,string,string]} = {
         'Профиль': [user,userActive,'Profile'],
         'Автопарк': [autoPark,autoParkActive,'AutoPark'],
@@ -63,7 +66,7 @@ const Sidebar: React.FC<Prop> = ({activeField,height}) => {
             </HeaderWrapper>
             <ComponentsList>
                 {Object.keys(Pictures).map((key : string) =>
-                    <Component onClick={() => window.location.href = (`/${Pictures[key][2]}`)} key={key}>
+                    <Component onClick={() => router.push( `/${Pictures[key][2]}`)} key={key}>
                         {activeField === key ? <>
                                 <Image style={{position: 'relative', left: '-1%', top: '-24%',display: 'grid', width: '27vw',height: '8vh'}}
                                                       src={Pictures[key][1]} alt={''} />

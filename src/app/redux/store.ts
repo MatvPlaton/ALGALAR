@@ -4,7 +4,8 @@ import storage from 'redux-persist/lib/storage';
 import { combineReducers } from 'redux';
 import authSlice from './authSlice'; // Your slices
 import passwordSlice from './passwordSlice';
-import emailSlice from "@/app/redux/emailSlice";
+import emailSlice from "./emailSlice";
+import innSlice from "./innSlice";
 
 // Persist configuration
 const persistConfig = {
@@ -16,7 +17,8 @@ const persistConfig = {
 const rootReducer = combineReducers({
     auth: authSlice,
     password: passwordSlice,
-    email: emailSlice
+    email: emailSlice,
+    inn: innSlice
 });
 
 // Persist reducer

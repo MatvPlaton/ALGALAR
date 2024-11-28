@@ -11,10 +11,12 @@ const Wrap = styled(FormControl)`
         width: 15rem;
     }   
 `
+interface Prop {
+    userField : string;
+}
+const SetTimezone: React.FC<Prop> = ({userField}) =>  {
 
-const SetTimezone = () =>  {
-
-    const [timezone, setTimezone] = React.useState('');
+    const [timezone, setTimezone] = React.useState(userField);
 
     const handleChange = (event: SelectChangeEvent) => {
         setTimezone(event.target.value as string);

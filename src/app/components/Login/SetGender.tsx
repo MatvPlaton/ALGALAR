@@ -27,7 +27,7 @@ const SetGender: React.FC<ChildComponentProps> = ({onDataChange}) =>  {
     };
 
     return (
-        <Wrap variant="standard" sx={{ m: 2, width: '124ch' }}>
+        <Wrap variant="standard" sx={{ m: 2, width: '113.5ch' }}>
             <InputLabel id="demo-simple-select-standard-label">Выберите пол</InputLabel>
             <Select
                 labelId="demo-simple-select-standard-label"

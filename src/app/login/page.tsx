@@ -8,15 +8,15 @@ import RegistrationButton from "@/app/components/Login/RegistrationButton";
 import Enter from "@/app/components/Login/Enter";
 import {FieldsWrapper} from "@/app/components/Login/styles/FieldsWrapper";
 import {LoginWrapper} from "@/app/components/Login/styles/LoginWrapper";
+import Modal from "@/app/components/Login/Modal";
+import {useState} from "react";
 
 
 const Login = () => {
 
+    const [showed, setShowed] = useState(false);
 
-
-
-
-    return <LoginWrapper>
+    return <> <LoginWrapper>
         <Header/>
         <UnderHeaderText message='Введите данные для входа'/>
         <FieldsWrapper>
@@ -25,8 +25,9 @@ const Login = () => {
         </FieldsWrapper>
         <ForgotPassword/>
         <RegistrationButton/>
-        <Enter/>
+        <Enter setShowed={setShowed}/>
     </LoginWrapper>
+    <Modal setShowed={setShowed} showed={showed}/> </>
 }
 
 

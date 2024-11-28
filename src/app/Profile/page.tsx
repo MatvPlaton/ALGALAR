@@ -17,14 +17,15 @@ const Page = () => {
     const token = useSelector((state: RootState) => state.auth.token);
     console.log(token)
 
-    const [,setName] = useState('');
-    const [,setSecondName] = useState('');
-    const [,setPhone] = useState('');
-    // const [email,setEmail] = useState('');
-    // const [inn,setInn] = useState('');
+    const [name,setName] = useState('1');
+    const [secondName,setSecondName] = useState('');
+    const [phone,setPhone] = useState('');
+    const [email,setEmail] = useState('');
+    const [inn,setInn] = useState('');
+    const [timezone,setTimezone] = useState('');
 
     useEffect(() => {
-        axios.get('http://5.188.138.91:8080/user', {
+        axios.get('https://algalar.ru:8080/user', {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -32,22 +33,25 @@ const Page = () => {
             console.log(r)
             setName(r.data['firstName'])
             setSecondName(r.data['lastName'])
-            setPhone(r.data['lastName'])
-
+            setPhone(r.data['phone'])
+            setEmail(r.data['email'])
+            setInn(r.data['inn'])
+            setTimezone(r.data['timezone'])
         })
     })
+    console.log(name)
     return <>
         <ProfileMenu height={'100vh'} activeField={'Профиль'}/>
         <ProfileTitle />
         <FieldsWrapper>
-            <AnyField text='Имя*'  />
-            <AnyField text='Фамилия*' />
-            <AnyField text='Отчество'  />
-            <AnyField text='Телефон*'  />
-            <AnyField text='E-mail*'  />
-            <AnyField text='ИНН Компании'  />
+            <AnyField userField={name} text='Имя'  />
+            <AnyField userField={secondName} text='Фамилия*' />
+            <AnyField userField={''} text='Отчество'  />
+            <AnyField userField={phone} text='Телефон*'  />
+            <AnyField userField={email} text='E-mail*'  />
+            <AnyField userField={inn} text='ИНН Компании'  />
             <SetRank />
-            <SetTimezone />
+            <SetTimezone userField={timezone}/>
         </FieldsWrapper>
         <ReturnButton />
         <RegistrationButton />
