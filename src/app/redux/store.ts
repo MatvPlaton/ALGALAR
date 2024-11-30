@@ -6,7 +6,7 @@ import authSlice from './authSlice'; // Your slices
 import passwordSlice from './passwordSlice';
 import emailSlice from "./emailSlice";
 import innSlice from "./innSlice";
-
+import refreshSlice from "./refreshSlice";
 // Persist configuration
 const persistConfig = {
     key: 'root',
@@ -18,7 +18,8 @@ const rootReducer = combineReducers({
     auth: authSlice,
     password: passwordSlice,
     email: emailSlice,
-    inn: innSlice
+    inn: innSlice,
+    refresh: refreshSlice
 });
 
 // Persist reducer

@@ -13,13 +13,16 @@ import RepairTable from "@/app/components/AutoPark/RepairTable";
 const AutoPark = () => {
 
     const [dataIndex,setDataIndex] = useState(-1);
+
+    const [wheel, setWheel] = useState(-1);
+
     return <> <ProfileMenu height={'100vh'} activeField={'Автопарк'} />
                 <Header />
                 <DataTable dataIndex={dataIndex} setDataIndex={setDataIndex}/>
 
-                <Scheme dataIndex={dataIndex}/>
+                <Scheme wheel={wheel} setWheel={setWheel} dataIndex={dataIndex}/>
                 <GraphicButtons />
-                <Graphic dataIndex={dataIndex} max={12}/>
+                <Graphic wheel={wheel} max={12}/>
                 <RepairButtons />
                 <RepairTable />
     </>

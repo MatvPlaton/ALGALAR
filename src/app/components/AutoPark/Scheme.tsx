@@ -1,10 +1,12 @@
-import React, {useState} from 'react';
+import React from 'react';
 import Image from 'next/image'
 import SchemeImage from '../../assets/AutoPark/SchemeWrapper.svg'
 import styled from "styled-components";
 
 interface Prop {
     dataIndex: number;
+    wheel: number;
+    setWheel: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const PressureWrapper = styled.div`
@@ -34,11 +36,14 @@ const Title = styled.div`
     color: #1e1e1e;
     font-family: RobotoBold, sans-serif;
 `
+const WheelsWrapper = styled.div`
+    position: absolute;
+    top: 3%;
+    left: 5%;
+`
 const Wheel = styled.div`
     background: linear-gradient(to bottom right, #43C5E2, #5A5CA8);
     position: relative;
-    top: -120%;
-    left: 5%;
     width: 2.3vw;
     height: 2.6vw;
     border-radius: 0.4vw;
@@ -57,15 +62,14 @@ const ParamWrapperActive = styled.div`
     top: 10%;
     height: 80%;
     border-radius: 0.3vw;
+    font-size: 1vw;
 `
 
 const ParamWrapper = styled(ParamWrapperActive)`
     background: white;
     color: black;
 `
-const Scheme: React.FC<Prop> = ({dataIndex}) => {
-
-    const [active, setActive] = useState(false);
+const Scheme: React.FC<Prop> = ({wheel, setWheel, dataIndex}) => {
 
     return <> {dataIndex === -1 ? <div /> :
         <div style={{height: '45vh',position: 'absolute',left: '50%', top: '15%'}}>
@@ -73,14 +77,17 @@ const Scheme: React.FC<Prop> = ({dataIndex}) => {
             <Title> Текущее состояние </Title>
             <PressureWrapper> Рекомендованное давление </PressureWrapper>
             <PressureNumber> 123 </PressureNumber>
-            <Wheel onClick={() => setActive(!active)}>
-                {active ?
+            <WheelsWrapper>
+                {Array.from({ length: 2}, (_, index) => (
+            <Wheel key={index} onClick={() => setWheel(index)}>
+                {wheel === index ?
                 <ParamWrapperActive>7.2 <br />
-                    <span style={{position: 'relative', bottom: '-10%'}}> 85 </span> </ParamWrapperActive> :
+                    <span style={{position: 'relative', bottom: '3%'}}> 85 </span> </ParamWrapperActive> :
                     <ParamWrapper>7.2 <br />
-                    <span style={{position: 'relative', bottom: '-10%'}}> 85 </span> </ParamWrapper>}
-            </Wheel>
+                    <span style={{position: 'relative', bottom: '3%'}}> 85 </span> </ParamWrapper>}
 
+            </Wheel>))}
+            </WheelsWrapper>
     </div>} </>
     }
 

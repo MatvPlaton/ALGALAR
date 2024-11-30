@@ -90,9 +90,9 @@ interface DataPoint {
 }
 interface Prop {
     max?: number
-    dataIndex: number
+    wheel: number;
 }
-const Graphic: React.FC<Prop> = (({max = 0, dataIndex}) => {
+const Graphic: React.FC<Prop> = (({wheel, max = 0}) => {
 
     const dataPoints = [];
     dataPoints.push([]);
@@ -117,7 +117,7 @@ const Graphic: React.FC<Prop> = (({max = 0, dataIndex}) => {
     ]);
     return (
         <div style={{position: "absolute", left: '70%', top: '24%', height: '30%', width: '27%'}}>
-            <LineChart max={max} dataPoints={dataPoints[dataIndex + 1]} />
+            <LineChart max={max} dataPoints={dataPoints[wheel + 1]} />
         </div>
     );
 });

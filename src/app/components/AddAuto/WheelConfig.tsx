@@ -40,23 +40,9 @@ const WheelConfig: React.FC<Props> = ({setRedacting,axis,
             prevStates.map((item, i) => i === index ? !item : item))
 
     }
-    // class wheelSetting {
-    //     private SensorNumber: number;
-    //     private TireBrand: string;
-    //     private TireSize: number;
-    //     private TireCost: number;
-    //     private TireModel: string;
-    //     constructor(SensorNumber : number,TireBrand: string, TireSize: number,TireCost: number, TireModel: string) {
-    //
-    //         this.SensorNumber = SensorNumber;
-    //         this.TireBrand = TireBrand;
-    //         this.TireSize = TireSize;
-    //         this.TireCost = TireCost;
-    //         this.TireModel = TireModel;
-    //     }
-    // }
-    const switchImage = (index : number) => {
 
+    const switchImage = (index : number) => {
+        console.log(index)
         setCurrTire(index)
         setRedacting(true)
         setImages((prevImage) =>
@@ -89,18 +75,18 @@ const WheelConfig: React.FC<Props> = ({setRedacting,axis,
                     <CheckBoxWrapper1 type={"checkbox"} onChange={() => switchAxis(index)} />
 
                     {!isDoubled[index] ? <>
-                        <Image onClick={() => switchImage(4*index)} style={{width: '3.4vw', height: '14.5vh'}} src={images[4*index]} alt={''}/>
+                        <Image onClick={() => switchImage(4*index + 1)} style={{width: '3.4vw', height: '14.5vh'}} src={images[4*index + 1]} alt={''}/>
                         <ImageComponent length={axis} index={index} />
 
-                        <Image onClick={() => switchImage(4*index + 1)} style={{width: '3.4vw', height: '14.5vh', position: 'relative', left: '1%'}} src={images[4*index + 1]}
+                        <Image onClick={() => switchImage(4*index + 2)} style={{width: '3.4vw', height: '14.5vh', position: 'relative', left: '1%'}} src={images[4*index + 2]}
                                alt={''}/> </> : <>
 
-                        <Image onClick={() => switchImage(4*index)} style={{width: '3.4vw', height: '14.5vh'}} src={images[4*index]} alt={''}/>
-                        <Image onClick={() => switchImage(4*index + 2)} style={{width: '3.4vw', height: '14.5vh', position: 'relative', left: '-41%'}} src={images[4*index + 2]}
+                        <Image onClick={() => switchImage(4*index + 1)} style={{width: '3.4vw', height: '14.5vh'}} src={images[4*index + 1]} alt={''}/>
+                        <Image onClick={() => switchImage(4*index)} style={{width: '3.4vw', height: '14.5vh', position: 'relative', left: '-41%'}} src={images[4*index]}
                                alt={''}/>
                         <div style={{position: 'relative', left: '-15%'}}> <ImageComponent length={axis} index={index} /> </div>
 
-                        <Image onClick={() => switchImage(4*index + 1)} style={{width: '3.4vw', height: '14.5vh', position: 'relative', left: '-14%'}} src={images[4*index + 1]}
+                        <Image onClick={() => switchImage(4*index + 2)} style={{width: '3.4vw', height: '14.5vh', position: 'relative', left: '-14%'}} src={images[4*index + 2]}
                                alt={''}/>
 
                         <Image onClick={() => switchImage(4*index + 3)} style={{width: '3.4vw', height: '14.5vh', position: 'relative', left: '-8%'}} src={images[4*index + 3]}
