@@ -1,11 +1,7 @@
 "use client"
-import React, {useEffect} from 'react';
+import React from 'react';
 import styled from "styled-components";
-import axios from "axios";
-import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "@/app/redux/store";
-import {setToken} from "@/app/redux/authSlice";
-import {setRefreshToken} from "@/app/redux/refreshSlice";
+
 class MyClass {
     field1: string;
     field2: string;
@@ -68,33 +64,7 @@ interface Prop {
 }
 const DataTable: React.FC<Prop> = ({dataIndex, setDataIndex}) => {
 
-    const token = useSelector((state: RootState) => state.auth.token);
-    const refreshToken = useSelector((state: RootState) => state.refresh.refreshToken);
-    const dispatch = useDispatch();
-    axios.interceptors.response.use(response => {
-        return response;
-    }, error => {
-        if (error.response.status === 401) {
-            axios.post('https://algalar.ru:8080/refresh', {},{
-                headers: {
-                    Authorization: `Bearer ${refreshToken}`
-                }
-            }).then(r => {
-                dispatch(setToken(r.data.accessToken))
-                dispatch(setRefreshToken(r.data.refreshToken))
-            })
-        }
-        return error;
-    });
-    useEffect(() => {
-        axios.get('https://algalar.ru:8080/auto?car_id=124', {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        }).then(r => {
-            console.log(r)
-        }).catch()
-    })
+
     return (
         <table style={{ position: 'absolute', left: '6.5%', top: '15%', width: '40%', borderCollapse: 'collapse' }}>
             <thead>

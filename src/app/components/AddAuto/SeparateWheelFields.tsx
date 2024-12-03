@@ -121,7 +121,7 @@ const SeparateWheelFields: React.FC<Prop> = ({carId, currTire, setImages, setRed
             "axleNumber": Math.floor(currTire / 4) + 1,
             "wheelPosition": currTire,
             "sensorNumber": number,
-            "tireSize": size,
+            "tireSize": Number(size),
             "tireCost": Number(cost),
             "tireBrand": brand,
             "tireModel": model,

@@ -38,6 +38,7 @@ export const CopyButton = styled.button<props>`
     height: 5%;
     box-shadow: 0 0.5vw 0.5vw 0 rgba(0,0,0,0.2), 0 0.01vw 0.5vw 0 rgba(0,0,0,0.19);
     &:hover {
+    
         background-color: #c4c2c3;
     }
     &:active {

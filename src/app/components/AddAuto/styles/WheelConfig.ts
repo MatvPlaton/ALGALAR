@@ -22,7 +22,7 @@ export const AxisBlockWrapper = styled.div`
     left: 10%;
     top: 30%;
     width: 85%;
-    height: 90%;
+    height: 70%;
 `
 export const SingleAxis = styled.div`
     display: flex;
