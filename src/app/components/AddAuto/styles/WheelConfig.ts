@@ -29,16 +29,25 @@ export const SingleAxis = styled.div`
     margin-bottom: 1vw;
     flex-direction: row;
     position: relative;
-    width: 50%;
-    left: 20%;
+    width: 60%;
+    left: 5%;
     top: 25%;
     height: 100%;
-
 `
 
 
 export const CheckBoxWrapper1 = styled.input`
     position: relative;
-    left: 110%;
+    left: 120%;
     top: -17%;
+`
+export const DoubleWrapper = styled.div`
+    width: 100%;
+    height: 14.5vh;
+    flex-direction: row;
+`
+export const FourWrapper = styled.div`
+    width: 100%;
+    height: 14.5vh;
+
 `

@@ -19,8 +19,6 @@ const Page = () => {
     const token = useSelector((state: RootState) => state.auth.token);
     const refreshToken = useSelector((state: RootState) => state.refresh.refreshToken);
     const dispatch = useDispatch();
-    console.log(token)
-
     const [name,setName] = useState('');
     const [secondName,setSecondName] = useState('');
     const [phone,setPhone] = useState('');

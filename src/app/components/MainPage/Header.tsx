@@ -1,3 +1,4 @@
+"use client"
 import React from "react";
 import Logotype from '../../assets/MainPage/image7.svg'
 import ProfileIcon from '../../assets/MainPage/profile.svg'

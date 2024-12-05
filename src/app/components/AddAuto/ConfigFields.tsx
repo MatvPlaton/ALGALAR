@@ -1,36 +1,37 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {ConfigFieldsWrapper, CopyButton} from './styles/ConfigFields';
 import AnyField from "@/app/components/AddAuto/AnyField";
 import SetTimezone from "@/app/components/AddAuto/SetTimezone";
 import {HeaderText2} from "@/app/components/AddAuto/styles/ConfigFields";
 import WheelConfig from "@/app/components/AddAuto/WheelConfig";
 import axios from "axios";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {RootState} from "@/app/redux/store";
-import {setToken} from "@/app/redux/authSlice";
-import {setRefreshToken} from "@/app/redux/refreshSlice";
 import Notification from "@/app/components/AddAuto/Notification";
 
+interface tireCont {
+    full : boolean;
+    img: string;
+}
 interface Props {
-    setRedacting: React.Dispatch<React.SetStateAction<boolean>>;
     axis : number;
     setAxis:  React.Dispatch<React.SetStateAction<number>>;
     isChecked : boolean;
     setIsChecked: React.Dispatch<React.SetStateAction<boolean>>;
     currTire : number;
-    setCurrTire : React.Dispatch<React.SetStateAction<number>>;
     isDoubled : boolean[];
     setIsDoubled : React.Dispatch<React.SetStateAction<boolean[]>>;
-    images : string[];
-    setImages : React.Dispatch<React.SetStateAction<string[]>>;
+    images : tireCont[];
     setCarId: React.Dispatch<React.SetStateAction<string>>;
+    switchImage: (index : number) => void;
+    carId: string;
 }
 
 
 
-const ConfigFields: React.FC<Props> = ({setCarId,setRedacting,axis,
+const ConfigFields: React.FC<Props> = ({carId, switchImage, setCarId, axis,
                                            setAxis,isChecked,setIsChecked,
-                                           images,setImages,currTire,setCurrTire, isDoubled, setIsDoubled}) => {
+                                           images,currTire, isDoubled, setIsDoubled}) => {
 
     const [id, setId] = useState('');
     const [number,setNumber] = useState('');
@@ -44,38 +45,16 @@ const ConfigFields: React.FC<Props> = ({setCarId,setRedacting,axis,
     const [typeTurn, setTypeTurn] = useState(false);
     const [uniqueIdTurn,setUniqueIdTurn] = useState(false);
 
+    const allFieldsFilled = [id, number, mark, type, uniqueId].every(field => field.trim() !== '');
+
 
     const token = useSelector((state: RootState) => state.auth.token);
-    const refreshToken = useSelector((state: RootState) => state.refresh.refreshToken);
 
     const inn = useSelector((state: RootState) => state.inn.inn);
-    const dispatch = useDispatch();
 
     const [isNotificationVisible, setNotificationVisible] = useState(false);
 
-    axios.interceptors.response.use(response => {
-        return response;
-    }, error => {
-        if (error.response.status === 401) {
-            axios.post('https://algalar.ru:8080/refresh', {},{
-                headers: {
-                    Authorization: `Bearer ${refreshToken}`
-                }
-            }).then(r => {
-                dispatch(setToken(r.data.accessToken))
-                dispatch(setRefreshToken(r.data.refreshToken))
-            })
-        }
-        return error;
-    });
 
-    useEffect(() => {
-        axios.get('https://algalar.ru:8080/user', {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        }).then().catch()
-    })
     const send  = () => {
 
         let flag = false;
@@ -109,6 +88,7 @@ const ConfigFields: React.FC<Props> = ({setCarId,setRedacting,axis,
             }, 3000);
             setCarId(r.data.id) }).catch()
     }
+
     return <> <ConfigFieldsWrapper>
         <HeaderText2> Выберите конфигурацию колёсной системы</HeaderText2>
 
@@ -118,14 +98,14 @@ const ConfigFields: React.FC<Props> = ({setCarId,setRedacting,axis,
         <SetTimezone setTurn={setTypeTurn} turn={typeTurn} setField={setType} userField={type} text={'Тип Авто*'} />
         <AnyField setTurn={setUniqueIdTurn} turn={uniqueIdTurn} setField={setUniqueId} userField={uniqueId} text={'Уникальный ID*'} />
 
-        <WheelConfig images={images} setImages={setImages} isDoubled={isDoubled} setIsDoubled={setIsDoubled}
-                     setCurrTire={setCurrTire} isChecked={isChecked} setIsChecked={setIsChecked}
-                     setRedacting={setRedacting} axis={axis} setAxis={setAxis} currTire={currTire}/>
-        <CopyButton onClick={() => send()} top={`${(axis-2)*28.6}%`}> СОХРАНИТЬ </CopyButton>
+        <WheelConfig carId={carId} switchImage={switchImage} images={images} isDoubled={isDoubled} setIsDoubled={setIsDoubled}
+                     isChecked={isChecked} setIsChecked={setIsChecked}
+                     axis={axis} setAxis={setAxis} currTire={currTire}/>
+        <CopyButton fields={allFieldsFilled} onClick={() => send()} top={`${(axis-2)*28.6}%`}> СОХРАНИТЬ </CopyButton>
 
     </ConfigFieldsWrapper>
 
-        <Notification message={'Машина отправлена'} visible={isNotificationVisible}/> </>
+        <Notification message={'Машина отправлена!'} visible={isNotificationVisible}/> </>
 }
 
 export default ConfigFields;

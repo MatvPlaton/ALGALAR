@@ -42,7 +42,7 @@ const AutoPark = () => {
         }).then(r => {
             console.log(r)
         }).catch()
-    }, [])
+    }, [token])
     const [dataIndex,setDataIndex] = useState(-1);
 
     const [wheel, setWheel] = useState(-1);

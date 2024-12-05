@@ -1,4 +1,3 @@
-"use client"
 import React from "react";
 import Header from "@/app/components/MainPage/Header";
 import Truck from "@/app/components/MainPage/Truck";

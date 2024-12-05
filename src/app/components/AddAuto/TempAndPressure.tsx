@@ -10,19 +10,29 @@ import {FieldWrapper} from "@/app/components/AddAuto/styles/TempAndPressure";
 import Image from "next/image";
 import temp from '../../assets/AddAuto/tempIcon.svg';
 import bar from '../../assets/AddAuto/barIcon.svg';
+interface Stats  {
+
+    number : string,
+    size : string,
+    ngp : string,
+    model : string,
+    brand : string,
+    cost : string,
+    tkvh : string,
+    minPress : string,
+    maxPress : string,
+    minTemp : string,
+    maxTemp : string,
+}
+
 interface Prop {
     redacting: boolean;
-    minPress : string,
-    setMinPress : React.Dispatch<React.SetStateAction<string>>,
-    maxPress : string,
-    setMaxPress : React.Dispatch<React.SetStateAction<string>>,
-    minTemp : string,
-    setMinTemp : React.Dispatch<React.SetStateAction<string>>,
-    maxTemp : string,
-    setMaxTemp : React.Dispatch<React.SetStateAction<string>>
+    wheels: Stats[];
+    setWheels: React.Dispatch<React.SetStateAction<Stats[]>>;
+    currTire: number;
 }
-const TempAndPressure: React.FC<Prop> = ({minPress, maxPress, minTemp, maxTemp,
-                                             setMaxTemp, setMinTemp, setMinPress, setMaxPress, redacting}) => {
+const TempAndPressure: React.FC<Prop> = ({currTire,
+                                             wheels,setWheels, redacting}) => {
     return <> {redacting ? <>
         <MinMaxWrapper>
             <div style={{zIndex: 100, marginRight: '7.5vw'}}> Минимальное </div>
@@ -35,22 +45,22 @@ const TempAndPressure: React.FC<Prop> = ({minPress, maxPress, minTemp, maxTemp,
                 </Headers>
                 <MinFields>
                     <FieldWrapper>
-                        <AnyFieldoutlined userField={minTemp} setField={setMinTemp} text={''} />
+                        <AnyFieldoutlined field={'minTemp'} index={currTire} wheels={wheels} setWheels={setWheels} text={''} />
                         <Image src={temp} alt={''} />
                     </FieldWrapper>
                     <FieldWrapper>
-                        <AnyFieldoutlined userField={minPress} setField={setMinPress} text={''} />
+                        <AnyFieldoutlined field={'minPress'} index={currTire}  wheels={wheels} setWheels={setWheels} text={''} />
                         <Image src={bar} alt={''} />
 
                     </FieldWrapper>
                 </MinFields>
                 <MinFields>
                     <FieldWrapper>
-                        <AnyFieldoutlined userField={maxTemp} setField={setMaxTemp} text={''} />
+                        <AnyFieldoutlined field={'maxTemp'} index={currTire}  wheels={wheels} setWheels={setWheels} text={''} />
                         <Image src={temp} alt={''} />
                     </FieldWrapper>
                     <FieldWrapper>
-                        <AnyFieldoutlined userField={maxPress} setField={setMaxPress} text={''} />
+                        <AnyFieldoutlined field={'maxPress'} index={currTire}  wheels={wheels} setWheels={setWheels} text={''} />
                         <Image src={bar} alt={''} />
 
                     </FieldWrapper>

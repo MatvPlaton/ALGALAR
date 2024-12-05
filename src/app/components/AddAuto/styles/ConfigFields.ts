@@ -21,12 +21,13 @@ export const HeaderText2 = styled.div`
     padding: 0.5vw;
 `
 interface props {
-    top?: string; // Define the prop type for top
+    top?: string;
+    fields?: boolean;
 }
 export const CopyButton = styled.button<props>`
     font-family: RobotoMedium,sans-serif;
     color: white;
-    background-color: #a9a9a9;
+    background-color: ${(props) => props.fields ? '#5A5CA8' : '#a9a9a9'};
     letter-spacing: 0.07vw;
     border: none;
     border-radius: 0.4vw;
@@ -38,8 +39,7 @@ export const CopyButton = styled.button<props>`
     height: 5%;
     box-shadow: 0 0.5vw 0.5vw 0 rgba(0,0,0,0.2), 0 0.01vw 0.5vw 0 rgba(0,0,0,0.19);
     &:hover {
-    
-        background-color: #c4c2c3;
+        background-color: ${(props) => props.fields ? '#46478b' : '#a9a9a9'};
     }
     &:active {
         transform: translateY(-5%);
