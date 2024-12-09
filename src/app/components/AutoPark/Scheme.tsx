@@ -2,11 +2,42 @@ import React from 'react';
 import Image from 'next/image'
 import SchemeImage from '../../assets/AutoPark/SchemeWrapper.svg'
 import styled from "styled-components";
-
+interface auto {
+    autoType : string
+    axleCount : number
+    brand : string
+    deviceId : string
+    id : string
+    stateNumber : string
+    uniqueId : string
+}
+interface wheel {
+    autoId : string
+    axleNumber : number
+    id : string
+    maxPressure : number
+    maxTemperature : number
+    mileage : number
+    minPressure : number
+    minTemperature : number
+    ngp : number
+    sensorNumber : string
+    tireBrand : string
+    tireCost : number
+    tireModel : string
+    tireSize : number
+    tkvh : number
+    wheelPosition : number
+}
+interface car {
+    auto : auto
+    wheels: wheel[]
+}
 interface Prop {
     dataIndex: number;
     wheel: number;
     setWheel: React.Dispatch<React.SetStateAction<number>>;
+    car: car;
 }
 
 const PressureWrapper = styled.div`
@@ -40,10 +71,18 @@ const WheelsWrapper = styled.div`
     position: absolute;
     top: 3%;
     left: 5%;
+    height: 100%;
+    width: 100%;
 `
-const Wheel = styled.div`
+interface WheelProp {
+    wheelposition: number;
+}
+
+const Wheel = styled.div<WheelProp>`
     background: linear-gradient(to bottom right, #43C5E2, #5A5CA8);
-    position: relative;
+    position: absolute;
+    top: ${(props) => `${((props.wheelposition - props.wheelposition % 4 )/ 4)* 15}%`};
+    left: ${(props) => `${((props.wheelposition  % 4)) * 25}%`};
     width: 2.3vw;
     height: 2.6vw;
     border-radius: 0.4vw;
@@ -69,7 +108,8 @@ const ParamWrapper = styled(ParamWrapperActive)`
     background: white;
     color: black;
 `
-const Scheme: React.FC<Prop> = ({wheel, setWheel, dataIndex}) => {
+const Scheme: React.FC<Prop> = ({car, wheel, setWheel, dataIndex}) => {
+
 
     return <> {dataIndex === -1 ? <div /> :
         <div style={{height: '45vh',position: 'absolute',left: '50%', top: '15%'}}>
@@ -78,13 +118,13 @@ const Scheme: React.FC<Prop> = ({wheel, setWheel, dataIndex}) => {
             <PressureWrapper> Рекомендованное давление </PressureWrapper>
             <PressureNumber> 123 </PressureNumber>
             <WheelsWrapper>
-                {Array.from({ length: 2}, (_, index) => (
-            <Wheel key={index} onClick={() => setWheel(index)}>
-                {wheel === index ?
-                <ParamWrapperActive>7.2 <br />
-                    <span style={{position: 'relative', bottom: '3%'}}> 85 </span> </ParamWrapperActive> :
-                    <ParamWrapper>7.2 <br />
-                    <span style={{position: 'relative', bottom: '3%'}}> 85 </span> </ParamWrapper>}
+                {car.wheels.map((wheel1: wheel) => (
+            <Wheel wheelposition={wheel1.wheelPosition} key={wheel1.wheelPosition} onClick={() => setWheel(wheel1.wheelPosition)}>
+                {wheel === wheel1.wheelPosition ?
+                <ParamWrapperActive>0 <br />
+                    <span style={{position: 'relative', bottom: '3%'}}> 0 </span> </ParamWrapperActive> :
+                    <ParamWrapper>0 <br />
+                    <span style={{position: 'relative', bottom: '3%'}}> 0 </span> </ParamWrapper>}
 
             </Wheel>))}
             </WheelsWrapper>

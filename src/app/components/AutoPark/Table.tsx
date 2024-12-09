@@ -1,6 +1,7 @@
 "use client"
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
+
 
 class MyClass {
     field1: string;
@@ -17,11 +18,7 @@ class MyClass {
 }
 // data/classesData.ts
 
-const data: MyClass[] = [
-    new MyClass('CAT 777', 'На Маршруте', '4', 'Самосвал'),
-    new MyClass('БелАЗ 7555А', 'В автопарке', '2', 'Самосвал'),
 
-];
 // components/DataTable.tsx
 
 
@@ -58,12 +55,53 @@ const Wrap3 = styled.td`
     font-size: 1vw;
 
 `
-interface Prop {
-    setDataIndex: React.Dispatch<React.SetStateAction<number>>;
-    dataIndex: number;
+interface auto {
+    autoType : string
+    axleCount : number
+    brand : string
+    deviceId : string
+    id : string
+    stateNumber : string
+    uniqueId : string
 }
-const DataTable: React.FC<Prop> = ({dataIndex, setDataIndex}) => {
+interface wheel {
+    autoId : string
+    axleNumber : number
+    id : string
+    maxPressure : number
+    maxTemperature : number
+    mileage : number
+    minPressure : number
+    minTemperature : number
+    ngp : number
+    sensorNumber : string
+    tireBrand : string
+    tireCost : number
+    tireModel : string
+    tireSize : number
+    tkvh : number
+    wheelPosition : number
+}
+interface car {
+    auto : auto
+    wheels: wheel[]
+}
+interface Prop {
+    setDataIndex: (index : number) => void;
+    dataIndex: number;
+    cars: car[];
+}
 
+const DataTable: React.FC<Prop> = ({ cars,dataIndex, setDataIndex}) => {
+
+    const [data, setData] = useState<MyClass[]>([])
+
+    useEffect(() => {
+        const updatedData = cars.map(
+            (car) => new MyClass(car.auto.brand, 'N/A', '0', car.auto.autoType)
+        );
+        setData(updatedData);
+    }, [cars])
 
     return (
         <table style={{ position: 'absolute', left: '6.5%', top: '15%', width: '40%', borderCollapse: 'collapse' }}>

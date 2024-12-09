@@ -29,29 +29,84 @@ const AutoPark = () => {
                 }
             }).then(r => {
                 dispatch(setToken(r.data.accessToken))
-                dispatch(setRefreshToken(r.data.refreshToken))
+                dispatch(setRefreshToken(r.data["refreshToken"]))
             })
         }
         return error;
     });
+
+    interface car {
+        autoType: string,
+        axleCount: number,
+        brand: string,
+        deviceId: string,
+        id: string,
+        stateNumber: string,
+        uniqueId: string
+    }
+    interface auto {
+        autoType : string
+        axleCount : number
+        brand : string
+        deviceId : string
+        id : string
+        stateNumber : string
+        uniqueId : string
+    }
+    interface wheel {
+        autoId : string
+        axleNumber : number
+        id : string
+        maxPressure : number
+        maxTemperature : number
+        mileage : number
+        minPressure : number
+        minTemperature : number
+        ngp : number
+        sensorNumber : string
+        tireBrand : string
+        tireCost : number
+        tireModel : string
+        tireSize : number
+        tkvh : number
+        wheelPosition : number
+    }
+    interface car {
+        auto : auto
+        wheels: wheel[]
+    }
+    const [cars, setCars] = useState<car[]>([]);
     useEffect(() => {
-        axios.get('https://algalar.ru:8080/auto/list?offset=0&limit=10', {
+
+        axios.get('https://algalar.ru:8080/auto/list?offset=0&limit=100', {
             headers: {
                 Authorization: `Bearer ${token}`
             }
         }).then(r => {
-            console.log(r)
+            r.data.forEach((car: auto) => {
+                axios.get(`https://algalar.ru:8080/auto/info?car_id=${car.id}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }).then(r => setCars(oldCars => [...oldCars,r.data]))
+            })
         }).catch()
-    }, [token])
+    }, [])
     const [dataIndex,setDataIndex] = useState(-1);
-
+    // @ts-expect-error 1234
+    const [currCar,setCurrCar] = useState<car>(null);
+    const setCar = (index: number) => {
+        setDataIndex(index);
+        setCurrCar(cars[index]);
+    }
     const [wheel, setWheel] = useState(-1);
+
 
     return <> <ProfileMenu height={'100vh'} activeField={'Автопарк'} />
                 <Header />
-                <DataTable dataIndex={dataIndex} setDataIndex={setDataIndex}/>
-
-                <Scheme wheel={wheel} setWheel={setWheel} dataIndex={dataIndex}/>
+                <DataTable cars={cars} dataIndex={dataIndex} setDataIndex={setCar}/>
+        <button onClick={() => console.log(cars)} style={{width: '20vw'}} />
+                <Scheme car={currCar} wheel={wheel} setWheel={setWheel} dataIndex={dataIndex}/>
                 <GraphicButtons />
                 <Graphic wheel={wheel} max={12}/>
                 <RepairButtons />
