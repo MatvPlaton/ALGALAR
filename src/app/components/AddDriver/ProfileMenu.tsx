@@ -27,7 +27,6 @@ import autoParkActive from "../../assets/Profile/ActiveAutoPark.svg"
 import locationActive from "../../assets/Profile/Activelocation.svg"
 import driversActive from "../../assets/Profile/ActiveDrivers.svg"
 import addCarActive from "../../assets/Profile/ActiveAddAuto.svg"
-import addDriverActive from  "../../assets/Profile/ActiveAddDriver.svg"
 
 import arrow1 from "../../assets/Profile/Arrow1.svg"
 import arrow2 from "../../assets/Profile/Arrow2.svg"
@@ -54,7 +53,7 @@ const Sidebar: React.FC<Prop> = ({activeField,height}) => {
         'Статистика по водителям' : [drivers,driversActive,'Drivers'],
         'Статистика по шинам' : [tires,tires,'tires'],
         'Добавить авто' : [addCar,addCarActive,'AddAuto'],
-        'Добавить водителя' : [addDriver,addDriverActive,'AddDriver'],
+        'Добавить водителя' : [addDriver,addDriver,'AddDriver'],
         'Уведомления' : [notifications,notifications,'Notifications'],
         'Выход' : [exit,exit,'Exit']
     }
@@ -67,7 +66,7 @@ const Sidebar: React.FC<Prop> = ({activeField,height}) => {
             </HeaderWrapper>
             <ComponentsList>
                 {Object.keys(Pictures).map((key : string) =>
-                    <Component onClick={() => {console.log(key); router.push( `/${Pictures[key][2]}`)}} key={key}>
+                    <Component onClick={() => router.push( `/${Pictures[key][2]}`)} key={key}>
                         {activeField === key ? <>
                                 <Image style={{position: 'relative', left: '-1%', top: '-24%',display: 'grid', width: '27vw',height: '8vh'}}
                                                       src={Pictures[key][1]} alt={''} />

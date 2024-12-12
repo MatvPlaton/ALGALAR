@@ -1,14 +1,19 @@
 import React from 'react';
+import styled from 'styled-components';
+
 import {
-    AddButton,
     ButtonsWrapper,
-    CopyButton,
     Report,
     TAndP,
     TempAndPressureWrapper,
     Wrapper
 } from './styles/GraphicButtons'
 
+const Sentence =  styled.div`
+    font-family: RobotoMedium,sans-serif;
+    letter-spacing: 0.1vw;
+    font-size: 0.8vw;
+`
 const GraphicButtons = () => {
     return (
         <Wrapper>
@@ -18,11 +23,7 @@ const GraphicButtons = () => {
 
             </TempAndPressureWrapper>
             <ButtonsWrapper>
-            <AddButton> НЕДЕЛЯ </AddButton>
-                <CopyButton> МЕСЯЦ </CopyButton>
-                <CopyButton> КВАРТАЛ </CopyButton>
-                <CopyButton> ГОД </CopyButton>
-                <CopyButton> ВСЁ ВРЕМЯ </CopyButton>
+                <Sentence> ВВЕДИТЕ ДАТУ ДД.ММ.ГГГГ </Sentence>
         </ButtonsWrapper>
             <Report> ОТЧЁТ ПО МАШИНЕ </Report>
 

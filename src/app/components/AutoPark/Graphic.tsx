@@ -26,8 +26,8 @@ ChartJS.register(
 
 // Типизация для данных точек
 interface DataPoint {
-    label: string;
-    value: number;
+    x: number;
+    y: number;
 }
 
 // Пропсы компонента
@@ -39,16 +39,18 @@ interface LineChartProps {
 const LineChart: React.FC<LineChartProps> = ({ max = 0, dataPoints }) => {
     // Подготовка данных для графика
     const data = {
-        labels: dataPoints.map((point) => point.label), // Метки оси X
+        labels: [...Array(24).keys()].map(value => value + 1), // Метки оси X
         datasets: [
             {
-                label: '',
-                data: dataPoints.map((point) => point.value), // Значения точек
+                data: dataPoints.map((point) => ({
+                    x: point.x,
+                    y: point.y,
+                })),
                 borderColor: 'rgba(75, 192, 192, 1)', // Цвет линии
                 backgroundColor: 'rgba(75, 192, 192, 0.2)', // Цвет под линией
                 pointBorderColor: 'white', // Цвет точек
                 pointBackgroundColor: 'purple', // Фон точек
-                pointBorderWidth: 2,
+                pointBorderWidth: 3,
                 tension: 0, // Гладкость линии (0 = угловатая, 1 = сглаженная)
             },
         ],
@@ -85,8 +87,8 @@ const LineChart: React.FC<LineChartProps> = ({ max = 0, dataPoints }) => {
 };
 
 interface DataPoint {
-    label: string;
-    value: number;
+    x: number;
+    y: number;
 }
 interface Prop {
     max?: number
@@ -97,23 +99,18 @@ const Graphic: React.FC<Prop> = (({wheel, max = 0}) => {
     const dataPoints = [];
     dataPoints.push([]);
     dataPoints.push([
-        { label: 'ПН', value: 7.5 },
-        { label: 'ВТ', value: 8 },
-        { label: 'СР', value: 7.7 },
-        { label: 'ЧТ', value: 7.6 },
-        { label: 'ПТ', value: 7.5 },
-        { label: 'СБ', value: 8.1 },
-        { label: 'ВС', value: 7.5 }
+        { x: 1, y: 7.5 },
+        { x: 12, y: 8.1 },
     ]);
     // Пример данных для графика
     dataPoints.push([
-        { label: 'ПН', value: 8.5 },
-        { label: 'ВТ', value: 6 },
-        { label: 'СР', value: 7.7 },
-        { label: 'ЧТ', value: 7.2 },
-        { label: 'ПТ', value: 7.9 },
-        { label: 'СБ', value: 6.1 },
-        { label: 'ВС', value: 7 }
+        { x: 1, y: 7.5 },
+        { x: 4, y: 5.5 },
+        { x: 8, y: 10 },
+        { x: 12, y: 9 },
+        { x: 15, y: 8.4 },
+        { x: 18, y: 8 },
+        { x: 24, y: 6.3 }
     ]);
     return (
         <div style={{position: "absolute", left: '70%', top: '24%', height: '30%', width: '27%'}}>
