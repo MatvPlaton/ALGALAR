@@ -6,6 +6,7 @@ export const ButtonsWrapper = styled.div`
     top: 62%;
     width: auto;
     height: auto;
+
 `
 
 export const AddButton = styled.button`

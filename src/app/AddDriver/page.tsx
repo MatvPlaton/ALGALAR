@@ -4,7 +4,7 @@ import ProfileMenu from '@/app/components/Profile/ProfileMenu'
 import ProfileTitle from "@/app/components/AddDriver/ProfileTitle";
 import {FieldsWrapper} from "@/app/components/AddDriver/styles/FieldsWrapper";
 import AnyField from "@/app/components/AddDriver/AnyField";
-
+import DateField from "@/app/components/AddDriver/DateField";
 import RegistrationButton from "@/app/components/AddDriver/RegistrationButton";
 
 const Page = () => {
@@ -12,7 +12,6 @@ const Page = () => {
     const [name,] = useState('');
     const [secondName,] = useState('');
     const [phone,] = useState('');
-    const [birthDate,] = useState('');
 
     return <>
         <ProfileMenu height={'100vh'} activeField={'Добавить водителя'}/>
@@ -22,8 +21,7 @@ const Page = () => {
             <AnyField userField={secondName} text='Фамилия*' />
             <AnyField userField={''} text='Отчество*'  />
             <AnyField userField={phone} text='Телефон*'  />
-            <AnyField userField={birthDate} text='Дата рождения*'  />
-
+            <DateField userField={null} text='Дата рождения*'  />
         </FieldsWrapper>
         <RegistrationButton />
         </>

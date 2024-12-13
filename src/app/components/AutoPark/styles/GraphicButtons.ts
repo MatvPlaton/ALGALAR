@@ -22,9 +22,12 @@ export const TAndP = styled.div`
     }
 `
 export const ButtonsWrapper = styled.div`
-    
+    display: flex;
+    flex-direction: row;
     width: auto;
     height: auto;
+    position: relative;
+    left: 1vw;
 `
 
 export const AddButton = styled.button`
@@ -49,7 +52,7 @@ export const AddButton = styled.button`
 `
 export const Report = styled(AddButton)`
     position: absolute;
-    top: 650%;
+    top: 750%;
     border-radius: 0.2vw;
     width: 12vw;
     height: 2vw;
