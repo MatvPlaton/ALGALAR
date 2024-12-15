@@ -77,7 +77,13 @@ const AutoPark = () => {
     }
     const [cars, setCars] = useState<car[]>([]);
     useEffect(() => {
-
+        axios.get('https://algalar.ru:8080/pressuredata', {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then(
+            r => console.log(r)
+        )
         axios.get('https://algalar.ru:8080/auto/list?offset=0&limit=100', {
             headers: {
                 Authorization: `Bearer ${token}`

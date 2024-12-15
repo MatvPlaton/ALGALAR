@@ -16,7 +16,7 @@ import fullTire from "@/app/assets/AddAuto/Rectangle 36.svg";
 
 const AutoPark = () => {
 
-
+   
     const [redacting, setRedacting] = useState(false)
     const [axis,setAxis] = useState(2);
     const [isChecked, setIsChecked] = useState(false);

@@ -8,7 +8,7 @@ import {
     TempAndPressureWrapper,
     Wrapper
 } from './styles/GraphicButtons'
-import {DateField, LocalizationProvider} from "@mui/x-date-pickers";
+import {DatePicker, LocalizationProvider} from "@mui/x-date-pickers";
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
 const Sentence =  styled.div`
@@ -18,6 +18,16 @@ const Sentence =  styled.div`
     position: relative;
     top: 0.2vw;
 `
+const StyledDatePicker = styled(DatePicker)(() => ({
+    '& .MuiInputBase-root': {
+      height: '1.3vw',
+      width: '12vw',  
+      borderRadius: '1vw',
+      position: 'relative',
+      left: '5%',
+    },
+  }));
+  
 const GraphicButtons = () => {
 
     return (
@@ -30,17 +40,7 @@ const GraphicButtons = () => {
             <ButtonsWrapper>
                 <Sentence> ВВЕДИТЕ ДАТУ </Sentence>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                        <DateField InputProps={{
-            sx: {
-                borderRadius: '2vw',
-                height: '1.2vw',
-                width: '10vw',
-                fontSize: '1vw',
-                marginLeft: '1vw',
-                fontFamily: 'RobotoMedium,sans-serif',
-                border: 'solid 0.1vw black',
-            },
-        }}
+                        <StyledDatePicker sx={{BackgroundColor: 'blue'}}
                             label=""
                             format="DD.MM.YYYY"
                         />
