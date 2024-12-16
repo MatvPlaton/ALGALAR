@@ -92,7 +92,17 @@ const App1 = () => {
         {
             
           data: [8, 2, 4],
-          backgroundColor: '#5184BE',
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          backgroundColor: (context: any) => {
+            // Получаем текущий индекс столбца
+            const gradient = context.chart.ctx.createLinearGradient(0, 0, 0, 400); 
+            
+            // Устанавливаем цвета градиента
+            gradient.addColorStop(0, '#43C5E2');   
+            gradient.addColorStop(1, '#5A5CA8'); 
+            
+            return gradient; 
+          },
           borderWidth: 0,
           width: 0.1,
         },
@@ -109,7 +119,15 @@ const App1 = () => {
       },
       barPercentage: 0.3,
       scales: {
+        x: {
+          grid: {
+            display: false, // Убираем сетку для оси Y
+          }
+        },
         y: {
+          grid: {
+            display: false, // Убираем сетку для оси Y
+          },
         beginAtZero: true, 
         title: {
         display: true, 
