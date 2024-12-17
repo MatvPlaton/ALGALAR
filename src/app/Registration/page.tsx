@@ -40,7 +40,7 @@ const Page = () => {
             middleName: "",
             phone: phone,
             email: email,
-            timeZone: `${timezone}`,
+            timeZone: Number(timezone),
             inn: inn,
             password: password
         }).then(r => {

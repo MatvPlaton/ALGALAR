@@ -35,6 +35,7 @@ const Value = styled.div`
   font-size: 2vw;
 
 `
+
 const CircularChart: React.FC<CircularChartProps> = ({ value }) => {
   const maxDivisions = 10;
 
@@ -45,6 +46,7 @@ const CircularChart: React.FC<CircularChartProps> = ({ value }) => {
       {
         data: [value, maxDivisions - value], // Заполненная часть и оставшаяся часть
         backgroundColor: [chooseColor(value), '#dedede'],
+        borderRadius: [20, 0]
       },
     ],
   };

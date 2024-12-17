@@ -10,6 +10,9 @@ import {
 } from './styles/GraphicButtons'
 import {DatePicker, LocalizationProvider} from "@mui/x-date-pickers";
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import axios from 'axios';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/app/redux/store';
 
 const Sentence =  styled.div`
     font-family: RobotoMedium,sans-serif;
@@ -30,6 +33,15 @@ const StyledDatePicker = styled(DatePicker)(() => ({
   
 const GraphicButtons = () => {
 
+    const token = useSelector((state: RootState) => state.auth.token);
+
+    const getReport = () => {
+        axios.get('https://algalar.ru:8080/report', {
+            headers: {
+                    Authorization: `Bearer ${token}`
+                }
+        }).then(r => console.log((r)))
+    }
     return (
         <Wrapper>
             <TempAndPressureWrapper>
@@ -46,7 +58,7 @@ const GraphicButtons = () => {
                         />
                 </LocalizationProvider>
         </ButtonsWrapper>
-            <Report> ОТЧЁТ ПО МАШИНЕ </Report>
+            <Report onClick={() => getReport()}> ОТЧЁТ ПО МАШИНЕ </Report>
 
         </Wrapper>
     )
