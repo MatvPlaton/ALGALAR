@@ -40,7 +40,23 @@ const GraphicButtons = () => {
             headers: {
                     Authorization: `Bearer ${token}`
                 }
-        }).then(r => console.log((r)))
+        }).then(r => {
+        
+        console.log((r))
+        const blob = new Blob([r.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+        
+        // Create a link element
+        const link = document.createElement('a');
+        link.href = window.URL.createObjectURL(blob);
+        link.download = 'report.xlsx'; // Specify the file name
+
+        // Append to the body and trigger the download
+        document.body.appendChild(link);
+        link.click();
+
+        // Cleanup
+        document.body.removeChild(link);
+        })
     }
     return (
         <Wrapper>

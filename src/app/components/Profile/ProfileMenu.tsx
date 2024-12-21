@@ -24,7 +24,7 @@ import exit from "../../assets/Profile/user 6.svg"
 
 import userActive from "../../assets/Profile/ProfileActiveExpanded.svg"
 import autoParkActive from "../../assets/Profile/ActiveAutoPark.svg"
-import locationActive from "../../assets/Profile/Activelocation.svg"
+import locationActive from "../../assets/Profile/ActiveLocation.svg"
 import driversActive from "../../assets/Profile/ActiveDrivers.svg"
 import addCarActive from "../../assets/Profile/ActiveAddAuto.svg"
 import addDriverActive from  "../../assets/Profile/ActiveAddDriver.svg"

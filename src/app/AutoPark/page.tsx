@@ -111,7 +111,6 @@ const AutoPark = () => {
     return <> <ProfileMenu height={'100vh'} activeField={'Автопарк'} />
                 <Header />
                 <DataTable cars={cars} dataIndex={dataIndex} setDataIndex={setCar}/>
-        <button onClick={() => console.log(cars)} style={{width: '20vw'}} />
                 <Scheme car={currCar} wheel={wheel} setWheel={setWheel} dataIndex={dataIndex}/>
                 <GraphicButtons />
                 <Graphic wheel={wheel} max={12}/>
