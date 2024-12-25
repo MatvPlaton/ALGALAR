@@ -1,6 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import {
@@ -72,10 +72,9 @@ interface data {
 interface Props {
     car: car | null
     wheel: number
-    data: data[];
     setData: React.Dispatch<React.SetStateAction<data[]>>;
 }
-const GraphicButtons: React.FC<Props> = (({data, setData, car,wheel}) => {
+const GraphicButtons: React.FC<Props> = (({setData, car,wheel}) => {
 
     const token = useSelector((state: RootState) => state.auth.token);
 
@@ -114,19 +113,16 @@ const GraphicButtons: React.FC<Props> = (({data, setData, car,wheel}) => {
         }
         return '';
     }
-    const handleChange = (newValue: React.SetStateAction<dayjs.Dayjs | null>) => {
-        setValue(newValue)
-        console.log(newValue)
-
+    useEffect(() => {
         if (car === null) {
             return
         }
-        axios.get(`https://algalar.ru:8080/${type}data?wheel_id=${chooseByPosition(car.wheels, wheel)}&from=${newValue.$y}-${newValue.$M + 1}-${newValue.$D}T00:00:00Z&to=${newValue.$y}-${newValue.$M + 1}-${newValue.$D}T23:59:59Z`, {
+        axios.get(`https://algalar.ru:8080/${type}data?wheel_id=${chooseByPosition(car.wheels, wheel)}&from=${value.$y}-${value.$M + 1}-${value.$D}T00:00:00Z&to=${value.$y}-${value.$M + 1}-${value.$D}T23:59:59Z`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
         }).then(r => {console.log(r); setData(r.data)})
-    }
+    }, [value,type])
 
     return (
         <Wrapper>
@@ -142,12 +138,11 @@ const GraphicButtons: React.FC<Props> = (({data, setData, car,wheel}) => {
                             label=""
                             format="DD.MM.YYYY"
                             value={value}
-                            onChange={(newValue) => handleChange(newValue)}
+                            onChange={(newValue) => setValue(newValue)}
                         />
                 </LocalizationProvider>
         </ButtonsWrapper>
             <Report onClick={() => getReport()}> ОТЧЁТ ПО МАШИНЕ </Report>
-            <button onClick={() => console.log(data)} />
 
         </Wrapper>
     )

@@ -69,7 +69,7 @@ const ConfigFields: React.FC<Props> = ({carId, switchImage, setCarId, axis,
         axios.post('https://algalar.ru:8080/auto', {
 
             "companyInn": inn,
-            "deviceId": id,
+            "deviceNumber": id,
             "uniqueId": uniqueId,
             "AutoType": type,
             "stateNumber": number,

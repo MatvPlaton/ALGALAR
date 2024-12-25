@@ -79,6 +79,7 @@ const LineChart: React.FC<LineChartProps> = ({ max = 0, dataPoints }) => {
 
             },
             x: {
+                type: 'linear',
                 grid: {
                     display: false
                   },

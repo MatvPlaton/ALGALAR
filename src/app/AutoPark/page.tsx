@@ -100,7 +100,7 @@ const AutoPark = () => {
                 <Header />
                 <DataTable cars={cars} dataIndex={dataIndex} setDataIndex={setCar}/>
                 <Scheme car={currCar} wheel={wheel} setWheel={setWheel} dataIndex={dataIndex}/>
-                <GraphicButtons data={data} setData={setData} wheel={wheel} car={currCar} />
+                <GraphicButtons setData={setData} wheel={wheel} car={currCar} />
                 <Graphic data={data} max={40}/>
                 <RepairButtons />
                 <RepairTable />
