@@ -34,16 +34,6 @@ const AutoPark = () => {
         }
         return error;
     });
-
-    interface car {
-        autoType: string,
-        axleCount: number,
-        brand: string,
-        deviceId: string,
-        id: string,
-        stateNumber: string,
-        uniqueId: string
-    }
     interface auto {
         autoType : string
         axleCount : number
@@ -75,15 +65,12 @@ const AutoPark = () => {
         auto : auto
         wheels: wheel[]
     }
+    interface data {
+        PorT : number;
+        time: string;
+    }
     const [cars, setCars] = useState<car[]>([]);
     useEffect(() => {
-        axios.get('https://algalar.ru:8080/pressuredata', {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        }).then(
-            r => console.log(r)
-        )
         axios.get('https://algalar.ru:8080/auto/list?offset=0&limit=100', {
             headers: {
                 Authorization: `Bearer ${token}`
@@ -94,7 +81,7 @@ const AutoPark = () => {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
-                }).then(r => setCars(oldCars => [...oldCars,r.data]))
+                }).then(r => {console.log(r); setCars(oldCars => [...oldCars,r.data])})
             })
         }).catch()
     }, [])
@@ -107,13 +94,14 @@ const AutoPark = () => {
     }
     const [wheel, setWheel] = useState(-1);
 
+    const [data,setData] = useState<data[]>([])
 
     return <> <ProfileMenu height={'100vh'} activeField={'Автопарк'} />
                 <Header />
                 <DataTable cars={cars} dataIndex={dataIndex} setDataIndex={setCar}/>
                 <Scheme car={currCar} wheel={wheel} setWheel={setWheel} dataIndex={dataIndex}/>
-                <GraphicButtons />
-                <Graphic wheel={wheel} max={12}/>
+                <GraphicButtons data={data} setData={setData} wheel={wheel} car={currCar} />
+                <Graphic data={data} max={40}/>
                 <RepairButtons />
                 <RepairTable />
     </>

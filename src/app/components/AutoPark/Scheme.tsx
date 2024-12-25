@@ -119,7 +119,7 @@ const Scheme: React.FC<Prop> = ({car, wheel, setWheel, dataIndex}) => {
             <PressureNumber> 123 </PressureNumber>
             <WheelsWrapper>
                 {car.wheels.map((wheel1: wheel) => (
-            <Wheel wheelposition={wheel1.wheelPosition} key={wheel1.wheelPosition} onClick={() => setWheel(wheel1.wheelPosition)}>
+            <Wheel wheelposition={wheel1.wheelPosition} key={wheel1.wheelPosition} onClick={() => {setWheel(wheel1.wheelPosition); console.log(wheel1)}}>
                 {wheel === wheel1.wheelPosition ?
                 <ParamWrapperActive>0 <br />
                     <span style={{position: 'relative', bottom: '3%'}}> 0 </span> </ParamWrapperActive> :

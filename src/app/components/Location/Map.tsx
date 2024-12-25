@@ -41,7 +41,7 @@ const YandexMap: React.FC<YandexMapProps> = ({ coordinates }) => {
         const loadYandexMaps = () => {
             if (!document.querySelector('script[src="https://api-maps.yandex.com/2.1/?lang=ru_RU"]')) {
                 const ymapsScript = document.createElement('script');
-                ymapsScript.src = "https://api-maps.yandex.com/2.1/?lang=ru_RU";
+                ymapsScript.src = "https://api-maps.yandex.com/2.1/?apikey=2ce1f479-b990-4fa6-b136-dd14cd134e90&lang=ru_RU";
                 ymapsScript.onload = () => {
                     if (window.ymaps) {
                         initMap();

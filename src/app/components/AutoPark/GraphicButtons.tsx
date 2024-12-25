@@ -1,4 +1,6 @@
-import React from 'react';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import {
@@ -13,6 +15,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/app/redux/store';
+import dayjs, { Dayjs } from 'dayjs';
 
 const Sentence =  styled.div`
     font-family: RobotoMedium,sans-serif;
@@ -30,8 +33,49 @@ const StyledDatePicker = styled(DatePicker)(() => ({
       left: '5%',
     },
   }));
-  
-const GraphicButtons = () => {
+
+  interface auto {
+    autoType : string
+    axleCount : number
+    brand : string
+    deviceId : string
+    id : string
+    stateNumber : string
+    uniqueId : string
+}
+interface wheel {
+    autoId : string
+    axleNumber : number
+    id : string
+    maxPressure : number
+    maxTemperature : number
+    mileage : number
+    minPressure : number
+    minTemperature : number
+    ngp : number
+    sensorNumber : string
+    tireBrand : string
+    tireCost : number
+    tireModel : string
+    tireSize : number
+    tkvh : number
+    wheelPosition : number
+}
+interface car {
+    auto : auto
+    wheels: wheel[]
+}
+interface data {
+    PorT : number;
+    time: string;
+}
+interface Props {
+    car: car | null
+    wheel: number
+    data: data[];
+    setData: React.Dispatch<React.SetStateAction<data[]>>;
+}
+const GraphicButtons: React.FC<Props> = (({data, setData, car,wheel}) => {
 
     const token = useSelector((state: RootState) => state.auth.token);
 
@@ -57,12 +101,38 @@ const GraphicButtons = () => {
         // Cleanup
         document.body.removeChild(link);
         })
+    
     }
+    const [value, setValue] = useState<Dayjs | null>(dayjs(null));
+    const [type,setType] = useState('pressure');
+
+    const chooseByPosition = (wheels: wheel[],position: number) => {
+        for (const wheel of wheels) {
+            if (wheel.wheelPosition === position) {
+                return wheel.id
+            }
+        }
+        return '';
+    }
+    const handleChange = (newValue: React.SetStateAction<dayjs.Dayjs | null>) => {
+        setValue(newValue)
+        console.log(newValue)
+
+        if (car === null) {
+            return
+        }
+        axios.get(`https://algalar.ru:8080/${type}data?wheel_id=${chooseByPosition(car.wheels, wheel)}&from=${newValue.$y}-${newValue.$M + 1}-${newValue.$D}T00:00:00Z&to=${newValue.$y}-${newValue.$M + 1}-${newValue.$D}T23:59:59Z`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then(r => {console.log(r); setData(r.data)})
+    }
+
     return (
         <Wrapper>
             <TempAndPressureWrapper>
-                <TAndP> ГРАФИК ПО ДАВЛЕНИЮ</TAndP>
-                <TAndP style={{marginLeft: '4.3vw'}}> ГРАФИК ПО ТЕМПЕРАТУРЕ</TAndP>
+                <TAndP onClick={() => setType('pressure')} style={{color: type === 'pressure' ? '#5A5CA8' : 'black'}}> ГРАФИК ПО ДАВЛЕНИЮ</TAndP>
+                <TAndP onClick={() => setType('temperature')} style={{color: type === 'temperature' ? '#5A5CA8' : 'black',marginLeft: '4.3vw'}}> ГРАФИК ПО ТЕМПЕРАТУРЕ</TAndP>
 
             </TempAndPressureWrapper>
             <ButtonsWrapper>
@@ -71,13 +141,16 @@ const GraphicButtons = () => {
                         <StyledDatePicker sx={{BackgroundColor: 'blue'}}
                             label=""
                             format="DD.MM.YYYY"
+                            value={value}
+                            onChange={(newValue) => handleChange(newValue)}
                         />
                 </LocalizationProvider>
         </ButtonsWrapper>
             <Report onClick={() => getReport()}> ОТЧЁТ ПО МАШИНЕ </Report>
+            <button onClick={() => console.log(data)} />
 
         </Wrapper>
     )
-}
+})
 
 export default GraphicButtons;

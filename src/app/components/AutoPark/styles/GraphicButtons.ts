@@ -17,6 +17,7 @@ export const TempAndPressureWrapper = styled.div`
     
 `
 export const TAndP = styled.div`
+    
     &:hover {
         color : #5A5CA8;
     }

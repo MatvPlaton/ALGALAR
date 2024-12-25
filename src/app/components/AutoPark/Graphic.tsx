@@ -1,5 +1,7 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 "use client"
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Line } from 'react-chartjs-2';
 import {
@@ -12,7 +14,6 @@ import {
     Tooltip,
     Legend,
 } from 'chart.js';
-
 // Регистрация компонентов Chart.js
 ChartJS.register(
     LineElement,
@@ -66,6 +67,9 @@ const LineChart: React.FC<LineChartProps> = ({ max = 0, dataPoints }) => {
         },
         scales: {
             y: {
+                grid: {
+                    display: false
+                  },
                 min: 0, // Минимальное значение
                 max: max, // Максимальное значение
                 ticks: {
@@ -75,6 +79,9 @@ const LineChart: React.FC<LineChartProps> = ({ max = 0, dataPoints }) => {
 
             },
             x: {
+                grid: {
+                    display: false
+                  },
                 ticks: {
                     font: {weight: 'bold'},
                 },
@@ -90,31 +97,42 @@ interface DataPoint {
     x: number;
     y: number;
 }
+interface data {
+    PorT : number;
+    time: string;
+}
 interface Prop {
     max?: number
-    wheel: number;
+    data : data[]
 }
-const Graphic: React.FC<Prop> = (({wheel, max = 0}) => {
+const Graphic: React.FC<Prop> = (({data, max = 0}) => {
 
-    const dataPoints = [];
-    dataPoints.push([]);
-    dataPoints.push([
-        { x: 1, y: 7.5 },
-        { x: 12, y: 8.1 },
-    ]);
+    const [dataPoints, setDataPoints] = useState<DataPoint[]>([])
+    useEffect(() => {
+        console.log(data)
+        const temp : DataPoint[] = [];
+        if (data.length === undefined) {
+            return;
+        }
+        data.forEach(value => {
+           const keys = Object.keys(value);
+           console.log(keys)
+
+           const date = new Date(value[keys[1]]);
+           const hours = date.getUTCHours();
+           const minutes = date.getUTCMinutes();
+           temp.push({x : hours + (minutes / 60), y : value[keys[0]]});
+
+        })
+        console.log(temp)
+        setDataPoints(temp)
+    },[data])
+    
     // Пример данных для графика
-    dataPoints.push([
-        { x: 1, y: 7.5 },
-        { x: 4, y: 5.5 },
-        { x: 8, y: 10 },
-        { x: 12, y: 9 },
-        { x: 15, y: 8.4 },
-        { x: 18, y: 8 },
-        { x: 24, y: 6.3 }
-    ]);
+   
     return (
         <div style={{position: "absolute", left: '70%', top: '24%', height: '30%', width: '27%'}}>
-            <LineChart max={max} dataPoints={dataPoints[wheel + 1]} />
+            <LineChart max={max} dataPoints={dataPoints} />
         </div>
     );
 });
