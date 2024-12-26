@@ -98,7 +98,7 @@ const DataTable: React.FC<Prop> = ({ cars,dataIndex, setDataIndex}) => {
 
     useEffect(() => {
         const updatedData = cars.map(
-            (car) => new MyClass(car.auto.brand, 'N/A', '0', car.auto.autoType)
+            (car) => new MyClass(car.auto.brand, car.auto.stateNumber, '0', car.auto.autoType)
         );
         setData(updatedData);
     }, [cars])
@@ -109,7 +109,7 @@ const DataTable: React.FC<Prop> = ({ cars,dataIndex, setDataIndex}) => {
             <tr>
                 <Wrap1>№</Wrap1>
                 <Wrap> Марка Автомобиля</Wrap>
-                <Wrap>Статус Авто</Wrap>
+                <Wrap>Гос Номер</Wrap>
                 <Wrap>Кол-во поломок </Wrap>
                 <Wrap>Тип Авто</Wrap>
             </tr>
