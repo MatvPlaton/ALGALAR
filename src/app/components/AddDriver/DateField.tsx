@@ -18,8 +18,11 @@ const Wrap = styled(FormControl)`
 interface ChildComponentProps {
     text: string;
     userField : Dayjs | null;
+    setField : React.Dispatch<React.SetStateAction<Dayjs | null>>;
+    turn: boolean;
+    setTurn : React.Dispatch<React.SetStateAction<boolean>>
 }
-const DateField: React.FC<ChildComponentProps> = (({ text, userField }) =>  {
+const DateField: React.FC<ChildComponentProps> = (({turn, setTurn, setField, text, userField }) =>  {
 
     const [, setInputValue] = useState<Dayjs | null >(null);
     useEffect(() => {
@@ -27,10 +30,11 @@ const DateField: React.FC<ChildComponentProps> = (({ text, userField }) =>  {
     }, [userField]);
     const handleChange = (event: Dayjs | null ) => {
         setInputValue(event);
+        setField(event);
     };
 
     return (
-        <Wrap variant="standard">
+        <Wrap onClick={() => setTurn(false)} variant="standard" error={turn}>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker
                     sx={{border: 'none'}}

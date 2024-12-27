@@ -112,7 +112,7 @@ const Graphic: React.FC<Prop> = (({data, max = 0}) => {
     useEffect(() => {
         console.log(data)
         const temp : DataPoint[] = [];
-        if (data.length === undefined) {
+        if (data === undefined) {
             return;
         }
         data.forEach(value => {

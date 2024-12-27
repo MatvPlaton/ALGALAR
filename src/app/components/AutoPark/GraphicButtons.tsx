@@ -73,8 +73,9 @@ interface Props {
     car: car | null
     wheel: number
     setData: React.Dispatch<React.SetStateAction<data[]>>;
+    index: number
 }
-const GraphicButtons: React.FC<Props> = (({setData, car,wheel}) => {
+const GraphicButtons: React.FC<Props> = (({index,setData, car,wheel}) => {
 
     const token = useSelector((state: RootState) => state.auth.token);
 
@@ -114,7 +115,11 @@ const GraphicButtons: React.FC<Props> = (({setData, car,wheel}) => {
         return '';
     }
     useEffect(() => {
-        if (car === null) {
+        if (car === null || value === null) {
+            return
+        }
+        if (wheel === -1) {
+            setData([])
             return
         }
         axios.get(`https://algalar.ru:8080/${type}data?wheel_id=${chooseByPosition(car.wheels, wheel)}&from=${value.$y}-${value.$M + 1}-${value.$D}T00:00:00Z&to=${value.$y}-${value.$M + 1}-${value.$D}T23:59:59Z`, {
@@ -122,7 +127,7 @@ const GraphicButtons: React.FC<Props> = (({setData, car,wheel}) => {
                 Authorization: `Bearer ${token}`
             }
         }).then(r => {console.log(r); setData(r.data)})
-    }, [value,type])
+    }, [value,type,car,wheel, index])
 
     return (
         <Wrapper>

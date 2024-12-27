@@ -90,9 +90,10 @@ interface Prop {
     setDataIndex: (index : number) => void;
     dataIndex: number;
     cars: car[];
+    setWheel: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const DataTable: React.FC<Prop> = ({ cars,dataIndex, setDataIndex}) => {
+const DataTable: React.FC<Prop> = ({ setWheel,cars,dataIndex, setDataIndex}) => {
 
     const [data, setData] = useState<MyClass[]>([])
 
@@ -102,7 +103,10 @@ const DataTable: React.FC<Prop> = ({ cars,dataIndex, setDataIndex}) => {
         );
         setData(updatedData);
     }, [cars])
-
+    const handleChange = (index: number) => {
+        setDataIndex(index)
+        setWheel(-1)
+    }
     return (
         <table style={{ position: 'absolute', left: '6.5%', top: '15%', width: '40%', borderCollapse: 'collapse' }}>
             <thead>
@@ -116,7 +120,7 @@ const DataTable: React.FC<Prop> = ({ cars,dataIndex, setDataIndex}) => {
             </thead>
             <tbody>
             {data.map((item, index) => (
-                <tr style={{cursor: 'pointer'}} onClick={() => setDataIndex(index)} key={index}>
+                <tr style={{cursor: 'pointer'}} onClick={() => handleChange(index)} key={index}>
                     <Wrap2 style={{backgroundColor: dataIndex === index ? "#43C5E24A" : ""}}>{index + 1}</Wrap2>
                     <Wrap3 style={{backgroundColor: dataIndex === index ? "#43C5E24A" : ""}}>{item.field1}</Wrap3>
                     <Wrap3 style={{backgroundColor: dataIndex === index ? "#43C5E24A" : ""}}>{item.field2}</Wrap3>

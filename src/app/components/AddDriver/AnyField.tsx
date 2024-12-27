@@ -14,19 +14,23 @@ const Wrap = styled(FormControl)`
 interface ChildComponentProps {
     text: string;
     userField : string;
+    setField : React.Dispatch<React.SetStateAction<string>>;
+    turn: boolean;
+    setTurn : React.Dispatch<React.SetStateAction<boolean>>
 }
-const AnyField: React.FC<ChildComponentProps> = (({ text, userField }) =>  {
+const AnyField: React.FC<ChildComponentProps> = (({turn, setTurn, setField, text, userField }) =>  {
 
     const [inputValue, setInputValue] = useState('');
-    useEffect(() => {
-        setInputValue(userField)
-    }, [userField]);
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setInputValue(event.target.value);
-    };
+        useEffect(() => {
+            setInputValue(userField)
+        }, [userField]);
+        const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+            setInputValue(event.target.value);
+            setField(event.target.value)
+        };
 
     return (
-            <Wrap variant="standard">
+        <Wrap onClick={() => setTurn(false)} variant="standard" error={turn}>
                 <InputLabel htmlFor="standard-adornment-password"> {text} </InputLabel>
                 <Input style={{marginBottom: '1rem'}}
                     value={inputValue}          // Step 3: Set the Input value to state
