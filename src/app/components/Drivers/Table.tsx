@@ -5,11 +5,11 @@ import styled from "styled-components";
 
 class MyClass {
     field1: string;
-    field2: string;
-    field3: string;
+    field2: number;
+    field3: number;
     field4: number;
 
-    constructor(field1: string, field2: string, field3: string, field4: number) {
+    constructor(field1: string, field2: number, field3: number, field4: number) {
         this.field1 = field1;
         this.field2 = field2;
         this.field3 = field3;
@@ -55,10 +55,26 @@ const Wrap3 = styled.td`
     font-size: 1vw;
 
 `
+interface driver {
+    name: string,
+    surname: string,
+    middle_name: string,
+    phone: string,
+    birthday: string,
+    worked_time: number,
+    experience: number,
+    rating: number,
+    breakages_count: number,
+}
+interface Prop{
+    drivers: driver[]
+    dataIndex: number,
+    setDataIndex: React.Dispatch<React.SetStateAction<number>> 
+}
+const DataTable: React.FC<Prop> = ({drivers, dataIndex, setDataIndex}) => {
 
-const DataTable = () => {
-
-
+   
+    
     const chooseColor = (rating : number) => {
         switch (true) {
             case (rating < 3):
@@ -74,10 +90,12 @@ const DataTable = () => {
     const [data, setData] = useState<MyClass[]>([])
 
     useEffect(() => {
-        const temp = [new MyClass('Иванов В.А', 'нет', '6', 8), new MyClass('Сидоров В.А', 'нет', '12', 2.5), 
-            new MyClass('Петров В.А', 'нет', '11', 4.3)]
-        setData(temp)
-    },[])
+        const parsedData = drivers.map(
+            
+            (driver) => new MyClass(`${driver.surname} ${driver.name} ${driver.middle_name}`, driver.worked_time, driver.experience, driver.rating)
+        )
+        setData(parsedData)
+    },[drivers])
     return (
         <table style={{ position: 'absolute', left: '6.5%', top: '15%', width: '40%', borderCollapse: 'collapse' }}>
             <thead>
@@ -91,12 +109,12 @@ const DataTable = () => {
             </thead>
             <tbody>
             {data.map((item, index) => (
-                <tr style={{cursor: 'pointer'}} key={index}>
-                    <Wrap2>{index + 1}</Wrap2>
-                    <Wrap3>{item.field1}</Wrap3>
-                    <Wrap3>{item.field2}</Wrap3>
-                    <Wrap3>{item.field3}</Wrap3>
-                    <Wrap3 style={{color: chooseColor(item.field4)}}>{item.field4}/10</Wrap3>
+                <tr style={{cursor: 'pointer'}} onClick={() => setDataIndex(index)} key={index}>
+                    <Wrap2 style={{backgroundColor: dataIndex === index ? "#43C5E24A" : ""}} >{index + 1}</Wrap2>
+                    <Wrap3 style={{backgroundColor: dataIndex === index ? "#43C5E24A" : ""}} >{item.field1}</Wrap3>
+                    <Wrap3 style={{backgroundColor: dataIndex === index ? "#43C5E24A" : ""}} >{item.field2}</Wrap3>
+                    <Wrap3 style={{backgroundColor: dataIndex === index ? "#43C5E24A" : ""}} >{item.field3}</Wrap3>
+                    <Wrap3 style={{backgroundColor: dataIndex === index ? "#43C5E24A" : "", color: chooseColor(item.field4)}}>{item.field4}/10</Wrap3>
                 </tr>
             ))}
             </tbody>

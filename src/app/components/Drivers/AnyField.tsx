@@ -26,12 +26,13 @@ const AnyField: React.FC<ChildComponentProps> = (({ text, userField }) =>  {
     };
 
     return (
-            <Wrap variant="standard">
+            <Wrap  variant="standard">
                 <InputLabel htmlFor="standard-adornment-password"> {text} </InputLabel>
                 <Input style={{marginBottom: '1rem'}}
                     value={inputValue}          // Step 3: Set the Input value to state
                     onChange={handleChange}
                     id="standard-adornment-password"
+                    readOnly
                 />
             </Wrap>
     );

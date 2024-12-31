@@ -4,6 +4,6 @@ export const FieldsWrapper = styled.div`
     display: flex;
     flex-direction: column;
     position: absolute;
-    top: 54%;
+    top: 57%;
     left: 51%;
 `

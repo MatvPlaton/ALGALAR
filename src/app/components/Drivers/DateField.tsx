@@ -21,7 +21,7 @@ interface ChildComponentProps {
 }
 const DateField: React.FC<ChildComponentProps> = (({ text, userField }) =>  {
 
-    const [, setInputValue] = useState<Dayjs | null >(null);
+    const [inputValue, setInputValue] = useState<Dayjs | null >(null);
     useEffect(() => {
         setInputValue(userField)
     }, [userField]);
@@ -35,8 +35,10 @@ const DateField: React.FC<ChildComponentProps> = (({ text, userField }) =>  {
                 <DatePicker
                     sx={{border: 'none'}}
                     label={text}
-                    format="DD/MM/YYYY"
+                    value={inputValue}
+                    format="DD.MM.YYYY"
                     onChange={handleChange}
+                    readOnly
                 />
             </LocalizationProvider>
         </Wrap>

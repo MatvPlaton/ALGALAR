@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Chart, registerables } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import styled from 'styled-components';
@@ -7,6 +7,7 @@ Chart.register(...registerables);
 
 interface CircularChartProps {
   value: number; // Значение от 0 до 10
+  index: number;
 }
 const chooseColor = (rating : number) => {
   switch (true) {
@@ -36,7 +37,12 @@ const Value = styled.div`
 
 `
 
-const CircularChart: React.FC<CircularChartProps> = ({ value }) => {
+const CircularChart: React.FC<CircularChartProps> = ({ value,index }) => {
+
+  const [currValue, setCurrValue] = useState(0);
+
+  useEffect(() => setCurrValue(value),[value])
+
   const maxDivisions = 10;
 
   // Определяем данные для круговой диаграммы
@@ -46,7 +52,8 @@ const CircularChart: React.FC<CircularChartProps> = ({ value }) => {
       {
         data: [value, maxDivisions - value], // Заполненная часть и оставшаяся часть
         backgroundColor: [chooseColor(value), '#dedede'],
-        borderRadius: [20, 0]
+        borderRadius: [20, 0],
+        spacing: -20,
       },
     ],
   };
@@ -59,7 +66,9 @@ const CircularChart: React.FC<CircularChartProps> = ({ value }) => {
       legend: {
         display: false, // Выключить отображение легенды
       },
+      showTooltips: true,
       tooltip: {
+        
         callbacks: {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           label: (tooltipItem : any) => {
@@ -72,12 +81,14 @@ const CircularChart: React.FC<CircularChartProps> = ({ value }) => {
   };
 
   return (
+    <> 
+    {index != -1 ? 
     <Wrapper>
       <Doughnut data={data} options={options} />
 
-      <Value> <h3 style={{color: chooseColor(value)}}>{value}/{maxDivisions}</h3>  </Value>
+      <Value> <h3 style={{color: chooseColor(currValue)}}>{currValue}/{maxDivisions}</h3>  </Value>
      
-    </Wrapper>
+    </Wrapper> : <div />} </>
   );
 };
 

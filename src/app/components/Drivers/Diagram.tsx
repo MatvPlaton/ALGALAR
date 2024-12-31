@@ -1,4 +1,6 @@
-import React from 'react';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+import React, { useEffect, useState } from 'react';
 import { Bar } from 'react-chartjs-2';
 import styled from 'styled-components';
 // Импортируйте необходимые модули из Chart.js
@@ -84,14 +86,41 @@ const HeaderWrapper = styled.div`
     position: relative;
     top: -5%;
 `
+interface driver {
+  name: string,
+  surname: string,
+  middle_name: string,
+  phone: string,
+  birthday: string,
+  worked_time: number,
+  experience: number,
+  rating: number,
+  breakages_count: number,
+}
+interface Prop {
+  drivers: driver[]
+  index: number
+}
+const Diagram: React.FC<Prop> = ({drivers, index}) => {
 
-const App1 = () => {
+    const [colors,setColors] = useState(Array.from({ length: drivers.length }, () => 'black'));
+
+    const updateColors = (index : number) => {
+      const updatedColors = Array.from({ length: drivers.length }, () => 'black');
+      // Replace the element at the specified index
+      updatedColors[index] = '#43C5E2';
+      // Update the state with the new array
+      setColors(updatedColors);
+    }
+
+    useEffect(() => updateColors(index), [index])
     const data = {
-      labels: ['Иванов', 'Смирнов', 'Петров'],
+      labels: drivers.map(driver => driver.surname),
+      colors: 'red',
       datasets: [
         {
             
-          data: [8, 2, 4],
+          data: drivers.map(driver => driver.breakages_count + 2),
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           backgroundColor: (context: any) => {
             // Получаем текущий индекс столбца
@@ -117,9 +146,17 @@ const App1 = () => {
             display: false
         }
       },
+      
       barPercentage: 0.3,
       scales: {
         x: {
+          ticks: {
+            color: colors,
+            font: {
+              weight: 'bold',
+              size: 24,
+            }
+          },
           grid: {
             display: false, // Убираем сетку для оси Y
           }
@@ -129,6 +166,10 @@ const App1 = () => {
             display: false, // Убираем сетку для оси Y
           },
         beginAtZero: true, 
+        tooltip: {
+          bodyColor: 'orange', // Set the color of the tooltip body text
+          titleColor: 'green', // Set the color of the tooltip title
+        },
         title: {
         display: true, 
         text: 'Количество поломок', 
@@ -152,4 +193,4 @@ const App1 = () => {
     );
   };
   
-  export default App1;
+  export default Diagram;
