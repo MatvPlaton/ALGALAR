@@ -28,12 +28,10 @@ const Fields: React.FC<Prop> = ({driver, index}) => {
     const [date, setDate] = useState<Dayjs | null>(null);
 
     useEffect(() => {
-        console.log(driver)
         setName(`${driver.surname} ${driver.name} ${driver.middle_name}`);
         setPhone(driver.phone)
         setExp(driver.experience);
         setDate(dayjs(driver.birthday))
-        console.log(date)
     },[driver])
 
     return <>

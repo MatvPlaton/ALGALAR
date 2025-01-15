@@ -104,13 +104,17 @@ interface Prop {
 const Diagram: React.FC<Prop> = ({drivers, index}) => {
 
     const [colors,setColors] = useState(Array.from({ length: drivers.length }, () => 'black'));
+    const [weights,setWeights] = useState(Array.from({ length: drivers.length }, () => 'normal'));
 
     const updateColors = (index : number) => {
       const updatedColors = Array.from({ length: drivers.length }, () => 'black');
+      const updatedWeights = Array.from({ length: drivers.length }, () => 'normal');
       // Replace the element at the specified index
       updatedColors[index] = '#43C5E2';
+      updatedWeights[index] = 'bold';
       // Update the state with the new array
       setColors(updatedColors);
+      setWeights(updatedWeights);
     }
 
     useEffect(() => updateColors(index), [index])
@@ -120,7 +124,7 @@ const Diagram: React.FC<Prop> = ({drivers, index}) => {
       datasets: [
         {
             
-          data: drivers.map(driver => driver.breakages_count + 2),
+          data: drivers.map(driver => driver.breakages_count),
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           backgroundColor: (context: any) => {
             // Получаем текущий индекс столбца
@@ -153,7 +157,7 @@ const Diagram: React.FC<Prop> = ({drivers, index}) => {
           ticks: {
             color: colors,
             font: {
-              weight: 'bold',
+              weight: weights,
               size: 24,
             }
           },

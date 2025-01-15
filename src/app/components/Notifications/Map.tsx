@@ -76,7 +76,7 @@ const YandexMap: React.FC<YandexMapProps> = ({ coordinates }) => {
         };
     }, []);
 
-    return <div ref={mapRef} style={{ position: 'absolute', left: '6.5%', top: '10%', height: '85vh', width: '55vw' }} />;
+    return <div ref={mapRef} style={{ position: 'absolute', left: '76.5%', top: '10%', height: '20vw', width: '20vw' }} />;
 };
 
 export default YandexMap;

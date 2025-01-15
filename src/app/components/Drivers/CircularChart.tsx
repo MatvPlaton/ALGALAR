@@ -15,7 +15,7 @@ const chooseColor = (rating : number) => {
           return '#e52525';
       case (3 <= rating && rating < 5):
           return '#da8d00';
-      case (8 <= rating):
+      case (5 <= rating && 8 <= rating):
           return '#00BB00';
       default:
           return '#000000cedc'
@@ -53,7 +53,6 @@ const CircularChart: React.FC<CircularChartProps> = ({ value,index }) => {
         data: [value, maxDivisions - value], // Заполненная часть и оставшаяся часть
         backgroundColor: [chooseColor(value), '#dedede'],
         borderRadius: [20, 0],
-        spacing: -20,
       },
     ],
   };
@@ -86,7 +85,7 @@ const CircularChart: React.FC<CircularChartProps> = ({ value,index }) => {
     <Wrapper>
       <Doughnut data={data} options={options} />
 
-      <Value> <h3 style={{color: chooseColor(currValue)}}>{currValue}/{maxDivisions}</h3>  </Value>
+      <Value> <h3 style={{position: 'relative', left: '14%', color: chooseColor(currValue)}}>{currValue}/{maxDivisions}</h3>  </Value>
      
     </Wrapper> : <div />} </>
   );

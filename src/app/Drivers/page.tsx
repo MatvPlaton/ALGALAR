@@ -68,12 +68,14 @@ const Page = () => {
                 Authorization: `Bearer ${token}`
             }
         }).then(r => {
+            console.log(r)
             r.data.forEach( (driver : driverTemp) => {
                 axios.get(`https://algalar.ru:8080/driver/info?driver_id=${driver.driver_id}`, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
                 }).then(res => {
+                    console.log(res)
                     const data : driver = {
                         name: res.data.name,
                         surname: res.data.surname,
@@ -103,7 +105,7 @@ const Page = () => {
         <Table dataIndex={index} setDataIndex={setIndex} drivers={drivers} />
         <Diagram  drivers={drivers} index={index} />
         <Fields index={index} driver={driver}/>
-        <CircularChart index={index} value={2.555}/>
+        <CircularChart index={index} value={driver.rating}/>
         </>
 }
 

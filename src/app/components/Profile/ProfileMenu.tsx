@@ -28,6 +28,7 @@ import locationActive from "../../assets/Profile/ActiveLocation.svg"
 import driversActive from "../../assets/Profile/ActiveDrivers.svg"
 import addCarActive from "../../assets/Profile/ActiveAddAuto.svg"
 import addDriverActive from  "../../assets/Profile/ActiveAddDriver.svg"
+import notificationsActive from "../../assets/Profile/ActiveNotifications.svg"
 
 import arrow1 from "../../assets/Profile/Arrow1.svg"
 import arrow2 from "../../assets/Profile/Arrow2.svg"
@@ -55,9 +56,9 @@ const Sidebar: React.FC<Prop> = ({activeField,height}) => {
         'Статистика по шинам' : [tires,tires,'tires'],
         'Добавить авто' : [addCar,addCarActive,'AddAuto'],
         'Добавить водителя' : [addDriver,addDriverActive,'AddDriver'],
-        'Уведомления' : [notifications,notifications,'Notifications'],
+        'Уведомления' : [notifications,notificationsActive,'Notifications'],
         'Выход' : [exit,exit,'Exit']
-    }
+    } 
     return (
         <SidebarWrapper height={height} $active={isExpanded}>
             <HeaderWrapper>
