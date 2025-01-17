@@ -96,7 +96,7 @@ const AutoPark = () => {
 
     const [data,setData] = useState<data[]>([])
 
-    return <> <ProfileMenu height={'100vh'} activeField={'Автопарк'} />
+    return <> <ProfileMenu height={'100vh'} activeField={'AutoPark'} />
                 <Header />
                 <DataTable setWheel={setWheel} cars={cars} dataIndex={dataIndex} setDataIndex={setCar}/>
                 <Scheme car={currCar} wheel={wheel} setWheel={setWheel} dataIndex={dataIndex}/>

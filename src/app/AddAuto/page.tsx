@@ -70,7 +70,7 @@ const AutoPark = () => {
     }
 
     return <div style={{backgroundColor: '#D9D9D9', height: '100vh'}}>
-        <ProfileMenu height={'100vh'} activeField={'Добавить авто'} />
+        <ProfileMenu height={'100vh'} activeField={'AddAuto'} />
         <Header />
 
         <ConfigFields carId={carId} switchImage={switchImage} setCarId={setCarId} images={images} isDoubled={isDoubled} setIsDoubled={setIsDoubled}

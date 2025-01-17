@@ -57,7 +57,7 @@ const Page = () => {
         }).catch()
     })
     return <>
-        <ProfileMenu height={'100vh'} activeField={'Профиль'}/>
+        <ProfileMenu height={'100vh'} activeField={'Profile'}/>
         <ProfileTitle />
         <FieldsWrapper>
             <AnyField userField={name} text='Имя'  />

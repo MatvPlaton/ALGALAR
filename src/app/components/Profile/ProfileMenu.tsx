@@ -35,6 +35,8 @@ import arrow2 from "../../assets/Profile/Arrow2.svg"
 import Image from "next/image";
 import {ALGALAR, Description} from "@/app/components/Profile/styles/ProfileMenu";
 import {useRouter} from "next/navigation";
+import { clearToken } from "@/app/redux/authSlice";
+import { useDispatch } from "react-redux";
 
 interface Prop {
     activeField : string;
@@ -48,27 +50,34 @@ const Sidebar: React.FC<Prop> = ({activeField,height}) => {
     };
 
     const router = useRouter();
-    const Pictures : {[key : string] : [string,string,string]} = {
-        'Профиль': [user,userActive,'Profile'],
-        'Автопарк': [autoPark,autoParkActive,'AutoPark'],
-        'Местоположение авто': [location,locationActive,'Location'],
-        'Статистика по водителям' : [drivers,driversActive,'Drivers'],
-        'Статистика по шинам' : [tires,tires,'tires'],
-        'Добавить авто' : [addCar,addCarActive,'AddAuto'],
-        'Добавить водителя' : [addDriver,addDriverActive,'AddDriver'],
-        'Уведомления' : [notifications,notificationsActive,'Notifications'],
-        'Выход' : [exit,exit,'Exit']
+    const dispatch = useDispatch();
+
+    const Pictures : {[key : string] : [string,string]} = {
+        'Profile': [user,userActive],
+        'AutoPark': [autoPark,autoParkActive],
+        'Location': [location,locationActive],
+        'Drivers' : [drivers,driversActive],
+        'tires' : [tires,tires],
+        'AddAuto' : [addCar,addCarActive],
+        'AddDriver' : [addDriver,addDriverActive],
+        'Notifications' : [notifications,notificationsActive],
+        'Exit' : [exit,exit]
+    }
+    const exitSession = () => {
+        console.log(1)
+        dispatch(clearToken());
+        router.push('/MainPage')
     } 
     return (
         <SidebarWrapper height={height} $active={isExpanded}>
             <HeaderWrapper>
-                <LogoWrapper $active={isExpanded}> <Image style={{width: '6vw', height: '6vh'}} src={logo} alt='' /> </LogoWrapper>
+                <LogoWrapper onClick={() => router.push('/MainPage')} $active={isExpanded}> <Image style={{width: '6vw', height: '6vh'}} src={logo} alt='' /> </LogoWrapper>
                 <ALGALAR> ALGALAR </ALGALAR>
                 <Description> техника безопасного вождения </Description>
             </HeaderWrapper>
             <ComponentsList>
                 {Object.keys(Pictures).map((key : string) =>
-                    <Component onClick={() => {console.log(key); router.push( `/${Pictures[key][2]}`)}} key={key}>
+                    <Component onClick={() => key === 'Exit' ? exitSession() : router.push( `/${key}`)} key={key}>
                         {activeField === key ? <>
                                 <Image style={{position: 'relative', left: '-1%', top: '-24%',display: 'grid', width: '27vw',height: '8vh'}}
                                                       src={Pictures[key][1]} alt={''} />

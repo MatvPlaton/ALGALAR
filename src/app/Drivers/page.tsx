@@ -100,7 +100,7 @@ const Page = () => {
         }
     }, [index,drivers])
     return <>
-        <ProfileMenu height={'100vh'} activeField={'Статистика по водителям'}/>
+        <ProfileMenu height={'100vh'} activeField={'Drivers'}/>
         <ProfileTitle />
         <Table dataIndex={index} setDataIndex={setIndex} drivers={drivers} />
         <Diagram  drivers={drivers} index={index} />

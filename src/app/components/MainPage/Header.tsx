@@ -14,10 +14,14 @@ import {
     LogoWrapper,
     LogoWrapperText, ButtonTextWrapper
 } from "./styles/Header";
+import { useSelector } from "react-redux";
+import { RootState } from "@/app/redux/store";
 
 const Header = () => {
 
     const router = useRouter();
+    const token = useSelector((state: RootState) => state.auth.token);
+
 
     return <HeaderWrapper>
         <LogoWrapper>
@@ -27,7 +31,7 @@ const Header = () => {
             <LogoRest> технология безопасного вождения </LogoRest>
         </LogoWrapperText>
         </LogoWrapper>
-        <Profile onClick={() => router.push('/login')}>
+        <Profile onClick={() => token === null ? router.push('/login') : router.push('/Profile')}>
             <ProfileIc> <Image style={{width: 'inherit', height: 'inherit'}} src={ProfileIcon} alt='' /> </ProfileIc>
             <ButtonTextWrapper> Личный Кабинет </ButtonTextWrapper> </Profile>
     </HeaderWrapper>;

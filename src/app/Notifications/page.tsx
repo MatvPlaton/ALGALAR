@@ -10,7 +10,7 @@ const Notifications = () => {
     
     const [index,setIndex] = useState(-1);
     return <> 
-    <ProfileMenu height={'100vh'} activeField={'Уведомления'} />
+    <ProfileMenu height={'100vh'} activeField={'Notifications'} />
     <ProfileTitle />
     <Table dataIndex={index} setDataIndex={setIndex}/>
     <TableButtons />

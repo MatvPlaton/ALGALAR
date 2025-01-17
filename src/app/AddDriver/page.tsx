@@ -58,7 +58,7 @@ const Page = () => {
 
 
     return <>
-        <ProfileMenu height={'100vh'} activeField={'Добавить водителя'}/>
+        <ProfileMenu height={'100vh'} activeField={'AddDriver'}/>
         <ProfileTitle />
         <FieldsWrapper>
             <AnyField turn={nameTurn} setTurn={setNameTurn} setField={setName} userField={name} text='Имя*'  />
