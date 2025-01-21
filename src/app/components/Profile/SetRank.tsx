@@ -6,7 +6,7 @@ import {MenuItem, Select, SelectChangeEvent} from "@mui/material";
 import styled from "styled-components";
 const Wrap = styled(FormControl)`
     width: 90%;
-    margin-bottom: 2rem;
+    margin-bottom: -0.2rem;
     @media (max-width: 1000px) {
         width: 15rem;
     }   

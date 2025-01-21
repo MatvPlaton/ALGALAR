@@ -6,10 +6,9 @@ import ConfigFields from "@/app/components/AddAuto/ConfigFields"
 import SeparateWheelFields from "@/app/components/AddAuto/SeparateWheelFields";
 import emptyTire from "@/app/assets/AddAuto/Rectangle 41.svg";
 import axios from "axios";
-import {setToken} from "@/app/redux/authSlice";
-import {setRefreshToken} from "@/app/redux/refreshSlice";
-import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "@/app/redux/store";
+
+import { useAuthStore } from "../redux/store";
+import { useRefreshStore } from "../redux/store";
 import redactTire from "@/app/assets/AddAuto/Frame 3.svg";
 import fullTire from "@/app/assets/AddAuto/Rectangle 36.svg";
 
@@ -27,9 +26,11 @@ const AutoPark = () => {
     const [images, setImages] = useState(Array(24).fill({full: false, img: emptyTire}))
     const [carId,setCarId] = useState('');
 
-    const token = useSelector((state: RootState) => state.auth.token);
-    const refreshToken = useSelector((state: RootState) => state.refresh.refreshToken);
-    const dispatch = useDispatch();
+    const token = useAuthStore((state) => state.token);
+    const refresh = useRefreshStore((state) => state.refresh);
+       
+    const setToken = useAuthStore((state) => state.setToken);
+    const setRefresh = useRefreshStore((state) => state.setRefresh);
 
     axios.interceptors.response.use(response => {
         return response;
@@ -37,13 +38,11 @@ const AutoPark = () => {
         if (error.response.status === 401) {
             axios.post('https://algalar.ru:8080/refresh', {},{
                 headers: {
-                    Authorization: `Bearer ${refreshToken}`
+                    Authorization: `Bearer ${refresh}`
                 }
             }).then(r => {
-                dispatch(setToken(r.data.accessToken))
-                dispatch(setRefreshToken(r.data['refreshToken']))
-                console.log(r.data.accessToken)
-                console.log(r.data.refreshToken)
+                setToken(r.data.accessToken)
+                setRefresh(r.data['refreshToken'])
             })
         }
         return error;

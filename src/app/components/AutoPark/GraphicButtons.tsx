@@ -13,8 +13,7 @@ import {
 import {DatePicker, LocalizationProvider} from "@mui/x-date-pickers";
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import axios from 'axios';
-import { useSelector } from 'react-redux';
-import { RootState } from '@/app/redux/store';
+import { useAuthStore } from '@/app/redux/store';
 import dayjs, { Dayjs } from 'dayjs';
 
 const Sentence =  styled.div`
@@ -77,7 +76,7 @@ interface Props {
 }
 const GraphicButtons: React.FC<Props> = (({index,setData, car,wheel}) => {
 
-    const token = useSelector((state: RootState) => state.auth.token);
+    const token = useAuthStore((state) => state.token);
 
     const getReport = () => {
         axios.get('https://algalar.ru:8080/report', {

@@ -7,13 +7,13 @@ import AnyField from "@/app/components/AddDriver/AnyField";
 import DateField from "@/app/components/AddDriver/DateField";
 import RegistrationButton from "@/app/components/AddDriver/RegistrationButton";
 import { Dayjs } from "dayjs";
-import { useSelector } from "react-redux";
-import { RootState } from "../redux/store";
+
 import axios from "axios";
+import { useAuthStore } from "@/app/redux/store";
 
 const Page = () => {
 
-    const token = useSelector((state: RootState) => state.auth.token);
+    const token = useAuthStore((state) => state.token);
 
     const [nameTurn, setNameTurn] = useState(false);
     const [secondNameTurn, setSecondNameTurn] = useState(false);

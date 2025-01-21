@@ -12,8 +12,7 @@ import {LoginWrapper} from "@/app/components/Registration/styles/LoginWrapper";
 import {RegistrationWrapper} from "@/app/components/Registration/styles/RegistrationButton";
 import axios from "axios";
 import {useRouter} from "next/navigation";
-import {setInn} from "@/app/redux/innSlice";
-import {useDispatch} from "react-redux";
+import { useInnStore } from "../redux/store";
 
 const Page = () => {
     const [email, setEmail] = useState('');
@@ -27,7 +26,8 @@ const Page = () => {
     const [timezone, setTimezone] = useState('');
 
     const router = useRouter();
-    const dispatch = useDispatch();
+    const setInn = useInnStore((state) => state.setInn);
+
 
     const Registration = () => {
         if (password != password1) {
@@ -47,7 +47,7 @@ const Page = () => {
             console.log(r)
             if (r.status === 201) {
                 console.log('success')
-                dispatch(setInn(inn))
+                setInn(inn)
                 router.push('/login')
             }
             if (r.status === 400) {

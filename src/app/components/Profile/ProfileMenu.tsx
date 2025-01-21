@@ -35,8 +35,8 @@ import arrow2 from "../../assets/Profile/Arrow2.svg"
 import Image from "next/image";
 import {ALGALAR, Description} from "@/app/components/Profile/styles/ProfileMenu";
 import {useRouter} from "next/navigation";
-import { clearToken } from "@/app/redux/authSlice";
-import { useDispatch } from "react-redux";
+import { useAuthStore } from "@/app/redux/store";
+
 
 interface Prop {
     activeField : string;
@@ -50,7 +50,6 @@ const Sidebar: React.FC<Prop> = ({activeField,height}) => {
     };
 
     const router = useRouter();
-    const dispatch = useDispatch();
 
     const Pictures : {[key : string] : [string,string]} = {
         'Profile': [user,userActive],
@@ -63,9 +62,12 @@ const Sidebar: React.FC<Prop> = ({activeField,height}) => {
         'Notifications' : [notifications,notificationsActive],
         'Exit' : [exit,exit]
     }
+
+    const setToken = useAuthStore((state) => state.setToken);
+    
     const exitSession = () => {
         console.log(1)
-        dispatch(clearToken());
+        setToken(null)
         router.push('/MainPage')
     } 
     return (

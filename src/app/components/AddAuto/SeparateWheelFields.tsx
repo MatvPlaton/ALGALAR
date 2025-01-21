@@ -3,8 +3,7 @@ import {FieldsWrapper, Header, SeparateWheelFieldsWrapper, Wrapper} from './styl
 import TempAndPressure from "@/app/components/AddAuto/TempAndPressure";
 import Buttons from "@/app/components/AddAuto/Buttons";
 import axios from "axios";
-import {useSelector} from "react-redux";
-import {RootState} from "@/app/redux/store";
+import {useAuthStore} from "@/app/redux/store";
 import filledTire from "@/app/assets/AddAuto/Rectangle 36.svg";
 import AnyFieldWheel from "@/app/components/AddAuto/AnyFieldWheel";
 
@@ -74,7 +73,7 @@ const SeparateWheelFields: React.FC<Prop> = ({carId, currTire, setImages, setRed
             maxTemp: ''
         }
     ))
-    const token = useSelector((state: RootState) => state.auth.token);
+    const token = useAuthStore((state) => state.token);
 
     const send  = () => {
 

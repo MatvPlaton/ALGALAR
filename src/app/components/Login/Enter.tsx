@@ -1,11 +1,11 @@
 import React from 'react';
 import {EnterWrapper} from "./styles/Enter";
 import {useRouter} from "next/navigation";
-import {setToken} from "@/app/redux/authSlice";
-import {setRefreshToken} from "@/app/redux/refreshSlice"
-import {useDispatch, useSelector} from "react-redux";
 import axios from "axios";
-import {RootState} from "@/app/redux/store";
+import { useEmailStore } from '@/app/redux/store';
+import { usePasswordStore } from '@/app/redux/store';
+import { useAuthStore } from '@/app/redux/store';
+import { useRefreshStore } from '@/app/redux/store';
 
 interface Prop {
     setShowed:  React.Dispatch<React.SetStateAction<boolean>>;
@@ -13,10 +13,10 @@ interface Prop {
 const Enter: React.FC<Prop> = ({setShowed}) => {
 
     const router = useRouter();
-    const email = useSelector((state: RootState) => state.email.email);
-    const password = useSelector((state: RootState) => state.password.password);
-
-    const dispatch = useDispatch();
+    const email = useEmailStore((state) => state.email);
+    const password = usePasswordStore((state) => state.password);
+    const setToken = useAuthStore((state) => state.setToken);
+    const setRefresh = useRefreshStore((state) => state.setRefresh);
 
     const navigateToAnotherPage = () => {
 
@@ -26,8 +26,8 @@ const Enter: React.FC<Prop> = ({setShowed}) => {
         }).then(r => {
             if (r.status === 200) {
                 console.log(r)
-                dispatch(setToken(r.data.accessToken))
-                dispatch(setRefreshToken(r.data.refreshToken))
+                setToken(r.data.accessToken)
+                setRefresh(r.data.refreshToken)
                 router.push('../../Profile');
             }
         }).catch(() => setShowed(true))

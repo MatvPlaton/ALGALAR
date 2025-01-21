@@ -8,9 +8,9 @@ import FormControl from '@mui/material/FormControl';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import styled from "styled-components";
-import {useDispatch} from "react-redux";
-import {useState} from "react";
-import {setPassword} from "@/app/redux/passwordSlice";
+import { usePasswordStore } from '@/app/redux/store';
+import { useState } from 'react';
+
 const Wrap = styled(FormControl)`
     width: 90%;
     margin-bottom: 2rem;
@@ -30,11 +30,12 @@ const PasswordField = (props: {text: string}) =>  {
     };
 
 
-    const dispatch = useDispatch();
     const [inputValue, setInputValue] = useState('');
+    const setPassword = usePasswordStore((state) => state.setPassword);
+    
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setInputValue(event.target.value);
-        dispatch(setPassword(event.target.value))
+        setPassword(event.target.value)
     };
 
     return (

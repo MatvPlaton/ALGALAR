@@ -5,9 +5,9 @@ import SetTimezone from "@/app/components/AddAuto/SetTimezone";
 import {HeaderText2} from "@/app/components/AddAuto/styles/ConfigFields";
 import WheelConfig from "@/app/components/AddAuto/WheelConfig";
 import axios from "axios";
-import {useSelector} from "react-redux";
-import {RootState} from "@/app/redux/store";
 import Notification from "@/app/components/AddAuto/Notification";
+import { useAuthStore } from "@/app/redux/store";
+import { useInnStore } from "@/app/redux/store";
 
 interface tireCont {
     full : boolean;
@@ -48,12 +48,13 @@ const ConfigFields: React.FC<Props> = ({carId, switchImage, setCarId, axis,
     const allFieldsFilled = [id, number, mark, type, uniqueId].every(field => field.trim() !== '');
 
 
-    const token = useSelector((state: RootState) => state.auth.token);
-
-    const inn = useSelector((state: RootState) => state.inn.inn);
-
     const [isNotificationVisible, setNotificationVisible] = useState(false);
 
+    const token = useAuthStore((state) => state.token);
+
+
+    const inn = useInnStore((state) => state.inn);
+                                            
 
     const send  = () => {
 
@@ -64,8 +65,9 @@ const ConfigFields: React.FC<Props> = ({carId, switchImage, setCarId, axis,
         if (mark === '') { setMarkTurn(true); flag = true }
         if (type === '') { setTypeTurn(true); flag = true }
         if (uniqueId === '') { setUniqueIdTurn(true); flag = true }
-
         if (flag) return;
+
+        
         axios.post('https://algalar.ru:8080/auto', {
 
             "companyInn": inn,

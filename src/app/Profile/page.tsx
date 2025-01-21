@@ -6,19 +6,19 @@ import {FieldsWrapper} from "@/app/components/Profile/styles/FieldsWrapper";
 import AnyField from "@/app/components/Profile/AnyField";
 import ReturnButton from "@/app/components/Profile/ReturnButton";
 import RegistrationButton from "@/app/components/Profile/RegistrationButton";
-import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "@/app/redux/store";
 import SetTimezone from "@/app/components/Profile/SetTimezone";
 import SetRank from "@/app/components/Profile/SetRank";
 import axios from "axios";
-import {setToken} from "@/app/redux/authSlice";
-import {setRefreshToken} from "@/app/redux/refreshSlice";
+import { useAuthStore } from "../redux/store";
+import { useRefreshStore } from "../redux/store";
 const Page = () => {
 
+    const token = useAuthStore((state) => state.token);
+    const refresh = useRefreshStore((state) => state.refresh);
 
-    const token = useSelector((state: RootState) => state.auth.token);
-    const refreshToken = useSelector((state: RootState) => state.refresh.refreshToken);
-    const dispatch = useDispatch();
+    const setToken = useAuthStore((state) => state.setToken);
+    const setRefresh = useRefreshStore((state) => state.setRefresh);
+
     const [name,setName] = useState('');
     const [secondName,setSecondName] = useState('');
     const [phone,setPhone] = useState('');
@@ -31,11 +31,11 @@ const Page = () => {
         if (error.response.status === 401) {
             axios.post('https://algalar.ru:8080/refresh', {},{
                 headers: {
-                    Authorization: `Bearer ${refreshToken}`
+                    Authorization: `Bearer ${refresh}`
                 }
             }).then(r => {
-                dispatch(setToken(r.data.accessToken))
-                dispatch(setRefreshToken(r.data.refreshToken))
+                setToken(r.data.accessToken)
+                setRefresh(r.data.refreshToken)
             })
         }
         return error;

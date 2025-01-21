@@ -14,13 +14,12 @@ import {
     LogoWrapper,
     LogoWrapperText, ButtonTextWrapper
 } from "./styles/Header";
-import { useSelector } from "react-redux";
-import { RootState } from "@/app/redux/store";
+import { useAuthStore } from '@/app/redux/store';
 
 const Header = () => {
 
     const router = useRouter();
-    const token = useSelector((state: RootState) => state.auth.token);
+    const token = useAuthStore((state) => state.token);
 
 
     return <HeaderWrapper>

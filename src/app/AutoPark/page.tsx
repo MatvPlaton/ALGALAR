@@ -8,28 +8,28 @@ import Scheme from "../components/AutoPark/Scheme";
 import GraphicButtons from "@/app/components/AutoPark/GraphicButtons";
 import RepairButtons from "@/app/components/AutoPark/RepairButtons";
 import RepairTable from "@/app/components/AutoPark/RepairTable";
-import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "@/app/redux/store";
 import axios from "axios";
-import {setToken} from "@/app/redux/authSlice";
-import {setRefreshToken} from "@/app/redux/refreshSlice";
-
+import { useAuthStore } from "../redux/store";
+import { useRefreshStore } from "../redux/store";
 
 const AutoPark = () => {
-    const token = useSelector((state: RootState) => state.auth.token);
-    const refreshToken = useSelector((state: RootState) => state.refresh.refreshToken);
-    const dispatch = useDispatch();
+    const token = useAuthStore((state) => state.token);
+    const refresh = useRefreshStore((state) => state.refresh);
+    
+    const setToken = useAuthStore((state) => state.setToken);
+    const setRefresh = useRefreshStore((state) => state.setRefresh);
+
     axios.interceptors.response.use(response => {
         return response;
     }, error => {
         if (error.response.status === 401) {
             axios.post('https://algalar.ru:8080/refresh', {},{
                 headers: {
-                    Authorization: `Bearer ${refreshToken}`
+                    Authorization: `Bearer ${refresh}`
                 }
             }).then(r => {
-                dispatch(setToken(r.data.accessToken))
-                dispatch(setRefreshToken(r.data["refreshToken"]))
+                setToken(r.data.accessToken)
+                setRefresh(r.data["refreshToken"])
             })
         }
         return error;
