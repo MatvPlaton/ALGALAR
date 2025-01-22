@@ -1,10 +1,12 @@
 import styled from 'styled-components';
-
-export const EnterWrapper = styled.button`
+interface props {
+    isActive: boolean
+}
+export const EnterWrapper = styled.button<props>`
     font-family: RobotoMedium,sans-serif;
     position: absolute;
-    color: white;
-    background-color: #5A5CA8;
+    color: ${(props) => props.isActive ? 'white' : 'black'} ;
+    background-color:${(props) => props.isActive ? '#5A5CA8' : '#F5F5F5'} ;
     left: 93%;
     bottom: 1%;
     letter-spacing: 0.1vw;
@@ -15,7 +17,7 @@ export const EnterWrapper = styled.button`
     height: 2.5rem;
     box-shadow: 0 0.5vw 0.5vw 0 rgba(0,0,0,0.2), 0 0.01vw 0.5vw 0 rgba(0,0,0,0.19);
     &:hover {
-        background-color: #46478b;
+        background-color: ${(props) => props.isActive ? '#46478b' :'#e3e3e3'};
     }
     &:active {
         transform: translateY(-5%);

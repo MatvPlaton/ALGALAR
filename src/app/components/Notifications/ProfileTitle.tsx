@@ -3,7 +3,7 @@ import {TitleWrapper} from "./styles/ProfileTitle";
 const ProfileTitle = () => {
 
     return (<>
-        <TitleWrapper>  Уведомления </TitleWrapper>
+        <TitleWrapper>  <div style={{position: 'relative',top: '10%', left: '1%'}}> Уведомления </div> </TitleWrapper>
     </>)
 
 }

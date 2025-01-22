@@ -6,17 +6,21 @@ import Table from '../components/Notifications/Table'
 import TableButtons from "../components/Notifications/TableButtons";
 import Map from '../components/Notifications/Map';
 import Information from "../components/Notifications/Information";
+import ReadAll from "../components/Notifications/ReadAll";
+import ReadCurr from "../components/Notifications/ReadCurr";
 const Notifications = () => {
     
     const [index,setIndex] = useState(-1);
-    return <> 
+    return  <div style={{backgroundColor: '#f2f3f4', height: '100vh'}}>
     <ProfileMenu height={'100vh'} activeField={'Notifications'} />
     <ProfileTitle />
     <Table dataIndex={index} setDataIndex={setIndex}/>
     <TableButtons />
     <Map coordinates={[55.731272, 37.447198]}/>
-    <Information /> 
-    </>
+    <Information />
+    <ReadAll />
+    <ReadCurr /> 
+    </div>
 }
 
 export default Notifications;
