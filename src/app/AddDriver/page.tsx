@@ -1,13 +1,13 @@
 "use client"
 import React, {useState} from "react";
 import ProfileMenu from '@/app/components/Profile/ProfileMenu'
-import ProfileTitle from "@/app/components/AddDriver/ProfileTitle";
+import TitleBox from "../components/AddDriver/TitleBox";
 import {FieldsWrapper} from "@/app/components/AddDriver/styles/FieldsWrapper";
 import AnyField from "@/app/components/AddDriver/AnyField";
 import DateField from "@/app/components/AddDriver/DateField";
 import RegistrationButton from "@/app/components/AddDriver/RegistrationButton";
+import { BodyWrapper } from "../components/AddDriver/styles/BodyBox";
 import { Dayjs } from "dayjs";
-
 import axios from "axios";
 import { useAuthStore } from "@/app/redux/store";
 
@@ -57,10 +57,12 @@ const Page = () => {
     }
 
 
-    return <>
+    return <div style={{backgroundColor: '#f2f3f4', height: '100vh'}}>
         <ProfileMenu height={'100vh'} activeField={'AddDriver'}/>
-        <ProfileTitle />
+        <TitleBox />
+        <BodyWrapper>
         <FieldsWrapper>
+            <div> Добавление водителя</div>
             <AnyField turn={nameTurn} setTurn={setNameTurn} setField={setName} userField={name} text='Имя*'  />
             <AnyField turn={secondNameTurn} setTurn={setSecondNameTurn} setField={setSecondName} userField={secondName} text='Фамилия*' />
             <AnyField turn={thirdNameTurn} setTurn={setThirdNameTurn} setField={setThirdName} userField={thirdName} text='Отчество*'  />
@@ -70,7 +72,8 @@ const Page = () => {
             <DateField turn={dateTurn} setTurn={setDateTurn} setField={setDate} userField={date} text='Дата рождения*'  />
         </FieldsWrapper>
         <RegistrationButton sendDriver={sendDriver}/>
-        </>
+        </BodyWrapper>
+        </ div>
 }
 
 export default Page;

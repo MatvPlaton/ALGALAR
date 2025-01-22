@@ -10,7 +10,6 @@ const Wrap = styled(FormControl)`
     width: 90%;
     top: 1vw;
     border: none;
-    position: absolute;
     @media (max-width: 1000px) {
         width: 15rem;
     }   

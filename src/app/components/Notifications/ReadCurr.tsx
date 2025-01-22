@@ -4,7 +4,7 @@ const ReadCurr = () => {
 
 
     return (<>
-        <EnterWrapper isActive={true} style={{position: 'absolute', left: '85%', top: '80%'}}> ПРОЧИТАТЬ </EnterWrapper>
+        <EnterWrapper isActive={true} style={{position: 'absolute', left: '70%', top: '90%'}}> ПРОЧИТАТЬ </EnterWrapper>
     </>)
 
 }

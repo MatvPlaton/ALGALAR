@@ -4,7 +4,7 @@ const ReadAll = () => {
 
 
     return (<>
-        <EnterWrapper isActive={true} style={{position: 'absolute', left: '41%', top: '80%'}}> ПРОЧИТАТЬ ВСЁ </EnterWrapper>
+        <EnterWrapper isActive={true} style={{position: 'absolute', left: '71%', top: '90%'}}> ПРОЧИТАТЬ ВСЁ </EnterWrapper>
     </>)
 
 }

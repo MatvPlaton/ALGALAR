@@ -68,7 +68,7 @@ const DataTable: React.FC<Prop> = ({dataIndex, setDataIndex}) => {
     ]
     return (
         <>
-        <table style={{ position: 'absolute', left: '6.5%', top: '18%', width: '45%', borderCollapse: 'collapse' }}>
+        <table style={{ position: 'absolute', left: '2%', top: '15%', width: '92%', borderCollapse: 'collapse' }}>
             <thead>
             <tr>
                 <Wrap1>№</Wrap1>

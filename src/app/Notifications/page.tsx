@@ -1,25 +1,19 @@
 "use client"
 import React, { useState } from "react";
 import ProfileMenu from "@/app/components/Profile/ProfileMenu";
-import ProfileTitle from "../components/Notifications/ProfileTitle";
-import Table from '../components/Notifications/Table'
-import TableButtons from "../components/Notifications/TableButtons";
-import Map from '../components/Notifications/Map';
-import Information from "../components/Notifications/Information";
-import ReadAll from "../components/Notifications/ReadAll";
-import ReadCurr from "../components/Notifications/ReadCurr";
+import TitleBox from "../components/Notifications/TitleBox";
+import InfoBox from "../components/Notifications/InfoBox";
+
+import ListBox from "../components/Notifications/ListBox";
 const Notifications = () => {
     
-    const [index,setIndex] = useState(-1);
+    const [currNot,setCurrNot] = useState(-1);
+
     return  <div style={{backgroundColor: '#f2f3f4', height: '100vh'}}>
     <ProfileMenu height={'100vh'} activeField={'Notifications'} />
-    <ProfileTitle />
-    <Table dataIndex={index} setDataIndex={setIndex}/>
-    <TableButtons />
-    <Map coordinates={[55.731272, 37.447198]}/>
-    <Information />
-    <ReadAll />
-    <ReadCurr /> 
+    <TitleBox />
+    <ListBox index={currNot} setIndex={setCurrNot}/>
+    <InfoBox currIndex={currNot}/>
     </div>
 }
 

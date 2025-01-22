@@ -2,7 +2,9 @@ import styled from 'styled-components';
 interface props {
     isActive: boolean
 }
-export const EnterWrapper = styled.button<props>`
+export const EnterWrapper = styled.button.withConfig({
+    shouldForwardProp: (prop) => prop !== 'isActive',
+  })<props>`
     font-family: RobotoMedium,sans-serif;
     position: absolute;
     color: ${(props) => props.isActive ? 'white' : 'black'} ;
