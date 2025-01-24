@@ -14,9 +14,10 @@ const InfoBox: React.FC<Prop> = ({currIndex}) => {
         <InfoWrapper> 
             <Information />
             {currIndex != -1 ? <>
-            <Map coordinates={[55.731272, 37.447198]}/> </> :
+            <Map coordinates={[55.731272, 37.447198]}/> 
+            <ReadCurr /> </> :
             <> </>}
-            <ReadCurr /> 
+             
         </InfoWrapper>
     </>)
 

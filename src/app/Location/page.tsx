@@ -1,11 +1,11 @@
 "use client"
 import React, { useEffect, useState } from "react";
 import ProfileMenu from '@/app/components/Profile/ProfileMenu'
-import YandexMap from "../components/Location/Map";
-import ProfileTitle from "../components/Location/ProfileTitle";
-import Table from "../components/Location/Table";
+import TitleBox from "../components/Location/TitleBox";
 import { useAuthStore } from "../redux/store";
 import axios from "axios";
+import MapBox from "../components/Location/MapBox";
+import ListBox from "../components/Location/ListBox";
 const Page = () => {
     
     const token = useAuthStore((state) => state.token);
@@ -20,12 +20,13 @@ const Page = () => {
         }).then(r => console.log(r))
     })
     
-    return <>
+    return <div style={{backgroundColor: '#f2f3f4', height: '100vh'}}>
+
         <ProfileMenu height={'100vh'} activeField={'Location'}/>
-        <ProfileTitle />
-            <YandexMap coordinates={[56.751244, 37.618423]} />
-            <Table dataIndex={index} setDataIndex={setIndex} />
-        </>
+        <TitleBox />
+        <MapBox coordinates={[56.751244, 37.618423]} />
+        <ListBox dataIndex={index} setDataIndex={setIndex} />
+        </ div>
 }
 
 export default Page;

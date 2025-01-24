@@ -55,8 +55,8 @@ const Wrap3 = styled.td`
 `
 const Title = styled.div`
     position: absolute;
-    left: 63.5%; 
-    top: 10%;
+    left: 3.5%; 
+    top: 2%;
     font-family: RobotoRegular, sans-serif;
     font-size: 1.3vw;
 `
@@ -75,7 +75,7 @@ const DataTable: React.FC<Prop> = ({dataIndex, setDataIndex}) => {
     return (
         <>
         <Title> Информация по Авто </Title> 
-        <table style={{ position: 'absolute', left: '63.5%', top: '15%', width: '35%', borderCollapse: 'collapse' }}>
+        <table style={{ position: 'absolute', left: '3.5%', top: '10.5%', width: '93%', borderCollapse: 'collapse' }}>
             <thead>
             <tr>
                 <Wrap1>№</Wrap1>
