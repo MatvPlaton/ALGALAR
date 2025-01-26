@@ -6,6 +6,7 @@ import {FieldsWrapper} from "@/app/components/AddDriver/styles/FieldsWrapper";
 import AnyField from "@/app/components/AddDriver/AnyField";
 import DateField from "@/app/components/AddDriver/DateField";
 import RegistrationButton from "@/app/components/AddDriver/RegistrationButton";
+import Notification from "../components/AddDriver/Notification";
 import { BodyWrapper } from "../components/AddDriver/styles/BodyBox";
 import { Dayjs } from "dayjs";
 import axios from "axios";
@@ -31,6 +32,9 @@ const Page = () => {
     const [date, setDate] = useState<Dayjs | null >(null);
     const [stateNumber, setStateNumber] = useState('');
 
+    const [isVisible,setIsVisible] = useState(false);
+    const [message,setMessage] = useState('');
+
     const sendDriver = () => {
         let flag = false;
         if (name === '') {setNameTurn(true); flag = true}
@@ -53,7 +57,19 @@ const Page = () => {
             headers: {
                 Authorization: `Bearer ${token}`
             }
-        }).then(r => console.log((r)))
+        }).then(r => {
+            console.log(r)
+            if (r.status == 200) {
+            setMessage('Водитель добавлен');
+            }
+            if (r.status == 400) {
+                setMessage('Неправильный номер гос авто');
+            }
+            setIsVisible(true);
+            setTimeout(() => {
+                setIsVisible(false);
+            }, 3000);
+    })
     }
 
 
@@ -73,6 +89,7 @@ const Page = () => {
         </FieldsWrapper>
         <RegistrationButton sendDriver={sendDriver}/>
         </BodyWrapper>
+        <Notification message={message} visible={isVisible} />
         </ div>
 }
 

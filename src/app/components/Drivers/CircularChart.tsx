@@ -52,7 +52,6 @@ const CircularChart: React.FC<CircularChartProps> = ({ value,index }) => {
       {
         data: [value, maxDivisions - value], // Заполненная часть и оставшаяся часть
         backgroundColor: [chooseColor(value), '#dedede'],
-        borderRadius: [20, 0],
       },
     ],
   };
