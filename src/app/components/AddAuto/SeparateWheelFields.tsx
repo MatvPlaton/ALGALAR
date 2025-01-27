@@ -94,7 +94,6 @@ const SeparateWheelFields: React.FC<Prop> = ({carId, currTire, setImages, setRed
             prevImage.map((item, i) => i === currTire ? {full: true, img: filledTire} : item))
 
         currStats = wheels[currTire];
-        currStats.number = '';
         axios.post('https://algalar.ru:8080/wheels', {
 
             "AutoId": carId,
@@ -118,6 +117,8 @@ const SeparateWheelFields: React.FC<Prop> = ({carId, currTire, setImages, setRed
                 Authorization: `Bearer ${token}`
             }
         }).then(r => console.log(r))
+        currStats.number = '';
+
     }
     const copy = () => {
         setWheels(prevState => prevState.map((wheel, i) =>
