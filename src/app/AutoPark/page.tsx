@@ -81,7 +81,7 @@ const AutoPark = () => {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
-                }).then(r => {console.log(r); setCars(oldCars => [...oldCars,r.data])})
+                }).then(r => setCars(oldCars => [...oldCars,r.data]))
             })
         }).catch()
     }, [])
@@ -95,13 +95,14 @@ const AutoPark = () => {
     const [wheel, setWheel] = useState(-1);
 
     const [data,setData] = useState<data[]>([])
+    const [type,setType] = useState('pressure');
 
     return <> <ProfileMenu height={'100vh'} activeField={'AutoPark'} />
                 <Header />
                 <DataTable setWheel={setWheel} cars={cars} dataIndex={dataIndex} setDataIndex={setCar}/>
                 <Scheme car={currCar} wheel={wheel} setWheel={setWheel} dataIndex={dataIndex}/>
-                <GraphicButtons index={dataIndex} setData={setData} wheel={wheel} car={currCar} />
-                <Graphic data={data} max={40}/>
+                <GraphicButtons index={dataIndex} setData={setData} wheel={wheel} car={currCar} type={type} setType={setType}/>
+                <Graphic type={type} data={data} />
                 <RepairButtons />
                 <RepairTable />
     </>

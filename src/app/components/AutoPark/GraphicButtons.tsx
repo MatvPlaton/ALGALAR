@@ -73,8 +73,10 @@ interface Props {
     wheel: number
     setData: React.Dispatch<React.SetStateAction<data[]>>;
     index: number
+    type: string;
+    setType: React.Dispatch<React.SetStateAction<string>>;
 }
-const GraphicButtons: React.FC<Props> = (({index,setData, car,wheel}) => {
+const GraphicButtons: React.FC<Props> = (({index,setData, car,wheel,type,setType}) => {
 
     const token = useAuthStore((state) => state.token);
 
@@ -103,7 +105,6 @@ const GraphicButtons: React.FC<Props> = (({index,setData, car,wheel}) => {
     
     }
     const [value, setValue] = useState<Dayjs | null>(dayjs(null));
-    const [type,setType] = useState('pressure');
 
     const chooseByPosition = (wheels: wheel[],position: number) => {
         for (const wheel of wheels) {
@@ -121,7 +122,7 @@ const GraphicButtons: React.FC<Props> = (({index,setData, car,wheel}) => {
             setData([])
             return
         }
-        axios.get(`https://algalar.ru:8080/${type}data?wheel_id=${chooseByPosition(car.wheels, wheel)}&from=${value.$y}-${value.$M + 1}-${value.$D}T00:00:00Z&to=${value.$y}-${value.$M + 1}-${value.$D}T23:59:59Z`, {
+        axios.get(`https://algalar.ru:8080/${type}data?wheel_id=${chooseByPosition(car.wheels, wheel)}&from=${value.$y}-0${value.$M + 1}-${value.$D}T00:00:00Z&to=${value.$y}-0${value.$M + 1}-${value.$D}T23:59:59Z`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }

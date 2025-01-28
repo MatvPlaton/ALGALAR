@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-
+import { persist, PersistStorage } from 'zustand/middleware';
 interface AuthState {
     token: string | null;
     setToken: (token: string | null) => void;
@@ -22,34 +22,33 @@ interface RefreshState {
 }
 
 
-  // Define the persist options type
-// const customStorage: PersistStorage<AuthState> = {
-//     getItem: (name) => {
-//       const storedValue = localStorage.getItem(name);
-//       return storedValue ? JSON.parse(storedValue) : null;
-//     },
-//     setItem: (name, value) => {
-//       localStorage.setItem(name, JSON.stringify(value));
-//     },
-//     removeItem: (name) => {
-//       localStorage.removeItem(name);
-//     },
-//   };
+const customStorage: PersistStorage<AuthState> = {
+    getItem: (name) => {
+      const storedValue = localStorage.getItem(name);
+      return storedValue ? JSON.parse(storedValue) : null;
+    },
+    setItem: (name, value) => {
+      localStorage.setItem(name, JSON.stringify(value));
+    },
+    removeItem: (name) => {
+      localStorage.removeItem(name);
+    },
+  };
 
-// export const useAuthStore = create<AuthState>()(persist((set) => ({
+export const useAuthStore = create<AuthState>()(persist((set) => ({
      
-//     token: null,
-//     setToken: (token) => set({ token }),
-// }), {
-//     name: "cart",
-//     storage: customStorage
-// }
-// ));
-
-export const useAuthStore = create<AuthState>((set) => ({   
     token: null,
     setToken: (token) => set({ token }),
-}));
+}), {
+    name: "cart",
+    storage: customStorage
+}
+));
+
+// export const useAuthStore = create<AuthState>((set) => ({   
+//     token: null,
+//     setToken: (token) => set({ token }),
+// }));
 export const usePasswordStore = create<PasswordState>((set) => ({
     password: null,
     setPassword: (password) => set({ password }),

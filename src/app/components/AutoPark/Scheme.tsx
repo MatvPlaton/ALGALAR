@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Image from 'next/image'
 import SchemeImage from '../../assets/AutoPark/SchemeWrapper.svg'
 import styled from "styled-components";
+import axios from 'axios';
+import { useAuthStore } from '@/app/redux/store';
 interface auto {
     autoType : string
     axleCount : number
@@ -109,8 +111,17 @@ const ParamWrapper = styled(ParamWrapperActive)`
     color: black;
 `
 const Scheme: React.FC<Prop> = ({car, wheel, setWheel, dataIndex}) => {
+    const token = useAuthStore((state) => state.token);
 
-
+    useEffect(() => {
+        if (car != null) {
+        axios.get(`https://algalar.ru:8080/sensors?car_id=${car.auto.id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then(r => console.log(r))
+    }
+    })
     return <> {dataIndex === -1 ? <div /> :
         <div style={{height: '45vh',position: 'absolute',left: '50%', top: '15%'}}>
             <Image style={{width: '15vw', height: '45vh', position: 'relative'}} src={SchemeImage} alt={''} />

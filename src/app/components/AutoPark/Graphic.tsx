@@ -34,13 +34,12 @@ interface DataPoint {
 // Пропсы компонента
 interface LineChartProps {
     dataPoints: DataPoint[];
-    max?: number;
+    type: string;
 }
 
-const LineChart: React.FC<LineChartProps> = ({ max = 0, dataPoints }) => {
+const LineChart: React.FC<LineChartProps> = ({type, dataPoints}) => {
     // Подготовка данных для графика
     const data = {
-        labels: [...Array(24).keys()].map(value => value + 1), // Метки оси X
         datasets: [
             {
                 data: dataPoints.map((point) => ({
@@ -70,8 +69,8 @@ const LineChart: React.FC<LineChartProps> = ({ max = 0, dataPoints }) => {
                 grid: {
                     display: false
                   },
-                min: 0, // Минимальное значение
-                max: max, // Максимальное значение
+                min: type === 'pressure' ? 2 : 30, // Минимальное значение
+                max: type === 'pressure' ? 3 : 60, // Максимальное значение
                 ticks: {
                     stepSize: 3, // Шаг делений
                     font: {weight: 'bold'},
@@ -83,6 +82,7 @@ const LineChart: React.FC<LineChartProps> = ({ max = 0, dataPoints }) => {
                 grid: {
                     display: false
                   },
+                  max: 24,
                 ticks: {
                     font: {weight: 'bold'},
                 },
@@ -103,10 +103,10 @@ interface data {
     time: string;
 }
 interface Prop {
-    max?: number
     data : data[]
+    type: string
 }
-const Graphic: React.FC<Prop> = (({data, max = 0}) => {
+const Graphic: React.FC<Prop> = (({data, type}) => {
 
     const [dataPoints, setDataPoints] = useState<DataPoint[]>([])
     useEffect(() => {
@@ -117,15 +117,12 @@ const Graphic: React.FC<Prop> = (({data, max = 0}) => {
         }
         data.forEach(value => {
            const keys = Object.keys(value);
-           console.log(keys)
-
            const date = new Date(value[keys[1]]);
            const hours = date.getUTCHours();
            const minutes = date.getUTCMinutes();
            temp.push({x : hours + (minutes / 60), y : value[keys[0]]});
 
         })
-        console.log(temp)
         setDataPoints(temp)
     },[data])
     
@@ -133,7 +130,7 @@ const Graphic: React.FC<Prop> = (({data, max = 0}) => {
    
     return (
         <div style={{position: "absolute", left: '70%', top: '24%', height: '30%', width: '27%'}}>
-            <LineChart max={max} dataPoints={dataPoints} />
+            <LineChart type={type} dataPoints={dataPoints} />
         </div>
     );
 });
