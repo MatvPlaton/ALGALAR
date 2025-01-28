@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image'
 import SchemeImage from '../../assets/AutoPark/SchemeWrapper.svg'
 import styled from "styled-components";
@@ -79,7 +79,11 @@ const WheelsWrapper = styled.div`
 interface WheelProp {
     wheelposition: number;
 }
-
+interface wheelData {
+    pressure: number
+    temperature: number
+    wheel_position: number
+}
 const Wheel = styled.div<WheelProp>`
     background: linear-gradient(to bottom right, #43C5E2, #5A5CA8);
     position: absolute;
@@ -113,15 +117,23 @@ const ParamWrapper = styled(ParamWrapperActive)`
 const Scheme: React.FC<Prop> = ({car, wheel, setWheel, dataIndex}) => {
     const token = useAuthStore((state) => state.token);
 
+    const [wheelsData,setWheelsData] = useState<wheelData[]>(Array(24).fill(
+        {
+            pressure: 0,
+            temperature: 0,
+            wheel_position: 0
+        }
+    ));
+
     useEffect(() => {
         if (car != null) {
         axios.get(`https://algalar.ru:8080/sensors?car_id=${car.auto.id}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
-        }).then(r => console.log(r))
+        }).then(r =>  setWheelsData(r.data))
     }
-    })
+    }, [car])
     return <> {dataIndex === -1 ? <div /> :
         <div style={{height: '45vh',position: 'absolute',left: '50%', top: '15%'}}>
             <Image style={{width: '15vw', height: '45vh', position: 'relative'}} src={SchemeImage} alt={''} />
@@ -129,13 +141,13 @@ const Scheme: React.FC<Prop> = ({car, wheel, setWheel, dataIndex}) => {
             <PressureWrapper> Рекомендованное давление </PressureWrapper>
             <PressureNumber> 123 </PressureNumber>
             <WheelsWrapper>
-                {car.wheels.map((wheel1: wheel) => (
+                {car.wheels.map((wheel1: wheel, index) => (
             <Wheel wheelposition={wheel1.wheelPosition} key={wheel1.wheelPosition} onClick={() => {setWheel(wheel1.wheelPosition); console.log(wheel1)}}>
                 {wheel === wheel1.wheelPosition ?
-                <ParamWrapperActive>0 <br />
-                    <span style={{position: 'relative', bottom: '3%'}}> 0 </span> </ParamWrapperActive> :
-                    <ParamWrapper>0 <br />
-                    <span style={{position: 'relative', bottom: '3%'}}> 0 </span> </ParamWrapper>}
+                <ParamWrapperActive> {wheelsData[index].pressure.toFixed(1)} <br />
+                    <span style={{position: 'relative', bottom: '3%'}}> {Math.round(wheelsData[index].temperature)} </span> </ParamWrapperActive> :
+                    <ParamWrapper> {wheelsData[index].pressure.toFixed(1)} <br />
+                    <span style={{position: 'relative', bottom: '3%'}}> {Math.round(wheelsData[index].temperature) } </span> </ParamWrapper>}
 
             </Wheel>))}
             </WheelsWrapper>
