@@ -9,9 +9,11 @@ import CircularChart from "../components/Drivers/CircularChart";
 import axios from "axios";
 import { useAuthStore } from "../redux/store";
 import { useRefreshStore } from "../redux/store";
+import Cookies from "js-cookie";
+
 const Page = () => {
 
-    const token = useAuthStore((state) => state.token);
+    const token = Cookies.get("jwt");
     const refresh = useRefreshStore((state) => state.refresh);
            
     const setToken = useAuthStore((state) => state.setToken);

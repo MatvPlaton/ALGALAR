@@ -1,3 +1,4 @@
+"use client"
 import React from 'react';
 import {EnterWrapper} from "./styles/Enter";
 import {useRouter} from "next/navigation";
@@ -6,6 +7,7 @@ import { useEmailStore } from '@/app/redux/store';
 import { usePasswordStore } from '@/app/redux/store';
 import { useAuthStore } from '@/app/redux/store';
 import { useRefreshStore } from '@/app/redux/store';
+import Cookie from 'js-cookie';
 
 interface Prop {
     setShowed:  React.Dispatch<React.SetStateAction<boolean>>;
@@ -28,6 +30,7 @@ const Enter: React.FC<Prop> = ({setShowed}) => {
                 console.log(r)
                 setToken(r.data.accessToken)
                 setRefresh(r.data.refreshToken)
+                Cookie.set("jwt", r.data.accessToken, { expires: 7, secure: true });
                 router.push('../../Profile');
             }
         }).catch(() => setShowed(true))

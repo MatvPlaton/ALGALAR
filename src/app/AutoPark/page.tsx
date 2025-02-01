@@ -11,9 +11,10 @@ import RepairTable from "@/app/components/AutoPark/RepairTable";
 import axios from "axios";
 import { useAuthStore } from "../redux/store";
 import { useRefreshStore } from "../redux/store";
+import Cookies from "js-cookie";
 
 const AutoPark = () => {
-    const token = useAuthStore((state) => state.token);
+    const token = Cookies.get("jwt");
     const refresh = useRefreshStore((state) => state.refresh);
     
     const setToken = useAuthStore((state) => state.setToken);

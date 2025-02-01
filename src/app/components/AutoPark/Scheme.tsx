@@ -3,7 +3,7 @@ import Image from 'next/image'
 import SchemeImage from '../../assets/AutoPark/SchemeWrapper.svg'
 import styled from "styled-components";
 import axios from 'axios';
-import { useAuthStore } from '@/app/redux/store';
+import Cookies from 'js-cookie';
 interface auto {
     autoType : string
     axleCount : number
@@ -115,15 +115,16 @@ const ParamWrapper = styled(ParamWrapperActive)`
     color: black;
 `
 const Scheme: React.FC<Prop> = ({car, wheel, setWheel, dataIndex}) => {
-    const token = useAuthStore((state) => state.token);
+    const token = Cookies.get("jwt");
 
-    const [wheelsData,setWheelsData] = useState<wheelData[]>(Array(24).fill(
+    const emptyWheels = Array(24).fill(
         {
             pressure: 0,
             temperature: 0,
             wheel_position: 0
         }
-    ));
+    );
+    const [wheelsData,setWheelsData] = useState<wheelData[]>(emptyWheels);
 
     useEffect(() => {
         if (car != null) {
@@ -131,7 +132,7 @@ const Scheme: React.FC<Prop> = ({car, wheel, setWheel, dataIndex}) => {
             headers: {
                 Authorization: `Bearer ${token}`
             }
-        }).then(r =>  setWheelsData(r.data))
+        }).then(r =>  r.data.length != 0 ? setWheelsData(r.data) : setWheelsData(emptyWheels))
     }
     }, [car])
     return <> {dataIndex === -1 ? <div /> :
@@ -145,9 +146,9 @@ const Scheme: React.FC<Prop> = ({car, wheel, setWheel, dataIndex}) => {
             <Wheel wheelposition={wheel1.wheelPosition} key={wheel1.wheelPosition} onClick={() => {setWheel(wheel1.wheelPosition); console.log(wheel1)}}>
                 {wheel === wheel1.wheelPosition ?
                 <ParamWrapperActive> {wheelsData[index].pressure.toFixed(1)} <br />
-                    <span style={{position: 'relative', bottom: '3%'}}> {Math.round(wheelsData[index].temperature)} </span> </ParamWrapperActive> :
+                    <span style={{position: 'relative', bottom: '3%'}}> {wheelsData[index].temperature.toFixed(1)} </span> </ParamWrapperActive> :
                     <ParamWrapper> {wheelsData[index].pressure.toFixed(1)} <br />
-                    <span style={{position: 'relative', bottom: '3%'}}> {Math.round(wheelsData[index].temperature) } </span> </ParamWrapper>}
+                    <span style={{position: 'relative', bottom: '3%'}}> {wheelsData[index].temperature.toFixed(1)} </span> </ParamWrapper>}
 
             </Wheel>))}
             </WheelsWrapper>

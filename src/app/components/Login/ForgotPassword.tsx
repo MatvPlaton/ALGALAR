@@ -1,3 +1,4 @@
+"use client"
 import React from 'react';
 import {ForgotPasswordWrapper} from "./styles/ForgotPassword";
 import {useRouter} from "next/navigation";

@@ -113,13 +113,12 @@ const DataTable: React.FC<Prop> = ({drivers, dataIndex, setDataIndex}) => {
                     <Wrap2 style={{backgroundColor: dataIndex === index ? "#43C5E24A" : ""}} >{index + 1}</Wrap2>
                     <Wrap3 style={{backgroundColor: dataIndex === index ? "#43C5E24A" : ""}} >{item.field1}</Wrap3>
                     <Wrap3 style={{backgroundColor: dataIndex === index ? "#43C5E24A" : ""}} >{item.field2}</Wrap3>
-                    <Wrap3 style={{backgroundColor: dataIndex === index ? "#43C5E24A" : ""}} >{item.field3}</Wrap3>
+                    <Wrap3 style={{backgroundColor: dataIndex === index ? "#43C5E24A" : ""}} > 0 г. {item.field3} мес.</Wrap3>
                     <Wrap3 style={{backgroundColor: dataIndex === index ? "#43C5E24A" : "", color: chooseColor(item.field4)}}>{item.field4}/10</Wrap3>
                 </tr>
             ))}
-            </tbody>
+            </tbody>ю
         </table>
     );
 };
-
 export default DataTable;

@@ -69,8 +69,8 @@ const LineChart: React.FC<LineChartProps> = ({type, dataPoints}) => {
                 grid: {
                     display: false
                   },
-                min: type === 'pressure' ? 2 : 30, // Минимальное значение
-                max: type === 'pressure' ? 3 : 60, // Максимальное значение
+                min: type === 'pressure' ? 0 : 0, // Минимальное значение
+                max: type === 'pressure' ? 13 : 110, // Максимальное значение
                 ticks: {
                     stepSize: 3, // Шаг делений
                     font: {weight: 'bold'},

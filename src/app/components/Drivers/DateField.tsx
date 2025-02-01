@@ -8,9 +8,8 @@ import {DatePicker, LocalizationProvider} from "@mui/x-date-pickers";
 import {Dayjs} from "dayjs";
 const Wrap = styled(FormControl)`
     width: 86%;
-    top: 1vw;
     border: none;
-    position: absolute;
+    position: relative;
     @media (max-width: 1000px) {
         width: 15rem;
     }   

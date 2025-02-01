@@ -11,7 +11,6 @@ import {LoginWrapper} from "@/app/components/Login/styles/LoginWrapper";
 import Modal from "@/app/components/Login/Modal";
 import {useState} from "react";
 
-
 const Login = () => {
 
     const [showed, setShowed] = useState(false);
