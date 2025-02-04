@@ -8,33 +8,58 @@ import Scheme from "../components/AutoPark/Scheme";
 import GraphicButtons from "@/app/components/AutoPark/GraphicButtons";
 import RepairButtons from "@/app/components/AutoPark/RepairButtons";
 import RepairTable from "@/app/components/AutoPark/RepairTable";
-import axios from "axios";
-import { useAuthStore } from "../redux/store";
-import { useRefreshStore } from "../redux/store";
-import Cookies from "js-cookie";
-
+import axios, { AxiosError } from "axios";
+import Cookie from "js-cookie";
 const AutoPark = () => {
-    const token = Cookies.get("jwt");
-    const refresh = useRefreshStore((state) => state.refresh);
     
-    const setToken = useAuthStore((state) => state.setToken);
-    const setRefresh = useRefreshStore((state) => state.setRefresh);
-
-    axios.interceptors.response.use(response => {
-        return response;
-    }, error => {
-        if (error.response.status === 401) {
-            axios.post('https://algalar.ru:8080/refresh', {},{
+    axios.interceptors.response.use(
+        response => response,
+        async (error: AxiosError) => {
+          if (error.response?.status === 401) {
+            console.log('401 Unauthorized - Attempting to Refresh Token');
+      
+            try {
+              const refreshToken = Cookie.get('refresh');
+              if (!refreshToken) {
+                console.error('No refresh token found! Redirecting to login.');
+                return Promise.reject(error);
+              }
+      
+              const refreshResponse = await axios.post('https://algalar.ru:8080/refresh', {}, {
                 headers: {
-                    Authorization: `Bearer ${refresh}`
+                  Authorization: `Bearer ${refreshToken}`
                 }
-            }).then(r => {
-                setToken(r.data.accessToken)
-                setRefresh(r.data["refreshToken"])
-            })
+              });
+      
+              // Save the new tokens
+              const newAccessToken = refreshResponse.data.accessToken;
+              const newRefreshToken = refreshResponse.data.refreshToken;
+      
+              Cookie.set("jwt", newAccessToken, { 
+                expires: new Date(new Date().getTime() + 20 * 60 * 1000), 
+                secure: true 
+              });
+      
+              Cookie.set("refresh", newRefreshToken, {
+                expires: 7,
+                secure: true
+              });
+      
+              console.log('Token refreshed successfully.');
+      
+              // Retry the failed request with the new token
+              error.config!.headers!['Authorization'] = `Bearer ${newAccessToken}`;
+              return axios(error.config!);
+      
+            } catch (refreshError) {
+              console.error('Token refresh failed! Logging out...', refreshError);
+              return Promise.reject(refreshError);
+            }
+          }
+      
+          return Promise.reject(error);
         }
-        return error;
-    });
+      );
     interface auto {
         autoType : string
         axleCount : number
@@ -71,20 +96,30 @@ const AutoPark = () => {
         time: string;
     }
     const [cars, setCars] = useState<car[]>([]);
-    useEffect(() => {
-        axios.get('https://algalar.ru:8080/auto/list?offset=0&limit=100', {
+    const fetchUserData = async (accessToken: string) => {
+        try {
+          const r = await axios.get('https://algalar.ru:8080/auto/list?offset=0&limit=100', {
             headers: {
-                Authorization: `Bearer ${token}`
+              Authorization: `Bearer ${accessToken}`
             }
-        }).then(r => {
-            r.data.forEach((car: auto) => {
-                axios.get(`https://algalar.ru:8080/auto/info?car_id=${car.id}`, {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                }).then(r => setCars(oldCars => [...oldCars,r.data]))
-            })
-        }).catch()
+          });
+
+          r.data.forEach((car: auto) => {
+            axios.get(`https://algalar.ru:8080/auto/info?car_id=${car.id}`, {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`
+                }
+            }).then(r => setCars(oldCars => [...oldCars,r.data]))
+        })
+        } catch (error) {
+          console.error('Error fetching user data:', error);
+        }
+      };
+    useEffect(() => {
+        const token = Cookie.get('jwt'); // Get the latest JWT token
+        if (token) {
+          fetchUserData(token);
+        }
     }, [])
     const [dataIndex,setDataIndex] = useState(-1);
     // @ts-expect-error 1234

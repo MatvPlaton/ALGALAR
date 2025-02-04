@@ -3,8 +3,9 @@ import styled from 'styled-components';
 export const Wrapper = styled.div`
     width: 40%;
     position: absolute;
+    border-radius: 1vw;
     left: 59%;
-    top: 2%;
+    top: 12%;
     display: flex;
     flex-direction: column;
     height: 80%;
@@ -17,7 +18,7 @@ export const Header = styled.div`
     color: black;
     background-color: white;
     position: relative;
-    top: 7%;
+    top: 1%;
     margin-left: 1vw;
 `
 export const FieldsWrapper = styled.div`
@@ -26,7 +27,7 @@ export const FieldsWrapper = styled.div`
     background-color: white;
     margin-left: 0.6vw;
     position: relative;
-    top: 10%;
+    top: 2%;
 `
 export const SeparateWheelFieldsWrapper = styled.div`
     position: relative;

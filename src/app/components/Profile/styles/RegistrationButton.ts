@@ -3,10 +3,10 @@ import styled from 'styled-components';
 export const RegistrationWrapper = styled.button`
     font-family: RobotoMedium,sans-serif;
     position: absolute;
-    top: 77%;
+    top: 87%;
+    left: 22%;
     color: white;
     background-color: #5A5CA8;
-    left: 23%;
     letter-spacing: 0.1vw;
     border: none;
     border-radius: 0.4vw;

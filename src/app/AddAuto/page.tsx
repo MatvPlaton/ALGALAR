@@ -1,7 +1,6 @@
 "use client"
 import React, {useEffect, useState} from "react";
 import ProfileMenu from "@/app/components/Profile/ProfileMenu";
-import Header from "@/app/components/AddAuto/Header"
 import ConfigFields from "@/app/components/AddAuto/ConfigFields"
 import SeparateWheelFields from "@/app/components/AddAuto/SeparateWheelFields";
 import emptyTire from "@/app/assets/AddAuto/Rectangle 41.svg";
@@ -11,6 +10,7 @@ import { useAuthStore } from "../redux/store";
 import { useRefreshStore } from "../redux/store";
 import redactTire from "@/app/assets/AddAuto/Frame 3.svg";
 import fullTire from "@/app/assets/AddAuto/Rectangle 36.svg";
+import TitleBox from "../components/AddAuto/TitleBox";
 
 
 const AutoPark = () => {
@@ -68,9 +68,9 @@ const AutoPark = () => {
         );
     }
 
-    return <div style={{backgroundColor: '#D9D9D9', height: '100vh'}}>
+    return <div style={{backgroundColor: '#f2f3f4', height: '100vh'}}>
         <ProfileMenu height={'100vh'} activeField={'AddAuto'} />
-        <Header />
+        <TitleBox />
 
         <ConfigFields carId={carId} switchImage={switchImage} setCarId={setCarId} images={images} isDoubled={isDoubled} setIsDoubled={setIsDoubled}
                       isChecked={isChecked} setIsChecked={setIsChecked}

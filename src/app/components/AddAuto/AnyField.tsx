@@ -28,7 +28,7 @@ const AnyField: React.FC<ChildComponentProps> = ({setTurn, turn, text,userField,
     };
     return ( <>
             <Wrap onClick={() => setTurn(false)} variant="standard" error={turn}>
-                <InputLabel style={{marginLeft: '1vw',fontSize: '1vw'}} htmlFor="standard-adornment-password">{text} </InputLabel>
+                <InputLabel style={{marginLeft: '1.4vw',fontSize: '1vw'}} htmlFor="standard-adornment-password">{text} </InputLabel>
                 <Input style={{marginLeft: '1vw',fontSize: '1vw'}}
                     id="standard-adornment-password"
                        value={inputValue}

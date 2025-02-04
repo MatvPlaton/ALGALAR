@@ -13,8 +13,8 @@ import {
 import {DatePicker, LocalizationProvider} from "@mui/x-date-pickers";
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import axios from 'axios';
-import { useAuthStore } from '@/app/redux/store';
 import dayjs, { Dayjs } from 'dayjs';
+import Cookie from 'js-cookie';
 
 const Sentence =  styled.div`
     font-family: RobotoMedium,sans-serif;
@@ -78,7 +78,7 @@ interface Props {
 }
 const GraphicButtons: React.FC<Props> = (({index,setData, car,wheel,type,setType}) => {
 
-    const token = useAuthStore((state) => state.token);
+    const token = Cookie.get('jwt');
 
     const getReport = () => {
         axios.get('https://algalar.ru:8080/report', {

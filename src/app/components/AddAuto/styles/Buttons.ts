@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const ButtonsWrapper = styled.div`
     position: absolute;
-    left: 65.5%;
+    left: 68.5%;
     top: 85%;
     width: auto;
     height: auto;

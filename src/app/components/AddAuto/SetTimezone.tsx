@@ -30,7 +30,7 @@ const SetTimezone: React.FC<ChildComponentProps> = (({setTurn, turn, text,userFi
 
     return (
         <Wrap onClick={() => setTurn(false)} variant="standard" error={turn}>
-            <InputLabel style={{marginLeft: '1vw',fontSize: '1vw'}} id="demo-simple-select-standard-label">{text}</InputLabel>
+            <InputLabel style={{marginLeft: '1.4vw',fontSize: '1vw'}} id="demo-simple-select-standard-label">{text}</InputLabel>
             <Select
                 style={{marginLeft: '1vw',fontSize: '1vw'}}
                 labelId="demo-simple-select-standard-label"

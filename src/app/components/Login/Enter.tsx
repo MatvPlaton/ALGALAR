@@ -2,7 +2,7 @@
 import React from 'react';
 import {EnterWrapper} from "./styles/Enter";
 import {useRouter} from "next/navigation";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useEmailStore } from '@/app/redux/store';
 import { usePasswordStore } from '@/app/redux/store';
 import { useAuthStore } from '@/app/redux/store';
@@ -20,6 +20,14 @@ const Enter: React.FC<Prop> = ({setShowed}) => {
     const setToken = useAuthStore((state) => state.setToken);
     const setRefresh = useRefreshStore((state) => state.setRefresh);
 
+    axios.interceptors.response.use(
+        response => response,
+        async (error: AxiosError) => {
+          if (error.response?.status === 400) {
+            setShowed(true)
+          }
+        })
+
     const navigateToAnotherPage = () => {
 
         axios.post('https://algalar.ru:8080/login', {
@@ -30,10 +38,19 @@ const Enter: React.FC<Prop> = ({setShowed}) => {
                 console.log(r)
                 setToken(r.data.accessToken)
                 setRefresh(r.data.refreshToken)
-                Cookie.set("jwt", r.data.accessToken, { expires: 7, secure: true });
+                Cookie.set("jwt", r.data.accessToken, { 
+                    expires: new Date(new Date().getTime() + 20 * 60 * 1000), 
+                    secure: true 
+                });
+                Cookie.set("refresh", r.data.refreshToken, {
+                    expires: 7,
+                    secure: true
+                })
                 router.push('../../Profile');
+            } else {
+                setShowed(true)
             }
-        }).catch(() => setShowed(true))
+        })
 
     };
 

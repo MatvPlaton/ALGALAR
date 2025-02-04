@@ -4,6 +4,7 @@ import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import {MenuItem, Select, SelectChangeEvent} from "@mui/material";
 import styled from "styled-components";
+import { useEffect } from 'react';
 const Wrap = styled(FormControl)`
     width: 90%;
     margin-bottom: 2rem;
@@ -21,7 +22,9 @@ const SetTimezone: React.FC<Prop> = ({userField}) =>  {
     const handleChange = (event: SelectChangeEvent) => {
         setTimezone(event.target.value as string);
     };
-
+    useEffect(() => {
+        setTimezone(userField)
+    }, [userField]);
     const range = Array.from({ length: 25 }, (_, i) => i - 12);
 
     return (

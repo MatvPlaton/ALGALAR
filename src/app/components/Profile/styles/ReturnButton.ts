@@ -5,8 +5,8 @@ export const ReturnWrapper = styled.button`
     position: absolute;
     color: #34373b;
     background-color: white;
-    top: 77%;
-    left: 6%;
+    top: 87%;
+    left: 2%;
     letter-spacing: 0.1vw;
     border: none;
     border-radius: 0.4vw;

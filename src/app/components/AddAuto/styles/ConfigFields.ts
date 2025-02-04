@@ -2,14 +2,15 @@ import styled from 'styled-components';
 
 export const ConfigFieldsWrapper = styled.div`
     position: absolute;
-    top : 8%;
-    left: 7%;
+    top : 12%;
+    left: 6.5%;
     width: 50%;
     height: 85%;
     margin-bottom: 10vw;
     flex-direction: column;
     background-color: white;
     overflow-y: scroll;
+    border-radius: 1vw;
 `
 export const HeaderText2 = styled.div`
     color: black;
@@ -19,10 +20,28 @@ export const HeaderText2 = styled.div`
     display: flex;
     align-items: flex-end;
     padding: 0.5vw;
+    left: 2%;
+    width: 70%;
 `
 interface props {
-    top?: string;
+    top?: number;
     fields?: boolean;
+}
+const chooseTop = (axis? : number) => {
+    switch (axis) {
+        case 2:
+            return '95%';
+        case 3:
+            return '115%';
+        case 4:
+            return '134%';
+        case 5:
+            return '154%';
+        case 6:
+            return '174%';
+        default:
+            return '0'    
+    }
 }
 export const CopyButton = styled.button<props>`
     font-family: RobotoMedium,sans-serif;
@@ -33,7 +52,7 @@ export const CopyButton = styled.button<props>`
     border-radius: 0.4vw;
     font-size: 0.9vw;
     position: absolute;
-    top: calc(92% + ${(props) => props.top || '0'});    
+    top: ${({ top }) => chooseTop(top)};
     left: 82%;
     width: 8vw;
     height: 5%;

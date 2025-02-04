@@ -5,7 +5,7 @@ export const TempAndPressureWrapper = styled.div`
     display: flex;
     flex-direction: row;
     background-color: white;
-    top: 20%;
+    top: 10%;
     height: 20%;
 `
 export const Headers = styled.div`
@@ -46,7 +46,7 @@ export  const MinMaxWrapper = styled.div`
     font-size: 1.2vw;
     display: flex;
     position: relative;
-    top: 18%;
+    top: 8%;
     left: 25%;
     width: 10%;
     flex-direction: row;

@@ -103,7 +103,7 @@ const ConfigFields: React.FC<Props> = ({carId, switchImage, setCarId, axis,
         <WheelConfig carId={carId} switchImage={switchImage} images={images} isDoubled={isDoubled} setIsDoubled={setIsDoubled}
                      isChecked={isChecked} setIsChecked={setIsChecked}
                      axis={axis} setAxis={setAxis} currTire={currTire}/>
-        <CopyButton fields={allFieldsFilled} onClick={() => send()} top={`${(axis-2)*28.6}%`}> СОХРАНИТЬ </CopyButton>
+        <CopyButton fields={allFieldsFilled} onClick={() => send()} top={axis}> СОХРАНИТЬ </CopyButton>
 
     </ConfigFieldsWrapper>
 

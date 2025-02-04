@@ -3,6 +3,9 @@ import styled from "styled-components";
 export const FieldsWrapper = styled.div`
     flex-direction: column;
     position: absolute;
-    top: 24%;
-    left: 6.5%;
+    top: 5%;
+    left: 2%;
+    height: 90%;
+    font-family: RobotoRegular, sans-serif;
+    font-size: 1.4vw;
 `
