@@ -108,7 +108,7 @@ const DataTable: React.FC<Prop> = ({ setWheel,cars,dataIndex, setDataIndex}) => 
         setWheel(-1)
     }
     return (
-        <table style={{ position: 'absolute', left: '6.5%', top: '15%', width: '40%', borderCollapse: 'collapse' }}>
+        <table style={{ position: 'absolute', left: '5%', top: '2%', width: '90%', borderCollapse: 'collapse' }}>
             <thead>
             <tr>
                 <Wrap1>№</Wrap1>

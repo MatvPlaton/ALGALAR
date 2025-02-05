@@ -2,6 +2,7 @@
 // @ts-nocheck
 "use client"
 import React, { useEffect, useState } from 'react';
+// import zoomPlugin from 'chartjs-plugin-zoom';
 
 import { Line } from 'react-chartjs-2';
 import {
@@ -63,6 +64,21 @@ const LineChart: React.FC<LineChartProps> = ({type, dataPoints}) => {
             legend: {
                 display: false, // Полностью скрыть легенду
             },
+            // zoom: {
+            //     pan: {
+            //       enabled: true,
+            //       mode: 'x', // Allow panning in the X direction
+            //     },
+            //     zoom: {
+            //       wheel: {
+            //         enabled: true, // Enable zooming with the mouse wheel
+            //       },
+            //       pinch: {
+            //         enabled: true, // Enable zooming with pinch gestures on touch devices
+            //       },
+            //       mode: 'x', // Zoom in the X direction (set to 'xy' for both axes)
+            //     },
+            //   },
         },
         scales: {
             y: {
@@ -129,7 +145,7 @@ const Graphic: React.FC<Prop> = (({data, type}) => {
     // Пример данных для графика
    
     return (
-        <div style={{position: "absolute", left: '70%', top: '24%', height: '30%', width: '27%'}}>
+        <div style={{position: "absolute", left: '43%', top: '20%', height: '40%', width: '50%'}}>
             <LineChart type={type} dataPoints={dataPoints} />
         </div>
     );

@@ -61,7 +61,7 @@ const Wrap3 = styled.td`
 
 const DataTable = () => {
     return (
-        <table style={{ position: 'absolute', left: '53.5%', top: '70%', width: '40%', borderCollapse: 'collapse' }}>
+        <table style={{ position: 'absolute', left: '3.5%', top: '70%', width: '90%', borderCollapse: 'collapse' }}>
             <thead>
             <tr>
                 <Wrap1>№</Wrap1>

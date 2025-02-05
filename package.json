@@ -19,6 +19,7 @@
     "axios": "^1.7.7",
     "babel-plugin-styled-components": "^2.1.4",
     "chart.js": "^4.4.6",
+    "chartjs-plugin-zoom": "^2.2.0",
     "date-fns": "^4.1.0",
     "dayjs": "^1.11.13",
     "js-cookie": "^3.0.5",

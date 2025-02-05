@@ -1,7 +1,6 @@
 "use client"
 import React, { useEffect, useState } from "react";
 import ProfileMenu from '@/app/components/Profile/ProfileMenu'
-import ProfileTitle from "../components/Drivers/ProfileTitle";
 import Table from "../components/Drivers/Table";
 import Diagram from "../components/Drivers/Diagram";
 import Fields from "../components/Drivers/Fields";
@@ -10,6 +9,8 @@ import axios from "axios";
 import { useAuthStore } from "../redux/store";
 import { useRefreshStore } from "../redux/store";
 import Cookies from "js-cookie";
+import TitleBox from "../components/Drivers/TitleBox";
+import {MainWrapper} from "../components/Drivers/styles/MainBox";
 
 const Page = () => {
 
@@ -102,14 +103,16 @@ const Page = () => {
             setDriver(drivers[index] );
         }
     }, [index,drivers])
-    return <>
+    return <div style={{backgroundColor: '#f2f3f4', height: '100vh'}}>
         <ProfileMenu height={'100vh'} activeField={'Drivers'}/>
-        <ProfileTitle />
+        <TitleBox />
+        <MainWrapper>
         <Table dataIndex={index} setDataIndex={setIndex} drivers={drivers} />
         <Diagram  drivers={drivers} index={index} />
         <Fields index={index} driver={driver}/>
         <CircularChart index={index} value={driver.rating}/>
-        </>
+        </MainWrapper>
+        </ div>
 }
 
 export default Page;

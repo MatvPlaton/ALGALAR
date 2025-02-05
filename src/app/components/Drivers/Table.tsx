@@ -55,6 +55,13 @@ const Wrap3 = styled.td`
     font-size: 1vw;
 
 `
+const Title = styled.div`
+    font-family: RobotoRegular, sans-serif;
+    font-size: 1.5vw;
+    position: relative;
+    top: 2%;
+    left: 1%;
+`
 interface driver {
     name: string,
     surname: string,
@@ -90,14 +97,17 @@ const DataTable: React.FC<Prop> = ({drivers, dataIndex, setDataIndex}) => {
     const [data, setData] = useState<MyClass[]>([])
 
     useEffect(() => {
-        const parsedData = drivers.map(
+        const 
+        parsedData = drivers.map(
             
             (driver) => new MyClass(`${driver.surname} ${driver.name} ${driver.middle_name}`, driver.worked_time, driver.experience, driver.rating)
         )
         setData(parsedData)
     },[drivers])
     return (
-        <table style={{ position: 'absolute', left: '6.5%', top: '15%', width: '40%', borderCollapse: 'collapse' }}>
+        <>
+        <Title> Водители в компании </Title> 
+        <table style={{ position: 'relative', left: '2.5%', top: '5%', width: '40%', borderCollapse: 'collapse' }}>
             <thead>
             <tr>
                 <Wrap1>№</Wrap1>
@@ -119,6 +129,7 @@ const DataTable: React.FC<Prop> = ({drivers, dataIndex, setDataIndex}) => {
             ))}
             </tbody>
         </table>
+        </>
     );
 };
 export default DataTable;

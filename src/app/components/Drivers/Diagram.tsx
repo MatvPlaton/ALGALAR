@@ -78,7 +78,7 @@ const Wrapper = styled.div`
     width: 40%;
     height: 50%;
     left: 50%;
-    top: 10%;
+    top: 5%;
 `
 const HeaderWrapper = styled.div`
     font-family: RobotoRegular, sans-serif;

@@ -3,13 +3,14 @@ import React, {useEffect, useState} from "react";
 import ProfileMenu from "@/app/components/Profile/ProfileMenu";
 import Graphic from "@/app/components/AutoPark/Graphic";
 import DataTable from "@/app/components/AutoPark/Table";
-import Header from "@/app/components/AutoPark/Header";
 import Scheme from "../components/AutoPark/Scheme";
 import GraphicButtons from "@/app/components/AutoPark/GraphicButtons";
-import RepairButtons from "@/app/components/AutoPark/RepairButtons";
 import RepairTable from "@/app/components/AutoPark/RepairTable";
 import axios, { AxiosError } from "axios";
 import Cookie from "js-cookie";
+import TitleBox from "../components/AutoPark/TitleBox";
+import { DriversWrapper } from "../components/AutoPark/styles/DriversBox";
+import { RestWrapper } from "../components/AutoPark/styles/RestBox";
 const AutoPark = () => {
     
     axios.interceptors.response.use(
@@ -110,6 +111,11 @@ const AutoPark = () => {
                     Authorization: `Bearer ${accessToken}`
                 }
             }).then(r => setCars(oldCars => [...oldCars,r.data]))
+            axios.get(`https://algalar.ru:8080/breakage/list?car_id=${car.id}`, {
+              headers: {
+                Authorization: `Bearer ${accessToken}`
+              }
+          }).then(r => console.log(r))
         })
         } catch (error) {
           console.error('Error fetching user data:', error);
@@ -133,15 +139,19 @@ const AutoPark = () => {
     const [data,setData] = useState<data[]>([])
     const [type,setType] = useState('pressure');
 
-    return <> <ProfileMenu height={'100vh'} activeField={'AutoPark'} />
-                <Header />
-                <DataTable setWheel={setWheel} cars={cars} dataIndex={dataIndex} setDataIndex={setCar}/>
-                <Scheme car={currCar} wheel={wheel} setWheel={setWheel} dataIndex={dataIndex}/>
-                <GraphicButtons index={dataIndex} setData={setData} wheel={wheel} car={currCar} type={type} setType={setType}/>
-                <Graphic type={type} data={data} />
-                <RepairButtons />
-                <RepairTable />
-    </>
+    return <div style={{backgroundColor: '#f2f3f4', height: '100vh'}}> 
+        <ProfileMenu height={'100vh'} activeField={'AutoPark'} />
+        <TitleBox />
+        <DriversWrapper> 
+        <DataTable setWheel={setWheel} cars={cars} dataIndex={dataIndex} setDataIndex={setCar}/>
+        </DriversWrapper>
+        <RestWrapper>
+        <Scheme car={currCar} wheel={wheel} setWheel={setWheel} dataIndex={dataIndex}/>
+        <GraphicButtons index={dataIndex} setData={setData} wheel={wheel} car={currCar} type={type} setType={setType}/>
+        <Graphic type={type} data={data} />
+        <RepairTable />
+        </RestWrapper>
+    </ div>
 }
 
 export default AutoPark;

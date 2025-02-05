@@ -136,7 +136,7 @@ const Scheme: React.FC<Prop> = ({car, wheel, setWheel, dataIndex}) => {
     }
     }, [car])
     return <> {dataIndex === -1 ? <div /> :
-        <div style={{height: '45vh',position: 'absolute',left: '50%', top: '15%'}}>
+        <div style={{height: '45vh',position: 'absolute',left: '5%', top: '10%'}}>
             <Image style={{width: '15vw', height: '45vh', position: 'relative'}} src={SchemeImage} alt={''} />
             <Title> Текущее состояние </Title>
             <PressureWrapper> Рекомендованное давление </PressureWrapper>

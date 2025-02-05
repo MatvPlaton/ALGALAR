@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 export const Wrapper = styled. div`
     position: absolute;
-    left: 72%;
-    top: 16%;
+    left: 45%;
+    top: 6%;
     flex-direction: column;
 `
 export const TempAndPressureWrapper = styled.div`
@@ -53,11 +53,11 @@ export const AddButton = styled.button`
 `
 export const Report = styled(AddButton)`
     position: absolute;
-    top: 750%;
+    top: 840%;
     border-radius: 0.2vw;
     width: 12vw;
     height: 2vw;
-    left: 54%;
+    left: 56%;
     font-size: 0.8vw;
 `
 export const CopyButton = styled.button`
