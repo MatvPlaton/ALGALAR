@@ -3,7 +3,6 @@ import React, {useEffect, useState} from "react";
 import ProfileMenu from '@/app/components/Profile/ProfileMenu'
 import {FieldsWrapper} from "@/app/components/Profile/styles/FieldsWrapper";
 import AnyField from "@/app/components/Profile/AnyField";
-import ReturnButton from "@/app/components/Profile/ReturnButton";
 import RegistrationButton from "@/app/components/Profile/RegistrationButton";
 import SetTimezone from "@/app/components/Profile/SetTimezone";
 import SetRank from "@/app/components/Profile/SetRank";
@@ -20,6 +19,7 @@ const Page = () => {
     const [email,setEmail] = useState('');
     const [inn,setInn] = useState('');
     const [timezone,setTimezone] = useState('');
+
     axios.interceptors.response.use(
         response => response,
         async (error: AxiosError) => {
@@ -110,8 +110,7 @@ const Page = () => {
             <SetRank />
             <SetTimezone userField={`${timezone}`} />
         </FieldsWrapper>
-        <ReturnButton />
-        <RegistrationButton />
+        <RegistrationButton firstName={name} lastName={secondName} gender='' phone={phone} email={email} inn={inn} timeZone={Number(timezone)}/>
         </MainWrapper>
         </ div>
 }

@@ -2,13 +2,13 @@
 import React, { useEffect, useState } from "react";
 import ProfileMenu from '@/app/components/Profile/ProfileMenu'
 import TitleBox from "../components/Location/TitleBox";
-import { useAuthStore } from "../redux/store";
+import Cookie from "js-cookie";
 import axios from "axios";
 import MapBox from "../components/Location/MapBox";
 import ListBox from "../components/Location/ListBox";
 const Page = () => {
     
-    const token = useAuthStore((state) => state.token);
+    const token = Cookie.get('jwt');
     
     const [index, setIndex] = useState(-1); 
     

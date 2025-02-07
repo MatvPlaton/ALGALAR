@@ -16,15 +16,7 @@ import {
     Legend,
 } from 'chart.js';
 // Регистрация компонентов Chart.js
-ChartJS.register(
-    LineElement,
-    CategoryScale,
-    LinearScale,
-    PointElement,
-    Title,
-    Tooltip,
-    Legend
-);
+
 
 // Типизация для данных точек
 interface DataPoint {
@@ -39,6 +31,21 @@ interface LineChartProps {
 }
 
 const LineChart: React.FC<LineChartProps> = ({type, dataPoints}) => {
+    ChartJS.register(
+        LineElement,
+        CategoryScale,
+        LinearScale,
+        PointElement,
+        Title,
+        Tooltip,
+        Legend
+    );
+    useEffect(() => {
+        if (typeof window !== "undefined")
+          import("chartjs-plugin-zoom").then((plugin) => {
+            ChartJS.register(plugin.default);
+          });
+        }, []);
     // Подготовка данных для графика
     const data = {
         datasets: [
@@ -64,21 +71,21 @@ const LineChart: React.FC<LineChartProps> = ({type, dataPoints}) => {
             legend: {
                 display: false, // Полностью скрыть легенду
             },
-            // zoom: {
-            //     pan: {
-            //       enabled: true,
-            //       mode: 'x', // Allow panning in the X direction
-            //     },
-            //     zoom: {
-            //       wheel: {
-            //         enabled: true, // Enable zooming with the mouse wheel
-            //       },
-            //       pinch: {
-            //         enabled: true, // Enable zooming with pinch gestures on touch devices
-            //       },
-            //       mode: 'x', // Zoom in the X direction (set to 'xy' for both axes)
-            //     },
-            //   },
+            zoom: {
+                pan: {
+                  enabled: true,
+                  mode: 'x', // Allow panning in the X direction
+                },
+                zoom: {
+                  wheel: {
+                    enabled: true, // Enable zooming with the mouse wheel
+                  },
+                  pinch: {
+                    enabled: true, // Enable zooming with pinch gestures on touch devices
+                  },
+                  mode: 'x', // Zoom in the X direction (set to 'xy' for both axes)
+                },
+              },
         },
         scales: {
             y: {
@@ -86,7 +93,7 @@ const LineChart: React.FC<LineChartProps> = ({type, dataPoints}) => {
                     display: false
                   },
                 min: type === 'pressure' ? 0 : 0, // Минимальное значение
-                max: type === 'pressure' ? 13 : 110, // Максимальное значение
+                max: type === 'pressure' ? 12 : 200, // Максимальное значение
                 ticks: {
                     stepSize: 3, // Шаг делений
                     font: {weight: 'bold'},

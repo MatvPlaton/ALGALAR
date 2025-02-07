@@ -51,16 +51,16 @@ const Sidebar: React.FC<Prop> = ({activeField,height}) => {
 
     const router = useRouter();
 
-    const Pictures : {[key : string] : [string,string]} = {
-        'Profile': [user,userActive],
-        'AutoPark': [autoPark,autoParkActive],
-        'Location': [location,locationActive],
-        'Drivers' : [drivers,driversActive],
-        'tires' : [tires,tires],
-        'AddAuto' : [addCar,addCarActive],
-        'AddDriver' : [addDriver,addDriverActive],
-        'Notifications' : [notifications,notificationsActive],
-        'Exit' : [exit,exit]
+    const Pictures : {[key : string] : [string,string,string]} = {
+        'Profile': [user,userActive,'Профиль'],
+        'AutoPark': [autoPark,autoParkActive,'Автопарк'],
+        'Location': [location,locationActive,'Местоположение Авто'],
+        'Drivers' : [drivers,driversActive,'Статистика по водителям'],
+        'tires' : [tires,tires,'Статистика по шинам'],
+        'AddAuto' : [addCar,addCarActive,'Добавить авто'],
+        'AddDriver' : [addDriver,addDriverActive,'Добавить водителя'],
+        'Notifications' : [notifications,notificationsActive,'Уведомления'],
+        'Exit' : [exit,exit,'Выход']
     }
 
     const setToken = useAuthStore((state) => state.setToken);
@@ -83,9 +83,9 @@ const Sidebar: React.FC<Prop> = ({activeField,height}) => {
                         {activeField === key ? <>
                                 <Image style={{position: 'relative', left: '-1%', top: '-24%',display: 'grid', width: '27vw',height: '8vh'}}
                                                       src={Pictures[key][1]} alt={''} />
-                            <ComponentTextOn> {key} </ComponentTextOn> </> : <>
+                            <ComponentTextOn> {Pictures[key][2]} </ComponentTextOn> </> : <>
                             <ComponentImage> <Image style={{width: 'inherit',height: 'inherit'}} src={Pictures[key][0]} alt={''} /> </ComponentImage>
-                    <ComponentText> {key} </ComponentText> </>}
+                    <ComponentText> {Pictures[key][2]} </ComponentText> </>}
                     </Component>)}
             </ComponentsList>
 

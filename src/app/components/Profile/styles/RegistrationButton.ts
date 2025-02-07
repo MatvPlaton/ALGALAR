@@ -3,8 +3,8 @@ import styled from 'styled-components';
 export const RegistrationWrapper = styled.button`
     font-family: RobotoMedium,sans-serif;
     position: absolute;
-    top: 87%;
-    left: 22%;
+    top: 90%;
+    left: 2%;
     color: white;
     background-color: #5A5CA8;
     letter-spacing: 0.1vw;
