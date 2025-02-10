@@ -66,7 +66,7 @@ const DataTable: React.FC<Prop> = ({dataIndex, setDataIndex}) => {
             headers: {
                 Authorization: `Bearer ${token}`
             }
-        }).then(r => setCars(r.data.slice(0,16)))
+        }).then(r => setCars(r.data.slice(0,11)))
     })
     return (
         <>
