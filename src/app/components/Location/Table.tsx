@@ -1,24 +1,8 @@
 "use client"
-import React  from 'react';
+import React, {useState, useEffect}  from 'react';
 import styled from "styled-components";
-
-
-class MyClass {
-    field1: number;
-    field2: string;
-    field3: string;
-
-    constructor(field1: number, field2: string, field3: string) {
-        this.field1 = field1;
-        this.field2 = field2;
-        this.field3 = field3;
-    }
-}
-// data/classesData.ts
-
-
-// components/DataTable.tsx
-
+import Cookie from 'js-cookie';
+import axios from 'axios';
 
 const Wrap = styled.th`
     font-family: RobotoRegular, sans-serif;
@@ -60,18 +44,30 @@ const Title = styled.div`
     font-family: RobotoRegular, sans-serif;
     font-size: 1.3vw;
 `
+interface car {
+    brand: string
+    car_id: string
+    state_number: string
+    unique_id: string
+}
+
 interface Prop {
     dataIndex: number;
     setDataIndex: React.Dispatch<React.SetStateAction<number>> 
 }
 const DataTable: React.FC<Prop> = ({dataIndex, setDataIndex}) => {
 
-    const data = [
-        new MyClass(12,'БелАЗ75589','A111AA196'),
-        new MyClass(12,'БелАЗ75589','A111AA196'),
-        new MyClass(12,'БелАЗ75589','A111AA196'),
-        new MyClass(12,'БелАЗ75589','A111AA196')
-    ]
+    const token = Cookie.get('jwt');
+
+    const [cars,setCars] = useState<car[]>([]);
+
+    useEffect(() => {
+        axios.get('https://algalar.ru:8080/positions/listcars?limit=100&offset=0', {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then(r => setCars(r.data.slice(0,16)))
+    })
     return (
         <>
         <Title> Информация по Авто </Title> 
@@ -85,12 +81,12 @@ const DataTable: React.FC<Prop> = ({dataIndex, setDataIndex}) => {
             </tr>
             </thead>
             <tbody>
-            {data.map((item, index) => (
+            {cars.map((car, index) => (
                 <tr style={{cursor: 'pointer'}} onClick={() => setDataIndex(index)} key={index}>
                     <Wrap2 style={{backgroundColor: dataIndex === index ? "#43C5E24A" : ""}} >{index + 1}</Wrap2>
-                    <Wrap3 style={{backgroundColor: dataIndex === index ? "#43C5E24A" : ""}} >{item.field1}</Wrap3>
-                    <Wrap3 style={{backgroundColor: dataIndex === index ? "#43C5E24A" : ""}} >{item.field2}</Wrap3>
-                    <Wrap3 style={{backgroundColor: dataIndex === index ? "#43C5E24A" : ""}} >{item.field3}</Wrap3>
+                    <Wrap3 style={{backgroundColor: dataIndex === index ? "#43C5E24A" : ""}} >{car.unique_id}</Wrap3>
+                    <Wrap3 style={{backgroundColor: dataIndex === index ? "#43C5E24A" : ""}} >{car.brand}</Wrap3>
+                    <Wrap3 style={{backgroundColor: dataIndex === index ? "#43C5E24A" : ""}} >{car.state_number}</Wrap3>
                 </tr>
             ))}
             </tbody>
