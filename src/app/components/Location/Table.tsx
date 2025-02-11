@@ -66,13 +66,14 @@ const DataTable: React.FC<Prop> = ({dataIndex, setDataIndex}) => {
             headers: {
                 Authorization: `Bearer ${token}`
             }
-        }).then(r => setCars(r.data.slice(0,9)))
+        }).then(r => setCars(r.data))
     })
     return (
         <>
         <Title> Информация по Авто </Title> 
-        <table style={{ position: 'absolute', left: '3.5%', top: '10.5%', width: '93%', borderCollapse: 'collapse' }}>
-            <thead>
+        <div style={{ position: 'absolute', left: '3.5%', top: '10.5%', width: '95%', maxHeight: '85%', overflowY: 'auto'}}> 
+        <table style = {{width: '95%', borderCollapse: 'collapse'}}>
+        <thead style={{position: 'sticky',top: 0, zIndex: '2', background: 'white' }}>
             <tr>
                 <Wrap1>№</Wrap1>
                 <Wrap> Уникальный ID </Wrap>
@@ -91,6 +92,7 @@ const DataTable: React.FC<Prop> = ({dataIndex, setDataIndex}) => {
             ))}
             </tbody>
         </table>
+        </div>
         </>
     );
 };

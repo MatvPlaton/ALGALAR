@@ -24,6 +24,11 @@ const YandexMap: React.FC<YandexMapProps> = ({ coordinates }) => {
                 Authorization: `Bearer ${token}`
             }
         }).then(r => setPoints(r.data.map(point => point.point)))
+        axios.get('https://algalar.ru:8080/position/listcurrent?whatshere[pointA]=0&whatshere[pointA]=1&whatshere[pointB]=120&whatshere[pointB]=121', {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then(r => console.log(r))
     },[])
 
     useEffect(() => {

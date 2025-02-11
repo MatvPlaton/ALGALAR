@@ -14,8 +14,10 @@ const Wrap = styled(FormControl)`
 interface ChildComponentProps {
     text: string;
     userField : string;
+    setField : React.Dispatch<React.SetStateAction<string>>;
+    
 }
-const AnyField: React.FC<ChildComponentProps> = (({ text, userField }) =>  {
+const AnyField: React.FC<ChildComponentProps> = (({ text, userField, setField }) =>  {
 
     const [inputValue, setInputValue] = useState('');
     useEffect(() => {
@@ -23,6 +25,7 @@ const AnyField: React.FC<ChildComponentProps> = (({ text, userField }) =>  {
     }, [userField]);
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setInputValue(event.target.value);
+        setField(event.target.value)
     };
 
     return (

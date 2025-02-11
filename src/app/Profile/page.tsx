@@ -15,6 +15,7 @@ const Page = () => {
 
     const [name,setName] = useState('');
     const [secondName,setSecondName] = useState('');
+    const [thirdName, setThirdName] = useState('');
     const [phone,setPhone] = useState('');
     const [email,setEmail] = useState('');
     const [inn,setInn] = useState('');
@@ -101,12 +102,12 @@ const Page = () => {
         <MainWrapper>
         <FieldsWrapper>
             <div style={{position: 'relative', top: '-3%'}}> Редактирование профиля </div>
-            <AnyField userField={name} text='Имя'  />
-            <AnyField userField={secondName} text='Фамилия*' />
-            <AnyField userField={''} text='Отчество'  />
-            <AnyField userField={phone} text='Телефон*'  />
-            <AnyField userField={email} text='E-mail*'  />
-            <AnyField userField={inn} text='ИНН Компании'  />
+            <AnyField userField={name} setField={setName} text='Имя'  />
+            <AnyField userField={secondName} setField={setSecondName} text='Фамилия*' />
+            <AnyField userField={thirdName} setField={setThirdName} text='Отчество'  />
+            <AnyField userField={phone} setField={setPhone} text='Телефон*'  />
+            <AnyField userField={email} setField={setEmail} text='E-mail*'  />
+            <AnyField userField={inn} setField={setInn} text='ИНН Компании'  />
             <SetRank />
             <SetTimezone userField={`${timezone}`} />
         </FieldsWrapper>

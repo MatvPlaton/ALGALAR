@@ -18,6 +18,7 @@ const RegistrationButton: React.FC<Prop> = ({firstName,lastName,gender,phone,ema
 
 
     const sendData = () => {
+        console.log(firstName)
         axios.put('https://algalar.ru:8080/userinfo', {
             firstName : firstName,
             lastName : lastName,
