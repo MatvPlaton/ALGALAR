@@ -11,6 +11,7 @@ import Cookie from "js-cookie";
 import TitleBox from "../components/AutoPark/TitleBox";
 import { DriversWrapper } from "../components/AutoPark/styles/DriversBox";
 import { RestWrapper } from "../components/AutoPark/styles/RestBox";
+
 const AutoPark = () => {
     
     axios.interceptors.response.use(
@@ -112,16 +113,12 @@ const AutoPark = () => {
                     Authorization: `Bearer ${accessToken}`
                 }
             }).then(r => setCars(oldCars => [...oldCars,r.data]))
-            axios.get(`https://algalar.ru:8080/breakage/list?car_id=${car.id}`, {
-              headers: {
-                Authorization: `Bearer ${accessToken}`
-              }
-          }).then(r => console.log(r))
         })
         } catch (error) {
           console.error('Error fetching user data:', error);
         }
       };
+      
     useEffect(() => {
         const token = Cookie.get('jwt'); // Get the latest JWT token
         if (token) {

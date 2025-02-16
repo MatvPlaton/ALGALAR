@@ -35,8 +35,7 @@ import arrow2 from "../../assets/Profile/Arrow2.svg"
 import Image from "next/image";
 import {ALGALAR, Description} from "@/app/components/Profile/styles/ProfileMenu";
 import {useRouter} from "next/navigation";
-import { useAuthStore } from "@/app/redux/store";
-
+import Cookie from 'js-cookie';
 
 interface Prop {
     activeField : string;
@@ -63,11 +62,10 @@ const Sidebar: React.FC<Prop> = ({activeField,height}) => {
         'Exit' : [exit,exit,'Выход']
     }
 
-    const setToken = useAuthStore((state) => state.setToken);
     
     const exitSession = () => {
         console.log(1)
-        setToken(null)
+        Cookie.remove('jwt');
         router.push('/MainPage')
     } 
     return (

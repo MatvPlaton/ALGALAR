@@ -7,6 +7,4 @@ const TitleBox = () => {
     </>)
 
 }
-
-
 export default TitleBox;

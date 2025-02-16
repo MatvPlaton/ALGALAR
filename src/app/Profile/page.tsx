@@ -10,7 +10,7 @@ import axios, { AxiosError } from "axios";
 import Cookie from "js-cookie";
 import TitleBox from "../components/Profile/TitleBox";
 import { MainWrapper } from "../components/Profile/styles/MainBox";
-
+import {useTimeZoneStore} from "../redux/store";
 const Page = () => {
 
     const [name,setName] = useState('');
@@ -69,6 +69,8 @@ const Page = () => {
           return Promise.reject(error);
         }
       );
+      const setZone = useTimeZoneStore((state) => state.setZone);
+
      const fetchUserData = async (accessToken: string) => {
         try {
           const response = await axios.get('https://algalar.ru:8080/user', {
@@ -84,6 +86,7 @@ const Page = () => {
           setEmail(response.data.email);
           setInn(response.data.inn);
           setTimezone(response.data.timeZone);
+          setZone(response.data.timeZone);
         } catch (error) {
           console.error('Error fetching user data:', error);
         }
@@ -109,7 +112,7 @@ const Page = () => {
             <AnyField userField={email} setField={setEmail} text='E-mail*'  />
             <AnyField userField={inn} setField={setInn} text='ИНН Компании'  />
             <SetRank />
-            <SetTimezone userField={`${timezone}`} />
+            <SetTimezone userField={`${timezone}`} setField={setTimezone} />
         </FieldsWrapper>
         <RegistrationButton firstName={name} lastName={secondName} gender='' phone={phone} email={email} inn={inn} timeZone={Number(timezone)}/>
         </MainWrapper>

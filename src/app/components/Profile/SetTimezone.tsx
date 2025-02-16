@@ -14,13 +14,16 @@ const Wrap = styled(FormControl)`
 `
 interface Prop {
     userField : string;
+    setField : React.Dispatch<React.SetStateAction<string>>;
+    
 }
-const SetTimezone: React.FC<Prop> = ({userField}) =>  {
+const SetTimezone: React.FC<Prop> = ({userField, setField}) =>  {
 
     const [timezone, setTimezone] = React.useState(userField);
 
     const handleChange = (event: SelectChangeEvent) => {
         setTimezone(event.target.value as string);
+        setField(event.target.value as string)
     };
     useEffect(() => {
         setTimezone(userField)
@@ -49,12 +52,3 @@ const SetTimezone: React.FC<Prop> = ({userField}) =>  {
 }
 
 export default SetTimezone;
-
-
-
-
-
-
-
-
-

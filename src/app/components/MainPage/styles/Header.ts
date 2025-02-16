@@ -32,14 +32,6 @@ export const LogoImg = styled.div`
     height: 100%;
     width: auto;
 `
-export const LogoAng = styled.div`
-    position: relative;
-    height: 50%;
-    width: 100%;
-    text-align: left;
-    font-size: 2.3rem;
-    font-family: InterExtraBold, sans-serif;
-`
 export const LogoRest  = styled.div`
     position: relative;
     height: 50%;

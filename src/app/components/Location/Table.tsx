@@ -71,7 +71,7 @@ const DataTable: React.FC<Prop> = ({dataIndex, setDataIndex}) => {
     return (
         <>
         <Title> Информация по Авто </Title> 
-        <div style={{ position: 'absolute', left: '3.5%', top: '10.5%', width: '95%', maxHeight: '85%', overflowY: 'auto'}}> 
+        <div className="absolute left-[3.5%] top-[10.5%] w-[95%] max-h-[85%] overflow-y-auto"> 
         <table style = {{width: '95%', borderCollapse: 'collapse'}}>
         <thead style={{position: 'sticky',top: 0, zIndex: '2', background: 'white' }}>
             <tr>

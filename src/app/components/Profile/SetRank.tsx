@@ -40,12 +40,3 @@ const SetTimezone = () =>  {
 }
 
 export default SetTimezone;
-
-
-
-
-
-
-
-
-

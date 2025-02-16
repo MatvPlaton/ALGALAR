@@ -3,7 +3,7 @@
 "use client"
 import React, { useEffect, useState } from 'react';
 // import zoomPlugin from 'chartjs-plugin-zoom';
-
+import {useTimeZoneStore} from "../../redux/store";
 import { Line } from 'react-chartjs-2';
 import {
     Chart as ChartJS,
@@ -19,10 +19,7 @@ import {
 
 
 // Типизация для данных точек
-interface DataPoint {
-    x: number;
-    y: number;
-}
+
 
 // Пропсы компонента
 interface LineChartProps {
@@ -132,6 +129,9 @@ interface Prop {
 const Graphic: React.FC<Prop> = (({data, type}) => {
 
     const [dataPoints, setDataPoints] = useState<DataPoint[]>([])
+
+    const zone = useTimeZoneStore((state) => state.zone);
+     
     useEffect(() => {
         console.log(data)
         const temp : DataPoint[] = [];
@@ -141,7 +141,10 @@ const Graphic: React.FC<Prop> = (({data, type}) => {
         data.forEach(value => {
            const keys = Object.keys(value);
            const date = new Date(value[keys[1]]);
-           const hours = date.getUTCHours();
+           let hours = date.getUTCHours() - (zone - 3);
+           if (hours < 0) {
+            hours = 24 + hours;
+           }
            const minutes = date.getUTCMinutes();
            temp.push({x : hours + (minutes / 60), y : value[keys[0]]});
 

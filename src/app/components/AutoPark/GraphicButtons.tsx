@@ -15,6 +15,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import axios from 'axios';
 import dayjs, { Dayjs } from 'dayjs';
 import Cookie from 'js-cookie';
+import {useTimeZoneStore} from "../../redux/store";
 
 const Sentence =  styled.div`
     font-family: RobotoMedium,sans-serif;
@@ -90,21 +91,33 @@ const GraphicButtons: React.FC<Props> = (({index,setData, car,wheel,type,setType
         console.log((r))
         const blob = new Blob([r.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
         
-        // Create a link element
         const link = document.createElement('a');
         link.href = window.URL.createObjectURL(blob);
         link.download = 'report.xlsx'; // Specify the file name
 
-        // Append to the body and trigger the download
         document.body.appendChild(link);
         link.click();
 
-        // Cleanup
         document.body.removeChild(link);
         })
     
     }
+
     const [value, setValue] = useState<Dayjs | null>(dayjs(null));
+    const zone = useTimeZoneStore((state) => state.zone);
+
+    const shiftByZone = (dayStart: number, zone: number, end: boolean) => {
+        const offsetInMilliseconds = (zone - 3) * 60 * 60 * 1000;
+        
+        const Date1 = new Date(dayStart + 3 * 60 * 60 * 1000);
+
+        if (end)
+            Date1.setUTCHours(23, 59, 59, 999);
+                
+        const shiftedDate = new Date(Date1.getTime() + offsetInMilliseconds);
+
+        return shiftedDate.toISOString()
+    };
 
     const chooseByPosition = (wheels: wheel[],position: number) => {
         for (const wheel of wheels) {
@@ -114,15 +127,21 @@ const GraphicButtons: React.FC<Props> = (({index,setData, car,wheel,type,setType
         }
         return '';
     }
+
     useEffect(() => {
-        if (car === null || value === null) {
+        if (car === null ) {
+            return
+        }
+        if (Number.isNaN(value.$y)) {
             return
         }
         if (wheel === -1) {
             setData([])
             return
         }
-        axios.get(`https://algalar.ru:8080/${type}data?wheel_id=${chooseByPosition(car.wheels, wheel)}&from=${value.$y}-0${value.$M + 1}-${value.$D}T00:00:00Z&to=${value.$y}-0${value.$M + 1}-${value.$D}T23:59:59Z`, {
+        console.log(shiftByZone(value.toDate().getTime(),zone,false))
+        console.log(shiftByZone(value.toDate().getTime(),zone,true))
+        axios.get(`https://algalar.ru:8080/${type}data?wheel_id=${chooseByPosition(car.wheels, wheel)}&from=${shiftByZone(value.toDate().getTime(),zone,false)}&to=${shiftByZone(value.toDate().getTime(),zone,true)}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
