@@ -24,6 +24,7 @@
     "chartjs-plugin-zoom": "^2.2.0",
     "date-fns": "^4.1.0",
     "dayjs": "^1.11.13",
+    "dayjs-plugin-utc": "^0.1.2",
     "js-cookie": "^3.0.5",
     "js.cookie": "^0.0.4",
     "next": "15.0.2",

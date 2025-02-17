@@ -80,7 +80,6 @@ interface Props {
 const GraphicButtons: React.FC<Props> = (({index,setData, car,wheel,type,setType}) => {
 
     const token = Cookie.get('jwt');
-
     const getReport = () => {
         axios.get('https://algalar.ru:8080/report', {
             headers: {
@@ -88,7 +87,6 @@ const GraphicButtons: React.FC<Props> = (({index,setData, car,wheel,type,setType
                 }
         }).then(r => {
         
-        console.log((r))
         const blob = new Blob([r.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
         
         const link = document.createElement('a');
@@ -106,17 +104,14 @@ const GraphicButtons: React.FC<Props> = (({index,setData, car,wheel,type,setType
     const [value, setValue] = useState<Dayjs | null>(dayjs(null));
     const zone = useTimeZoneStore((state) => state.zone);
 
-    const shiftByZone = (dayStart: number, zone: number, end: boolean) => {
-        const offsetInMilliseconds = (zone - 3) * 60 * 60 * 1000;
+    const shiftByZone = (dayStart: dayjs, end: boolean) => {
         
-        const Date1 = new Date(dayStart + 3 * 60 * 60 * 1000);
-
+        dayStart = dayStart.add(3,'hour')
         if (end)
-            Date1.setUTCHours(23, 59, 59, 999);
-                
-        const shiftedDate = new Date(Date1.getTime() + offsetInMilliseconds);
-
-        return shiftedDate.toISOString()
+            dayStart = dayStart.add(1,'day');
+        console.log(dayStart.toDate().toISOString())
+ 
+        return dayStart.toDate().toISOString()
     };
 
     const chooseByPosition = (wheels: wheel[],position: number) => {
@@ -139,9 +134,9 @@ const GraphicButtons: React.FC<Props> = (({index,setData, car,wheel,type,setType
             setData([])
             return
         }
-        console.log(shiftByZone(value.toDate().getTime(),zone,false))
-        console.log(shiftByZone(value.toDate().getTime(),zone,true))
-        axios.get(`https://algalar.ru:8080/${type}data?wheel_id=${chooseByPosition(car.wheels, wheel)}&from=${shiftByZone(value.toDate().getTime(),zone,false)}&to=${shiftByZone(value.toDate().getTime(),zone,true)}`, {
+        console.log(zone)
+        
+        axios.get(`https://algalar.ru:8080/${type}data?wheel_id=${chooseByPosition(car.wheels, wheel)}&from=${shiftByZone(value,false)}&to=${shiftByZone(value,true)}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -162,7 +157,7 @@ const GraphicButtons: React.FC<Props> = (({index,setData, car,wheel,type,setType
                             label=""
                             format="DD.MM.YYYY"
                             value={value}
-                            onChange={(newValue) => setValue(newValue)}
+                            onChange={(newValue) => {setValue(newValue)}}
                         />
                 </LocalizationProvider>
         </ButtonsWrapper>

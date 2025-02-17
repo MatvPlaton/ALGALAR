@@ -60,13 +60,14 @@ const DataTable: React.FC<Prop> = ({dataIndex, setDataIndex}) => {
     const token = Cookie.get('jwt');
 
     const [cars,setCars] = useState<car[]>([]);
-
+    
     useEffect(() => {
         axios.get('https://algalar.ru:8080/positions/listcars?limit=100&offset=0', {
             headers: {
                 Authorization: `Bearer ${token}`
             }
         }).then(r => setCars(r.data))
+        
     })
     return (
         <>

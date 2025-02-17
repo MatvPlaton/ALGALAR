@@ -107,7 +107,6 @@ const AutoPark = () => {
           });
 
           r.data.forEach((car: auto) => {
-            console.log(r)
             axios.get(`https://algalar.ru:8080/auto/info?car_id=${car.id}`, {
                 headers: {
                     Authorization: `Bearer ${accessToken}`
