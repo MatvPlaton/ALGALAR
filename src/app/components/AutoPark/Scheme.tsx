@@ -146,9 +146,9 @@ const Scheme: React.FC<Prop> = ({car, wheel, setWheel, dataIndex}) => {
             <Wheel wheelposition={wheel1.wheelPosition} key={wheel1.wheelPosition} onClick={() => {setWheel(wheel1.wheelPosition); console.log(wheel1)}}>
                 {wheel === wheel1.wheelPosition ?
                 <ParamWrapperActive> {wheelsData[index].pressure.toFixed(1)} <br />
-                    <span style={{position: 'relative', bottom: '3%'}}> {wheelsData[index].temperature.toFixed(1)} </span> </ParamWrapperActive> :
+                    <span style={{position: 'relative', bottom: '27%'}}> {wheelsData[index].temperature.toFixed(0)} </span> </ParamWrapperActive> :
                     <ParamWrapper> {wheelsData[index].pressure.toFixed(1)} <br />
-                    <span style={{position: 'relative', bottom: '3%'}}> {wheelsData[index].temperature.toFixed(1)} </span> </ParamWrapper>}
+                    <span style={{position: 'relative', bottom: '27%'}}> {wheelsData[index].temperature.toFixed(0)} </span> </ParamWrapper>}
 
             </Wheel>))}
             </WheelsWrapper>

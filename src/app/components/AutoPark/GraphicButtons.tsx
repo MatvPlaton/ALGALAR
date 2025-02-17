@@ -16,6 +16,7 @@ import axios from 'axios';
 import dayjs, { Dayjs } from 'dayjs';
 import Cookie from 'js-cookie';
 import {useTimeZoneStore} from "../../redux/store";
+import utc from 'dayjs/plugin/utc';
 
 const Sentence =  styled.div`
     font-family: RobotoMedium,sans-serif;
@@ -103,12 +104,14 @@ const GraphicButtons: React.FC<Props> = (({index,setData, car,wheel,type,setType
 
     const [value, setValue] = useState<Dayjs | null>(dayjs(null));
     const zone = useTimeZoneStore((state) => state.zone);
-
+    dayjs.extend(utc)
     const shiftByZone = (dayStart: dayjs, end: boolean) => {
         
-        dayStart = dayStart.add(3,'hour')
-        if (end)
+        dayStart = dayStart.add(zone,'hour');
+                if (end) {
             dayStart = dayStart.add(1,'day');
+            dayStart = dayStart.add(-1,'second');
+                }
         console.log(dayStart.toDate().toISOString())
  
         return dayStart.toDate().toISOString()
@@ -157,7 +160,7 @@ const GraphicButtons: React.FC<Props> = (({index,setData, car,wheel,type,setType
                             label=""
                             format="DD.MM.YYYY"
                             value={value}
-                            onChange={(newValue) => {setValue(newValue)}}
+                            onChange={(newValue) => {console.log(newValue.toDate().toISOString()); setValue(dayjs.utc(newValue).startOf('day'))}}
                         />
                 </LocalizationProvider>
         </ButtonsWrapper>

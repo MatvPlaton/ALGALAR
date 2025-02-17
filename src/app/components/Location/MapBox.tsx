@@ -2,13 +2,15 @@ import React from 'react';
 import {MapWrapper} from "./styles/MapBox";
 import YandexMap from './Map';
 interface Prop {
-    coordinates: [number,number];
+    id: string;
+    setId: React.Dispatch<React.SetStateAction<string>> 
+    
 }
-const MapBox: React.FC<Prop> = ({coordinates}) => {
+const MapBox:React.FC<Prop> = ({id,setId}) => {
 
     return (<>
         <MapWrapper> 
-        <YandexMap coordinates={coordinates} />
+        <YandexMap id={id} setId={setId} />
         </MapWrapper>
     </>)
 

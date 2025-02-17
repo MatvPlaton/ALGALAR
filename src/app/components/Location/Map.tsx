@@ -3,11 +3,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Cookie from 'js-cookie';
 import axios from 'axios';
-interface YandexMapProps {
-    coordinates: [number, number]; // [latitude, longitude]
-}
 
-const YandexMap: React.FC<YandexMapProps> = ({ coordinates }) => {
+interface Prop {
+    id: string;
+    setId: React.Dispatch<React.SetStateAction<string>> 
+    
+}
+const YandexMap:React.FC<Prop> = ({id,setId}) => {
     const mapRef = useRef<HTMLDivElement | null>(null);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const yandexMapInstance = useRef<any>(null);
@@ -15,6 +17,8 @@ const YandexMap: React.FC<YandexMapProps> = ({ coordinates }) => {
     const token = Cookie.get('jwt');
     
     const [points, setPoints] = useState([]);
+    const [placemarks, setPlacemarks] = useState([]);
+
     const [count, setCount] = useState(0)
     const [map,setMap] = useState(null);
 
@@ -23,12 +27,12 @@ const YandexMap: React.FC<YandexMapProps> = ({ coordinates }) => {
             headers: {
                 Authorization: `Bearer ${token}`
             }
-        }).then(r => setPoints(r.data.map(point => point.point)))
+        }).then(r => setPoints(r.data.positions.map(point => point.point)))
         axios.get('https://algalar.ru:8080/position/listcurrent?whatshere[pointA]=0&whatshere[pointA]=1&whatshere[pointB]=120&whatshere[pointB]=121', {
             headers: {
                 Authorization: `Bearer ${token}`
             }
-        }).then(r => console.log(r))
+        }).then(r => {console.log(r); setPlacemarks(r.data)})
     },[])
 
     useEffect(() => {
@@ -36,7 +40,7 @@ const YandexMap: React.FC<YandexMapProps> = ({ coordinates }) => {
             if (mapRef.current && window.ymaps) {
                 window.ymaps.ready(() => {
                     setMap(new window.ymaps.Map(mapRef.current, {
-                        center: coordinates,
+                        center: [55.74, 37.568423],
                         zoom: 13,
                         controls: []
 
@@ -44,15 +48,6 @@ const YandexMap: React.FC<YandexMapProps> = ({ coordinates }) => {
 
                 
                   yandexMapInstance.current = map;
-                    const placemark = new window.ymaps.Placemark(points[1], {
-                        balloonContent: 'Your location',
-                    }, {
-                        iconLayout: 'default#image',
-                        iconImageHref: '/components/Location/icon.svg', 
-                    });
-
-                    map.geoObjects.add(placemark);
-                    yandexMapInstance.current = map;
                 });
             }
         };
@@ -86,7 +81,7 @@ const YandexMap: React.FC<YandexMapProps> = ({ coordinates }) => {
         const addMultiRoute = () => {
             if (map && window.ymaps && points.length > 0) {
                 const multiRoute = new window.ymaps.multiRouter.MultiRoute({
-                    referencePoints: points.slice(0, 80),
+                    referencePoints: points.slice(0, 40),
                     params: {
                         results: 2
                     }
@@ -96,20 +91,36 @@ const YandexMap: React.FC<YandexMapProps> = ({ coordinates }) => {
 
                 map.geoObjects.add(multiRoute);
 
-                const placemark = new window.ymaps.Placemark(points[1], {
-                    balloonContent: 'Your location',
-                }, {
-                    iconLayout: 'default#image',
-                    iconImageHref: '/components/Location/icon.svg',
-                });
-
-                map.geoObjects.add(placemark);
             }
         };
 
         addMultiRoute();
     }, [map, points]);
+    useEffect(() => {
+        console.log(id)
+    },[id])
+    useEffect(() => {
+        const addMarks = () => {
+            if (map && window.ymaps && placemarks.length > 0) {
+                
+                placemarks.forEach(placemark => {
+                    const mark = new window.ymaps.Placemark(placemark.point, {
+                        balloonContent: `уникальный id: ${placemark.unique_id}`,
+                    }, {
+                        iconLayout: 'default#image',
+                        iconImageHref: '/components/Location/icon.svg',
+                    });
+                    mark.events.add("click", () => {
+                        setId(placemark.unique_id) // Update state when clicked
+                      });
+                    map.geoObjects.add(mark);
+                });
+                
+            }
+        };
 
+        addMarks();
+    }, [map, placemarks]);
     return <> <button onClick={() => setCount(count + 1)} /> <div ref={mapRef} style={{ position: 'absolute', left: '1.5%', top: '1.5%', height: '97%', width: '97%' }} /> </>;
 };
 

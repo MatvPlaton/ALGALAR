@@ -52,10 +52,10 @@ interface car {
 }
 
 interface Prop {
-    dataIndex: number;
-    setDataIndex: React.Dispatch<React.SetStateAction<number>> 
+    id: string;
+    setId: React.Dispatch<React.SetStateAction<string>> 
 }
-const DataTable: React.FC<Prop> = ({dataIndex, setDataIndex}) => {
+const DataTable: React.FC<Prop> = ({id, setId}) => {
 
     const token = Cookie.get('jwt');
 
@@ -66,9 +66,9 @@ const DataTable: React.FC<Prop> = ({dataIndex, setDataIndex}) => {
             headers: {
                 Authorization: `Bearer ${token}`
             }
-        }).then(r => setCars(r.data))
+        }).then(r => {console.log(r.data); setCars(r.data)})
         
-    })
+    },[])
     return (
         <>
         <Title> Информация по Авто </Title> 
@@ -84,11 +84,11 @@ const DataTable: React.FC<Prop> = ({dataIndex, setDataIndex}) => {
             </thead>
             <tbody>
             {cars.map((car, index) => (
-                <tr style={{cursor: 'pointer'}} onClick={() => setDataIndex(index)} key={index}>
-                    <Wrap2 style={{backgroundColor: dataIndex === index ? "#43C5E24A" : ""}} >{index + 1}</Wrap2>
-                    <Wrap3 style={{backgroundColor: dataIndex === index ? "#43C5E24A" : ""}} >{car.unique_id}</Wrap3>
-                    <Wrap3 style={{backgroundColor: dataIndex === index ? "#43C5E24A" : ""}} >{car.brand}</Wrap3>
-                    <Wrap3 style={{backgroundColor: dataIndex === index ? "#43C5E24A" : ""}} >{car.state_number}</Wrap3>
+                <tr style={{cursor: 'pointer'}} onClick={() => setId(car.unique_id)} key={car.unique_id}>
+                    <Wrap2 style={{backgroundColor: id === car.unique_id ? "#43C5E24A" : ""}} >{index + 1}</Wrap2>
+                    <Wrap3 style={{backgroundColor: id === car.unique_id ? "#43C5E24A" : ""}} >{car.unique_id}</Wrap3>
+                    <Wrap3 style={{backgroundColor: id === car.unique_id ? "#43C5E24A" : ""}} >{car.brand}</Wrap3>
+                    <Wrap3 style={{backgroundColor: id === car.unique_id ? "#43C5E24A" : ""}} >{car.state_number}</Wrap3>
                 </tr>
             ))}
             </tbody>

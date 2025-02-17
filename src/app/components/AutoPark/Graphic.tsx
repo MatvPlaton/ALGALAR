@@ -4,6 +4,7 @@
 import React, { useEffect, useState } from 'react';
 // import zoomPlugin from 'chartjs-plugin-zoom';
 import { Line } from 'react-chartjs-2';
+import { useTimeZoneStore } from '@/app/redux/store';
 import {
     Chart as ChartJS,
     LineElement,
@@ -129,6 +130,7 @@ const Graphic: React.FC<Prop> = (({data, type}) => {
 
     const [dataPoints, setDataPoints] = useState<DataPoint[]>([])
 
+    const zone = useTimeZoneStore(set => set.zone);
      
     useEffect(() => {
         console.log(data)
@@ -139,12 +141,14 @@ const Graphic: React.FC<Prop> = (({data, type}) => {
         data.forEach(value => {
            const keys = Object.keys(value);
            const date = new Date(value[keys[1]]);
-           let hours = date.getUTCHours();
+           let hours = date.getUTCHours() - zone;
            if (hours < 0) {
             hours = 24 + hours;
            }
-           const minutes = date.getUTCMinutes();
+           const minutes = date.getUTCMinutes() ;
+           if (hours < 24) {
            temp.push({x : hours + (minutes / 60), y : value[keys[0]]});
+           }
 
         })
         setDataPoints(temp)

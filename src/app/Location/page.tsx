@@ -8,14 +8,14 @@ import ListBox from "../components/Location/ListBox";
 const Page = () => {
     
     
-    const [index, setIndex] = useState(-1); 
+    const [id, setId] = useState('');
 
     return <div style={{backgroundColor: '#f2f3f4', height: '100vh'}}>
 
         <ProfileMenu height={'100vh'} activeField={'Location'}/>
         <TitleBox />
-        <MapBox coordinates={[55.74, 37.568423]} />
-        <ListBox dataIndex={index} setDataIndex={setIndex} />
+        <MapBox id={id} setId={setId} />
+        <ListBox  id={id} setId={setId} />
         </ div>
 }
 

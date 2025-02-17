@@ -2,15 +2,15 @@ import React from 'react';
 import {ListWrapper} from "./styles/ListBox";
 import Table from './Table';
 interface Prop {
-    dataIndex: number;
-    setDataIndex: React.Dispatch<React.SetStateAction<number>> 
+    id: string;
+    setId: React.Dispatch<React.SetStateAction<string>> 
 }
 
-const MapBox: React.FC<Prop> = ({dataIndex, setDataIndex}) => {
+const MapBox: React.FC<Prop> = ({id, setId}) => {
 
     return (<>
         <ListWrapper> 
-        <Table dataIndex={dataIndex} setDataIndex={setDataIndex} />
+        <Table id={id} setId={setId} />
         </ListWrapper>
     </>)
 
