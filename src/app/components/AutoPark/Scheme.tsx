@@ -88,7 +88,7 @@ const Wheel = styled.div<WheelProp>`
     background: linear-gradient(to bottom right, #43C5E2, #5A5CA8);
     position: absolute;
     top: ${(props) => `${((props.wheelposition - props.wheelposition % 4 )/ 4)* 15}%`};
-    left: ${(props) => `${((props.wheelposition  % 4)) * 25}%`};
+    left: ${(props) => props.wheelposition % 4 <= 1 ? `${((props.wheelposition  % 4)) * 20}%` : `calc(15% + ${((props.wheelposition  % 4)) * 20}%)`};
     width: 2.3vw;
     height: 2.6vw;
     border-radius: 0.4vw;
@@ -142,6 +142,8 @@ const Scheme: React.FC<Prop> = ({car, wheel, setWheel, dataIndex}) => {
             <PressureWrapper> Рекомендованное давление </PressureWrapper>
             <PressureNumber> 123 </PressureNumber>
             <WheelsWrapper>
+                <div className='relative left-[40%] font-[RobotoRegular] text-[1.1vw]'> Bar </div>
+                <div className='relative left-[41%] top-[-1.5%] font-[RobotoRegular] text-[1.1vw]'> °C </div>
                 {car.wheels.map((wheel1: wheel, index) => (
             <Wheel wheelposition={wheel1.wheelPosition} key={wheel1.wheelPosition} onClick={() => {setWheel(wheel1.wheelPosition); console.log(wheel1)}}>
                 {wheel === wheel1.wheelPosition ?

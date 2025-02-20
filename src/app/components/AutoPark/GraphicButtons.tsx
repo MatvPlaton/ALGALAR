@@ -107,8 +107,7 @@ const GraphicButtons: React.FC<Props> = (({index,setData, car,wheel,type,setType
     dayjs.extend(utc)
     const shiftByZone = (dayStart: dayjs, end: boolean) => {
         
-        dayStart = dayStart.add(zone,'hour');
-                if (end) {
+        if (end) {
             dayStart = dayStart.add(1,'day');
             dayStart = dayStart.add(-1,'second');
                 }
@@ -160,7 +159,7 @@ const GraphicButtons: React.FC<Props> = (({index,setData, car,wheel,type,setType
                             label=""
                             format="DD.MM.YYYY"
                             value={value}
-                            onChange={(newValue) => {console.log(newValue.toDate().toISOString()); setValue(dayjs.utc(newValue).startOf('day'))}}
+                            onChange={(newValue) => {console.log(newValue.toDate().toISOString()); setValue(newValue)}}
                         />
                 </LocalizationProvider>
         </ButtonsWrapper>
