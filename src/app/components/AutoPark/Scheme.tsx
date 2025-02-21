@@ -45,7 +45,7 @@ interface Prop {
 const PressureWrapper = styled.div`
     text-align: center;
     position: relative;
-    top: -27%; 
+    top: -29%; 
     color: #1e1e1e;
     z-index: 100;
     font-family: RobotoBold, sans-serif;
@@ -54,7 +54,7 @@ const PressureWrapper = styled.div`
 const PressureNumber = styled(PressureWrapper)`
     border: solid black 0.1vw;
     border-radius: 0.4vw;
-    top: -25%;
+    top: -28%;
     width: 25%;
     height: 10%;
     left: 37.5%;
@@ -64,7 +64,7 @@ const PressureNumber = styled(PressureWrapper)`
 const Title = styled.div`
     text-align: center;
     position: relative;
-    top: -115%;
+    top: -125%;
     font-size: 1.2vw;
     color: #1e1e1e;
     font-family: RobotoBold, sans-serif;
@@ -136,14 +136,17 @@ const Scheme: React.FC<Prop> = ({car, wheel, setWheel, dataIndex}) => {
     }
     }, [car])
     return <> {dataIndex === -1 ? <div /> :
-        <div style={{height: '45vh',position: 'absolute',left: '5%', top: '10%'}}>
+        <div style={{height: '40vh',position: 'absolute',left: '5%', top: '10%'}}>
             <Image style={{width: '15vw', height: '45vh', position: 'relative'}} src={SchemeImage} alt={''} />
             <Title> Текущее состояние </Title>
             <PressureWrapper> Рекомендованное давление </PressureWrapper>
-            <PressureNumber> 123 </PressureNumber>
+            <PressureNumber> 5.5 </PressureNumber>
             <WheelsWrapper>
+            {Array.from({ length: car.auto.axleCount }, (_,index) => (
+                <div className={`relative mt-2 h-[15%]`} key={index}>
                 <div className='relative left-[40%] font-[RobotoRegular] text-[1.1vw]'> Bar </div>
-                <div className='relative left-[41%] top-[-1.5%] font-[RobotoRegular] text-[1.1vw]'> °C </div>
+                <div className='relative left-[41%] top-[-15%] font-[RobotoRegular] text-[1.1vw]'> °C </div>
+            </div>))}
                 {car.wheels.map((wheel1: wheel, index) => (
             <Wheel wheelposition={wheel1.wheelPosition} key={wheel1.wheelPosition} onClick={() => {setWheel(wheel1.wheelPosition); console.log(wheel1)}}>
                 {wheel === wheel1.wheelPosition ?

@@ -15,7 +15,6 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import axios from 'axios';
 import dayjs, { Dayjs } from 'dayjs';
 import Cookie from 'js-cookie';
-import {useTimeZoneStore} from "../../redux/store";
 import utc from 'dayjs/plugin/utc';
 
 const Sentence =  styled.div`
@@ -77,8 +76,10 @@ interface Props {
     index: number
     type: string;
     setType: React.Dispatch<React.SetStateAction<string>>;
+    zone: number;
+    setDay : React.Dispatch<React.SetStateAction<string>>;
 }
-const GraphicButtons: React.FC<Props> = (({index,setData, car,wheel,type,setType}) => {
+const GraphicButtons: React.FC<Props> = (({setDay, zone, index,setData, car,wheel,type,setType}) => {
 
     const token = Cookie.get('jwt');
     const getReport = () => {
@@ -103,7 +104,6 @@ const GraphicButtons: React.FC<Props> = (({index,setData, car,wheel,type,setType
     }
 
     const [value, setValue] = useState<Dayjs | null>(dayjs(null));
-    const zone = useTimeZoneStore((state) => state.zone);
     dayjs.extend(utc)
     const shiftByZone = (dayStart: dayjs, end: boolean) => {
         
@@ -159,7 +159,7 @@ const GraphicButtons: React.FC<Props> = (({index,setData, car,wheel,type,setType
                             label=""
                             format="DD.MM.YYYY"
                             value={value}
-                            onChange={(newValue) => {console.log(newValue.toDate().toISOString()); setValue(newValue)}}
+                            onChange={(newValue) => {setValue(dayjs.utc(newValue)); setDay(dayjs.utc(newValue).toISOString())}}
                         />
                 </LocalizationProvider>
         </ButtonsWrapper>

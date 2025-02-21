@@ -93,25 +93,38 @@ const AutoPark = () => {
         auto : auto
         wheels: wheel[]
     }
+    
+
     interface data {
         PorT : number;
         time: string;
     }
     const [cars, setCars] = useState<car[]>([]);
+
+    const [zone,setZone] = useState(0);
+    const [day, setDay] = useState('');
+
     const fetchUserData = async (accessToken: string) => {
         try {
+          axios.get('https://algalar.ru:8080/user', {
+            headers: {
+              Authorization: `Bearer ${accessToken}`
+            }
+          }).then(res => setZone(res.data.timeZone))
+
           const r = await axios.get('https://algalar.ru:8080/auto/list?offset=0&limit=100', {
             headers: {
               Authorization: `Bearer ${accessToken}`
             }
           });
-
+          console.log(r)
           r.data.forEach((car: auto) => {
             axios.get(`https://algalar.ru:8080/auto/info?car_id=${car.id}`, {
                 headers: {
                     Authorization: `Bearer ${accessToken}`
                 }
             }).then(r => setCars(oldCars => [...oldCars,r.data]))
+          
         })
         } catch (error) {
           console.error('Error fetching user data:', error);
@@ -122,6 +135,7 @@ const AutoPark = () => {
         const token = Cookie.get('jwt'); // Get the latest JWT token
         if (token) {
           fetchUserData(token);
+
         }
     }, [])
     const [dataIndex,setDataIndex] = useState(-1);
@@ -136,6 +150,9 @@ const AutoPark = () => {
     const [data,setData] = useState<data[]>([])
     const [type,setType] = useState('pressure');
 
+    useEffect(() => {
+      console.log(day)
+    },[day])
     return <div style={{backgroundColor: '#f2f3f4', height: '100vh'}}> 
         <ProfileMenu height={'100vh'} activeField={'AutoPark'} />
         <TitleBox />
@@ -144,9 +161,9 @@ const AutoPark = () => {
         </DriversWrapper>
         <RestWrapper>
         <Scheme car={currCar} wheel={wheel} setWheel={setWheel} dataIndex={dataIndex}/>
-        <GraphicButtons index={dataIndex} setData={setData} wheel={wheel} car={currCar} type={type} setType={setType}/>
+        <GraphicButtons setDay={setDay} zone={zone} index={dataIndex} setData={setData} wheel={wheel} car={currCar} type={type} setType={setType}/>
         <Graphic type={type} data={data} />
-        <RepairTable />
+        <RepairTable car={currCar} /> 
         </RestWrapper>
     </ div>
 }

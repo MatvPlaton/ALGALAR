@@ -9,7 +9,7 @@ import ReturnButton from "@/app/components/ForgotPassword/ReturnButton";
 import RegistrationButton from "@/app/components/ForgotPassword/RegistrationButton";
 
 const ForgotPassword = () => {
-
+    
     return <LoginWrapper>
         <Header />
         <UnderHeaderText message='Сброс пароля'/>

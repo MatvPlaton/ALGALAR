@@ -1,29 +1,8 @@
 "use client"
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import styled from "styled-components";
-class MyClass {
-    field1: string;
-    field2: string;
-    field3: string;
-    field4: string;
-
-    constructor(field1: string, field2: string, field3: string, field4: string) {
-        this.field1 = field1;
-        this.field2 = field2;
-        this.field3 = field3;
-        this.field4 = field4;
-    }
-}
-// data/classesData.ts
-
-const data: MyClass[] = [
-    new MyClass('CAT 777', 'На Маршруте', '4', 'Самосвал'),
-    new MyClass('БелАЗ 7555А', 'В автопарке', '2', 'Самосвал'),
-    new MyClass('БелАЗ 7555А', 'В автопарке', '2', 'Самосвал'),
-
-];
-// components/DataTable.tsx
-
+import Cookie from 'js-cookie';
 
 const Wrap = styled.th`
     font-family: RobotoRegular, sans-serif;
@@ -46,7 +25,7 @@ const Wrap2 = styled.td`
     padding: 0.8vw;
     text-align: center;
     font-size: 1vw;
-
+    color: black;
 `
 const Wrap3 = styled.td`
     font-family: RobotoRegular, sans-serif;
@@ -58,11 +37,85 @@ const Wrap3 = styled.td`
     font-size: 1vw;
 
 `
+interface auto {
+    autoType : string
+    axleCount : number
+    brand : string
+    deviceId : string
+    id : string
+    stateNumber : string
+    uniqueId : string
+}
+interface wheel {
+    autoId : string
+    axleNumber : number
+    id : string
+    maxPressure : number
+    maxTemperature : number
+    mileage : number
+    minPressure : number
+    minTemperature : number
+    ngp : number
+    sensorNumber : string
+    tireBrand : string
+    tireCost : number
+    tireModel : string
+    tireSize : number
+    tkvh : number
+    wheelPosition : number
+}
+interface car {
+    auto : auto
+    wheels: wheel[]
+}
+interface breakage {
+      datetime : string
+      description : string
+      driver_name : string
+      id : string
+      stateNumber : string 
+      type : string 
+    }
 
-const DataTable = () => {
+interface Prop {
+    car : car
+}
+const DataTable: React.FC<Prop> = ({car}) => {
+
+    const [breakages, setBreakages] = useState<breakage[]>([]);
+    const token = Cookie.get('jwt');
+    const [dataIndex ,setIndex] = useState(0);
+
+    const getUsualDate = (ISO: string) => {
+        const date = new Date(ISO);
+
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const year = date.getFullYear();
+
+        const hours = String(date.getHours()).padStart(2, '0');
+        const minutes = String(date.getMinutes()).padStart(2, '0');
+        const seconds = String(date.getSeconds()).padStart(2, '0');
+
+        const formattedDate = `${day}.${month}.${year}/${hours}:${minutes}:${seconds}`;
+
+        return (formattedDate);
+    }
+
+
+    useEffect(() => {
+        if (car) {
+        axios.get(`https://algalar.ru:8080/breakage/list?car_id=${car.auto.id}`, {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          }).then(r => {console.log(r); setBreakages(r.data)})
+        }
+    }, [car])
     return (
-        <table style={{ position: 'absolute', left: '3.5%', top: '70%', width: '90%', borderCollapse: 'collapse' }}>
-            <thead>
+        <div className="absolute left-[3.5%] top-[70%] w-[90%] max-h-[25%] overflow-y-auto"> 
+        <table style = {{width: '95%', borderCollapse: 'collapse'}}>
+        <thead style={{position: 'sticky',top: 0, zIndex: '2', background: 'white' }}>
             <tr>
                 <Wrap1>№</Wrap1>
                 <Wrap> Тип Поломки</Wrap>
@@ -72,17 +125,18 @@ const DataTable = () => {
             </tr>
             </thead>
             <tbody>
-            {data.map((item, index) => (
-                <tr style={{cursor: 'pointer'}} key={index}>
-                    <Wrap2  >{index + 1}</Wrap2>
-                    <Wrap3></Wrap3>
-                    <Wrap3></Wrap3>
-                    <Wrap3></Wrap3>
-                    <Wrap3></Wrap3>
+            {breakages.map((item, index) => (
+                <tr style={{cursor: 'pointer'}} onClick={() => setIndex(index)} key={index}>
+                    <Wrap2 style={{backgroundColor: dataIndex === index ? "#43C5E24A" : ""}}> {index + 1} </Wrap2>
+                    <Wrap3 style={{backgroundColor: dataIndex === index ? "#43C5E24A" : ""}}> {item.type} </Wrap3>
+                    <Wrap3 style={{backgroundColor: dataIndex === index ? "#43C5E24A" : ""}}> {getUsualDate(item.datetime)} </Wrap3>
+                    <Wrap3 style={{backgroundColor: dataIndex === index ? "#43C5E24A" : ""}}> {item.driver_name} </Wrap3>
+                    <Wrap3 style={{backgroundColor: dataIndex === index ? "#43C5E24A" : ""}}> {item.description } </Wrap3>
                 </tr>
             ))}
             </tbody>
         </table>
+        </div>
     );
 };
 
