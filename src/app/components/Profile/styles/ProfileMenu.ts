@@ -19,20 +19,19 @@ export const SidebarWrapper = styled.div<SideBarProps>`
 export const HeaderWrapper = styled.div`
     position: absolute;
     height: 10vh;
-    left: 0;
-    
-    transition: width 0.3s ease;
+    left: 2.3%;
     width: 17vw;
     display: flex;
 `
 export const LogoWrapper = styled.div<SideBarProps>`
     margin-top: 1vw;
     position: relative;
-    left: -0.5vw;
+    left: 0.5vw;
 `
 export const ALGALAR = styled.div`
     font-family: InterExtraBold,sans-serif;
     position: relative;
+    left: 8.2%;
     top: 20%;
     font-size: 1.3vw;
     width: 4vw;
@@ -41,7 +40,7 @@ export const ALGALAR = styled.div`
 export const Description = styled.div`
     font-family: InterExtraBold,sans-serif;
     top: 55%;
-    left: -24%;
+    left: -15.2%;
     position: relative;
     font-size: 0.6vw;
     white-space: nowrap;
