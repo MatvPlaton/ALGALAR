@@ -5,11 +5,11 @@ import Cookie from 'js-cookie';
 import axios from 'axios';
 
 interface Prop {
-    id: string;
     setId: React.Dispatch<React.SetStateAction<string>> 
-    
+    id1: string;
+    setId1: React.Dispatch<React.SetStateAction<string>> 
 }
-const YandexMap:React.FC<Prop> = ({id,setId}) => {
+const YandexMap:React.FC<Prop> = ({setId,id1,setId1}) => {
     const mapRef = useRef<HTMLDivElement | null>(null);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const yandexMapInstance = useRef<any>(null);
@@ -19,16 +19,25 @@ const YandexMap:React.FC<Prop> = ({id,setId}) => {
     const [points, setPoints] = useState([]);
     const [placemarks, setPlacemarks] = useState([]);
 
-    const [count, setCount] = useState(0)
+
     const [map,setMap] = useState(null);
 
     useEffect(() => {
-        axios.get('https://algalar.ru:8080/position/carroute?car_id=6d6892d9-154d-4cd0-8887-f6e668cde515&time_from=2023-12-24T15:30:00Z&time_to=2025-12-24T15:30:00Z', {
+        axios.get(`https://algalar.ru:8080/position/carroute?car_id=${id1}&time_from=2023-12-24T15:30:00Z&time_to=2025-12-24T15:30:00Z`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
-        }).then(r => setPoints(r.data.positions.map(point => point.point)))
-        axios.get('https://algalar.ru:8080/position/listcurrent?whatshere[pointA]=0&whatshere[pointA]=1&whatshere[pointB]=120&whatshere[pointB]=121', {
+        }).then(r => {
+            if (r.status === 204) {
+                setPoints([])
+            } else {
+            setPoints(r.data.positions.map(point => point.point))
+    }})
+    },[id1])
+
+    useEffect(() => {
+        
+        axios.get('https://algalar.ru:8080/position/listcurrent', {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -79,9 +88,13 @@ const YandexMap:React.FC<Prop> = ({id,setId}) => {
 
     useEffect(() => {
         const addMultiRoute = () => {
-            if (map && window.ymaps && points.length > 0) {
+           
+            if (map && window.ymaps) {
+                if (multiRouteRef.current) {
+                    map.geoObjects.remove(multiRouteRef.current);
+                }
                 const multiRoute = new window.ymaps.multiRouter.MultiRoute({
-                    referencePoints: points.slice(0, 40),
+                    referencePoints: points,
                     params: {
                         results: 2
                     }
@@ -90,29 +103,51 @@ const YandexMap:React.FC<Prop> = ({id,setId}) => {
                 });
 
                 map.geoObjects.add(multiRoute);
+                multiRouteRef.current = multiRoute;
 
             }
         };
 
         addMultiRoute();
     }, [map, points]);
-    useEffect(() => {
-        console.log(id)
-    },[id])
+    const multiRouteRef = useRef(null);
+
     useEffect(() => {
         const addMarks = () => {
             if (map && window.ymaps && placemarks.length > 0) {
                 
                 placemarks.forEach(placemark => {
                     const mark = new window.ymaps.Placemark(placemark.point, {
-                        balloonContent: `уникальный id: ${placemark.unique_id}`,
+                        balloonContent: 'Маршрут построен',
                     }, {
                         iconLayout: 'default#image',
-                        iconImageHref: '/components/Location/icon.svg',
+                        iconImageHref: '/assets/Location/icon.png',
+                        iconImageSize: [50,20],
+                        iconImageOffset: [-15, -14]
+
                     });
+                
+                    mark.events.add("mouseenter", () => {
+                        setId(placemark.car_id)
+                        mark.options.set({
+                            iconImageHref: '/assets/Location/2/icon.png'
+                        });
+                    })
                     mark.events.add("click", () => {
-                        setId(placemark.unique_id) // Update state when clicked
-                      });
+                        setId1(placemark.car_id)
+                    })
+                    
+                    mark.events.add("mouseleave", () => {
+                        mark.options.set({
+                            iconImageHref: '/assets/Location/icon.png' 
+                        });
+                    });
+                    mark.events.add("balloonclose", () => {
+                        mark.options.set({
+                            iconImageHref: '/assets/Location/icon.png' 
+                        });
+                    });
+
                     map.geoObjects.add(mark);
                 });
                 
@@ -121,7 +156,7 @@ const YandexMap:React.FC<Prop> = ({id,setId}) => {
 
         addMarks();
     }, [map, placemarks]);
-    return <> <button onClick={() => setCount(count + 1)} /> <div ref={mapRef} style={{ position: 'absolute', left: '1.5%', top: '1.5%', height: '97%', width: '97%' }} /> </>;
+    return <> <div ref={mapRef} style={{ position: 'absolute', left: '1.5%', top: '1.5%', height: '97%', width: '97%' }} /> </>;
 };
 
 export default YandexMap;

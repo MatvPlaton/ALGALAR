@@ -1,8 +1,6 @@
 "use client"
-import React, {useState, useEffect}  from 'react';
 import styled from "styled-components";
-import Cookie from 'js-cookie';
-import axios from 'axios';
+
 
 const Wrap = styled.th`
     font-family: RobotoRegular, sans-serif;
@@ -53,22 +51,13 @@ interface car {
 
 interface Prop {
     id: string;
-    setId: React.Dispatch<React.SetStateAction<string>> 
+    setId: React.Dispatch<React.SetStateAction<string>>;
+    setId1: React.Dispatch<React.SetStateAction<string>>
+    cars: car[]; 
 }
-const DataTable: React.FC<Prop> = ({id, setId}) => {
+const DataTable: React.FC<Prop> = ({setId1,id, setId, cars}) => {
 
-    const token = Cookie.get('jwt');
-
-    const [cars,setCars] = useState<car[]>([]);
-    
-    useEffect(() => {
-        axios.get('https://algalar.ru:8080/positions/listcars?limit=100&offset=0', {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        }).then(r => {console.log(r.data); setCars(r.data)})
-        
-    },[])
+    const setIds = (car : car) => {setId1(car.car_id); setId(car.car_id)}
     return (
         <>
         <Title> Информация по Авто </Title> 
@@ -84,11 +73,11 @@ const DataTable: React.FC<Prop> = ({id, setId}) => {
             </thead>
             <tbody>
             {cars.map((car, index) => (
-                <tr style={{cursor: 'pointer'}} onClick={() => setId(car.unique_id)} key={car.unique_id}>
-                    <Wrap2 style={{backgroundColor: id === car.unique_id ? "#43C5E24A" : ""}} >{index + 1}</Wrap2>
-                    <Wrap3 style={{backgroundColor: id === car.unique_id ? "#43C5E24A" : ""}} >{car.unique_id}</Wrap3>
-                    <Wrap3 style={{backgroundColor: id === car.unique_id ? "#43C5E24A" : ""}} >{car.brand}</Wrap3>
-                    <Wrap3 style={{backgroundColor: id === car.unique_id ? "#43C5E24A" : ""}} >{car.state_number}</Wrap3>
+                <tr style={{cursor: 'pointer'}} onClick={() => setIds(car)} key={car.unique_id}>
+                    <Wrap2 style={{backgroundColor: id === car.car_id ? "#43C5E24A" : ""}} >{index + 1}</Wrap2>
+                    <Wrap3 style={{backgroundColor: id === car.car_id ? "#43C5E24A" : ""}} >{car.unique_id}</Wrap3>
+                    <Wrap3 style={{backgroundColor: id === car.car_id ? "#43C5E24A" : ""}} >{car.brand}</Wrap3>
+                    <Wrap3 style={{backgroundColor: id === car.car_id ? "#43C5E24A" : ""}} >{car.state_number}</Wrap3>
                 </tr>
             ))}
             </tbody>
