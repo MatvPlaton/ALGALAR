@@ -86,23 +86,22 @@ const GraphicButtons: React.FC<Props> = (({setDay, zone, index,setData, car,whee
         axios.get('https://algalar.ru:8080/report', {
             headers: {
                     Authorization: `Bearer ${token}`
-                }
+                    
+                },
+            responseType: 'blob'
         }).then(r => {
-        
-        const blob = new Blob([r.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-        
-        const link = document.createElement('a');
-        link.href = window.URL.createObjectURL(blob);
-        link.download = 'report.xlsx'; // Specify the file name
+        console.log(r)
+        const blob = new Blob([r.data], { type: r.headers['content-type'] });
 
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = "report.xlsx";
         document.body.appendChild(link);
         link.click();
-
         document.body.removeChild(link);
-        })
     
+    })
     }
-
     const [value, setValue] = useState<Dayjs | null>(dayjs(null));
     dayjs.extend(utc)
     const shiftByZone = (dayStart: dayjs, end: boolean) => {

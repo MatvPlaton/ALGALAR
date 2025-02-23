@@ -11,7 +11,7 @@ const Notifications = () => {
     
     const [currNot,setCurrNot] = useState(-1);
     const token = Cookie.get('jwt');
-    axios.get('https://algalar.ru:8080/notification/list?status=new&limit=100&offset=0', {
+    axios.get('https://algalar.ru:8080/notification/list?limit=100&offset=0', {
         headers: {
             Authorization: `Bearer ${token}`
         }
