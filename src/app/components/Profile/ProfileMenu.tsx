@@ -10,6 +10,7 @@ import addCar from "../../assets/Profile/user 3 (3).svg"
 import addDriver from "../../assets/Profile/user 3 (4).svg"
 import notifications from "../../assets/Profile/user 4.svg"
 import exit from "../../assets/Profile/user 6.svg"
+import clsx from "clsx";
 
 import userActive from "../../assets/Profile/ProfileActiveExpanded.svg"
 import autoParkActive from "../../assets/Profile/ActiveAutoPark.svg"
@@ -56,9 +57,10 @@ const Sidebar: React.FC<Prop> = ({activeField}) => {
         router.push('/MainPage')
     } 
     return (
-        <div className={`absolute bg-black overflow-hidden transition-width duration-300 ease-in-out 
-            flex flex-col z-[100] w-[${isExpanded ? '26.5vw' : '4.8vw'}] 
-        h-[100vh] items-center`}>
+        <div className={clsx(
+            "absolute bg-black overflow-hidden transition-width duration-300 ease-in-out flex flex-col z-[100] h-[100vh] items-center",
+            isExpanded ? "w-[26.5vw]" : "w-[4.8vw]"
+        )}>
             <div className={` absolute h-[10vh] font-[InterExtraBold] text-white left-[2.3%] w-[17vw] flex`}>
                 <Image className=" cursor-pointer fixed left-[1%] top-[1%] w-[3vw] h-[3vw]" onClick={() => router.push('/MainPage')} src={logo} alt='' />
                 <div className={`relative left-[27.5%] top-[10%] text-[1.3vw] w-[4vw]`}> ALGALAR </div>
