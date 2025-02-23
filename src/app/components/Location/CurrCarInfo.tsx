@@ -13,6 +13,7 @@ interface Prop {
 const CurrCarInfo:React.FC<Prop> = ({cars, id}) => {
 
     const selectCar = (id : string,cars : car[]) => {
+        if (id === '-1') setCar(null)
         cars.forEach( (car : car) => {
             if (car.car_id === id) {
                 setCar(car);

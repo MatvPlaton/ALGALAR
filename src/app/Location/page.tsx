@@ -18,7 +18,6 @@ const Page = () => {
     
     const [id, setId] = useState('');
     const token = Cookie.get('jwt');
-    const [id1,setId1] = useState('');
 
     const [cars,setCars] = useState<car[]>([]);
     
@@ -33,10 +32,10 @@ const Page = () => {
 
     return <div style={{backgroundColor: '#f2f3f4', height: '100vh'}}>
         
-        <ProfileMenu height={'100vh'} activeField={'Location'}/>
+        <ProfileMenu activeField={'Location'}/>
         <TitleBox />
-        <MapBox cars={cars} id={id} setId={setId} id1={id1} setId1={setId1} />
-        <ListBox  cars={cars} id={id} setId={setId} setId1={setId1} />
+        <MapBox cars={cars} id={id} setId={setId} />
+        <ListBox  cars={cars} id={id} setId={setId} />
         </ div>
 }
 

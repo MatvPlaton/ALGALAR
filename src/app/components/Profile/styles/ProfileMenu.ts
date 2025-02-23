@@ -61,7 +61,7 @@ export const Component = styled.div`
     height: 6vh;
     flex-direction: row;
     margin-bottom: 1vw;
-        
+    width: 50%;    
 `
 export const ComponentImage = styled.div`
     width: 5vw;
@@ -95,16 +95,12 @@ export const ComponentTextOn = styled.div`
     display: grid;
 `
 export const ToggleButton = styled.div<SideBarProps>`
-    background-color: black;
     position: absolute;
     top: 90%;
-    left: ${({ $active }) => ($active ? '86%' : '30%')};
+    left: ${({ $active }) => ($active ? '88%' : '30%')};
     color: white;
     cursor: pointer;
     transition: left 0.3s ease;
-    &:hover {
-        background-color: black;
-    }
 `
 
 

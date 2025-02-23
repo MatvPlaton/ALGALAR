@@ -52,12 +52,10 @@ interface car {
 interface Prop {
     id: string;
     setId: React.Dispatch<React.SetStateAction<string>>;
-    setId1: React.Dispatch<React.SetStateAction<string>>
     cars: car[]; 
 }
-const DataTable: React.FC<Prop> = ({setId1,id, setId, cars}) => {
+const DataTable: React.FC<Prop> = ({id, setId, cars}) => {
 
-    const setIds = (car : car) => {setId1(car.car_id); setId(car.car_id)}
     return (
         <>
         <Title> Информация по Авто </Title> 
@@ -73,7 +71,7 @@ const DataTable: React.FC<Prop> = ({setId1,id, setId, cars}) => {
             </thead>
             <tbody>
             {cars.map((car, index) => (
-                <tr style={{cursor: 'pointer'}} onClick={() => setIds(car)} key={car.unique_id}>
+                <tr style={{cursor: 'pointer'}} onClick={() => setId(car.car_id)} key={car.unique_id}>
                     <Wrap2 style={{backgroundColor: id === car.car_id ? "#43C5E24A" : ""}} >{index + 1}</Wrap2>
                     <Wrap3 style={{backgroundColor: id === car.car_id ? "#43C5E24A" : ""}} >{car.unique_id}</Wrap3>
                     <Wrap3 style={{backgroundColor: id === car.car_id ? "#43C5E24A" : ""}} >{car.brand}</Wrap3>

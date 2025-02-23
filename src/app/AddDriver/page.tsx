@@ -74,7 +74,7 @@ const Page = () => {
 
 
     return <div style={{backgroundColor: '#f2f3f4', height: '100vh'}}>
-        <ProfileMenu height={'100vh'} activeField={'AddDriver'}/>
+        <ProfileMenu activeField={'AddDriver'}/>
         <TitleBox />
         <BodyWrapper>
         <FieldsWrapper>

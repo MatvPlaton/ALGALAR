@@ -6,10 +6,9 @@ import axios from 'axios';
 
 interface Prop {
     setId: React.Dispatch<React.SetStateAction<string>> 
-    id1: string;
-    setId1: React.Dispatch<React.SetStateAction<string>> 
+    id: string;
 }
-const YandexMap:React.FC<Prop> = ({setId,id1,setId1}) => {
+const YandexMap:React.FC<Prop> = ({setId,id}) => {
     const mapRef = useRef<HTMLDivElement | null>(null);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const yandexMapInstance = useRef<any>(null);
@@ -23,7 +22,7 @@ const YandexMap:React.FC<Prop> = ({setId,id1,setId1}) => {
     const [map,setMap] = useState(null);
 
     useEffect(() => {
-        axios.get(`https://algalar.ru:8080/position/carroute?car_id=${id1}&time_from=2023-12-24T15:30:00Z&time_to=2025-12-24T15:30:00Z`, {
+        axios.get(`https://algalar.ru:8080/position/carroute?car_id=${id}&time_from=2023-12-24T15:30:00Z&time_to=2025-12-24T15:30:00Z`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -33,7 +32,7 @@ const YandexMap:React.FC<Prop> = ({setId,id1,setId1}) => {
             } else {
             setPoints(r.data.positions.map(point => point.point))
     }})
-    },[id1])
+    },[id])
 
     useEffect(() => {
         
@@ -111,6 +110,7 @@ const YandexMap:React.FC<Prop> = ({setId,id1,setId1}) => {
         addMultiRoute();
     }, [map, points]);
     const multiRouteRef = useRef(null);
+    const currIcon = useRef(null);
 
     useEffect(() => {
         const addMarks = () => {
@@ -123,31 +123,24 @@ const YandexMap:React.FC<Prop> = ({setId,id1,setId1}) => {
                         iconLayout: 'default#image',
                         iconImageHref: '/assets/Location/icon.png',
                         iconImageSize: [50,20],
-                        iconImageOffset: [-15, -14]
-
+                        iconImageOffset: [-15, -14],
+                        hasBalloon: false,
+                        hasHint: false,
                     });
                 
-                    mark.events.add("mouseenter", () => {
+                    mark.events.add("click", () => {
                         setId(placemark.car_id)
+                        if (currIcon.current) {
+                            currIcon.current.options.set({
+                                iconImageHref: '/assets/Location/icon.png'
+                            });
+                        }
                         mark.options.set({
                             iconImageHref: '/assets/Location/2/icon.png'
                         });
+                        currIcon.current = mark;
                     })
-                    mark.events.add("click", () => {
-                        setId1(placemark.car_id)
-                    })
-                    
-                    mark.events.add("mouseleave", () => {
-                        mark.options.set({
-                            iconImageHref: '/assets/Location/icon.png' 
-                        });
-                    });
-                    mark.events.add("balloonclose", () => {
-                        mark.options.set({
-                            iconImageHref: '/assets/Location/icon.png' 
-                        });
-                    });
-
+                   
                     map.geoObjects.add(mark);
                 });
                 

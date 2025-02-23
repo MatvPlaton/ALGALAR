@@ -10,15 +10,14 @@ interface car {
 interface Prop {
     id: string;
     setId: React.Dispatch<React.SetStateAction<string>>
-    setId1: React.Dispatch<React.SetStateAction<string>>
     cars: car[]; 
 }
 
-const MapBox: React.FC<Prop> = ({setId1,id, setId, cars}) => {
+const MapBox: React.FC<Prop> = ({id, setId, cars}) => {
 
     return (<>
         <ListWrapper> 
-        <Table setId1={setId1} cars={cars} id={id} setId={setId} />
+        <Table cars={cars} id={id} setId={setId} />
         </ListWrapper>
     </>)
 

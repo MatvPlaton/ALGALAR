@@ -11,17 +11,15 @@ interface car {
 interface Prop {
     id: string;
     setId: React.Dispatch<React.SetStateAction<string>>;
-    id1 : string;
-    setId1: React.Dispatch<React.SetStateAction<string>>;
     cars: car[];    
 }
 
-const MapBox:React.FC<Prop> = ({id,id1,setId1,setId,cars}) => {
+const MapBox:React.FC<Prop> = ({id,setId,cars}) => {
 
 
     return (<>
         <MapWrapper> 
-        <YandexMap id1={id1} setId1={setId1} setId={setId} />
+        <YandexMap id={id} setId={setId} />
         <CurrCarInfo id={id} cars={cars}/>
         </MapWrapper>
     </>)

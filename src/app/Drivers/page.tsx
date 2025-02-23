@@ -104,7 +104,7 @@ const Page = () => {
         }
     }, [index,drivers])
     return <div style={{backgroundColor: '#f2f3f4', height: '100vh'}}>
-        <ProfileMenu height={'100vh'} activeField={'Drivers'}/>
+        <ProfileMenu activeField={'Drivers'}/>
         <TitleBox />
         <MainWrapper>
         <Table dataIndex={index} setDataIndex={setIndex} drivers={drivers} />

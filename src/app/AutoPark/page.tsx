@@ -154,7 +154,7 @@ const AutoPark = () => {
       console.log(day)
     },[day])
     return <div style={{backgroundColor: '#f2f3f4', height: '100vh'}}> 
-        <ProfileMenu height={'100vh'} activeField={'AutoPark'} />
+        <ProfileMenu activeField={'AutoPark'} />
         <TitleBox />
         <DriversWrapper> 
         <DataTable setWheel={setWheel} cars={cars} dataIndex={dataIndex} setDataIndex={setCar}/>
