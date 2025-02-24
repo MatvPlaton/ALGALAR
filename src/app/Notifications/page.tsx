@@ -14,7 +14,7 @@ const Notifications = () => {
     <ProfileMenu activeField={'Notifications'} />
     <TitleBox />
     <ListBox index={currNot} setIndex={setCurrNot}/>
-    <InfoBox currIndex={currNot}/>
+    <InfoBox currIndex={currNot} setCurrIndex={setCurrNot}/>
     </div>
 }
 

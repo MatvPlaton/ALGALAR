@@ -63,8 +63,12 @@ const YandexMap: React.FC<YandexMapProps> = ({ coordinates }) => {
     }, []);
 
     useEffect(() => {
-        if (coordinates === undefined)
+        if (coordinates === undefined) {
+            if (yandexMapInstance.current) {
+            yandexMapInstance.current.setCenter([55.7558, 37.6173])
+            }
             return
+        }
         placemarkRef.current.geometry.setCoordinates(coordinates);
         yandexMapInstance.current.setCenter(coordinates)
     },[coordinates])
