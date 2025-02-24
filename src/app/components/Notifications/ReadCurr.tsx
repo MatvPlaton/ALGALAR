@@ -11,9 +11,11 @@ interface breakage {
 interface Prop {
     id: string;
     setId: React.Dispatch<React.SetStateAction<string>>;
+    setActive: React.Dispatch<React.SetStateAction<number>>;
+
     setBreakage: React.Dispatch<React.SetStateAction<breakage | null>>;
 }
-const ReadCurr: React.FC<Prop> = ({id, setId, setBreakage}) => {
+const ReadCurr: React.FC<Prop> = ({setActive,id, setId, setBreakage}) => {
 
     const token = Cookie.get('jwt')
     const updateStatus = () => {
@@ -26,6 +28,7 @@ const ReadCurr: React.FC<Prop> = ({id, setId, setBreakage}) => {
                     Authorization: `Bearer ${token}`
                 }
             }).then(r => console.log(r))
+            setActive(1);
             setBreakage(null);
             setId('');
         }

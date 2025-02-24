@@ -11,18 +11,16 @@ interface breakage {
     id: string
 }
 interface Prop {
-    active: number;
     setData:  React.Dispatch<React.SetStateAction<breakage[]>>
      
 }
-const ReadAll: React.FC<Prop> = ({active,setData}) => {
+const ReadAll: React.FC<Prop> = ({setData}) => {
 
     const token = Cookie.get('jwt');
 
     const readAll = () => {
 
-        if (!active)
-            setData([])
+        setData([])
         axios.get(`https://algalar.ru:8080/notification/list?status=new&limit=100&offset=0`, {
             headers: {
                 Authorization: `Bearer ${token}`

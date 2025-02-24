@@ -9,14 +9,17 @@ import Cookie from 'js-cookie';
 interface Prop {
     currIndex: string;
     setCurrIndex: React.Dispatch<React.SetStateAction<string>>;
+    active: number;
+    setActive: React.Dispatch<React.SetStateAction<number>>;
 }
+
 interface breakage {
     description: string,
     driver_name: string,
     location: [number,number],
     created_at: string
 }
-const InfoBox: React.FC<Prop> = ({currIndex,setCurrIndex}) => {
+const InfoBox: React.FC<Prop> = ({setActive, currIndex,setCurrIndex, active}) => {
 
     const token = Cookie.get('jwt');
     const [breakage, setBreakage] = useState<breakage | null>(null);
@@ -36,9 +39,11 @@ const InfoBox: React.FC<Prop> = ({currIndex,setCurrIndex}) => {
             <Information />
             <Map coordinates={breakage?.location}/> 
             {breakage ? <>
-            <ReadCurr setId={setCurrIndex} setBreakage={setBreakage} id={currIndex} />
+            {!active ? <ReadCurr setId={setCurrIndex} setActive={setActive} setBreakage={setBreakage} id={currIndex} /> : <> </>}
+            
             <div className='absolute top-1/10 text-[1vw] w-2/5 h-8/10 left-[5%] font-[RobotoRegular]'> 
-            {breakage.description} <br /> Водитель: {breakage.driver_name}</div> </> :
+            <span className='font-[RobotoBold]'> Произошла поломка: </span> {breakage.description} <br /> 
+            <span className='font-[RobotoBold]'> Водитель: </span> {breakage.driver_name}</div> </> :
             <> </>}
 
         </InfoWrapper>

@@ -15,17 +15,18 @@ interface breakage {
 interface Prop {
     index: string;
     setIndex: React.Dispatch<React.SetStateAction<string>>;
+    active: number;
+    setActive: React.Dispatch<React.SetStateAction<number>>;
 }
-const ListBox: React.FC<Prop> = ({index,setIndex}) => {
+const ListBox: React.FC<Prop> = ({index,setIndex,active,setActive}) => {
 
-    const [active,setActive] = useState(0);
     const [data,setData] = useState<breakage[]>([]);
 
     return (
         <ListWrapper>
             <Table data={data} setData={setData} active={active} dataIndex={index} setDataIndex={setIndex} />
             <TableButtons active={active} setActive={setActive} />
-            <ReadAll setData={setData} active={active} />
+            {!active ? <ReadAll setData={setData} /> : <></>}
         </ListWrapper>
     )
 
