@@ -5,8 +5,8 @@ import TableButtons from "./TableButtons";
 import ReadAll from './ReadAll';
 
 interface Prop {
-    index: number;
-    setIndex: React.Dispatch<React.SetStateAction<number>>;
+    index: string;
+    setIndex: React.Dispatch<React.SetStateAction<string>>;
 }
 const ListBox: React.FC<Prop> = ({index,setIndex}) => {
 

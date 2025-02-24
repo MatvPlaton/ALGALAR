@@ -32,6 +32,11 @@ const YandexMap:React.FC<Prop> = ({setId,id}) => {
             } else {
             setPoints(r.data.positions.map(point => point.point))
     }})
+
+    placemarks.forEach( (placemark) => 
+        placemark.car_id === id ? placemark.ref.options.set({iconImageHref: '/assets/Location/2/icon.png'}) :
+            placemark.ref.options.set({iconImageHref: '/assets/Location/icon.png'})
+    )
     },[id])
 
     useEffect(() => {
@@ -40,8 +45,20 @@ const YandexMap:React.FC<Prop> = ({setId,id}) => {
             headers: {
                 Authorization: `Bearer ${token}`
             }
-        }).then(r => {console.log(r); setPlacemarks(r.data)})
+        }).then(r => {console.log(r);
+            
+            r.data.forEach((item) => {
+                const placemark = {
+                    point : item.point,
+                    car_id : item.car_id,
+                    href: '/assets/Location/icon.png',
+                    ref: null
+                }
+            
+            setPlacemarks(oldPlacemarks => [...oldPlacemarks, placemark])})
+        })
     },[])
+
 
     useEffect(() => {
         const initMap = () => {
@@ -110,7 +127,6 @@ const YandexMap:React.FC<Prop> = ({setId,id}) => {
         addMultiRoute();
     }, [map, points]);
     const multiRouteRef = useRef(null);
-    const currIcon = useRef(null);
 
     useEffect(() => {
         const addMarks = () => {
@@ -121,7 +137,7 @@ const YandexMap:React.FC<Prop> = ({setId,id}) => {
                         balloonContent: 'Маршрут построен',
                     }, {
                         iconLayout: 'default#image',
-                        iconImageHref: '/assets/Location/icon.png',
+                        iconImageHref: placemark.href,
                         iconImageSize: [50,20],
                         iconImageOffset: [-15, -14],
                         hasBalloon: false,
@@ -130,17 +146,9 @@ const YandexMap:React.FC<Prop> = ({setId,id}) => {
                 
                     mark.events.add("click", () => {
                         setId(placemark.car_id)
-                        if (currIcon.current) {
-                            currIcon.current.options.set({
-                                iconImageHref: '/assets/Location/icon.png'
-                            });
-                        }
-                        mark.options.set({
-                            iconImageHref: '/assets/Location/2/icon.png'
-                        });
-                        currIcon.current = mark;
+    
                     })
-                   
+                    placemark.ref = mark;
                     map.geoObjects.add(mark);
                 });
                 
@@ -149,6 +157,8 @@ const YandexMap:React.FC<Prop> = ({setId,id}) => {
 
         addMarks();
     }, [map, placemarks]);
+
+    
     return <> <div ref={mapRef} style={{ position: 'absolute', left: '1.5%', top: '1.5%', height: '97%', width: '97%' }} /> </>;
 };
 

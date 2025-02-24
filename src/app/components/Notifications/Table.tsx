@@ -1,27 +1,8 @@
 "use client"
-import React  from 'react';
+import React, { useState }  from 'react';
 import styled from "styled-components";
-
-
-class MyClass {
-    field1: string;
-    field2: string;
-    field3: string;
-    field4: string;
-
-    constructor(field1: string, field2: string, field3: string, field4: string) {
-        this.field1 = field1;
-        this.field2 = field2;
-        this.field3 = field3;
-        this.field4 = field4;
-    }
-}
-// data/classesData.ts
-
-
-// components/DataTable.tsx
-
-
+import Cookie from 'js-cookie';
+import axios from 'axios';
 const Wrap = styled.th`
     font-family: RobotoRegular, sans-serif;
     font-weight: normal;
@@ -56,20 +37,31 @@ const Wrap3 = styled.td`
 
 `
 
+interface breakage {
+    state_number: string,
+    brand: string,
+    breakage_type: string,
+    created_at: string,
+    id: string
+}
 interface Prop {
-    dataIndex: number;
-    setDataIndex: React.Dispatch<React.SetStateAction<number>> 
+    dataIndex: string;
+    setDataIndex: React.Dispatch<React.SetStateAction<string>> 
 }
 const DataTable: React.FC<Prop> = ({dataIndex, setDataIndex}) => {
+    const token = Cookie.get('jwt');
 
-    const data = [
-        new MyClass('A111AA196','БелАЗ75589','Механическая/Шина','28.10.2024/15:09'),
-        
-    ]
+    const [data,setData] = useState<breakage[]>([]);
+    axios.get('https://algalar.ru:8080/notification/list?limit=100&offset=0', {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    }).then(r => setData(r.data))
+    
     return (
-        <>
-        <table style={{ position: 'absolute', left: '2%', top: '15%', width: '92%', borderCollapse: 'collapse' }}>
-            <thead>
+        <div className="absolute left-[2%] top-[15%] w-[92%] max-h-[70%] overflow-y-auto"> 
+        <table style = {{width: '95%', borderCollapse: 'collapse'}}>
+        <thead style={{position: 'sticky',top: 0, zIndex: '2', background: 'white' }}>
             <tr>
                 <Wrap1>№</Wrap1>
                 <Wrap> Гос Номер </Wrap>
@@ -81,18 +73,18 @@ const DataTable: React.FC<Prop> = ({dataIndex, setDataIndex}) => {
             </thead>
             <tbody>
             {data.map((item, index) => (
-                <tr style={{cursor: 'pointer'}} onClick={() => setDataIndex(index)} key={index}>
-                    <Wrap2 style={{backgroundColor: dataIndex === index ? "#43C5E24A" : ""}} >{index + 1}</Wrap2>
-                    <Wrap3 style={{backgroundColor: dataIndex === index ? "#43C5E24A" : ""}} >{item.field1}</Wrap3>
-                    <Wrap3 style={{backgroundColor: dataIndex === index ? "#43C5E24A" : ""}} >{item.field2}</Wrap3>
-                    <Wrap3 style={{backgroundColor: dataIndex === index ? "#43C5E24A" : ""}} >{item.field3}</Wrap3>
-                    <Wrap3 style={{backgroundColor: dataIndex === index ? "#43C5E24A" : ""}} >{item.field4}</Wrap3>
+                <tr style={{cursor: 'pointer'}} onClick={() => setDataIndex(item.id)} key={item.id}>
+                    <Wrap2 style={{backgroundColor: dataIndex === item.id ? "#43C5E24A" : ""}} >{index + 1}</Wrap2>
+                    <Wrap3 style={{backgroundColor: dataIndex === item.id ? "#43C5E24A" : ""}} >{item.state_number}</Wrap3>
+                    <Wrap3 style={{backgroundColor: dataIndex === item.id ? "#43C5E24A" : ""}} >{item.brand}</Wrap3>
+                    <Wrap3 style={{backgroundColor: dataIndex === item.id ? "#43C5E24A" : ""}} >{item.breakage_type}</Wrap3>
+                    <Wrap3 style={{backgroundColor: dataIndex === item.id ? "#43C5E24A" : ""}} >{item.created_at}</Wrap3>
 
                 </tr>
             ))}
             </tbody>
         </table>
-        </>
+        </ div>
     );
 };
 

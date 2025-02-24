@@ -5,17 +5,10 @@ import TitleBox from "../components/Notifications/TitleBox";
 import InfoBox from "../components/Notifications/InfoBox";
 
 import ListBox from "../components/Notifications/ListBox";
-import Cookie from "js-cookie";
-import axios from "axios";
 const Notifications = () => {
     
-    const [currNot,setCurrNot] = useState(-1);
-    const token = Cookie.get('jwt');
-    axios.get('https://algalar.ru:8080/notification/list?limit=100&offset=0', {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    }).then(r => console.log(r))
+    const [currNot,setCurrNot] = useState('');
+    
 
     return  <div style={{backgroundColor: '#f2f3f4', height: '100vh'}}>
     <ProfileMenu activeField={'Notifications'} />

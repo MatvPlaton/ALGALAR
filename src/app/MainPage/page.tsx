@@ -7,14 +7,13 @@ import Footer from "@/app/components/MainPage/Footer";
 
 const Page = () => {
 
-
-    return (<div>
+    return (<>
         <Header />
         <Truck />
         <Info />
         <Tires />
         <Footer />
-    </div>);
+    </>);
 }
 
 export default Page;

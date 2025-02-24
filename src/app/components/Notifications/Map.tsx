@@ -3,53 +3,39 @@
 import React, { useEffect, useRef } from 'react';
 
 interface YandexMapProps {
-    coordinates: [number, number]; // [latitude, longitude]
+    coordinates: [number, number] | undefined;
 }
 
 const YandexMap: React.FC<YandexMapProps> = ({ coordinates }) => {
     const mapRef = useRef<HTMLDivElement | null>(null);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const yandexMapInstance = useRef<any>(null);
+    const placemarkRef = useRef(null); // Keep track of the placemark
 
     useEffect(() => {
-        const initMap = () => {
-            if (mapRef.current && window.ymaps) {
-                window.ymaps.ready(() => {
-                    const map = new window.ymaps.Map(mapRef.current, {
-                        center: coordinates,
-                        zoom: 13,
-                        controls: []
-
-                }, { suppressMapOpenBlock: true});
-
-                const multiRoute = new ymaps.multiRouter.MultiRoute({
-                    // Описание опорных точек мультимаршрута.
-                    referencePoints: [
-                      [55.861352, 37.545552],
-                      [55.730086, 37.589239], // Комсомольский проспект, 13
-                      [55.729914, 37.397207],
-                    ],
-                    params: {
-                      results: 2
-                    }
-                  }, {
-                    boundsAutoApply: true
-                  });
-                  map.geoObjects.add(multiRoute);
-                  yandexMapInstance.current = map;
-
-                    const placemark = new window.ymaps.Placemark(coordinates, {
-                        balloonContent: 'Your location',
+            const initMap = () => {
+                if (mapRef.current && window.ymaps) {
+                    window.ymaps.ready(() => {
+                        const map = new window.ymaps.Map(mapRef.current, {
+                            center: [55.7558, 37.6173],
+                            zoom: 13,
+                            controls: []
+    
+                    }, { suppressMapOpenBlock: true});
+                    const mark = new window.ymaps.Placemark(coordinates, {
+                        balloonContent: '',
                     }, {
                         iconLayout: 'default#image',
-                        iconImageHref: '/components/Location/icon.svg', // Используем HTTPS-ссылку
+                        iconImageHref: '/assets/Notifications/icon.svg',
+                        hasBalloon: false,
+                        hasHint: false,
                     });
-
-                    map.geoObjects.add(placemark);
+                    map.geoObjects.add(mark);
+                    placemarkRef.current = mark;
                     yandexMapInstance.current = map;
-                });
-            }
-        };
+                    });
+                }
+            };
 
         const loadYandexMaps = () => {
             if (!document.querySelector('script[src="https://api-maps.yandex.com/2.1/?lang=ru_RU"]')) {
@@ -75,6 +61,14 @@ const YandexMap: React.FC<YandexMapProps> = ({ coordinates }) => {
             }
         };
     }, []);
+
+    useEffect(() => {
+        if (coordinates === undefined)
+            return
+        placemarkRef.current.geometry.setCoordinates(coordinates);
+        yandexMapInstance.current.setCenter(coordinates)
+    },[coordinates])
+
 
     return <div ref={mapRef} style={{ position: 'absolute', left: '50%', top: '10%', height: '24vw', width: '20vw' }} />;
 };
