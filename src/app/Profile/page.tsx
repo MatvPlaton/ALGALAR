@@ -93,6 +93,7 @@ const Page = () => {
       };
 
       useEffect(() => {
+        
         const token = Cookie.get('jwt'); // Get the latest JWT token
         if (token) {
           fetchUserData(token);

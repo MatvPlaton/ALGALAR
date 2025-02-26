@@ -2,6 +2,7 @@
 // @ts-nocheck
 "use client"
 import React, { useEffect, useState } from 'react';
+import dayjs from 'dayjs';
 // import zoomPlugin from 'chartjs-plugin-zoom';
 import { Line } from 'react-chartjs-2';
 import {
@@ -14,6 +15,7 @@ import {
     Tooltip,
     Legend,
 } from 'chart.js';
+import { useTimeZoneStore } from '@/app/redux/store';
 // Регистрация компонентов Chart.js
 
 
@@ -128,9 +130,13 @@ interface Prop {
 const Graphic: React.FC<Prop> = (({data, type}) => {
 
     const [dataPoints, setDataPoints] = useState<DataPoint[]>([])
-     
+    const timezone = useTimeZoneStore(store => store.zone);
+
     useEffect(() => {
         console.log(data)
+        const now = dayjs();
+        const timezoneOffsetHours = now.utcOffset() / 60;
+
         const temp : DataPoint[] = [];
         if (data === undefined) {
             return;
@@ -138,16 +144,21 @@ const Graphic: React.FC<Prop> = (({data, type}) => {
         data.forEach(value => {
            const keys = Object.keys(value);
            const date = new Date(value[keys[1]]);
-           const hours = date.getHours();
+           let hours = date.getHours() + timezone - timezoneOffsetHours;
+           if (hours < 0) {
+            hours += 24
+           }
+           if (hours >= 24) {
+            hours -= 24
+           }
            const minutes = date.getMinutes();
+           console.log(hours)
            temp.push({x : hours + (minutes / 60), y : value[keys[0]]});
 
         })
         setDataPoints(temp)
     },[data])
     
-    // Пример данных для графика
-   
     return (
         <div style={{position: "absolute", left: '43%', top: '20%', height: '40%', width: '50%'}}>
             <LineChart type={type} dataPoints={dataPoints} />

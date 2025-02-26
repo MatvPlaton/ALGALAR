@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Cookie from 'js-cookie';
 import axios from 'axios';
+import { useTimeZoneStore } from '@/app/redux/store';
 
 interface Prop {
     setId: React.Dispatch<React.SetStateAction<string>> 
@@ -18,9 +19,14 @@ const YandexMap:React.FC<Prop> = ({setId,id}) => {
     const [points, setPoints] = useState([]);
     const [placemarks, setPlacemarks] = useState([]);
     const [map,setMap] = useState(null);
+    const timezone = useTimeZoneStore(store => store.zone);
+
     useEffect(() => {
 
-        const begin = new Date().toLocaleDateString('en-CA');
+        let begin = new Date()
+        begin.setHours(begin.getHours() + timezone)
+        begin = begin.toISOString().split('T')[0]
+        
         axios.get(`https://algalar.ru:8080/position/carroute?car_id=${id}&time_from=${begin}T00:00:00Z&time_to=${begin}T23:59:59Z`, {
             headers: {
                 Authorization: `Bearer ${token}`

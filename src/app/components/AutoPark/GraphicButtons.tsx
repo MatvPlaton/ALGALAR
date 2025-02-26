@@ -16,6 +16,7 @@ import axios from 'axios';
 import dayjs, { Dayjs } from 'dayjs';
 import Cookie from 'js-cookie';
 import utc from 'dayjs/plugin/utc';
+import { useTimeZoneStore } from '@/app/redux/store';
 
 const Sentence =  styled.div`
     font-family: RobotoMedium,sans-serif;
@@ -76,12 +77,11 @@ interface Props {
     index: number
     type: string;
     setType: React.Dispatch<React.SetStateAction<string>>;
-    zone: number;
-    setDay : React.Dispatch<React.SetStateAction<string>>;
 }
-const GraphicButtons: React.FC<Props> = (({setDay, zone, index,setData, car,wheel,type,setType}) => {
+const GraphicButtons: React.FC<Props> = (({index,setData, car,wheel,type,setType}) => {
 
     const token = Cookie.get('jwt');
+    const timezone = useTimeZoneStore(store => store.zone);
     const getReport = () => {
         axios.get('https://algalar.ru:8080/report', {
             headers: {
@@ -102,16 +102,19 @@ const GraphicButtons: React.FC<Props> = (({setDay, zone, index,setData, car,whee
     
     })
     }
+
     const [value, setValue] = useState<Dayjs | null>(dayjs(null));
     dayjs.extend(utc)
     const shiftByZone = (dayStart: dayjs, end: boolean) => {
         
+        const now = dayjs();
+        const timezoneOffsetHours = now.utcOffset() / 60;
+        dayStart = dayStart.add(timezoneOffsetHours - timezone,'hour');
+
         if (end) {
             dayStart = dayStart.add(1,'day');
             dayStart = dayStart.add(-1,'second');
                 }
-        console.log(dayStart.toDate().toISOString())
- 
         return dayStart.toDate().toISOString()
     };
 
@@ -135,8 +138,9 @@ const GraphicButtons: React.FC<Props> = (({setDay, zone, index,setData, car,whee
             setData([])
             return
         }
-        console.log(zone)
-        
+        console.log(shiftByZone(value,false))
+        console.log(shiftByZone(value,true))
+
         axios.get(`https://algalar.ru:8080/${type}data?wheel_id=${chooseByPosition(car.wheels, wheel)}&from=${shiftByZone(value,false)}&to=${shiftByZone(value,true)}`, {
             headers: {
                 Authorization: `Bearer ${token}`
@@ -158,7 +162,7 @@ const GraphicButtons: React.FC<Props> = (({setDay, zone, index,setData, car,whee
                             label=""
                             format="DD.MM.YYYY"
                             value={value}
-                            onChange={(newValue) => {setValue(dayjs.utc(newValue)); setDay(dayjs.utc(newValue).toISOString())}}
+                            onChange={(newValue) => setValue(newValue)}
                         />
                 </LocalizationProvider>
         </ButtonsWrapper>

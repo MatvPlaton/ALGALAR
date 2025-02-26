@@ -101,16 +101,8 @@ const AutoPark = () => {
     }
     const [cars, setCars] = useState<car[]>([]);
 
-    const [zone,setZone] = useState(0);
-    const [day, setDay] = useState('');
-
     const fetchUserData = async (accessToken: string) => {
         try {
-          axios.get('https://algalar.ru:8080/user', {
-            headers: {
-              Authorization: `Bearer ${accessToken}`
-            }
-          }).then(res => setZone(res.data.timeZone))
 
           const r = await axios.get('https://algalar.ru:8080/auto/list?offset=0&limit=100', {
             headers: {
@@ -150,9 +142,6 @@ const AutoPark = () => {
     const [data,setData] = useState<data[]>([])
     const [type,setType] = useState('pressure');
 
-    useEffect(() => {
-      console.log(day)
-    },[day])
     return <div style={{backgroundColor: '#f2f3f4', height: '100vh'}}> 
         <ProfileMenu activeField={'AutoPark'} />
         <TitleBox />
@@ -161,7 +150,7 @@ const AutoPark = () => {
         </DriversWrapper>
         <RestWrapper>
         <Scheme car={currCar} wheel={wheel} setWheel={setWheel} dataIndex={dataIndex}/>
-        <GraphicButtons setDay={setDay} zone={zone} index={dataIndex} setData={setData} wheel={wheel} car={currCar} type={type} setType={setType}/>
+        <GraphicButtons index={dataIndex} setData={setData} wheel={wheel} car={currCar} type={type} setType={setType}/>
         <Graphic type={type} data={data} />
         <RepairTable car={currCar} /> 
         </RestWrapper>
