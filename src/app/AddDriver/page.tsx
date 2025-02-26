@@ -10,11 +10,10 @@ import Notification from "../components/AddDriver/Notification";
 import { BodyWrapper } from "../components/AddDriver/styles/BodyBox";
 import { Dayjs } from "dayjs";
 import axios from "axios";
-import { useAuthStore } from "@/app/redux/store";
-
+import Cookie from 'js-cookie';
 const Page = () => {
 
-    const token = useAuthStore((state) => state.token);
+    const token = Cookie.get('jwt');
 
     const [nameTurn, setNameTurn] = useState(false);
     const [secondNameTurn, setSecondNameTurn] = useState(false);
@@ -60,16 +59,23 @@ const Page = () => {
         }).then(r => {
             console.log(r)
             if (r.status == 200) {
-            setMessage('Водитель добавлен');
-            }
-            if (r.status == 400) {
-                setMessage('Неправильный номер гос авто');
+                setMessage('Водитель добавлен');
             }
             setIsVisible(true);
             setTimeout(() => {
                 setIsVisible(false);
             }, 3000);
-    })
+    }).catch(error => {
+        if (error.response && error.response.status === 400) {
+            setMessage('Неправильный номер гос авто');
+            setIsVisible(true);
+            setTimeout(() => {
+                setIsVisible(false);
+            }, 3000);
+        } else {
+            console.error(error);
+        }
+    });
     }
 
 

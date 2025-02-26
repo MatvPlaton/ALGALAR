@@ -1,9 +1,9 @@
 import React from 'react';
-import {Wrapper} from "./styles/UnderHeaderText";
 
 const UnderHeaderText = (props: { message: string}) => {
 
-    return <Wrapper> {props.message} </Wrapper>
+    return <div className='relative top-[6%] left-[3%] 
+    text-black text-[1.5rem] font-[RobotoMedium]'> {props.message} </div>
 }
 
 export default UnderHeaderText;

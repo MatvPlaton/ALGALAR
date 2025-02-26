@@ -17,16 +17,16 @@ const YandexMap:React.FC<Prop> = ({setId,id}) => {
     
     const [points, setPoints] = useState([]);
     const [placemarks, setPlacemarks] = useState([]);
-
-
     const [map,setMap] = useState(null);
-
     useEffect(() => {
-        axios.get(`https://algalar.ru:8080/position/carroute?car_id=${id}&time_from=2023-12-24T15:30:00Z&time_to=2025-12-24T15:30:00Z`, {
+
+        const begin = new Date().toLocaleDateString('en-CA');
+        axios.get(`https://algalar.ru:8080/position/carroute?car_id=${id}&time_from=${begin}T00:00:00Z&time_to=${begin}T23:59:59Z`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
         }).then(r => {
+            console.log(r)
             if (r.status === 204) {
                 setPoints([])
             } else {

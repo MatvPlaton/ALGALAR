@@ -1,18 +1,15 @@
 "use client"
-import React from 'react';
-import {EnterWrapper} from "./styles/Enter";
+import React, { useState } from 'react';
 import {useRouter} from "next/navigation";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import { useEmailStore } from '@/app/redux/store';
 import { usePasswordStore } from '@/app/redux/store';
 import { useAuthStore } from '@/app/redux/store';
 import { useRefreshStore } from '@/app/redux/store';
+import Notification from "./Notification";
 import Cookie from 'js-cookie';
 
-interface Prop {
-    setShowed:  React.Dispatch<React.SetStateAction<boolean>>;
-}
-const Enter: React.FC<Prop> = ({setShowed}) => {
+const Enter = () => {
 
     const router = useRouter();
     const email = useEmailStore((state) => state.email);
@@ -20,21 +17,12 @@ const Enter: React.FC<Prop> = ({setShowed}) => {
     const setToken = useAuthStore((state) => state.setToken);
     const setRefresh = useRefreshStore((state) => state.setRefresh);
 
-    axios.interceptors.response.use(
-        response => response,
-        async (error: AxiosError) => {
-          if (error.response?.status === 400) {
-            setShowed(true)
-          }
-        })
-
     const navigateToAnotherPage = () => {
 
         axios.post('https://algalar.ru:8080/login', {
             email: email,
             password: password
         }).then(r => {
-            if (r.status === 200) {
                 console.log(r)
                 setToken(r.data.accessToken)
                 setRefresh(r.data.refreshToken)
@@ -47,16 +35,28 @@ const Enter: React.FC<Prop> = ({setShowed}) => {
                     secure: true
                 })
                 router.push('../../Profile');
+
+        }).catch(error => {
+            if (error.response && error.response.status === 400) {
+                setShowed(true);
+                setTimeout(() => {
+                    setShowed(false);
+                }, 3000);
             } else {
-                setShowed(true)
+                console.error(error);
             }
-        })
+        });
 
     };
 
+    const [showed, setShowed] = useState(false);
 
-
-    return <EnterWrapper onClick={() => navigateToAnotherPage()}> ВХОД </EnterWrapper>
+    return <> <button className='absolute bg-[#5A5CA8] w-[4.5rem] h-[2.5rem] 
+    tracking-[0.1vw] border-none shadow-[0_0.5vw_0.5vw_0_rgba(0,0,0,0.2),0_0.1vw_0.5vw_0_rgba(0,0,0,0.2)] rounded-[0.4rem] 
+    font-[RobotoMedium] text-[white]  text-[0.9rem] bottom-[1%] left-[93%]
+    hover:bg-[#46478b] active:translate-y-[-5%]' onClick={() => navigateToAnotherPage()}> ВХОД </button>
+    <Notification message="Неправильный логин или пароль!" visible={showed} />
+    </>
 }
 
 export default Enter;

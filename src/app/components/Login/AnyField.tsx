@@ -4,16 +4,8 @@ import Input from '@mui/material/Input';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import {useState} from "react";
-import styled from 'styled-components';
 import { useEmailStore } from '@/app/redux/store';
 
-const Wrap = styled(FormControl)`
-    width: 90%;
-    margin-bottom: 2rem;
-    @media (max-width: 1000px) {
-        width: 15rem;
-    }   
-`
 interface ChildComponentProps {
     text: string;
 }
@@ -27,14 +19,14 @@ const AnyField: React.FC<ChildComponentProps> = (({ text }) =>  {
     };
 
     return (
-            <Wrap variant="standard">
-                <InputLabel htmlFor="standard-adornment-password">{text} </InputLabel>
+        <FormControl variant="standard" className="w-9/10">
+                <InputLabel sx={{fontSize: '1vw'}} htmlFor="standard-adornment-password">{text} </InputLabel>
                 <Input
-                    value={inputValue}          // Step 3: Set the Input value to state
+                    value={inputValue}
                     onChange={handleChange}
                     id="standard-adornment-password"
                 />
-            </Wrap>
+            </FormControl>
     );
 })
 

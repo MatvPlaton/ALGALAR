@@ -1,5 +1,4 @@
 import React from 'react';
-import {ButtonStyles, ModalStyles, OverlayStyles} from "@/app/components/Login/styles/Modal";
 
 interface Prop {
     showed: boolean;
@@ -9,12 +8,12 @@ interface Prop {
 const Modal: React.FC<Prop> = ({showed,setShowed}) => {
 
     return ( <> {showed ?
-        <OverlayStyles>
-            <ModalStyles>
-                <ButtonStyles onClick={() => setShowed(false)}>&#x00d7;</ButtonStyles>
-                <h2>Неправильная почта или пароль!</h2>
-            </ ModalStyles>
-        </OverlayStyles> : <div/>} </>
+        <div className=' w-full fixed bg-[rgba(0,0,0,0.6)] flex justify-center items-center h-[100%]'>
+            <div className='bg-[#fff] rounded-[10px] font-[RobotoRegular] text-center'>
+                <button className='relative cursor-pointer top-[-1rem] left-[52%]' onClick={() => setShowed(false)}>&#x00d7;</button>
+                <h2 >Неправильная почта или пароль!</h2>
+            </ div>
+        </div> : <div/>} </>
     );
 };
 
