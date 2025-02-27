@@ -1,55 +1,46 @@
-"use client"
+'use client';
 import * as React from 'react';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
-import {MenuItem, Select, SelectChangeEvent} from "@mui/material";
-import styled from "styled-components";
+import { MenuItem, Select, SelectChangeEvent } from '@mui/material';
+import styled from 'styled-components';
 const Wrap = styled(FormControl)`
-    width: 90%;
-    margin-bottom: 2rem;
-    left: -1.5%;
-    @media (max-width: 1000px) {
-        width: 15rem;
-        left: -3.5%;
-
-    }   
-`
+  width: 90%;
+  margin-bottom: 2rem;
+  left: -1.5%;
+  @media (max-width: 1000px) {
+    width: 15rem;
+    left: -3.5%;
+  }
+`;
 interface ChildComponentProps {
-    onDataChange: (data: string) => void;
+  onDataChange: (data: string) => void;
 }
-const SetGender: React.FC<ChildComponentProps> = ({onDataChange}) =>  {
+const SetGender: React.FC<ChildComponentProps> = ({ onDataChange }) => {
+  const [gender, setGender] = React.useState('');
 
-    const [gender, setGender] = React.useState('');
+  const handleChange = (event: SelectChangeEvent) => {
+    setGender(event.target.value as string);
+    onDataChange(event.target.value as string);
+  };
 
-    const handleChange = (event: SelectChangeEvent) => {
-        setGender(event.target.value as string);
-        onDataChange(event.target.value as string)
-    };
-
-    return (
-        <Wrap variant="standard" sx={{ m: 2, width: '113.5ch' }}>
-            <InputLabel id="demo-simple-select-standard-label">Выберите пол</InputLabel>
-            <Select
-                labelId="demo-simple-select-standard-label"
-                id="demo-simple-select-standard"
-                value={gender}
-                onChange={handleChange}
-                label="gender"
-            >
-                <MenuItem value={1}>Мужской</MenuItem>
-                <MenuItem value={2}>Женский</MenuItem>
-            </Select>
-        </Wrap>
-    );
-}
+  return (
+    <Wrap variant="standard" sx={{ m: 2, width: '113.5ch' }}>
+      <InputLabel id="demo-simple-select-standard-label">
+        Выберите пол
+      </InputLabel>
+      <Select
+        labelId="demo-simple-select-standard-label"
+        id="demo-simple-select-standard"
+        value={gender}
+        onChange={handleChange}
+        label="gender"
+      >
+        <MenuItem value={1}>Мужской</MenuItem>
+        <MenuItem value={2}>Женский</MenuItem>
+      </Select>
+    </Wrap>
+  );
+};
 
 export default SetGender;
-
-
-
-
-
-
-
-
-
