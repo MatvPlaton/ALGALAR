@@ -1,6 +1,5 @@
-import React from "react";
+import React from 'react';
 import styled, { keyframes } from 'styled-components';
-
 
 const slideDownUp = keyframes`
   0% {
@@ -19,7 +18,7 @@ const slideDownUp = keyframes`
     transform: translate(-50%, -100%); // Уходит наверх
     opacity: 0;
   }
-`
+`;
 const NotificationContainer = styled.div`
   position: fixed;
   top: 2%;
@@ -34,18 +33,24 @@ const NotificationContainer = styled.div`
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   z-index: 1000;
   animation: ${slideDownUp} 3s ease-in-out;
-
 `;
 
 interface NotificationProps {
-    message: string;
-    visible: boolean;
+  message: string;
+  visible: boolean;
 }
 
 const Notification: React.FC<NotificationProps> = ({ message, visible }) => {
-    return (<> {visible ?
-        <NotificationContainer>
-            {message}
-        </NotificationContainer> : <div />} </>)};
+  return (
+    <>
+      {' '}
+      {visible ? (
+        <NotificationContainer>{message}</NotificationContainer>
+      ) : (
+        <div />
+      )}{' '}
+    </>
+  );
+};
 
 export default Notification;

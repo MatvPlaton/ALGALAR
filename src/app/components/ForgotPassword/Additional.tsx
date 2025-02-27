@@ -1,9 +1,16 @@
 import React from 'react';
-import {AdditionalWrapper} from "./styles/Additional";
-
 
 const Additional = () => {
-    return <AdditionalWrapper> На указанный e-mail будет отправлено письмо со ссылкой для сброса пароля. </AdditionalWrapper>
-}
+  return (
+    <div
+      className="relative top-[12%] left-[3.2%] text-[#858585] 
+    font-[RobotoRegular]"
+    >
+      {' '}
+      На указанный e-mail будет отправлено письмо со ссылкой для сброса
+      пароля.{' '}
+    </div>
+  );
+};
 
 export default Additional;

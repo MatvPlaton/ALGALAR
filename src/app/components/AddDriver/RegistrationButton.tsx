@@ -1,13 +1,16 @@
 import React from 'react';
-import {RegistrationWrapper} from "./styles/RegistrationButton";
+import { RegistrationWrapper } from './styles/RegistrationButton';
 
 interface Prop {
-    sendDriver : () => void;
+  sendDriver: () => void;
 }
-const RegistrationButton : React.FC<Prop> = ({sendDriver}) => {
-
-
-    return <RegistrationWrapper onClick={() => sendDriver()}> ДОБАВИТЬ </RegistrationWrapper>
-}
+const RegistrationButton: React.FC<Prop> = ({ sendDriver }) => {
+  return (
+    <RegistrationWrapper onClick={() => sendDriver()}>
+      {' '}
+      ДОБАВИТЬ{' '}
+    </RegistrationWrapper>
+  );
+};
 
 export default RegistrationButton;
