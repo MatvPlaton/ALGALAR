@@ -12,12 +12,11 @@ const LoginField = (props: {
     <FormControl variant="standard" className="w-9/10">
       <InputLabel
         sx={{ fontSize: '1vw' }}
-        htmlFor="standard-adornment-password"
       >
         {' '}
         {props.text}{' '}
       </InputLabel>
-      <Input onChange={props.handleChange} id="standard-adornment-password" />
+      <Input onChange={props.handleChange} />
     </FormControl>
   );
 };

@@ -7,43 +7,21 @@ import InputAdornment from '@mui/material/InputAdornment';
 import FormControl from '@mui/material/FormControl';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import { usePasswordStore } from '@/app/redux/store';
-import { useState } from 'react';
 
-const PasswordField = (props: { text: string }) => {
+const LoginPasswordField = (props: { text: string, handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void}) => {
   const [showPassword, setShowPassword] = React.useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
-  const handleMouseDownPassword = (
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => {
-    event.preventDefault();
-  };
-  const handleMouseUpPassword = (
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => {
-    event.preventDefault();
-  };
-
-  const [inputValue, setInputValue] = useState('');
-  const setPassword = usePasswordStore((state) => state.setPassword);
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(event.target.value);
-    setPassword(event.target.value);
-  };
 
   return (
     <FormControl className="w-9/10 relative top-1/5" variant="standard">
       <InputLabel
         sx={{ fontSize: '1vw' }}
-        htmlFor="standard-adornment-password"
       >
         {props.text}
       </InputLabel>
       <Input
-        id="standard-adornment-password"
-        value={inputValue}
-        onChange={handleChange}
+       
+        onChange={props.handleChange}
         type={showPassword ? 'text' : 'password'}
         endAdornment={
           <InputAdornment position="end">
@@ -52,8 +30,6 @@ const PasswordField = (props: { text: string }) => {
                 showPassword ? 'hide the password' : 'display the password'
               }
               onClick={handleClickShowPassword}
-              onMouseDown={handleMouseDownPassword}
-              onMouseUp={handleMouseUpPassword}
             >
               {showPassword ? <VisibilityOff /> : <Visibility />}
             </IconButton>
@@ -64,4 +40,4 @@ const PasswordField = (props: { text: string }) => {
   );
 };
 
-export default PasswordField;
+export default LoginPasswordField;

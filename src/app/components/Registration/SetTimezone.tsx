@@ -3,37 +3,22 @@ import * as React from 'react';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import { MenuItem, Select, SelectChangeEvent } from '@mui/material';
-import styled from 'styled-components';
-const Wrap = styled(FormControl)`
-  width: 90%;
-  margin-bottom: 2rem;
-  @media (max-width: 1000px) {
-    width: 15rem;
-  }
-`;
-interface ChildComponentProps {
-  onDataChange: (data: string) => void;
-}
-const SetTimezone: React.FC<ChildComponentProps> = ({ onDataChange }) => {
-  const [timezone, setTimezone] = React.useState('');
 
-  const handleChange = (event: SelectChangeEvent) => {
-    setTimezone(event.target.value as string);
-    onDataChange(event.target.value as string);
-  };
+const SetTimezone = (props: {
+  handleChange: (e: SelectChangeEvent) => void}) => {
 
   const range = Array.from({ length: 25 }, (_, i) => i - 12);
 
   return (
-    <Wrap variant="standard">
-      <InputLabel id="demo-simple-select-standard-label">
+    <FormControl variant="standard" className="w-9/10" sx={{marginBottom: '1vw'}}>
+      <InputLabel sx={{ fontSize: '1vw' }} id="demo-simple-select-standard-label">
         Часовой пояс
       </InputLabel>
       <Select
         labelId="demo-simple-select-standard-label"
         id="demo-simple-select-standard"
-        value={timezone}
-        onChange={handleChange}
+        defaultValue=""
+        onChange={props.handleChange}
         label="timezone"
       >
         {range.map((number) =>
@@ -50,7 +35,7 @@ const SetTimezone: React.FC<ChildComponentProps> = ({ onDataChange }) => {
           )
         )}
       </Select>
-    </Wrap>
+    </FormControl>
   );
 };
 

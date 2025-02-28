@@ -8,20 +8,18 @@ import FormControl from '@mui/material/FormControl';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
-const LoginpasswordField = (props: { text: string, handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void}) => {
+const RegistrationPasswordField = (props: { text: string, handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void}) => {
   const [showPassword, setShowPassword] = React.useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
   return (
-    <FormControl className="w-9/10 relative top-1/5" variant="standard">
+    <FormControl className="w-9/10" sx={{marginBottom: '1vw'}} variant="standard" >
       <InputLabel
         sx={{ fontSize: '1vw' }}
-        htmlFor="standard-adornment-password"
       >
         {props.text}
       </InputLabel>
       <Input
-        id="standard-adornment-password"
        
         onChange={props.handleChange}
         type={showPassword ? 'text' : 'password'}
@@ -42,4 +40,4 @@ const LoginpasswordField = (props: { text: string, handleChange: (e: React.Chang
   );
 };
 
-export default LoginpasswordField;
+export default RegistrationPasswordField;

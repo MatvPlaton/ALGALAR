@@ -2,7 +2,7 @@
 import { useRef, useState } from 'react';
 import Enter from './Enter';
 import LoginField from './LoginField';
-import LoginpasswordField from './LoginpasswordField';
+import LoginpasswordField from './LoginPasswordField';
 import Notification from './Notification';
 
 const ClientComponents = () => {

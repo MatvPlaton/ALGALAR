@@ -25,7 +25,7 @@ const AnyField: React.FC<ChildComponentProps> = ({ text }) => {
       >
         {text}{' '}
       </InputLabel>
-      <Input onChange={handleChange} id="standard-adornment-password" />
+      <Input value={inputValue} onChange={handleChange} id="standard-adornment-password" />
     </FormControl>
   );
 };

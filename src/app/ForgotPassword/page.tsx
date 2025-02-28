@@ -1,6 +1,6 @@
 import Header from '@/app/components/Login/Header';
 import UnderHeaderText from '@/app/components/Login/UnderHeaderText';
-import AnyField from '@/app/components/Login/AnyField';
+import AnyField from '@/app/components/ForgotPassword/AnyField';
 import Additional from '@/app/components/ForgotPassword/Additional';
 import ReturnButton from '@/app/components/ForgotPassword/ReturnButton';
 import RegistrationButton from '@/app/components/ForgotPassword/RegistrationButton';

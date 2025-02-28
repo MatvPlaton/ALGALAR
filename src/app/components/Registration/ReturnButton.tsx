@@ -1,19 +1,17 @@
 import React from 'react';
-import { ReturnWrapper } from './styles/ReturnButton';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
-const Enter = (props: { message: string }) => {
-  const router = useRouter();
-
-  const navigateToAnotherPage = () => {
-    router.push('../../login'); // Specify the path to the page you want to navigate to
-  };
+const ReturnButton = () => {
   return (
-    <ReturnWrapper onClick={() => navigateToAnotherPage()}>
-      {' '}
-      {props.message}{' '}
-    </ReturnWrapper>
+    <Link href={'/login'} className="relative"> <button className="w-[8rem] h-[2.5rem] 
+    border-none rounded-[0.4vw] text-[#34373b] text-[0.9rem] bg-white 
+    font-[RobotoMedium] tracking-[0.1vw]
+    hover:bg-[#c4c2c3] active:translate-y-[-5%] 
+    shadow-[0_0.5vw_0.5vw_0_rgba(0,0,0,0.2),0_0.1vw_0.5vw_0_rgba(0,0,0,0.2)]">
+        ВЕРНУТЬСЯ
+      </button>
+    </Link>
   );
 };
 
-export default Enter;
+export default ReturnButton;

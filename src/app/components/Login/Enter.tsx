@@ -1,14 +1,13 @@
 'use client';
-import React from 'react';
 import { useRouter } from 'next/navigation';
+import React from 'react';
 import axios from 'axios';
 import Cookie from 'js-cookie';
-
 const Enter = (props: {email: React.RefObject<string>, password: React.RefObject<string>, setShowed: SetState<boolean>}) => {
-  const router = useRouter();
 
+  const router = useRouter();
+  
   const navigateToAnotherPage = () => {
-    console.log(props.email, props.password)
     axios
       .post('https://algalar.ru:8080/login', {
         email: props.email.current,
@@ -37,18 +36,12 @@ const Enter = (props: {email: React.RefObject<string>, password: React.RefObject
       });
   };
 
-
-  return (
-      <button
-        className="absolute bg-[#5A5CA8] w-[4.5rem] h-[2.5rem] 
-    tracking-[0.1vw] border-none shadow-[0_0.5vw_0.5vw_0_rgba(0,0,0,0.2),0_0.1vw_0.5vw_0_rgba(0,0,0,0.2)] rounded-[0.4rem] 
-    font-[RobotoMedium] text-[white]  text-[0.9rem] bottom-[1%] left-[93%]
-    hover:bg-[#46478b] active:translate-y-[-5%]"
-        onClick={() => navigateToAnotherPage()}
-      >
-        ВХОД
-      </button>
-  );
+  return <button className="absolute bg-[#5A5CA8] w-[4.5rem] h-[2.5rem] 
+    tracking-[0.1vw] border-none shadow-[0_0.5vw_0.5vw_0_rgba(0,0,0,0.2),0_0.1vw_0.5vw_0_rgba(0,0,0,0.2)] 
+    rounded-[0.4rem] font-[RobotoMedium] text-[white]  text-[0.9rem] bottom-[1%] left-[93%]
+    hover:bg-[#46478b] active:translate-y-[-5%]" 
+    onClick={() => navigateToAnotherPage()}> ВХОД </button>
+   
 };
 
 export default Enter;
