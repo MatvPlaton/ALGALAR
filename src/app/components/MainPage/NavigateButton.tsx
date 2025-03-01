@@ -11,7 +11,7 @@ const NavigateButton = async () => {
   return (
     <Link
       className="relative left-3/4 top-[25%]"
-      href={token ? '/Profile' : '/login'}
+      href={token ? '/Profile' : '/auth/login'}
     >
       <button className=" w-[19rem] h-[35%] max-w-[40vw] text-white bg-[#43C5E2] rounded-md border-none text-[1.5rem] transform translate-x-[-220%] hover:bg-[#40b9d6] active:scale-95 active:bg-[#43C5E2]  sm:left-[74%] sm:text-center">
         <Image
