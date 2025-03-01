@@ -101,7 +101,7 @@ const DataTable: React.FC<Prop> = ({
         new MyClass(
           car.auto.brand,
           car.auto.stateNumber,
-          '0',
+          car.auto.uniqueId,
           car.auto.autoType
         )
     );
@@ -134,7 +134,7 @@ const DataTable: React.FC<Prop> = ({
             <Wrap1>№</Wrap1>
             <Wrap> Марка Автомобиля</Wrap>
             <Wrap>Гос Номер</Wrap>
-            <Wrap>Кол-во поломок </Wrap>
+            <Wrap> Уникальный ID </Wrap>
             <Wrap>Тип Авто</Wrap>
           </tr>
         </thead>
