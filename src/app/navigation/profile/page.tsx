@@ -1,6 +1,5 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import { FieldsWrapper } from './components/styles/FieldsWrapper';
 import AnyField from './components/AnyField';
 import RegistrationButton from './components/RegistrationButton';
 import SetTimezone from './components/SetTimezone';
@@ -8,7 +7,6 @@ import SetRank from './components/SetRank';
 import axios, { AxiosError } from 'axios';
 import Cookie from 'js-cookie';
 import TitleBox from './components/TitleBox';
-import { MainWrapper } from './components/styles/MainBox';
 import { useTimeZoneStore } from '@/app/redux/store';
 import Menu from '../Menu';
 
@@ -44,7 +42,6 @@ const Page = () => {
             }
           );
 
-          // Save the new tokens
           const newAccessToken = refreshResponse.data.accessToken;
           const newRefreshToken = refreshResponse.data.refreshToken;
 
@@ -60,7 +57,6 @@ const Page = () => {
 
           console.log('Token refreshed successfully.');
 
-          // Retry the failed request with the new token
           error.config!.headers!['Authorization'] = `Bearer ${newAccessToken}`;
           return axios(error.config!);
         } catch (refreshError) {
@@ -82,7 +78,6 @@ const Page = () => {
         },
       });
 
-      console.log(response);
       setName(response.data.firstName);
       setSecondName(response.data.lastName);
       setPhone(response.data.phone);
@@ -90,27 +85,27 @@ const Page = () => {
       setInn(response.data.inn);
       setTimezone(response.data.timeZone);
       setZone(response.data.timeZone);
+
     } catch (error) {
       console.error('Error fetching user data:', error);
     }
   };
 
   useEffect(() => {
-    const token = Cookie.get('jwt'); // Get the latest JWT token
+    const token = Cookie.get('jwt')
     if (token) {
       fetchUserData(token);
     }
   }, []);
 
   return (
-    <div style={{ backgroundColor: '#f2f3f4', height: '100vh' }}>
+    <div className="bg-[#f2f3f4] h-[100vh]">
       <Menu activeField='profile'/>
       <TitleBox />
-      <MainWrapper>
-        <FieldsWrapper>
-          <div style={{ position: 'relative', top: '-3%' }}>
-            {' '}
-            Редактирование профиля{' '}
+      <div className='absolute w-18/25 h-39/50 left-[6.5%] top-3/25 color-[#202020] rounded-[1vw] bg-white text-[2vw]'>
+        <div className='absolute h-9/10 top-1/20 left-1/50 text-[1.4vw] font-[RobotoRegular]'>
+          <div className="relative top-[-3%]">
+            Редактирование профиля
           </div>
           <AnyField userField={name} setField={setName} text="Имя" />
           <AnyField
@@ -128,7 +123,7 @@ const Page = () => {
           <AnyField userField={inn} setField={setInn} text="ИНН Компании" />
           <SetRank />
           <SetTimezone userField={`${timezone}`} setField={setTimezone} />
-        </FieldsWrapper>
+        </div>
         <RegistrationButton
           firstName={name}
           lastName={secondName}
@@ -138,7 +133,7 @@ const Page = () => {
           inn={inn}
           timeZone={Number(timezone)}
         />
-      </MainWrapper>
+      </div>
     </div>
   );
 };

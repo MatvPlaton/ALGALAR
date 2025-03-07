@@ -6,24 +6,29 @@ import LoginpasswordField from './LoginPasswordField';
 import Notification from './Notification';
 
 const ClientComponents = () => {
-  const email = useRef('');
-  const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) =>
-    (email.current = e.target.value);
 
-  const password = useRef('');
-  const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) =>
-    (password.current = e.target.value);
+  const refs = {
+    email: useRef(''),
+    password: useRef('')
+  }
+
+  type RefKeys = keyof typeof refs;
+
+  const handleChange = (key: RefKeys) => 
+  (e: React.ChangeEvent<HTMLInputElement>) => {
+    refs[key].current = e.target.value;
+  };
 
   const [showed, setShowed] = useState(false);
 
   return (
     <>
       <div className="relative top-[14%] left-[3%] flex-col">
-        <LoginField handleChange={handleEmail} text={'E-mail'} />
-        <LoginpasswordField handleChange={handlePassword} text={'Пароль'} />
+        <LoginField handleChange={handleChange('email')} text={'E-mail'} />
+        <LoginpasswordField handleChange={handleChange('password')} text={'Пароль'} />
       </div>
       
-      <Enter email={email} password={password} setShowed={setShowed}/>
+      <Enter email={refs['email']} password={refs['password']} setShowed={setShowed}/>
       <Notification message="Неправильный логин или пароль!" visible={showed} />
     </>
   );
