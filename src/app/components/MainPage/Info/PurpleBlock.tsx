@@ -3,11 +3,12 @@
 const PurpleBlock = () => {
     return <div className="absolute top-[20%] left-[74%] w-[23%]
     h-[40%] bg-[#5A5CA8] rounded-[2vw] text-left text-white font-[RobotoBold]
-    max-[1746px]:h-[46%] max-[1537px]:h-[48%] 
-    max-[1281px]:h-[51%] max-[1098px]:h-[56%]
-    max-[961px]:h-[58%]
-    max-[769px]:top-[75%] max-[769px]:left-1/10 max-[769px]:w-8/10
-    max-[769px]:h-[22%]
+    max-[1746px]:h-[48%] max-[1537px]:h-[51%] 
+    max-[1281px]:h-[42%] max-[1098px]:h-[45%]
+    max-[961px]:h-[38%]
+    max-[769px]:top-[54%] max-[769px]:left-1/10 max-[769px]:w-8/10
+    max-[769px]:h-[16%]
+    max-[641px]:h-[18%]
     max-[481px]:top-[76%] max-[481px]:h-[22%]">
 
         <div className="relative left-[12%] text-left text-[1.7rem] w-4/5 top-[2%]">
