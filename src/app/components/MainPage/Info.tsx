@@ -18,7 +18,7 @@ const Info = () => {
       <InfoTitle />
       
       <div className="absolute w-[55vw] h-[50rem] top-1/5 left-1/10 flex flex-col 
-      max-[769px]:top-[13%]
+      max-[769px]:top-[13%] max-[609px]:left-[1%]
        max-[481px]:top-[18%]">
         <div className="flex flex-row w-full h-1/2">
           <InfoFirst />

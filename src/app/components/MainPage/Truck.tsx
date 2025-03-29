@@ -15,7 +15,7 @@ const Truck = () => {
       max-[1098px]:top-[55vh] max-[1098px]:w-full max-[1098px]:flex-row   max-[1098px]:h-[20rem]
       max-[481px]:flex-col max-[481px]:h-[24rem]">
         <div
-          className="relative text-white font-bold text-left left-[18.5%] w-[80%] h-auto top-[12%] 
+          className="relative text-white font-bold text-left left-[18.5%] w-[90%] h-auto top-[12%] 
           text-[2.5rem] font-[MontserratBold]
           max-[1098px]:left-1/20  max-[1098px]:w-2/5 
           max-[481px]:text-center max-[481px]:w-auto  max-[481px]:left-0"

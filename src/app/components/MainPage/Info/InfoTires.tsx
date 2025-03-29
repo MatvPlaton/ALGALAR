@@ -29,7 +29,8 @@ const InfoTires = () => {
           alt=""
         />
         <Image
-          className=" relative top-[6%] max-w-[40vw] max-h-[30vw] left-[10%] w-[20rem] h-[15rem]
+          className=" relative top-[6%] max-w-[40vw] max-h-[30vw] left-[8%] w-[20rem] h-[15rem]
+          max-[1025px]:left-1/20
           max-[961px]:top-[85%] max-[961px]:left-[3%] max-[641px]:top-[131%]
           max-[481px]:top-[152%] max-[385px]:top-[148%]"
           src={BadTyre2}
