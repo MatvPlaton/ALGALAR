@@ -5,7 +5,6 @@ import user from '@/app/assets/Profile/user 1.svg';
 import autoPark from '@/app/assets/Profile/user 2.svg';
 import location from '@/app/assets/Profile/user 3.svg';
 import drivers from '@/app/assets/Profile/user 3 (1).svg';
-import tires from '@/app/assets/Profile/user 3 (2).svg';
 import addCar from '@/app/assets/Profile/user 3 (3).svg';
 import addDriver from '@/app/assets/Profile/user 3 (4).svg';
 import notifications from '@/app/assets/Profile/user 4.svg';
@@ -40,7 +39,6 @@ const Menu = (props: { activeField: string }) => {
     autoPark: [autoPark, autoParkActive, 'Автопарк'],
     location: [location, locationActive, 'Местоположение Авто'],
     drivers: [drivers, driversActive, 'Статистика по водителям'],
-    tires: [tires, tires, 'Статистика по шинам'],
     addAuto: [addCar, addCarActive, 'Добавить авто'],
     addDriver: [addDriver, addDriverActive, 'Добавить водителя'],
     notifications: [notifications, notificationsActive, 'Уведомления'],

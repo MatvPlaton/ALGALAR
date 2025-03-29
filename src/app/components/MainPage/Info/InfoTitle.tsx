@@ -1,6 +1,7 @@
 
 const InfoTitle = () => {
     return <div className="absolute flex flex-col left-[10%] top-[5%] h-[10vh]
+    max-[609px]:left-[1%]
     max-[481px]:top-0">
         <div className="relative text-white font-[MontserratBold] text-[2.5rem]">
           Комплексное
