@@ -11,10 +11,9 @@ const LoginField = (props: {
   return (
     <FormControl variant="standard" className="w-9/10">
       <InputLabel
-        sx={{ fontSize: '1vw' }}
+        sx={{ fontSize: '1.2rem' }}
       >
-        {' '}
-        {props.text}{' '}
+        {props.text}
       </InputLabel>
       <Input onChange={props.handleChange} />
     </FormControl>

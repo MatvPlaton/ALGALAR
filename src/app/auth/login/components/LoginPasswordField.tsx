@@ -15,7 +15,7 @@ const LoginPasswordField = (props: { text: string, handleChange: (e: React.Chang
   return (
     <FormControl className="w-9/10 relative top-1/5" variant="standard">
       <InputLabel
-        sx={{ fontSize: '1vw' }}
+        sx={{ fontSize: '1.2rem' }}
       >
         {props.text}
       </InputLabel>

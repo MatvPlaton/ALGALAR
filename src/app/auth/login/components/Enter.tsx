@@ -39,7 +39,7 @@ const Enter = (props: {email: React.RefObject<string>, password: React.RefObject
   return <button className="absolute bg-[#5A5CA8] w-[4.5rem] h-[2.5rem] 
     tracking-[0.1vw] border-none shadow-[0_0.5vw_0.5vw_0_rgba(0,0,0,0.2),0_0.1vw_0.5vw_0_rgba(0,0,0,0.2)] 
     rounded-[0.4rem] font-[RobotoMedium] text-[white]  text-[0.9rem] bottom-1/5 left-[93%]
-    hover:bg-[#46478b] active:translate-y-[-5%]" 
+    hover:bg-[#46478b] active:translate-y-[-5%] max-[961px]:left-[24rem] max-[449px]:left-[1%] max-[449px]:bottom-1/20" 
     onClick={() => navigateToAnotherPage()}> ВХОД </button>
    
 };

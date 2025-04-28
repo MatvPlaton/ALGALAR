@@ -8,7 +8,8 @@ const ForgotPassword = () => {
   return (
     <div
       className="absolute w-[70rem] h-[26rem] 
-    left-1/2 top-3/20 flex flex-col overflow-x-hidden -translate-x-1/2"
+    left-1/2 top-3/20 flex flex-col overflow-x-hidden -translate-x-1/2
+    max-[1098px]:w-full max-[1121px]:top-5/20"
     >
       <UnderHeaderText message="Сброс пароля" />
       <Additional />

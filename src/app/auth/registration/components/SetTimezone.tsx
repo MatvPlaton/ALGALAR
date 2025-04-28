@@ -11,7 +11,7 @@ const SetTimezone = (props: {
 
   return (
     <FormControl variant="standard" className="w-9/10" sx={{marginBottom: '1vw'}}>
-      <InputLabel sx={{ fontSize: '1vw' }} id="demo-simple-select-standard-label">
+      <InputLabel sx={{ fontSize: '1.2rem' }} id="demo-simple-select-standard-label">
         Часовой пояс
       </InputLabel>
       <Select

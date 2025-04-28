@@ -46,7 +46,7 @@ const ClientComponents = () => {
     <RegistrationPasswordField text='Повторите Пароль' handleChange={handleChange('passwordRepeat')} />
     <SetTimezone handleChange={handleChangeSelect('timezone')}/>
     </div>
-    <div className=" relative w-[30%] left-3/5 top-1/10 flex flex-row">
+    <div className=" relative w-[30%] left-3/5 top-1/10 flex flex-row max-[801px]:left-[3%]">
     <ReturnButton />
     <RegistrationButton email={refs.email} name={refs.name} secondName={refs.secondName} 
     gender={refs.gender} phone={refs.phone} inn={refs.inn} password={refs.password} 

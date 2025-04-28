@@ -3,11 +3,10 @@ import React from 'react';
 const UnderHeaderText = (props: { message: string }) => {
   return (
     <div
-      className="relative top-[6%] left-[3%] 
-    text-black text-[1.5rem] font-[RobotoMedium]"
+      className="relative top-[1.56rem] left-[3%] 
+    text-black text-[1.5rem] font-[RobotoMedium] max-[609px]:text-center  max-[609px]:top-3/40"
     >
-      {' '}
-      {props.message}{' '}
+      {props.message}
     </div>
   );
 };

@@ -15,7 +15,7 @@ const RegistrationPasswordField = (props: { text: string, handleChange: (e: Reac
   return (
     <FormControl className="w-9/10" sx={{marginBottom: '1vw'}} variant="standard" >
       <InputLabel
-        sx={{ fontSize: '1vw' }}
+        sx={{ fontSize: '1.2rem' }}
       >
         {props.text}
       </InputLabel>

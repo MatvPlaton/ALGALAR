@@ -10,8 +10,8 @@ const ForgotPassword = () => {
     font-[RobotoMedium] text-[#34373b]  text-[0.9rem] 
     hover:bg-[#c4c2c3] active:translate-y-[-5%]"
       >
-        ЗАБЫЛИ ПАРОЛЬ{' '}
-      </button>{' '}
+        ЗАБЫЛИ ПАРОЛЬ
+      </button>
     </Link>
   );
 };
