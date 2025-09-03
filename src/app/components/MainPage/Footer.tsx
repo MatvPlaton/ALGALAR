@@ -8,13 +8,13 @@ import LeftCornerLogo from '../../assets/MainPage/image 10.svg';
 
 const Footer = () => {
   return (
-    <div className="absolute w-full h-[40rem] top-[calc(130vh+101rem)] 
-    max-[1281px]:top-[calc(130vh+130rem)]
-    max-[1098px]:top-[calc(130vh+150rem)]
-    max-[961px]:top-[calc(130vh+180rem)]
-    max-[769px]:top-[calc(130vh+210rem)]
-    max-[481px]:top-[calc(130vh+290rem)]
-    max-[385px]:top-[calc(130vh+298rem)] text-white left-0 bg-[#141415]">
+    <footer className="absolute w-full h-[40rem] top-[calc(130vh+81rem)] 
+    max-[1281px]:top-[calc(130vh+110rem)]
+    max-[1098px]:top-[calc(130vh+130rem)]
+    max-[961px]:top-[calc(130vh+160rem)]
+    max-[769px]:top-[calc(130vh+190rem)]
+    max-[481px]:top-[calc(130vh+270rem)]
+    max-[385px]:top-[calc(130vh+278rem)] text-white left-0 bg-[#141415]">
       <div className="absolute left-[18%] top-1/10 transform translate-x-[-25%] text-[calc(2vw+1rem)] font-[MontserratBold] ">
         
         ALGALAR
@@ -87,7 +87,7 @@ const Footer = () => {
         src={Logo}
         alt=""
       />
-    </div>
+    </footer>
   );
 };
 

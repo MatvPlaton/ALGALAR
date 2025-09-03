@@ -5,11 +5,10 @@ import InfoFirst from './Info/InfoFirst';
 import InfoSecond from './Info/InfoSecond';
 import InfoThird from './Info/InfoThird';
 import InfoFourth from './Info/InfoFourth';
-import InfoTires from './Info/InfoTires';
 const Info = () => {
   return (
-    <div className="absolute bg-[#1D1C1C] left-0 w-full h-[91rem] top-[calc(55vh+10rem)]
-    max-[1281px]:h-[120rem]
+    <div className="absolute bg-[#1D1C1C] left-0 w-full h-[71rem] top-[calc(55vh+10rem)]
+    max-[1281px]:h-[100rem]
     max-[1098px]:top-[calc(30rem+55vh)]
     max-[961px]:h-[150rem]
     max-[769px]:h-[180rem]
@@ -32,7 +31,6 @@ const Info = () => {
       </div>
 
       <PurpleBlock />
-      <InfoTires />
       
     </div>
   );
