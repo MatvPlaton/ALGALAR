@@ -68,7 +68,7 @@ const Menu = (props: { activeField: string }) => {
       )}
     >
       <div
-        className={` absolute h-[10vh] font-[InterExtraBold] text-white left-[2.3%] w-[17vw] flex`}
+        className={` absolute h-[10vh] font-inter font-extrabold text-white left-[2.3%] w-[17vw] flex`}
       >
         <Image
           className=" cursor-pointer fixed left-[1%] top-[1%] w-[3vw] h-[3vw]"
@@ -107,7 +107,7 @@ const Menu = (props: { activeField: string }) => {
             )}
 
             <div
-              className={`relative left-[23%] top-[5%] font-[RobotoRegular] text-[1.4vw] text-${props.activeField === key ? 'black' : 'white'}`}
+              className={`relative left-[23%] top-[5%] font-roboto font-regular text-[1.4vw] text-${props.activeField === key ? 'black' : 'white'}`}
             >
               {' '}
               {Pictures[key][2]}{' '}

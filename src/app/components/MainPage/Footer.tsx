@@ -15,28 +15,28 @@ const Footer = () => {
     max-[769px]:top-[calc(130vh+190rem)]
     max-[481px]:top-[calc(130vh+270rem)]
     max-[385px]:top-[calc(130vh+278rem)] text-white left-0 bg-[#141415]">
-      <div className="absolute left-[18%] top-1/10 transform translate-x-[-25%] text-[calc(2vw+1rem)] font-[MontserratBold] ">
+      <div className="absolute left-[18%] top-1/10 transform translate-x-[-25%] text-[calc(2vw+1rem)] font-montserrat font-bold ">
         
         ALGALAR
       </div>
-      <div className="absolute left-[14.2%] top-[23%] text-[calc(0.7vw+1rem)] font-[MontserratMedium]">
+      <div className="absolute left-[14.2%] top-[23%] text-[calc(0.7vw+1rem)] font-montserrat font-medium">
         
         Сделано в России!
       </div>
-      <div className="absolute left-[14%] top-[38%] w-[25vw] font-[InterRegular] text-[calc(0.3vw+1rem)] text-[#B3B6BA]">
+      <div className="absolute left-[14%] top-[38%] w-[25vw] font-inter font-regular text-[calc(0.3vw+1rem)] text-[#B3B6BA]">
         
         Россия, г. Екатеринбург, ул. Свердловская, дом 15, строение 29,
         помещение 1, 660079
       </div>
-      <div className="absolute left-[65.5%] top-[33%] w-[25vw] font-[MontserratBold] text-[clamp(0vw,calc(0.8vw+1rem),3vw)]">
+      <div className="absolute left-[65.5%] top-[33%] w-[25vw] font-montserrat font-bold text-[clamp(0vw,calc(0.8vw+1rem),3vw)]">
         
         +7 (9XX) XXX-XX-XX
       </div>
-      <div className="absolute left-[66%] top-[43%] font-[MontserratSemiBold] text-[clamp(0vw,calc(0.8vw+1rem),3vw)]">
+      <div className="absolute left-[66%] top-[43%] font-montserrat font-semibold text-[clamp(0vw,calc(0.8vw+1rem),3vw)]">
         
         algalar@gmail.com
       </div>
-      <div className="absolute left-[68%] top-[55%] font-[MontserratMedium] text-[clamp(0vw,calc(0.3vw+1rem),2vw)]">
+      <div className="absolute left-[68%] top-[55%] font-montserrat font-medium text-[clamp(0vw,calc(0.3vw+1rem),2vw)]">
         
         Мы в социальных сетях:
       </div>
@@ -57,11 +57,11 @@ const Footer = () => {
           alt=""
         />
       </div>
-      <a className="absolute left-[29%] top-3/4 text-[1vw] font-[InterRegular]">
+      <a className="absolute left-[29%] top-3/4 text-[1vw] font-inter font-regular">
         
         Политика использования персональных данных
       </a>
-      <a className="absolute left-[58%] top-3/4 text-[1vw] font-[InterRegular]">
+      <a className="absolute left-[58%] top-3/4 text-[1vw] font-inter font-regular">
         
         Пользовательское соглашение сервиса ALGALAR
       </a>

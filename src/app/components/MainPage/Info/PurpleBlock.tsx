@@ -1,8 +1,7 @@
 
-
 const PurpleBlock = () => {
     return <div className="absolute top-[20%] left-[74%] w-[23%]
-    h-[60%] bg-[#5A5CA8] rounded-[2vw] text-left text-white font-[RobotoBold]
+    h-[60%] bg-[#5A5CA8] rounded-[2vw] text-left text-white font-roboto font-bold
     max-[1761px]:h-[65%] max-[1537px]:h-[70%] 
     max-[1281px]:h-[54%] max-[1098px]:h-[54%]
     max-[961px]:h-[38%]

@@ -13,7 +13,7 @@ const InfoTires = () => {
     max-[481px]:top-[81%]
     max-[385px]:top-[83%]">
         <div className="relative h-0 left-[2.85%] top-[20%] text-white text-right transform translate-x-[-20%] 
-        text-[2rem] leading-[2rem] font-[MontserratSemiBold] max-[1281px]:top-[0] 
+        text-[2rem] leading-[2rem] font-montserrat font-semibold max-[1281px]:top-[0] 
          max-[961px]:text-center max-[641px]:top-[25%]">
           Отсутствие постоянного контроля <br />
           давления в шинах - это прямая <br />

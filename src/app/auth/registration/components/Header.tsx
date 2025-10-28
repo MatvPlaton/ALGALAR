@@ -15,11 +15,11 @@ const Header = () => {
           className="relative top-[-5%] left-1/20 flex flex-col justify-center
 "
         >
-          <div className="relative w-1/10 top-[-5%] text-[2.2rem] font-[InterExtraBold] text-center">
+          <div className="relative w-1/10 top-[-5%] text-[2.2rem] font-inter font-extrabold text-center">
             {' '}
             ALGALAR{' '}
           </div>
-          <div className="relative w-full top-[-15%]  text-[0.8rem] font-[InterExtraBold] text-center">
+          <div className="relative w-full top-[-15%]  text-[0.8rem] font-inter font-extrabold text-center">
             {' '}
             техника безопасного вождения{' '}
           </div>

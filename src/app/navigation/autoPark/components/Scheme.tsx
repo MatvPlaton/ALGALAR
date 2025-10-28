@@ -168,11 +168,11 @@ const Scheme: React.FC<Prop> = ({ car, wheel, setWheel, dataIndex }) => {
           <WheelsWrapper>
             {Array.from({ length: car.auto.axleCount }, (_, index) => (
               <div className={`relative mt-2 h-[15%]`} key={index}>
-                <div className="relative left-[40%] font-[RobotoRegular] text-[1.1vw]">
+                <div className="relative left-[40%] font-roboto font-regular text-[1.1vw]">
                   {' '}
                   Bar{' '}
                 </div>
-                <div className="relative left-[41%] top-[-15%] font-[RobotoRegular] text-[1.1vw]">
+                <div className="relative left-[41%] top-[-15%] font-roboto font-regular text-[1.1vw]">
                   {' '}
                   °C{' '}
                 </div>

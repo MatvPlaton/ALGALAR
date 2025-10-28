@@ -59,10 +59,10 @@ const InfoBox: React.FC<Prop> = ({
             ) : (
               <> </>
             )}
-            <div className="absolute top-1/10 text-[1vw] w-2/5 h-8/10 left-[5%] font-[RobotoRegular]">
-              <span className="font-[RobotoBold]"> Произошла поломка: </span>{' '}
+            <div className="absolute top-1/10 text-[1vw] w-2/5 h-8/10 left-[5%] font-roboto font-regular">
+              <span className="font-roboto font-bold"> Произошла поломка: </span>{' '}
               {breakage.description} <br />
-              <span className="font-[RobotoBold]"> Водитель: </span>{' '}
+              <span className="font-roboto font-bold"> Водитель: </span>{' '}
               {breakage.driver_name}
             </div>{' '}
           </>

@@ -103,7 +103,7 @@ const Page = () => {
       <Menu activeField='profile'/>
       <TitleBox />
       <div className='absolute w-18/25 h-39/50 left-[6.5%] top-3/25 color-[#202020] rounded-[1vw] bg-white text-[2vw]'>
-        <div className='absolute h-9/10 top-1/20 left-1/50 text-[1.4vw] font-[RobotoRegular]'>
+        <div className='absolute h-9/10 top-1/20 left-1/50 text-[1.4vw] font-roboto font-regular'>
           <div className="relative top-[-3%]">
             Редактирование профиля
           </div>
