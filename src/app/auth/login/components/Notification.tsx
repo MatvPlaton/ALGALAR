@@ -1,39 +1,4 @@
-import React from 'react';
-import styled, { keyframes } from 'styled-components';
-
-const slideDownUp = keyframes`
-  0% {
-    transform: translate(-50%, -100%); // Начальное положение выше экрана
-    opacity: 0;
-  }
-  10% {
-    transform: translate(-50%, 0); // Спустился на место
-    opacity: 1;
-  }
-  90% {
-    transform: translate(-50%, 0); // Держится на месте
-    opacity: 1;
-  }
-  100% {
-    transform: translate(-50%, -100%); // Уходит наверх
-    opacity: 0;
-  }
-`;
-const NotificationContainer = styled.div`
-  position: fixed;
-  top: 2%;
-  left: 50%;
-  transform: translateX(-60%);
-  background-color: #dddddd;
-  color: black;
-  font-family: RobotoBold, sans-serif;
-  font-size: 1.1vw;
-  padding: 1rem 2rem;
-  border-radius: 4px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-  animation: ${slideDownUp} 3s ease-in-out;
-`;
+import React, { useEffect, useState } from 'react';
 
 interface NotificationProps {
   message: string;
@@ -41,15 +6,36 @@ interface NotificationProps {
 }
 
 const Notification: React.FC<NotificationProps> = ({ message, visible }) => {
+  const [shouldRender, setShouldRender] = useState(visible);
+
+  useEffect(() => {
+    if (visible) {
+      setShouldRender(true);
+    } else {
+      const timer = setTimeout(() => setShouldRender(false), 300);
+      return () => clearTimeout(timer);
+    }
+  }, [visible]);
+
+  if (!shouldRender) return null;
+
   return (
-    <>
-      {' '}
-      {visible ? (
-        <NotificationContainer>{message}</NotificationContainer>
-      ) : (
-        <div />
-      )}{' '}
-    </>
+    <div
+      className={`
+        fixed top-[5%] left-1/2 -translate-x-1/2
+         text-black font-roboto-bold 
+        rounded-md text-[1.5rem]
+        shadow-lg z-1000 border-2
+        transition-all duration-300 ease-in-out
+        ${visible 
+          ? 'opacity-100 translate-y-0' 
+          : 'opacity-0 -translate-y-full'
+        }
+      `}
+    >
+      {message}
+     
+    </div>
   );
 };
 

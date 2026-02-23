@@ -1,8 +1,18 @@
 import UnderHeaderText from './components/UnderHeaderText';
 import ForgotPassword from './components/ForgotPassword';
 import RegistrationButton from './components/RegistrationButton';
-import ClientComponents from './components/ClientComponents';
-const Login = () => {
+import LoginForm from './components/LoginForm';
+import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
+const Login = async() => {
+
+  const cookieStore = cookies();
+  const token = (await cookieStore).get('token');
+  
+  if (token) {
+    redirect('/navigation/profile'); 
+  }
+
   return (
     <div
       className="absolute w-[70rem] h-[26rem] 
@@ -10,7 +20,7 @@ const Login = () => {
     max-[1121px]:w-full max-[1121px]:top-5/20"
     >
       <UnderHeaderText message="Введите данные для входа" />
-      <ClientComponents />
+      <LoginForm />
       <ForgotPassword />
       <RegistrationButton />
     </div>
