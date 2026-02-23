@@ -108,7 +108,6 @@ const DataTable: React.FC<Prop> = ({ car }) => {
           },
         })
         .then((r) => {
-          console.log(r);
           setBreakages(r.data);
         });
     }

@@ -129,7 +129,6 @@ const Graphic: React.FC<Prop> = ({ data, type }) => {
   const timezone = useTimeZoneStore((store) => store.zone);
 
   useEffect(() => {
-    console.log(data);
     const now = dayjs();
     const timezoneOffsetHours = now.utcOffset() / 60;
 
@@ -148,7 +147,6 @@ const Graphic: React.FC<Prop> = ({ data, type }) => {
         hours -= 24;
       }
       const minutes = date.getMinutes();
-      console.log(hours);
       temp.push({ x: hours + minutes / 60, y: value[keys[0]] });
     });
     setDataPoints(temp);

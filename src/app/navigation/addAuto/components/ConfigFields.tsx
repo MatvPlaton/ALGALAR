@@ -109,7 +109,6 @@ const ConfigFields: React.FC<Props> = ({
         }
       )
       .then((r) => {
-        console.log(r);
         setNotificationVisible(true);
         setTimeout(() => {
           setNotificationVisible(false);

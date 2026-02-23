@@ -184,7 +184,6 @@ const Scheme: React.FC<Prop> = ({ car, wheel, setWheel, dataIndex }) => {
                 key={wheel1.wheelPosition}
                 onClick={() => {
                   setWheel(wheel1.wheelPosition);
-                  console.log(wheel1);
                 }}
               >
                 {wheel === wheel1.wheelPosition ? (

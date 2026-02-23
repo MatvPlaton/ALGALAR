@@ -100,7 +100,6 @@ const Page = () => {
         },
       })
       .then((r) => {
-        console.log(r);
         r.data.forEach((driver: driverTemp) => {
           axios
             .get(
@@ -112,7 +111,6 @@ const Page = () => {
               }
             )
             .then((res) => {
-              console.log(res);
               const data: driver = {
                 name: res.data.name,
                 surname: res.data.surname,

@@ -80,7 +80,6 @@ const Page = () => {
         }
       )
       .then((r) => {
-        console.log(r);
         if (r.status == 200) {
           setMessage('Водитель добавлен');
         }

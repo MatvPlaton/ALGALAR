@@ -2,18 +2,9 @@ import UnderHeaderText from './components/UnderHeaderText';
 import ForgotPassword from './components/ForgotPassword';
 import RegistrationButton from './components/RegistrationButton';
 import LoginForm from './components/LoginForm';
-import { cookies } from 'next/headers';
-import { redirect } from 'next/navigation';
 const Login = async() => {
 
-  const cookieStore = cookies();
-  const token = (await cookieStore).get('token');
-  
-  if (token) {
-    redirect('/navigation/profile'); 
-  }
-
-  return (
+    return (
     <div
       className="absolute w-[70rem] h-[26rem] 
     left-1/2 top-3/20 flex flex-col overflow-x-hidden -translate-x-1/2

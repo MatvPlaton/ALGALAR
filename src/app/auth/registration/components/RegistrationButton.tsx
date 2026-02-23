@@ -20,7 +20,6 @@ const RegistrationButton: React.FC<Prop> = ({email,name,secondName,gender,phone,
 
   const Registration = () => {
     if (password.current != passwordRepeat.current) {
-      console.log('Пароли не совпадают!');
       return;
     }
     axios
@@ -35,13 +34,10 @@ const RegistrationButton: React.FC<Prop> = ({email,name,secondName,gender,phone,
         'password': password.current,
       })
       .then((r) => {
-        console.log(r);
         if (r.status === 201) {
-          console.log('success');
           router.push('/auth/login');
         }
         if (r.status === 400) {
-          console.log('wrong password or email');
         }
       });
     }

@@ -97,7 +97,6 @@ const GraphicButtons: React.FC<Props> = ({
         responseType: 'blob',
       })
       .then((r) => {
-        console.log(r);
         const blob = new Blob([r.data], { type: r.headers['content-type'] });
 
         const link = document.createElement('a');
@@ -143,9 +142,7 @@ const GraphicButtons: React.FC<Props> = ({
       setData([]);
       return;
     }
-    console.log(shiftByZone(value, false));
-    console.log(shiftByZone(value, true));
-
+   
     axios
       .get(
         `https://algalar.ru:8080/${type}data?wheel_id=${chooseByPosition(car.wheels, wheel)}&from=${shiftByZone(value, false)}&to=${shiftByZone(value, true)}`,
@@ -156,7 +153,6 @@ const GraphicButtons: React.FC<Props> = ({
         }
       )
       .then((r) => {
-        console.log(r);
         setData(r.data);
       });
   }, [value, type, car, wheel, index]);

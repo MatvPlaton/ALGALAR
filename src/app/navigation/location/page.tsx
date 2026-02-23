@@ -5,8 +5,6 @@ import TitleBox from './components/TitleBox';
 
 import MapBox from './components/MapBox';
 import ListBox from './components/ListBox';
-import Cookie from 'js-cookie';
-import axios from 'axios';
 interface car {
   brand: string;
   car_id: string;
@@ -15,19 +13,14 @@ interface car {
 }
 const Page = () => {
   const [id, setId] = useState('');
-  const token = Cookie.get('jwt');
 
   const [cars, setCars] = useState<car[]>([]);
 
   useEffect(() => {
-    axios
-      .get('https://algalar.ru:8080/positions/listcars?limit=100&offset=0', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((r) => {
-        console.log(r.data);
+    fetch('/api/listcars')
+    
+    .then(res => res.json())
+    .then((r) => {
         setCars(r.data);
       });
   }, []);

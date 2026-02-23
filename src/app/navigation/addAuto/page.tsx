@@ -63,13 +63,11 @@ const AutoPark = () => {
         },
       })
       .then((r) => {
-        console.log(r);
       })
       .catch();
   }, [currTire]);
 
   const switchImage = (index: number) => {
-    console.log(index);
     setCurrTire(index);
     setRedacting(true);
     setImages((prevImage) =>

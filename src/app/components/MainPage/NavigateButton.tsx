@@ -1,17 +1,13 @@
 import Image from 'next/image';
-import React from 'react';
 import ProfileIcon from '../../assets/MainPage/profile.svg';
-import { cookies } from 'next/headers';
 import Link from 'next/link';
 
 const NavigateButton = async () => {
-  const cookieStore = cookies();
-  const token = (await cookieStore).get('jwt');
 
   return (
     <Link
       className="absolute w-[19rem] max-[769px]:w-[31%]  max-[769px]:h-[40%] h-[35%] left-[64%] top-[25%]"
-      href={token ? '/navigation/profile' : '/auth/login'}
+      href='/auth/login'
     >
       <button className=" h-full w-full text-white 
       bg-[#43C5E2] rounded-md text-[1.5rem]

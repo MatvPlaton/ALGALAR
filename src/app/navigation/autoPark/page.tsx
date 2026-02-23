@@ -1,69 +1,17 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState } from 'react';
 import Menu from '../Menu';
 import Graphic from './components/Graphic';
 import DataTable from './components/Table';
 import Scheme from './components/Scheme';
 import GraphicButtons from './components/GraphicButtons';
 import RepairTable from './components/RepairTable';
-import axios, { AxiosError } from 'axios';
-import Cookie from 'js-cookie';
-import TitleBox from './components/TitleBox';
 import { DriversWrapper } from './components/styles/DriversBox';
 import { RestWrapper } from './components/styles/RestBox';
+import TitleBox from './components/TitleBox';
 
 const AutoPark = () => {
-  axios.interceptors.response.use(
-    (response) => response,
-    async (error: AxiosError) => {
-      if (error.response?.status === 401) {
-        console.log('401 Unauthorized - Attempting to Refresh Token');
-
-        try {
-          const refreshToken = Cookie.get('refresh');
-          if (!refreshToken) {
-            console.error('No refresh token found! Redirecting to login.');
-            return Promise.reject(error);
-          }
-
-          const refreshResponse = await axios.post(
-            'https://algalar.ru:8080/refresh',
-            {},
-            {
-              headers: {
-                Authorization: `Bearer ${refreshToken}`,
-              },
-            }
-          );
-
-          // Save the new tokens
-          const newAccessToken = refreshResponse.data.accessToken;
-          const newRefreshToken = refreshResponse.data.refreshToken;
-
-          Cookie.set('jwt', newAccessToken, {
-            expires: new Date(new Date().getTime() + 20 * 60 * 1000),
-            secure: true,
-          });
-
-          Cookie.set('refresh', newRefreshToken, {
-            expires: 7,
-            secure: true,
-          });
-
-          console.log('Token refreshed successfully.');
-
-          // Retry the failed request with the new token
-          error.config!.headers!['Authorization'] = `Bearer ${newAccessToken}`;
-          return axios(error.config!);
-        } catch (refreshError) {
-          console.error('Token refresh failed! Logging out...', refreshError);
-          return Promise.reject(refreshError);
-        }
-      }
-
-      return Promise.reject(error);
-    }
-  );
+  
   interface auto {
     autoType: string;
     axleCount: number;
@@ -102,37 +50,31 @@ const AutoPark = () => {
   }
   const [cars, setCars] = useState<car[]>([]);
 
-  const fetchUserData = async (accessToken: string) => {
+  const fetchUserData = async () => {
     try {
-      const r = await axios.get(
-        'https://algalar.ru:8080/auto/list?offset=0&limit=100',
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
+      const res = await fetch('/api/autopark');
+      const autopark = await res.json();
+  
+      const carsData = await Promise.all(
+        autopark.data.map(async (car: auto) => {
+          const res = await fetch(`/api/auto?id=${car.id}`);
+          const data = await res.json();
+          return data.data;   
+        })
       );
-      console.log(r);
-      r.data.forEach((car: auto) => {
-        axios
-          .get(`https://algalar.ru:8080/auto/info?car_id=${car.id}`, {
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-            },
-          })
-          .then((r) => setCars((oldCars) => [...oldCars, r.data]));
-      });
-    } catch (error) {
-      console.error('Error fetching user data:', error);
+  
+      setCars(carsData);
+    } catch (err) {
+      console.error('Fetch error:', err);
     }
   };
 
-  useEffect(() => {
-    const token = Cookie.get('jwt'); // Get the latest JWT token
-    if (token) {
-      fetchUserData(token);
-    }
-  }, []);
+    useEffect(() => {
+      
+        fetchUserData();
+  
+    }, []);
+
   const [dataIndex, setDataIndex] = useState(-1);
   // @ts-expect-error 1234
   const [currCar, setCurrCar] = useState<car>(null);

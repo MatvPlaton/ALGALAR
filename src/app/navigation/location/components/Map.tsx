@@ -1,8 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 import React, { useEffect, useRef, useState } from 'react';
-import Cookie from 'js-cookie';
-import axios from 'axios';
 import { useTimeZoneStore } from '@/app/redux/store';
 
 interface Prop {
@@ -11,10 +9,9 @@ interface Prop {
 }
 const YandexMap: React.FC<Prop> = ({ setId, id }) => {
   const mapRef = useRef<HTMLDivElement | null>(null);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const yandexMapInstance = useRef<any>(null);
 
-  const token = Cookie.get('jwt');
+  const yandexMapInstance = useRef<unknown>(null);
+
 
   const [points, setPoints] = useState([]);
   const [placemarks, setPlacemarks] = useState([]);
@@ -25,18 +22,11 @@ const YandexMap: React.FC<Prop> = ({ setId, id }) => {
     let begin = new Date();
     begin.setHours(begin.getHours() + timezone);
     begin = begin.toISOString().split('T')[0];
-
-    axios
-      .get(
-        `https://algalar.ru:8080/position/carroute?car_id=${id}&time_from=${begin}T00:00:00Z&time_to=${begin}T23:59:59Z`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
+    if (!id) return;
+    fetch(`/api/carroute?car_id=${id}&begin=${begin}`)
+      .then(res => res.json())
       .then((r) => {
-        console.log(r);
+        
         if (r.status === 204) {
           setPoints([]);
         } else {
@@ -56,14 +46,9 @@ const YandexMap: React.FC<Prop> = ({ setId, id }) => {
   }, [id]);
 
   useEffect(() => {
-    axios
-      .get('https://algalar.ru:8080/position/listcurrent', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+    fetch('/api/listcurrent')
+      .then(r => r.json())
       .then((r) => {
-        console.log(r);
 
         r.data.forEach((item) => {
           const placemark = {

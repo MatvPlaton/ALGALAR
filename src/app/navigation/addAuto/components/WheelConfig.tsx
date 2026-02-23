@@ -104,7 +104,6 @@ const WheelConfig: React.FC<Props> = ({
       setTimeout(() => {
         setNotificationVisible(false);
       }, 3000);
-      console.log('error');
       return;
     }
     switchImage(index);

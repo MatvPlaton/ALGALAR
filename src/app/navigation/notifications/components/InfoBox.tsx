@@ -37,7 +37,6 @@ const InfoBox: React.FC<Prop> = ({
         },
       })
       .then((r) => {
-        console.log(r);
         setBreakage(r.data);
       });
   }, [currIndex]);
