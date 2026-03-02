@@ -43,27 +43,7 @@ const Footer = () => {
         
         algalar@gmail.com
       </div>
-      <div className="font-montserrat font-medium text-[clamp(0vw,calc(0.3vw+1rem),2vw)]">
-        
-        Мы в социальных сетях:
-      </div>
-      <div className="relative -left-14 justify-center w-[4vw] h-[2vh] flex flex-row gap-4">
-        <Image
-          className="mr-[1vw] border-none bg-[#141415] w-[2vw] h-[2vw]"
-          src={VKlogo}
-          alt=""
-        />
-        <Image
-          className="mr-[1vw] border-none bg-[#141415] w-[2vw] h-[2vw]"
-          src={YTlogo}
-          alt=""
-        />
-        <Image
-          className="border-none bg-[#141415] w-[2vw] h-[2vw]"
-          src={TGlogo}
-          alt=""
-        />
-      </div>
+    
       </div>
       </div>
       <div className='relative left-[10%] h-160  flex flex-col font-inter font-regular text-center text-[2rem] w-4/5 '>
