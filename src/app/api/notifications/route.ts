@@ -4,21 +4,21 @@ import { proxyAuthRequest } from '@/app/api/_lib/proxyRequest';
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
-    const id = searchParams.get('id');
+    const status = searchParams.get('status') ?? 'new';
 
-    if (!id) {
-      return NextResponse.json({ message: 'Параметр id обязателен' }, { status: 400 });
+    if (status !== 'new' && status !== 'readed') {
+      return NextResponse.json({ message: 'Параметр status должен быть new или readed' }, { status: 400 });
     }
 
     const result = await proxyAuthRequest(
-      `${process.env.BACKEND_URL}/auto/info?car_id=${encodeURIComponent(id)}`
+      `${process.env.BACKEND_URL}/notification/list?status=${status}&limit=100&offset=0`
     );
     if (result instanceof NextResponse) return result;
 
     const data = await result.json();
-    return NextResponse.json({ success: true, data: data.body ?? data.user ?? data });
+    return NextResponse.json({ success: true, data });
   } catch (error) {
-    console.error('Auto API error:', error);
+    console.error('Notifications API error:', error);
     return NextResponse.json({ message: 'Внутренняя ошибка сервера' }, { status: 500 });
   }
 }

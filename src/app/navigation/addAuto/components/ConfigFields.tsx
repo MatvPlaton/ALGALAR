@@ -4,9 +4,7 @@ import AnyField from './AnyField';
 import SetTimezone from './SetTimezone';
 import { HeaderText2 } from './styles/ConfigFields';
 import WheelConfig from './WheelConfig';
-import axios from 'axios';
 import Notification from './Notification';
-import { useAuthStore } from '@/app/redux/store';
 import { useInnStore } from '@/app/redux/store';
 
 interface tireCont {
@@ -52,114 +50,54 @@ const ConfigFields: React.FC<Props> = ({
   const [typeTurn, setTypeTurn] = useState(false);
   const [uniqueIdTurn, setUniqueIdTurn] = useState(false);
 
-  const allFieldsFilled = [id, number, mark, type, uniqueId].every(
-    (field) => field.trim() !== ''
-  );
-
+  const allFieldsFilled = [id, number, mark, type, uniqueId].every((f) => f.trim() !== '');
   const [isNotificationVisible, setNotificationVisible] = useState(false);
-
-  const token = useAuthStore((state) => state.token);
 
   const inn = useInnStore((state) => state.inn);
 
-  const send = () => {
+  const send = async () => {
     let flag = false;
-    if (id === '') {
-      setIdTurn(true);
-      flag = true;
-    }
-    if (number === '') {
-      setNumberTurn(true);
-      flag = true;
-    }
-    if (mark === '') {
-      setMarkTurn(true);
-      flag = true;
-    }
-    if (mark === '') {
-      setMarkTurn(true);
-      flag = true;
-    }
-    if (type === '') {
-      setTypeTurn(true);
-      flag = true;
-    }
-    if (uniqueId === '') {
-      setUniqueIdTurn(true);
-      flag = true;
-    }
+    if (id === '') { setIdTurn(true); flag = true; }
+    if (number === '') { setNumberTurn(true); flag = true; }
+    if (mark === '') { setMarkTurn(true); flag = true; }
+    if (type === '') { setTypeTurn(true); flag = true; }
+    if (uniqueId === '') { setUniqueIdTurn(true); flag = true; }
     if (flag) return;
 
-    axios
-      .post(
-        'https://algalar.ru:8080/auto',
-        {
+    try {
+      const response = await fetch('/api/autocreate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
           companyInn: inn,
           deviceNumber: id,
-          uniqueId: uniqueId,
+          uniqueId,
           AutoType: type,
           stateNumber: number,
           brand: mark,
           axleCount: axis,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
-      .then((r) => {
+        }),
+      });
+      const data = await response.json();
+      if (response.ok) {
         setNotificationVisible(true);
-        setTimeout(() => {
-          setNotificationVisible(false);
-        }, 3000);
-        setCarId(r.data.id);
-      })
-      .catch();
+        setTimeout(() => setNotificationVisible(false), 3000);
+        setCarId(data.data?.id ?? '');
+      }
+    } catch (error) {
+      console.error('Autocreate error:', error);
+    }
   };
 
   return (
     <>
-      {' '}
       <ConfigFieldsWrapper>
         <HeaderText2> Выберите конфигурацию колёсной системы</HeaderText2>
-
-        <AnyField
-          setTurn={setIdTurn}
-          turn={idTurn}
-          setField={setId}
-          userField={id}
-          text={'ID устройства*'}
-        />
-        <AnyField
-          setTurn={setNumberTurn}
-          turn={numberTurn}
-          setField={setNumber}
-          userField={number}
-          text={'ГОС Номер*'}
-        />
-        <AnyField
-          setTurn={setMarkTurn}
-          turn={markTurn}
-          setField={setMark}
-          userField={mark}
-          text={'Марка Авто*'}
-        />
-        <SetTimezone
-          setTurn={setTypeTurn}
-          turn={typeTurn}
-          setField={setType}
-          userField={type}
-          text={'Тип Авто*'}
-        />
-        <AnyField
-          setTurn={setUniqueIdTurn}
-          turn={uniqueIdTurn}
-          setField={setUniqueId}
-          userField={uniqueId}
-          text={'Уникальный ID*'}
-        />
-
+        <AnyField setTurn={setIdTurn} turn={idTurn} setField={setId} userField={id} text={'ID устройства*'} />
+        <AnyField setTurn={setNumberTurn} turn={numberTurn} setField={setNumber} userField={number} text={'ГОС Номер*'} />
+        <AnyField setTurn={setMarkTurn} turn={markTurn} setField={setMark} userField={mark} text={'Марка Авто*'} />
+        <SetTimezone setTurn={setTypeTurn} turn={typeTurn} setField={setType} userField={type} text={'Тип Авто*'} />
+        <AnyField setTurn={setUniqueIdTurn} turn={uniqueIdTurn} setField={setUniqueId} userField={uniqueId} text={'Уникальный ID*'} />
         <WheelConfig
           carId={carId}
           switchImage={switchImage}
@@ -173,14 +111,10 @@ const ConfigFields: React.FC<Props> = ({
           currTire={currTire}
         />
         <CopyButton fields={allFieldsFilled} onClick={() => send()} top={axis}>
-          {' '}
-          СОХРАНИТЬ{' '}
+          {' '}СОХРАНИТЬ{' '}
         </CopyButton>
       </ConfigFieldsWrapper>
-      <Notification
-        message={'Машина отправлена!'}
-        visible={isNotificationVisible}
-      />{' '}
+      <Notification message={'Машина отправлена!'} visible={isNotificationVisible} />
     </>
   );
 };

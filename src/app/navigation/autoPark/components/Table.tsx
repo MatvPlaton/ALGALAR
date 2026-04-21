@@ -3,12 +3,14 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 class MyClass {
+  id: string;
   field1: string;
   field2: string;
   field3: string;
   field4: string;
 
-  constructor(field1: string, field2: string, field3: string, field4: string) {
+  constructor(id: string, field1: string, field2: string, field3: string, field4: string) {
+    this.id = id;
     this.field1 = field1;
     this.field2 = field2;
     this.field3 = field3;
@@ -99,6 +101,7 @@ const DataTable: React.FC<Prop> = ({
     const updatedData = cars.map(
       (car) =>
         new MyClass(
+          car.auto.id,
           car.auto.brand,
           car.auto.stateNumber,
           car.auto.uniqueId,
@@ -143,7 +146,7 @@ const DataTable: React.FC<Prop> = ({
             <tr
               style={{ cursor: 'pointer' }}
               onClick={() => handleChange(index)}
-              key={index}
+              key={item.id}
             >
               <Wrap2
                 style={{

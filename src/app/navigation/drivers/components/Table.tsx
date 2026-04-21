@@ -3,12 +3,14 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 class MyClass {
+  id: string;
   field1: string;
   field2: number;
   field3: number;
   field4: number;
 
-  constructor(field1: string, field2: number, field3: number, field4: number) {
+  constructor(id: string, field1: string, field2: number, field3: number, field4: number) {
+    this.id = id;
     this.field1 = field1;
     this.field2 = field2;
     this.field3 = field3;
@@ -91,6 +93,7 @@ const DataTable: React.FC<Prop> = ({ drivers, dataIndex, setDataIndex }) => {
     const parsedData = drivers.map(
       (driver) =>
         new MyClass(
+          driver.phone,
           `${driver.surname} ${driver.name} ${driver.middle_name}`,
           driver.worked_time,
           driver.experience,
@@ -125,7 +128,7 @@ const DataTable: React.FC<Prop> = ({ drivers, dataIndex, setDataIndex }) => {
             <tr
               style={{ cursor: 'pointer' }}
               onClick={() => setDataIndex(index)}
-              key={index}
+              key={item.id}
             >
               <Wrap2
                 style={{

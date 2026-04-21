@@ -1,6 +1,11 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useRef } from 'react';
+
+declare global {
+  interface Window {
+    ymaps: any;
+  }
+}
 
 interface YandexMapProps {
   coordinates: [number, number] | undefined;
@@ -8,9 +13,8 @@ interface YandexMapProps {
 
 const YandexMap: React.FC<YandexMapProps> = ({ coordinates }) => {
   const mapRef = useRef<HTMLDivElement | null>(null);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const yandexMapInstance = useRef<any>(null);
-  const placemarkRef = useRef(null); // Keep track of the placemark
+  const placemarkRef = useRef<any>(null);
 
   useEffect(() => {
     const initMap = () => {
@@ -52,7 +56,7 @@ const YandexMap: React.FC<YandexMapProps> = ({ coordinates }) => {
       ) {
         const ymapsScript = document.createElement('script');
         ymapsScript.src =
-          'https://api-maps.yandex.com/2.1/?apikey=2ce1f479-b990-4fa6-b136-dd14cd134e90&lang=ru_RU';
+          `https://api-maps.yandex.com/2.1/?apikey=${process.env.NEXT_PUBLIC_YANDEX_MAPS_API_KEY}&lang=ru_RU`;
         ymapsScript.onload = () => {
           if (window.ymaps) {
             initMap();
@@ -81,8 +85,8 @@ const YandexMap: React.FC<YandexMapProps> = ({ coordinates }) => {
       }
       return;
     }
-    placemarkRef.current.geometry.setCoordinates(coordinates);
-    yandexMapInstance.current.setCenter(coordinates);
+    placemarkRef.current?.geometry.setCoordinates(coordinates);
+    yandexMapInstance.current?.setCenter(coordinates);
   }, [coordinates]);
 
   return (

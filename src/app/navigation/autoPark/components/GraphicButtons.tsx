@@ -1,8 +1,5 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-
 import {
   ButtonsWrapper,
   Report,
@@ -12,11 +9,11 @@ import {
 } from './styles/GraphicButtons';
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import axios from 'axios';
 import dayjs, { Dayjs } from 'dayjs';
-import Cookie from 'js-cookie';
 import utc from 'dayjs/plugin/utc';
 import { useTimeZoneStore } from '@/app/redux/store';
+
+dayjs.extend(utc);
 
 const Sentence = styled.div`
   font-family: RobotoMedium, sans-serif;
@@ -78,104 +75,71 @@ interface Props {
   type: string;
   setType: React.Dispatch<React.SetStateAction<string>>;
 }
-const GraphicButtons: React.FC<Props> = ({
-  index,
-  setData,
-  car,
-  wheel,
-  type,
-  setType,
-}) => {
-  const token = Cookie.get('jwt');
-  const timezone = useTimeZoneStore((store) => store.zone);
-  const getReport = () => {
-    axios
-      .get('https://algalar.ru:8080/report', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        responseType: 'blob',
-      })
-      .then((r) => {
-        const blob = new Blob([r.data], { type: r.headers['content-type'] });
 
-        const link = document.createElement('a');
-        link.href = URL.createObjectURL(blob);
-        link.download = 'report.xlsx';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-      });
+const GraphicButtons: React.FC<Props> = ({ index, setData, car, wheel, type, setType }) => {
+  const timezone = useTimeZoneStore((store) => store.zone);
+
+  const getReport = async () => {
+    try {
+      const response = await fetch('/api/report');
+      if (!response.ok) return;
+      const blob = await response.blob();
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'report.xlsx';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (error) {
+      console.error('Report fetch error:', error);
+    }
   };
 
   const [value, setValue] = useState<Dayjs | null>(dayjs(null));
-  dayjs.extend(utc);
-  const shiftByZone = (dayStart: dayjs, end: boolean) => {
+
+  const shiftByZone = (dayStart: Dayjs, end: boolean): string => {
     const now = dayjs();
     const timezoneOffsetHours = now.utcOffset() / 60;
-    dayStart = dayStart.add(timezoneOffsetHours - timezone, 'hour');
-
+    let shifted = dayStart.add(timezoneOffsetHours - (timezone ?? 0), 'hour');
     if (end) {
-      dayStart = dayStart.add(1, 'day');
-      dayStart = dayStart.add(-1, 'second');
+      shifted = shifted.add(1, 'day').add(-1, 'second');
     }
-    return dayStart.toDate().toISOString();
+    return shifted.toDate().toISOString();
   };
 
-  const chooseByPosition = (wheels: wheel[], position: number) => {
-    for (const wheel of wheels) {
-      if (wheel.wheelPosition === position) {
-        return wheel.id;
-      }
+  const chooseByPosition = (wheels: wheel[], position: number): string => {
+    for (const w of wheels) {
+      if (w.wheelPosition === position) return w.id;
     }
     return '';
   };
 
   useEffect(() => {
-    if (car === null) {
-      return;
-    }
-    if (Number.isNaN(value.$y)) {
-      return;
-    }
-    if (wheel === -1) {
-      setData([]);
-      return;
-    }
-   
-    axios
-      .get(
-        `https://algalar.ru:8080/${type}data?wheel_id=${chooseByPosition(car.wheels, wheel)}&from=${shiftByZone(value, false)}&to=${shiftByZone(value, true)}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
-      .then((r) => {
-        setData(r.data);
-      });
+    if (car === null) return;
+    if (!value || isNaN((value as Dayjs & { $y: number }).$y)) return;
+    if (wheel === -1) { setData([]); return; }
+
+    const params = new URLSearchParams({
+      type,
+      wheel_id: chooseByPosition(car.wheels, wheel),
+      from: shiftByZone(value, false),
+      to: shiftByZone(value, true),
+    });
+
+    fetch(`/api/sensordata?${params}`)
+      .then((r) => r.json())
+      .then((r) => { if (r.success) setData(r.data); })
+      .catch((error) => console.error('Sensordata fetch error:', error));
   }, [value, type, car, wheel, index]);
 
   return (
     <Wrapper>
       <TempAndPressureWrapper>
-        <TAndP
-          onClick={() => setType('pressure')}
-          style={{ color: type === 'pressure' ? '#5A5CA8' : 'black' }}
-        >
-          {' '}
-          ГРАФИК ПО ДАВЛЕНИЮ
+        <TAndP onClick={() => setType('pressure')} style={{ color: type === 'pressure' ? '#5A5CA8' : 'black' }}>
+          {' '}ГРАФИК ПО ДАВЛЕНИЮ
         </TAndP>
-        <TAndP
-          onClick={() => setType('temperature')}
-          style={{
-            color: type === 'temperature' ? '#5A5CA8' : 'black',
-            marginLeft: '4.3vw',
-          }}
-        >
-          {' '}
-          ГРАФИК ПО ТЕМПЕРАТУРЕ
+        <TAndP onClick={() => setType('temperature')} style={{ color: type === 'temperature' ? '#5A5CA8' : 'black', marginLeft: '4.3vw' }}>
+          {' '}ГРАФИК ПО ТЕМПЕРАТУРЕ
         </TAndP>
       </TempAndPressureWrapper>
       <ButtonsWrapper>

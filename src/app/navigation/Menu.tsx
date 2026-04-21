@@ -23,7 +23,6 @@ import arrow1 from '@/app/assets/Profile/Arrow1.svg';
 import arrow2 from '@/app/assets/Profile/Arrow2.svg';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import Cookie from 'js-cookie';
 
 const Menu = (props: { activeField: string }) => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -45,9 +44,8 @@ const Menu = (props: { activeField: string }) => {
     exit: [exit, exit, 'Выход'],
   };
 
-  const exitSession = () => {
-    Cookie.remove('jwt');
-    Cookie.remove('refresh')
+  const exitSession = async () => {
+    await fetch('/api/logout', { method: 'POST' });
     router.push('/MainPage');
   };
 

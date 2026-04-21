@@ -1,8 +1,7 @@
 'use client';
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import Cookie from 'js-cookie';
-import axios from 'axios';
+
 const Wrap = styled.th`
   font-family: RobotoRegular, sans-serif;
   font-weight: normal;
@@ -48,56 +47,31 @@ interface Prop {
   data: breakage[];
   setData: React.Dispatch<React.SetStateAction<breakage[]>>;
 }
-const DataTable: React.FC<Prop> = ({
-  active,
-  dataIndex,
-  setDataIndex,
-  data,
-  setData,
-}) => {
-  const token = Cookie.get('jwt');
 
+const DataTable: React.FC<Prop> = ({ active, dataIndex, setDataIndex, data, setData }) => {
   useEffect(() => {
     const status = active ? 'readed' : 'new';
-
-    axios
-      .get(
-        `https://algalar.ru:8080/notification/list?status=${status}&limit=100&offset=0`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
-      .then((r) => (r.data ? setData(r.data) : setData([])));
-  }, [active, token]);
+    fetch(`/api/notifications?status=${status}`)
+      .then((r) => r.json())
+      .then((r) => setData(r.success && r.data ? r.data : []))
+      .catch((error) => console.error('Notifications fetch error:', error));
+  }, [active]);
 
   const getUsualDate = (ISO: string) => {
     const date = new Date(ISO);
-
     const day = String(date.getDate()).padStart(2, '0');
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const year = date.getFullYear();
-
     const hours = String(date.getHours()).padStart(2, '0');
     const minutes = String(date.getMinutes()).padStart(2, '0');
     const seconds = String(date.getSeconds()).padStart(2, '0');
-
-    const formattedDate = `${day}.${month}.${year}/${hours}:${minutes}:${seconds}`;
-
-    return formattedDate;
+    return `${day}.${month}.${year}/${hours}:${minutes}:${seconds}`;
   };
+
   return (
     <div className="absolute left-[2%] top-[15%] w-[92%] max-h-[70%] overflow-y-auto">
       <table style={{ width: '95%', borderCollapse: 'collapse' }}>
-        <thead
-          style={{
-            position: 'sticky',
-            top: 0,
-            zIndex: '2',
-            background: 'white',
-          }}
-        >
+        <thead style={{ position: 'sticky', top: 0, zIndex: '2', background: 'white' }}>
           <tr>
             <Wrap1>№</Wrap1>
             <Wrap> Гос Номер </Wrap>
@@ -108,44 +82,20 @@ const DataTable: React.FC<Prop> = ({
         </thead>
         <tbody>
           {data.map((item, index) => (
-            <tr
-              style={{ cursor: 'pointer' }}
-              onClick={() => setDataIndex(item.id)}
-              key={item.id}
-            >
-              <Wrap2
-                style={{
-                  backgroundColor: dataIndex === item.id ? '#43C5E24A' : '',
-                }}
-              >
+            <tr style={{ cursor: 'pointer' }} onClick={() => setDataIndex(item.id)} key={item.id}>
+              <Wrap2 style={{ backgroundColor: dataIndex === item.id ? '#43C5E24A' : '' }}>
                 {index + 1}
               </Wrap2>
-              <Wrap3
-                style={{
-                  backgroundColor: dataIndex === item.id ? '#43C5E24A' : '',
-                }}
-              >
+              <Wrap3 style={{ backgroundColor: dataIndex === item.id ? '#43C5E24A' : '' }}>
                 {item.state_number}
               </Wrap3>
-              <Wrap3
-                style={{
-                  backgroundColor: dataIndex === item.id ? '#43C5E24A' : '',
-                }}
-              >
+              <Wrap3 style={{ backgroundColor: dataIndex === item.id ? '#43C5E24A' : '' }}>
                 {item.brand}
               </Wrap3>
-              <Wrap3
-                style={{
-                  backgroundColor: dataIndex === item.id ? '#43C5E24A' : '',
-                }}
-              >
+              <Wrap3 style={{ backgroundColor: dataIndex === item.id ? '#43C5E24A' : '' }}>
                 {item.breakage_type}
               </Wrap3>
-              <Wrap3
-                style={{
-                  backgroundColor: dataIndex === item.id ? '#43C5E24A' : '',
-                }}
-              >
+              <Wrap3 style={{ backgroundColor: dataIndex === item.id ? '#43C5E24A' : '' }}>
                 {getUsualDate(item.created_at)}
               </Wrap3>
             </tr>
